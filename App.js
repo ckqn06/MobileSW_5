@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 const App = () => {
   return (
     <View style={styles.container}>
-      <Text>This is first time</Text>
+      <Text>Mobile SW!</Text>
     </View>
   )
 }
