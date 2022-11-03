@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 const App = () => {
   return (
     <View style={styles.container}>
-      <Text>안녕하세요</Text>
+      <Text>하이 헬로</Text>
     </View>
   )
 }
