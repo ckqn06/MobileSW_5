@@ -14,7 +14,7 @@ const Quiz6 = (props) => {
                 <Button
                     title = "Write an equation to solve"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate6_1")
                     }}
                 />
             </View>
@@ -22,7 +22,7 @@ const Quiz6 = (props) => {
             <Button
                     title = "Guess and check"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate6_2")
                     }}
                 />
             </View>
@@ -30,7 +30,7 @@ const Quiz6 = (props) => {
             <Button
                     title = "Try to use a diagram to understand"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate6_3")
                     }}
                 />
             </View>

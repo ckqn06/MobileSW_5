@@ -14,7 +14,7 @@ const Quiz2 = (props) => {
                 <Button
                     title = "Add up her miles and then find out how many more she needs to get to 22 miles"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate2_1")
                     }}
                 />
             </View>
@@ -22,7 +22,7 @@ const Quiz2 = (props) => {
             <Button
                     title = "Write an equation to solve it"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate2_2")
                     }}
                 />
             </View>
@@ -30,7 +30,7 @@ const Quiz2 = (props) => {
             <Button
                     title = "Subtract her miles from 22 and see how many are left"              
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate2_3")
                     }}
                 />
             </View>
