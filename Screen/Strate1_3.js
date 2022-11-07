@@ -10,10 +10,10 @@ const Strate1_3 = (props) => {
     }
     const correct = () => {
         if (myTextInput == 11) {
-            alert("맞췄습니다.");
+            alert("correct");
             props.navigation.navigate("Quiz1")
         } else {
-            alert("오답입니다.");
+            alert("miss");
         }
     }
     return (
@@ -30,14 +30,14 @@ const Strate1_3 = (props) => {
             </Text>
             <TextInput
             style = {styles.input}
-            placeholder="답을 입력해주세요."
+            placeholder="answer"
             value = {myTextInput}
             onChangeText = {onChangeInput}
             />
             </View >
             <View style = {styles.button}>
                 <Button
-                    title = "정답 확인"
+                    title = "check"
                     onPress = {correct}
                 />
             </View>

@@ -18,7 +18,7 @@ const Register = (props) => {
              resizeMode ="contain"
              /> */}
             <Text style={styles.header}>Header</Text>
-            <TextInput placeholder="이름" style={styles.textInput} />
+            <TextInput placeholder="name" style={styles.textInput} />
             <View style={styles.btnContainer}>
               <Button title="Submit" onPress ={() => {
                         props.navigation.navigate("QuizList")

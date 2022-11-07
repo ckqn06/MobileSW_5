@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, Button, TouchableOpacity} from "react-native";
 const Start = (props) => {
     return (
         <View style = {styles.main}>
-            <Text style = {styles.text}>학습 테스트</Text>
+            <Text style = {styles.text}>QUIZ TEST</Text>
             <TouchableOpacity>
                 <Text
                 style = {styles.button}
