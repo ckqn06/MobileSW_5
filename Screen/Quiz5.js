@@ -17,7 +17,7 @@ const Quiz5 = (props) => {
                 <Button
                     title = "Write equations to solve the problem"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate5_1")
                     }}
                 />
             </View>
@@ -25,7 +25,7 @@ const Quiz5 = (props) => {
             <Button
                     title = "Add on from 34.5 inches until i use up all the rope"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate5_2")
                     }}
                 />
             </View>
@@ -33,7 +33,7 @@ const Quiz5 = (props) => {
             <Button
                     title = "Subtract from the total until i get to 0"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate5_3")
                     }}
                 />
             </View>

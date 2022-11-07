@@ -12,17 +12,17 @@ const Quiz8 = (props) => {
             <View style = {styles.button}>
             <Text style = {styles.tt}>Which strategy do you want to use?</Text>
                 <Button
-                    title = "Write an inequality to solve the problem"
+                    title = "Guess and check"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate8_1")
                     }}
                 />
             </View>
             <View style = {styles.button}>
             <Button
-                    title = "Guess and check"
+                    title = "Write an inequality to solve the problem"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate8_2")
                     }}
                 />
             </View>
@@ -30,7 +30,7 @@ const Quiz8 = (props) => {
             <Button
                     title = "Add up until i figure out the width of the garden"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate8_3")
                     }}
                 />
             </View>

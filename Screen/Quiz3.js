@@ -12,17 +12,17 @@ const Quiz3 = (props) => {
             <View style = {styles.button}>
             <Text style = {styles.tt}>Which strategy do you want to use?</Text>
                 <Button
-                    title = "Write an equation to solve"
+                    title = "subtract the extra yards and then figure out how much fabric she used for each curtain"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate3_1")
                     }}
                 />
             </View>
             <View style = {styles.button}>
             <Button
-                    title = "subtract the extra yards and then figure out how much fabric she used for each curtain"
+                    title = "Write an equation to solve"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate3_2")
                     }}
                 />
             </View>
@@ -30,7 +30,7 @@ const Quiz3 = (props) => {
             <Button
                     title = "Use a diagram to try to understand the problem"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate3_3")
                     }}
                 />
             </View>

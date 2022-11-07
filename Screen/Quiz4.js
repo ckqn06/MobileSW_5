@@ -13,17 +13,17 @@ const Quiz4 = (props) => {
             <View style = {styles.button}>
             <Text style = {styles.tt}>Which strategy do you want to use?</Text>
                 <Button
-                    title = "Write equations to solve the problem"
+                    title = "Guess the number of points and see if it works"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate4_1")
                     }}
                 />
             </View>
             <View style = {styles.button}>
             <Button
-                    title = "Guess the number of points and see if it works"
+                    title = "Write equations to solve the problem"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate4_2")
                     }}
                 />
             </View>
@@ -31,7 +31,7 @@ const Quiz4 = (props) => {
             <Button
                     title = "Use a diagram to try to understand the problem"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate4_3")
                     }}
                 />
             </View>

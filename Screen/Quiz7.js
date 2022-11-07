@@ -15,7 +15,7 @@ const Quiz7 = (props) => {
                 <Button
                     title = "Write an inequality to solve the problem"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate7_1")
                     }}
                 />
             </View>
@@ -23,7 +23,7 @@ const Quiz7 = (props) => {
             <Button
                     title = "Guess and check"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate7_2")
                     }}
                 />
             </View>
@@ -31,7 +31,7 @@ const Quiz7 = (props) => {
             <Button
                     title = "Add up until i find the number of days"
                     onPress ={() => {
-                        props.navigation.navigate("")
+                        props.navigation.navigate("Strate7_3")
                     }}
                 />
             </View>
