@@ -3,15 +3,15 @@ import { View, Text, Button, StyleSheet, TextInput,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {useState} from 'react'
 
-const Strate1_2 = (props) => {
+const Strate2_3 = (props) => {
     const [myTextInput, setMyTextInput] = useState("")
     const onChangeInput = (event) => {
         setMyTextInput(event)
     }
     const correct = () => {
         if (myTextInput == 11) {
-            alert("correct");
-            props.navigation.navigate("Quiz1")
+            alert("Fantastic! You’ve found that Jen needs to run another 5 7/8 miles to reach her goal.");
+            props.navigation.navigate("Quiz2")
         } else {
             alert("miss");
         }
@@ -24,8 +24,8 @@ const Strate1_2 = (props) => {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>    
         <View style = {styles.container}>
             <View style = {styles.textcon}>
-            <Text style = {styles.text}>OK, let’s try that. Start from $3.25. 
-            How many times do you have to add $7.50 to get to $85.75?
+            <Text style = {styles.text}>Let’s subtract Jen’s miles from Monday through Friday from 22. 
+            How many miles does Jen have left to run?
             </Text>
             <TextInput
             style = {styles.input}
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     },
     textcon: {
         backgroundColor: 'white',
-        height: 80,
+        height: 100,
         marginLeft: 30,
         marginRight: 30,
         marginBottom: 30,
@@ -85,4 +85,4 @@ const styles = StyleSheet.create({
     },
 }); 
 
-export default Strate1_2
+export default Strate2_3
