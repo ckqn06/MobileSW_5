@@ -21,9 +21,9 @@ import Strate2_3 from './Screen/Strate2_3'
 
 import Strate3_1 from './Screen/Strate3_1'
 import Strate3_2 from './Screen/Strate3_2'
-//import Strate3_3 from './Screen/Strate3_3'
+import Strate3_3 from './Screen/Strate3_3'
 
-//import Strate4_1 from './Screen/Strate4_1'
+import Strate4_1 from './Screen/Strate4_1'
 //import Strate4_2 from './Screen/Strate4_2'
 //import Strate4_3 from './Screen/Strate4_3'
 
@@ -71,9 +71,10 @@ export default function App() {
 
         <Stack.Screen name = "Strate3_1" component={Strate3_1}/>
         <Stack.Screen name = "Strate3_2" component={Strate3_2}/>
-        {/* <Stack.Screen name = "Strate3_3" component={Strate3_3}/> */}
+        <Stack.Screen name = "Strate3_3" component={Strate3_3}/>
 
-        {/* <Stack.Screen name = "Strate4_1" component={Strate4_1}/>
+        <Stack.Screen name = "Strate4_1" component={Strate4_1}/>
+        {/*
         <Stack.Screen name = "Strate4_2" component={Strate4_2}/>
         <Stack.Screen name = "Strate4_3" component={Strate4_3}/> */}
 
