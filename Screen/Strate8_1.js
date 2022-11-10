@@ -4,8 +4,7 @@ import { View, Text, Button, StyleSheet, TextInput,
 import {useState} from 'react'
 
 
-
-const Strate4_1 = (props) => {
+const Strate8_1 = (props) => {
     const [show1, setShow1] = useState(false);              //2번째 화면 상태 값 default는 false로 동작
     const [show2, setShow2] = useState(false);              //3번째 화면 상태 값 default는 false로 동작
     const [show3, setShow3] = useState(false);              //4번째 화면 상태 값 default는 false로 동작
@@ -51,8 +50,8 @@ const Strate4_1 = (props) => {
     }
     const correct4 = () => {
         if (myTextInput4 == 11) {
-            alert("Ok! It looks like Faye scored the most.");
-            props.navigation.navigate("Quiz4")
+            alert("Hey, that’s exactly 80 feet of fencing! It seems that 15 feet is a reasonable answer!");
+            props.navigation.navigate("Quiz8")
         } else {
             alert("miss");
         }
@@ -66,8 +65,8 @@ const Strate4_1 = (props) => {
         <ScrollView style ={{width:"100%"}}>    
             <View style = {styles.container}>
                 <View style = {styles.textcon}>
-                <Text style = {styles.text}>Ok, you want to guess-and-check. 
-                How many points do you want to guess that Elena won?
+                <Text style = {styles.text}>Ok, you want to guess and check. First, 
+                how much fencing will he need for the two sides of the fence that go along the length of the garden?
                 </Text>
                 <TextInput
                 style = {styles.input}
@@ -87,7 +86,8 @@ const Strate4_1 = (props) => {
                 <View>
                     <View style = {styles.textcon2}>
                     <Text style = {styles.text}>
-                    Ok, you guessed [x] points for Elena. Then how many would Karla and Faye win?
+                    Ok, you said he will need 50 feet of fencing for the sides that go along the length of the garden. 
+                    So, what is the widest garden that you think he could make?
                     </Text>
                     <TextInput
                     style = {styles.input}
@@ -108,7 +108,8 @@ const Strate4_1 = (props) => {
                     <View>
                     <View style = {styles.textcon3}>
                     <Text style = {styles.text}>
-                    Nice work! Now, what do Elena’s, Karla’s and Faye’s scores add up to?
+                    Ok, so you’re guessing the garden would be [x] feet wide. 
+                    How much fencing would he need to make the two sides that go along the width?
                     </Text>
                     <TextInput
                     style = {styles.input}
@@ -129,8 +130,7 @@ const Strate4_1 = (props) => {
                     <View>
                     <View style = {styles.textcon4}>
                     <Text style = {styles.text}>
-                    Nice work! The points for Elena, Karla, and Faye add up to 114, 
-                    so that seems correct! So who scored the most?
+                    Ok, if that’s true, then how much fencing would he use all together to make his rectangular garden fence? work!
                     </Text>
                     <TextInput
                     style = {styles.input}
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     },
     textcon: {
         backgroundColor: 'white',
-        height: 80,
+        height: 120,
         marginLeft: 30,
         marginRight: 30,
         marginBottom: 30,
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     },
     textcon2: {
         backgroundColor: 'white',
-        height: 80,
+        height: 120,
         marginLeft: 30,
         marginRight: 30,
         marginBottom: 30,
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     },
     textcon3: {
         backgroundColor: 'white',
-        height: 80,
+        height: 120,
         marginLeft: 30,
         marginRight: 30,
         marginBottom: 30,
@@ -220,4 +220,4 @@ const styles = StyleSheet.create({
     },
 }); 
 
-export default Strate4_1
+export default Strate8_1

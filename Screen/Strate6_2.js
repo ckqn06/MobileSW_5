@@ -4,8 +4,7 @@ import { View, Text, Button, StyleSheet, TextInput,
 import {useState} from 'react'
 
 
-
-const Strate4_1 = (props) => {
+const Strate6_2 = (props) => {
     const [show1, setShow1] = useState(false);              //2번째 화면 상태 값 default는 false로 동작
     const [show2, setShow2] = useState(false);              //3번째 화면 상태 값 default는 false로 동작
     const [show3, setShow3] = useState(false);              //4번째 화면 상태 값 default는 false로 동작
@@ -51,8 +50,8 @@ const Strate4_1 = (props) => {
     }
     const correct4 = () => {
         if (myTextInput4 == 11) {
-            alert("Ok! It looks like Faye scored the most.");
-            props.navigation.navigate("Quiz4")
+            alert("Nice! The width of the rectangle 20. Let’s try a different method!");
+            props.navigation.navigate("Quiz6")
         } else {
             alert("miss");
         }
@@ -66,8 +65,8 @@ const Strate4_1 = (props) => {
         <ScrollView style ={{width:"100%"}}>    
             <View style = {styles.container}>
                 <View style = {styles.textcon}>
-                <Text style = {styles.text}>Ok, you want to guess-and-check. 
-                How many points do you want to guess that Elena won?
+                <Text style = {styles.text}>Ok, you want to guess and check. 
+                How long do you think the width is?
                 </Text>
                 <TextInput
                 style = {styles.input}
@@ -87,7 +86,7 @@ const Strate4_1 = (props) => {
                 <View>
                     <View style = {styles.textcon2}>
                     <Text style = {styles.text}>
-                    Ok, you guessed [x] points for Elena. Then how many would Karla and Faye win?
+                    Cool, now let’s also guess the length of this rectangle.
                     </Text>
                     <TextInput
                     style = {styles.input}
@@ -108,7 +107,8 @@ const Strate4_1 = (props) => {
                     <View>
                     <View style = {styles.textcon3}>
                     <Text style = {styles.text}>
-                    Nice work! Now, what do Elena’s, Karla’s and Faye’s scores add up to?
+                    Ok, so you guessed that the width is [w] and the length is [w+12]. 
+                    Now let’s find the perimeter of the rectangle with these dimensions.
                     </Text>
                     <TextInput
                     style = {styles.input}
@@ -129,8 +129,8 @@ const Strate4_1 = (props) => {
                     <View>
                     <View style = {styles.textcon4}>
                     <Text style = {styles.text}>
-                    Nice work! The points for Elena, Karla, and Faye add up to 114, 
-                    so that seems correct! So who scored the most?
+                    Great! You got a perimeter of 104 inches. Now remember what you guessed. 
+                    What is the width of the rectangle?
                     </Text>
                     <TextInput
                     style = {styles.input}
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     },
     textcon2: {
         backgroundColor: 'white',
-        height: 80,
+        height: 60,
         marginLeft: 30,
         marginRight: 30,
         marginBottom: 30,
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     },
     textcon3: {
         backgroundColor: 'white',
-        height: 80,
+        height: 100,
         marginLeft: 30,
         marginRight: 30,
         marginBottom: 30,
@@ -220,4 +220,4 @@ const styles = StyleSheet.create({
     },
 }); 
 
-export default Strate4_1
+export default Strate6_2

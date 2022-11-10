@@ -28,7 +28,7 @@ const Strate3_3 = (props) => {
         }
     }
     const correct2 = () => {
-        if (myTextInput1 == 11) {
+        if (myTextInput2 == 11) {
             alert("next");
             setShow2(true)
         } else {
@@ -36,7 +36,7 @@ const Strate3_3 = (props) => {
         }
     }
     const correct3 = () => {
-        if (myTextInput2 == 11) {
+        if (myTextInput3 == 11) {
             alert("Nice! Jennifer used 10.8 yards of fabric for each curtain. Let’s try a different method!");
             props.navigation.navigate("Quiz3")
         } else {

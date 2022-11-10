@@ -24,24 +24,24 @@ import Strate3_2 from './Screen/Strate3_2'
 import Strate3_3 from './Screen/Strate3_3'
 
 import Strate4_1 from './Screen/Strate4_1'
-//import Strate4_2 from './Screen/Strate4_2'
-//import Strate4_3 from './Screen/Strate4_3'
+import Strate4_2 from './Screen/Strate4_2'
+import Strate4_3 from './Screen/Strate4_3'
 
 import Strate5_1 from './Screen/Strate5_1'
 import Strate5_2 from './Screen/Strate5_2'
 import Strate5_3 from './Screen/Strate5_3'
 
 import Strate6_1 from './Screen/Strate6_1'
-//import Strate6_2 from './Screen/Strate6_2'
+import Strate6_2 from './Screen/Strate6_2'
 import Strate6_3 from './Screen/Strate6_3'
 
-//import Strate7_1 from './Screen/Strate7_1'
-//import Strate7_2 from './Screen/Strate7_2'
+import Strate7_1 from './Screen/Strate7_1'
+import Strate7_2 from './Screen/Strate7_2'
 import Strate7_3 from './Screen/Strate7_3'
 
-// import Strate8_1 from './Screen/Strate8_1'
-// import Strate8_2 from './Screen/Strate8_2'
-// import Strate8_3 from './Screen/Strate8_3'
+import Strate8_1 from './Screen/Strate8_1'
+import Strate8_2 from './Screen/Strate8_2'
+import Strate8_3 from './Screen/Strate8_3'
 
 //주석 처리 된 부분들은 답이 3개 이상이어서 아직 미구현
 
@@ -73,26 +73,25 @@ export default function App() {
         <Stack.Screen name = "Strate3_2" component={Strate3_2}/>
         <Stack.Screen name = "Strate3_3" component={Strate3_3}/>
 
-        <Stack.Screen name = "Strate4_1" component={Strate4_1}/>
-        {/*
+        <Stack.Screen name = "Strate4_1" component={Strate4_1}/> 
         <Stack.Screen name = "Strate4_2" component={Strate4_2}/>
-        <Stack.Screen name = "Strate4_3" component={Strate4_3}/> */}
+        <Stack.Screen name = "Strate4_3" component={Strate4_3}/> 
 
         <Stack.Screen name = "Strate5_1" component={Strate5_1}/>
         <Stack.Screen name = "Strate5_2" component={Strate5_2}/>
         <Stack.Screen name = "Strate5_3" component={Strate5_3}/>
 
         <Stack.Screen name = "Strate6_1" component={Strate6_1}/>
-        {/* <Stack.Screen name = "Strate6_2" component={Strate6_2}/> */}
+        <Stack.Screen name = "Strate6_2" component={Strate6_2}/>
         <Stack.Screen name = "Strate6_3" component={Strate6_3}/>
 
-        {/* <Stack.Screen name = "Strate7_1" component={Strate7_1}/>
-        <Stack.Screen name = "Strate7_2" component={Strate7_2}/> */}
+        <Stack.Screen name = "Strate7_1" component={Strate7_1}/>
+        <Stack.Screen name = "Strate7_2" component={Strate7_2}/>
         <Stack.Screen name = "Strate7_3" component={Strate7_3}/>
 
-        {/* <Stack.Screen name = "Strate8_1" component={Strate8_1}/>
+        <Stack.Screen name = "Strate8_1" component={Strate8_1}/>
         <Stack.Screen name = "Strate8_2" component={Strate8_2}/>
-        <Stack.Screen name = "Strate8_3" component={Strate8_3}/> */}
+        <Stack.Screen name = "Strate8_3" component={Strate8_3}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

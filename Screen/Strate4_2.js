@@ -5,7 +5,7 @@ import {useState} from 'react'
 
 
 
-const Strate4_1 = (props) => {
+const Strate4_2 = (props) => {
     const [show1, setShow1] = useState(false);              //2번째 화면 상태 값 default는 false로 동작
     const [show2, setShow2] = useState(false);              //3번째 화면 상태 값 default는 false로 동작
     const [show3, setShow3] = useState(false);              //4번째 화면 상태 값 default는 false로 동작
@@ -66,8 +66,8 @@ const Strate4_1 = (props) => {
         <ScrollView style ={{width:"100%"}}>    
             <View style = {styles.container}>
                 <View style = {styles.textcon}>
-                <Text style = {styles.text}>Ok, you want to guess-and-check. 
-                How many points do you want to guess that Elena won?
+                <Text style = {styles.text}>What equation will represent the situation? 
+                Use the letter “e” as your vairable
                 </Text>
                 <TextInput
                 style = {styles.input}
@@ -87,7 +87,7 @@ const Strate4_1 = (props) => {
                 <View>
                     <View style = {styles.textcon2}>
                     <Text style = {styles.text}>
-                    Ok, you guessed [x] points for Elena. Then how many would Karla and Faye win?
+                    Great! That equation looks good. Now, solve for e and enter your answer.
                     </Text>
                     <TextInput
                     style = {styles.input}
@@ -108,7 +108,7 @@ const Strate4_1 = (props) => {
                     <View>
                     <View style = {styles.textcon3}>
                     <Text style = {styles.text}>
-                    Nice work! Now, what do Elena’s, Karla’s and Faye’s scores add up to?
+                    Ok, Elena scored 21 points. Then how many points did Karla and Faye score?
                     </Text>
                     <TextInput
                     style = {styles.input}
@@ -129,8 +129,7 @@ const Strate4_1 = (props) => {
                     <View>
                     <View style = {styles.textcon4}>
                     <Text style = {styles.text}>
-                    Nice work! The points for Elena, Karla, and Faye add up to 114, 
-                    so that seems correct! So who scored the most?
+                    So who scored the most?
                     </Text>
                     <TextInput
                     style = {styles.input}
@@ -196,7 +195,7 @@ const styles = StyleSheet.create({
     },
     textcon4: {
         backgroundColor: 'white',
-        height: 100,
+        height: 50,
         marginLeft: 30,
         marginRight: 30,
         marginBottom: 30,
@@ -220,4 +219,4 @@ const styles = StyleSheet.create({
     },
 }); 
 
-export default Strate4_1
+export default Strate4_2
