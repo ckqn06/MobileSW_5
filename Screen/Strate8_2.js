@@ -4,15 +4,12 @@ import { View, Text, Button, StyleSheet, TextInput,
 import {useState} from 'react'
 
 
-
-const Strate4_1 = (props) => {
+const Strate8_2 = (props) => {
     const [show1, setShow1] = useState(false);              //2번째 화면 상태 값 default는 false로 동작
     const [show2, setShow2] = useState(false);              //3번째 화면 상태 값 default는 false로 동작
-    const [show3, setShow3] = useState(false);              //4번째 화면 상태 값 default는 false로 동작
     const [myTextInput1, setMyTextInput1] = useState("")    //1번 답 저장 하는 공간
     const [myTextInput2, setMyTextInput2] = useState("")    //2번 답 저장 하는 공간
     const [myTextInput3, setMyTextInput3] = useState("")    //3번 답 저장 하는 공간
-    const [myTextInput4, setMyTextInput4] = useState("")    //4번 답 저장 하는 공간
     const onChangeInput1 = (event) => {
         setMyTextInput1(event)
     }
@@ -21,9 +18,6 @@ const Strate4_1 = (props) => {
     }
     const onChangeInput3 = (event) => {
         setMyTextInput3(event)
-    }
-    const onChangeInput4 = (event) => {
-        setMyTextInput4(event)
     }
     const correct1 = () => {
         if (myTextInput1 == 11) {
@@ -43,21 +37,14 @@ const Strate4_1 = (props) => {
     }
     const correct3 = () => {
         if (myTextInput3 == 11) {
-            alert("next");
-            setShow3(true)
-        } else {
-            alert("miss");
-        }
-    }
-    const correct4 = () => {
-        if (myTextInput4 == 11) {
-            alert("Ok! It looks like Faye scored the most.");
-            props.navigation.navigate("Quiz4")
+            alert("Nice work! That’s correct!");
+            props.navigation.navigate("Quiz8")
         } else {
             alert("miss");
         }
     }
     return (
+        
         <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
@@ -66,8 +53,8 @@ const Strate4_1 = (props) => {
         <ScrollView style ={{width:"100%"}}>    
             <View style = {styles.container}>
                 <View style = {styles.textcon}>
-                <Text style = {styles.text}>Ok, you want to guess-and-check. 
-                How many points do you want to guess that Elena won?
+                <Text style = {styles.text}>What inequality will represent the situation? 
+                Use the letter w as your variable.
                 </Text>
                 <TextInput
                 style = {styles.input}
@@ -87,7 +74,7 @@ const Strate4_1 = (props) => {
                 <View>
                     <View style = {styles.textcon2}>
                     <Text style = {styles.text}>
-                    Ok, you guessed [x] points for Elena. Then how many would Karla and Faye win?
+                    Great! That inequality makes sense. Now, solve for w and enter your answer as an inequality 
                     </Text>
                     <TextInput
                     style = {styles.input}
@@ -108,7 +95,7 @@ const Strate4_1 = (props) => {
                     <View>
                     <View style = {styles.textcon3}>
                     <Text style = {styles.text}>
-                    Nice work! Now, what do Elena’s, Karla’s and Faye’s scores add up to?
+                    Nice work! If that’s correct, then how wide could the fence be?
                     </Text>
                     <TextInput
                     style = {styles.input}
@@ -121,28 +108,6 @@ const Strate4_1 = (props) => {
                         <Button
                             title = "check"
                             onPress = {correct3}
-                        />
-                    </View>
-                </View>
-                ):null}
-                {show3 ? (
-                    <View>
-                    <View style = {styles.textcon4}>
-                    <Text style = {styles.text}>
-                    Nice work! The points for Elena, Karla, and Faye add up to 114, 
-                    so that seems correct! So who scored the most?
-                    </Text>
-                    <TextInput
-                    style = {styles.input}
-                    placeholder="answer."
-                    value = {myTextInput4}
-                    onChangeText = {onChangeInput4}
-                    />
-                    </View>
-                    <View style = {styles.button}>
-                        <Button
-                            title = "check"
-                            onPress = {correct4}
                         />
                     </View>
                 </View>
@@ -187,16 +152,7 @@ const styles = StyleSheet.create({
     },
     textcon3: {
         backgroundColor: 'white',
-        height: 80,
-        marginLeft: 30,
-        marginRight: 30,
-        marginBottom: 30,
-        marginTop: 10,
-        borderRadius: 3,
-    },
-    textcon4: {
-        backgroundColor: 'white',
-        height: 100,
+        height: 60,
         marginLeft: 30,
         marginRight: 30,
         marginBottom: 30,
@@ -220,4 +176,4 @@ const styles = StyleSheet.create({
     },
 }); 
 
-export default Strate4_1
+export default Strate8_2
