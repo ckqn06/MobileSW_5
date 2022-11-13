@@ -4,16 +4,34 @@ import { View, Text, Button, StyleSheet, TextInput,
 import {useState} from 'react'
 
 const Strate1_2 = (props) => {
+
+    var score2 = 0;
+    var count = 3;
+
     const [myTextInput, setMyTextInput] = useState("")
     const onChangeInput = (event) => {
         setMyTextInput(event)
     }
     const correct = () => {
         if (myTextInput == 11) {
-            alert("correct");
-            props.navigation.navigate("Quiz1")
+            score2+=1;
+            alert("Ok! If you’re right, then Todd bought 11 pictures.");
+            props.navigation.navigate("Quiz1",
+            {
+                score2:score2
+            })
         } else {
-            alert("miss");
+            if(count > 0) {
+                count -= 1;
+                alert("miss you have "+(count)+" chance");
+            }
+            else if(count == 0) {
+                alert("miss you have no chance")
+                props.navigation.navigate("Quiz1", 
+                {
+                    score2:score2
+                })
+            }
         }
     }
     return (

@@ -16,7 +16,9 @@ const QuizList = (props) => {
     //         </View>
     //     )
     // })
-   
+    const {params} = props.route
+    var score1 = params? params.score1:0;
+    
     return(
         <ScrollView style ={{width:"100%"}}>
         <View style ={styles.container}>
@@ -93,6 +95,9 @@ const QuizList = (props) => {
                 }}
                 />
             </View>
+        </View>
+        <View>
+                <Text>Score1: {JSON.stringify(score1)}</Text>
         </View>
         </ScrollView>
     );
