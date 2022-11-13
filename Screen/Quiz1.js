@@ -1,6 +1,14 @@
 import { View, Text, Button, StyleSheet, TextInput } from "react-native";
 
 const Quiz1 = (props) => {
+    
+    const {params} = props.route
+    var score1 = params? params.score1:0;
+    var score2 = params? params.score2:0;
+    var score3 = params? params.score3:0;
+    
+    var sumScore = score1 + score2 + score3;
+
     return (
         <View style = {styles.container}>
             <View style = {styles.textcon}>
@@ -38,9 +46,12 @@ const Quiz1 = (props) => {
             </View>
             <View style = {styles.button}>
                 <Button
-                    title = "back"
+                    title = "submit"
                     onPress ={() => {
-                        props.navigation.navigate("QuizList")
+                        props.navigation.navigate("QuizList",
+                        {
+                            score1:sumScore
+                        })
                     }}
                 />
             </View>
