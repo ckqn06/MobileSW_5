@@ -1,9 +1,16 @@
-import {View, Text, StyleSheet, Button, TouchableOpacity} from "react-native";
+import {View, Text, StyleSheet, Button, TouchableOpacity, Image} from "react-native";
+import { ScreenContainer } from "react-native-screens";
+import icon from '../assets/school.png'
 
 const Start = (props) => {
     return (
         <View style = {styles.main}>
-            <Text style = {styles.text}>QUIZ TEST</Text>
+            <Image
+             style={{width:300, height:300}}
+             source={icon}
+             resizeMode="contain"
+            />
+            <Text style = {styles.text}>Sunmoon School</Text>
             <TouchableOpacity>
                 <Text
                 style = {styles.button}
