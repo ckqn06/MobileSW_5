@@ -1,7 +1,21 @@
-import { View, Text, Button, StyleSheet, TextInput, ScrollView } from "react-native";
+import { View, Text, Button, StyleSheet, TextInput, ScrollView,
+    KeyboardAvoidingView,
+    Platform, Keyboard, TouchableWithoutFeedback } from "react-native";
+import {useState} from 'react'
 
 const Quiz4 = (props) => {
+
+    const [show, setShow] = useState(false);                //전략 선택 화면 상태 값 default는 false로 동작
+    const showme = () => {
+        setShow(true);
+    }
+
     return (
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+        > 
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>  
         <ScrollView style ={{width:"100%"}}>
         <View style = {styles.container}>
             <View style = {styles.textcon}>
@@ -10,6 +24,26 @@ const Quiz4 = (props) => {
             The sum of their three scores is 114. {"\n"}{"\n"}Who scores more points, Karla or Faye?
             </Text>
             </View>
+
+
+            <View style = {styles.simpletext}>
+                <Text style = {styles.text}>
+                What do you think the problem is asking you to do?
+                </Text>
+                <TextInput
+                style = {styles.input}
+                placeholder="give me any strategy"
+                />
+            </View>
+            <View style = {styles.button}>
+                <Button
+                    title = "send"
+                    onPress = {showme}
+                />
+            </View>
+
+            {show ? (
+            <View>
             <View style = {styles.button}>
             <Text style = {styles.tt}>Which strategy do you want to use?</Text>
                 <Button
@@ -21,7 +55,7 @@ const Quiz4 = (props) => {
             </View>
             <View style = {styles.button}>
             <Button
-                    title = "Write equations to solve the problem"
+                    title = "Write equations to solve the problem" 
                     onPress ={() => {
                         props.navigation.navigate("Strate4_2")
                     }}
@@ -43,8 +77,12 @@ const Quiz4 = (props) => {
                     }}
                 />
             </View>
+            </View>
+            ):null}
         </View>
         </ScrollView>
+        </TouchableWithoutFeedback> 
+        </KeyboardAvoidingView>
     );
 }
 
@@ -52,8 +90,7 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: '#DDA0DD',
-        paddingTop: 30,
-        paddingBottom: 30
+        paddingBottom: 10
     },
     button: {
         marginLeft: 30,
@@ -78,6 +115,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#DDA0DD',
         color: 'black',
         marginBottom: 5,
+    },
+    input: {
+        marginTop: 15,
+        marginBottom: 15,
+        backgroundColor: 'white',
+    },
+    simpletext: {
+        backgroundColor: 'white',
+        height: 60,
+        marginLeft: 30,
+        marginRight: 30,
+        marginBottom: 30,
+        borderRadius: 3,
     },
 }); 
 
