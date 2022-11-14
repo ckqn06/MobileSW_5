@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet, Button, TouchableOpacity, Image} from "react-native";
 import { ScreenContainer } from "react-native-screens";
-import icon from '../assets/school.png'
+import icon from '../assets/images/school.png'
 
 const Start = (props) => {
     return (
@@ -8,8 +8,8 @@ const Start = (props) => {
             <Image
              style={{width:300, height:300}}
              source={icon}
-             resizeMode="contain"
-            />
+             resizeMode="contain">
+            </Image>
             <Text style = {styles.text}>Sunmoon School</Text>
             <TouchableOpacity>
                 <Text
@@ -29,6 +29,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 130,
         backgroundColor: '#DDA0DD',
+    },
+    image: {
+        flex:1,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     text: {
         margin: 70,
