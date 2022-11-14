@@ -1,7 +1,22 @@
-import { View, Text, Button, StyleSheet, TextInput } from "react-native";
+import { View, Text, Button, StyleSheet, TextInput, ScrollView,
+    KeyboardAvoidingView,
+    Platform, Keyboard, TouchableWithoutFeedback } from "react-native";
+import {useState} from 'react'
 
 const Quiz6 = (props) => {
+
+    const [show, setShow] = useState(false);                //전략 선택 화면 상태 값 default는 false로 동작
+    const showme = () => {
+        setShow(true);
+    }
+
     return (
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+        > 
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>  
+        <ScrollView style ={{width:"100%"}}>
         <View style = {styles.container}>
             <View style = {styles.textcon}>
             <Text style = {styles.text}>A rectangle has a length that is unknown but is 12 inches longer than its width. 
@@ -9,10 +24,28 @@ const Quiz6 = (props) => {
             What is the width of the rectangle?
             </Text>
             </View>
+
+            <View style = {styles.simpletext}>
+                <Text style = {styles.text}>
+                What do you think the problem is asking you to do?
+                </Text>
+                <TextInput
+                style = {styles.input}
+                placeholder="give me any strategy"
+                />
+            </View>
+            <View style = {styles.button}>
+                <Button
+                    title = "send"
+                    onPress = {showme}
+                />
+            </View>
+            {show ? (
+            <View>
             <View style = {styles.button}>
             <Text style = {styles.tt}>Which strategy do you want to use?</Text>
                 <Button
-                    title = "Write an equation to solve"
+                    title = "Write an equation to solve it"
                     onPress ={() => {
                         props.navigation.navigate("Strate6_1")
                     }}
@@ -42,7 +75,12 @@ const Quiz6 = (props) => {
                     }}
                 />
             </View>
+            </View>
+            ):null}
         </View>
+        </ScrollView>
+        </TouchableWithoutFeedback> 
+        </KeyboardAvoidingView>
     );
 }
 
@@ -50,8 +88,7 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: '#DDA0DD',
-        paddingTop: 30,
-        paddingBottom: 30
+        paddingBottom: 10
     },
     button: {
         marginLeft: 30,
@@ -76,6 +113,19 @@ const styles = StyleSheet.create({
         backgroundColor: '#DDA0DD',
         color: 'black',
         marginBottom: 5,
+    },
+    input: {
+        marginTop: 15,
+        marginBottom: 15,
+        backgroundColor: 'white',
+    },
+    simpletext: {
+        backgroundColor: 'white',
+        height: 60,
+        marginLeft: 30,
+        marginRight: 30,
+        marginBottom: 30,
+        borderRadius: 3,
     },
 }); 
 
