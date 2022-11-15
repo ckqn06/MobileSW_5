@@ -2,10 +2,16 @@ import { View, Text, StyleSheet, Image, TextInput, Button, TouchableOpacity, Ima
 import { useState } from 'react';
 
 const Start = (props) => {
-    const [myTextInput,setmyTextInput] = useState("")
-    const onChangeInput = (event) => {
+    const [mySIDInput,setmySIDInput] = useState("")
+    const onChangeSIDInput = (event) => {
         console.log("event", event)
-        setmyTextInput(event)
+        setmySIDInput(event)
+    }
+
+    const [myPWDInput,setmyPWDInput] = useState("")
+    const onChangePWDInput = (event) => {
+        console.log("event", event)
+        setmyPWDInput(event)
     }
 
     return (
@@ -23,16 +29,16 @@ const Start = (props) => {
                 <Text style = {styles.subText}>School ID</Text>
                 <TextInput
                  style = {styles.textInput}
-                 value = {myTextInput}
-                 onChangeText = {onChangeInput}
+                 value = {mySIDInput}
+                 onChangeText = {onChangeSIDInput}
                  placeholder = "Insert your school ID"
                 ></TextInput>
 
                 <Text style = {styles.subText}>PassWord</Text>
                 <TextInput
                  style = {styles.textInput}
-                 value = {myTextInput}
-                 onChangeText = {onChangeInput}
+                 value = {myPWDInput}
+                 onChangeText = {onChangePWDInput}
                  placeholder = "Insert your password"
                 ></TextInput>
             </View>
