@@ -4,12 +4,13 @@ const Welcome = (props) => {
     return (
         <View style = {styles.main}>
             <View style = {styles.subView_1}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button}
+                    onPress = {() => navigation.navigate("QuizList")}>
                     <Image
                      style = {{width:300, height:300}}
                      source = {require('../assets/images/hand.png')}
                      resizeMode = "contain"
-                     onPress = {() => { props.navigation.navigate("QuizList") }}>
+                     >
                     </Image>
                 </TouchableOpacity>
                 <Text style = {styles.mainText}>Welcome</Text>
