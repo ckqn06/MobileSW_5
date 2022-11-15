@@ -45,10 +45,10 @@ const Start = (props) => {
 
             <View style = {styles.subView_3}>
                 <Button
-                 title = "Start"
+                 title = "LOGIN"
                  color = '#FF9933'
                  fontColor = 'black'
-                 onPress = {() => { props.navigation.navigate("QuizList") }}
+                 onPress = {() => { props.navigation.navigate("Welcome") }}
                 />
             </View>
         </View>
