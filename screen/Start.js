@@ -48,9 +48,8 @@ const Start = (props) => {
                  title = "Start"
                  color = '#FF9933'
                  fontColor = 'black'
-                 onPress = {() => { props.navigation.navigate("Register") }}
-                >
-                </Button>
+                 onPress = {() => { props.navigation.navigate("QuizList") }}
+                />
             </View>
         </View>
     );
