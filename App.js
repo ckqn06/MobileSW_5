@@ -1,9 +1,9 @@
+import { View, Text, StyleSheet } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Start from './Screen/Start'
-import Welcome from './Screen/Welcome'
-import Main from './Screen/Main'
+import Register from './Screen/Register'
 import QuizList from './Screen/QuizList'
 import Quiz1 from './Screen/Quiz1'
 import Quiz2 from './Screen/Quiz2'
@@ -45,16 +45,13 @@ import Strate8_1 from './Screen/Strate8_1'
 import Strate8_2 from './Screen/Strate8_2'
 import Strate8_3 from './Screen/Strate8_3'
 
-//주석 처리 된 부분들은 답이 3개 이상이어서 아직 미구현
-
 const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name = "Start" component={Start}/>
-        <Stack.Screen name = "Welcome" component={Welcome}/>
-        <Stack.Screen name = "Main" component={Main}/>
+        <Stack.Screen name = "Register" component={Register}/>
         <Stack.Screen name = "QuizList" component={QuizList}/>
         <Stack.Screen name = "Quiz1" component={Quiz1}/>
         <Stack.Screen name = "Quiz2" component={Quiz2}/>

@@ -1,7 +1,7 @@
 import {View, Text, StyleSheet, Image,
     Button, TextInput, KeyboardAvoidingView,
     Platform, TouchableWithoutFeedback, Keyboard} from "react-native";
-//import Study from './assets/study.jpg';
+//import Study from '../assets/study.jpg';
 
 const Register = (props) => {
     return (
