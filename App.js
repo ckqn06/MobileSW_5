@@ -2,7 +2,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Start from './Screen/Start'
-import Welcome from './screen/Welcome'
+import Welcome from './Screen/Welcome'
+import Main from './Screen/Main'
 import QuizList from './Screen/QuizList'
 import Quiz1 from './Screen/Quiz1'
 import Quiz2 from './Screen/Quiz2'
@@ -53,6 +54,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name = "Start" component={Start}/>
         <Stack.Screen name = "Welcome" component={Welcome}/>
+        <Stack.Screen name = "Main" component={Main}/>
         <Stack.Screen name = "QuizList" component={QuizList}/>
         <Stack.Screen name = "Quiz1" component={Quiz1}/>
         <Stack.Screen name = "Quiz2" component={Quiz2}/>
