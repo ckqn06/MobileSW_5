@@ -17,7 +17,7 @@ const QuizList = (props) => {
     //     )
     // })
     const {params} = props.route
-    var score1 = params? params.score1:0;
+    var score1 = params? params.score1:0;    //1번 문제 결과 값
     
     return(
         <ScrollView style ={{width:"100%"}}>
