@@ -1,22 +1,23 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { useState } from 'react';
-import { TouchableOpacity } from "react-native-web";
 
-const Start = (props) => {
+const Welcome = (props) => {
     return (
         <View style = {styles.main}>
             <View style = {styles.subView_1}>
-                <Image
-                 style = {{width:200, height:200}}
-                 source = {require('../assets/images/hand.png')}
-                 resizeMode = "contain">
-                </Image>
+                <TouchableOpacity style={styles.button}>
+                    <Image
+                     style = {{width:300, height:300}}
+                     source = {require('../assets/images/hand.png')}
+                     resizeMode = "contain"
+                     onPress = {() => { props.navigation.navigate("QuizList") }}>
+                    </Image>
+                </TouchableOpacity>
                 <Text style = {styles.mainText}>Welcome</Text>
                 <Text style = {styles.mainText}>'LGH'!</Text>
             </View>
 
             <View style = {styles.subView_2}>
-                <Text style = {styles.subText}>Touch anywhere to START</Text>
+                <Text style = {styles.subText}>Touch hand to START</Text>
             </View>
         </View>
     );
@@ -41,15 +42,11 @@ const styles = StyleSheet.create({
         fontSize:40
     },
     subText: {
-        fontSize:30
+        fontSize:35
     },
-    header:{
-        backgroundColor:'pink',
-        padding:5,
-        alignItems:'center',
-        width:'100%',
-        justifyContent:'center'
+    button: {
+        margin: 10
     }
 });
 
-export default Start
+export default Welcome
