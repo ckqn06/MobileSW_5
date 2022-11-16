@@ -1,13 +1,13 @@
 import {View, Text, StyleSheet, Button, TouchableOpacity} from "react-native";
-import LobbyImage from '../assets/StartImage.png';
+import TodayImage from '../assets/TodaysQuiz.png';
 
-const Start = (props) => {
+const Profile = (props) => {
     return (
         <View style = {styles.main}>
-            <img height={200} src={LobbyImage}/>
+            <img height={200} src={TodayImage}/>
             <TouchableOpacity>
                 <Text
-                style = {{fontSize:60,textAlignL:'center',marginTop:30, height:50}
+                style = {{fontSize:60,textAlign:'center',marginTop:30, height:50}
                 }
                 >USA Study</Text>
             </TouchableOpacity>
@@ -15,7 +15,7 @@ const Start = (props) => {
                 <Text
                 style = {styles.button}
                 onPress ={() =>{
-                    props.navigation.navigate("Register")
+                    props.navigation.navigate("QuizList")
                 }}
                 >Start</Text>
             </TouchableOpacity>
@@ -55,4 +55,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Start
+export default Profile;

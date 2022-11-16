@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         color: 'black',
     },
     tt: {
-        backgroundColor: '#DDA0DD',
+        backgroundColor: '#eefbff',
         color: 'black',
         marginBottom: 5,
     },

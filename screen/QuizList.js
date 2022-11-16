@@ -1,5 +1,9 @@
 import { View, Text, Button, StyleSheet, ScrollView } from "react-native";
 import {useState} from 'react'
+import Correct from '../assets/QuizCorrect.png';
+import Wrong from '../assets/QuizWrong.png';
+import Yet from '../assets/QuizYet.png';
+import ListImage from '../assets/QuizListImage.png';
 
 
 const QuizList = (props) => {
@@ -17,12 +21,24 @@ const QuizList = (props) => {
     //     )
     // })
     const {params} = props.route
-    var score1 = params? params.score1:0;    //1번 문제 결과 값
+    var score1 = params? params.score1:0;
     
     return(
         <ScrollView style ={{width:"100%"}}>
         <View style ={styles.container}>
             {/* {ButtonList} */}
+            <View style = {styles.LImage}>
+                <img height={200} width={200} src={ListImage}/>
+            </View>
+            <View style = {styles.QuizC}>
+                <img height={20} width={20} src={Correct}/>
+            </View>
+            <View style = {styles.QuizW}>
+                <img height={20} width={20} src={Wrong}/>
+            </View>
+                <View style = {styles.QuizY}>
+                <img height={20} width={20} src={Yet}/>
+            </View>
             <View style = {styles.button}>
                 <Button
                 title = "Quiz.1"
@@ -106,15 +122,37 @@ const QuizList = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor: '#DDA0DD',
+        backgroundColor: '#eefbff',
         paddingTop: 30,
         paddingBottom: 30
+    },
+
+    LImage: {
+        position:'relative',
+        top:-60,
+    },
+    QuizC: {
+        position:'relative',
+        top:76,
+        left:460,
+ 
+    },
+    QuizW: {
+        position:'relative',
+        top:132,
+        left:460,
+
+    },
+    QuizY: {
+        position:'relative',
+        top:188,
+        left:460,
     },
     button: {
         marginLeft: 30,
         marginRight: 30,
         marginBottom: 30,
-        marginTop: 10
+        marginTop: 10,
     },
 }); 
 

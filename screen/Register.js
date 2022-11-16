@@ -1,7 +1,8 @@
 import {View, Text, StyleSheet, Image,
     Button, TextInput, KeyboardAvoidingView,
     Platform, TouchableWithoutFeedback, Keyboard} from "react-native";
-//import Study from '../assets/study.jpg';
+//import Study from './assets/study.jpg';
+import LoginImage from '../assets/LoginImage.png';
 
 const Register = (props) => {
     return (
@@ -17,10 +18,11 @@ const Register = (props) => {
              source ={Study}
              resizeMode ="contain"
              /> */}
-            <Text style={styles.header}>Header</Text>
-            <TextInput placeholder="name" style={styles.textInput} />
-            <View style={styles.btnContainer}>
-              <Button title="Submit" onPress ={() => {
+            <img height={300} width={300} src={LoginImage}/>
+            <Text style={styles.header}>Login</Text>
+            <TextInput placeholder="Enter your Name" style={styles.textInput} />
+            <View style={styles.Button}>
+              <Button title="Login" onPress ={() => {
                         props.navigation.navigate("QuizList")
                     }} />
             </View>
@@ -33,7 +35,7 @@ const Register = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#DDA0DD'
+        backgroundColor: '#eefbff',
       },
       inner: {
         padding: 24,
@@ -46,19 +48,33 @@ const styles = StyleSheet.create({
       //   marginBottom: 48
       // },
       header: {
-        fontSize: 36,
-        marginBottom: 48
+        fontSize: 48,
+        marginBottom: 48,
+        fontWeight:'bold',
       },
       textInput: {
         height: 40,
-        borderColor: "#000000",
+        fontSize: 24,
+        color: '#afafaf',
         borderBottomWidth: 1,
-        marginBottom: 25
+        marginBottom: 24,
       },
-      btnContainer: {
-        backgroundColor: "white",
-        marginTop: 8
-      }
+      Button: {
+        position:'relative',
+        top:-32,
+        height:32,
+        margin:0,
+        backgroundColor: '#8463ff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 2,
+        paddingHorizontal:16,
+        fontSize: 24,
+        width: '100%',
+        borderRadius: 5,
+        fontWeight:'bold',
+        borderColor: '#8463ff',
+      },
 });
 
 export default Register

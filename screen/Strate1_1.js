@@ -117,7 +117,7 @@ const Strate1_1 = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor: '#DDA0DD',
+        backgroundColor: '#eefbff',
         paddingTop: 30,
         paddingBottom: 30
     },
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
         color: 'black',
     },
     tt: {
-        backgroundColor: '#DDA0DD',
+        backgroundColor: '#eefbff',
         color: 'black',
         marginBottom: 5,
     },

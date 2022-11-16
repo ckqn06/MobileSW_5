@@ -122,7 +122,7 @@ const Strate8_2 = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor: '#DDA0DD',
+        backgroundColor: '#eefbff',
         paddingTop: 30,
         paddingBottom: 30
     },
