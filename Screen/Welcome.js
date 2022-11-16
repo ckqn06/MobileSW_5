@@ -1,6 +1,27 @@
+import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { auth } from "../Auth/firebaseConfig";
+import { db } from "../Auth/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
 
 const Welcome = (props) => {
+
+    const [studentData, setStudentData] = useState({});
+
+    useEffect(() => {
+        const fetcData = async () => {
+            const docRef = doc(db, "student", auth.currentUser.uid)
+            await getDoc(docRef)
+                .then((snapshot) => {
+                    console.log(snapshot.data());
+                    setStudentData(snapshot.data())
+                }).catch(error => console.log(error.message))
+        };
+
+        fetcData();
+    }, [])
+
+
     return (
         <View style = {styles.main}>
             <View style = {styles.subView_1}>
@@ -13,7 +34,7 @@ const Welcome = (props) => {
                     </Image>
                 </TouchableOpacity>
                 <Text style = {styles.mainText}>Welcome</Text>
-                <Text style = {styles.mainText}>'LGH'!</Text>
+                <Text style={styles.mainText}>{studentData.Name}!</Text>
             </View>
 
             <View style = {styles.subView_2}>

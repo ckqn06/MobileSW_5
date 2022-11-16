@@ -1,10 +1,14 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Button } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { LogOut } from './Auth/AuthFunctions';
 
-import Start from './Screen/Start'
+import Start from './Screen/registration/Start'
+import loginScreen from './Screen/registration/login';
 import Register from './Screen/Register'
 import QuizList from './Screen/QuizList'
+import Welcome from './Screen/Welcome'
+import Main from './Screen/Main'
 import Quiz1 from './Screen/Quiz1'
 import Quiz2 from './Screen/Quiz2'
 import Quiz3 from './Screen/Quiz3'
@@ -49,10 +53,22 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name = "Start" component={Start}/>
+      <Stack.Navigator initialRouteName='Login'>
+        <Stack.Screen name="Start" component={Start} />
+        <Stack.Screen name='Login' component={loginScreen} />
         <Stack.Screen name = "Register" component={Register}/>
-        <Stack.Screen name = "QuizList" component={QuizList}/>
+        <Stack.Screen name="QuizList" component={QuizList} />
+        <Stack.Screen name='Welcome' component={Welcome} />
+        <Stack.Screen name='Main' component={Main} options={{
+          headerRight: () => (
+            <View style={{ marginRight: 8 }}>
+              <Button
+                title='Log Out'
+                onPress={LogOut}
+              />
+            </View>
+          )
+        }} />
         <Stack.Screen name = "Quiz1" component={Quiz1}/>
         <Stack.Screen name = "Quiz2" component={Quiz2}/>
         <Stack.Screen name = "Quiz3" component={Quiz3}/>

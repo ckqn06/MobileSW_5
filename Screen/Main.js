@@ -1,11 +1,29 @@
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity } from "react-native";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { auth } from "../Auth/firebaseConfig";
+import { db } from "../Auth/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore"
 
 const Main = (props) => {
+
+    const [studentData, setStudentData] = useState({});
+
+    useEffect(() => {
+        const fetcData = async () => {
+            const docRef = doc(db, "student", auth.currentUser.uid)
+            await getDoc(docRef)
+                .then((snapshot) => {
+                    console.log(snapshot.data());
+                    setStudentData(snapshot.data())
+                }).catch(error => console.log(error.message))
+        };
+
+        fetcData();
+    }, [])
     return (
         <View style = {styles.main}>
-            <Text style = {styles.subText}>Name: LGH</Text>
-            <Text style = {styles.subText}>School ID: </Text>
+            <Text style={styles.subText}>Name: {studentData.Name}</Text>
+            <Text style={styles.subText}>Email: {studentData.Email} </Text>
             <Text style = {styles.subText}>Password: </Text>
             <View style = {styles.subView_1}>
                 <Image
@@ -40,6 +58,7 @@ const Main = (props) => {
 const styles = StyleSheet.create({
     main: {
         flex: 1,
+        marginTop: 12
         //backgroundColor: '#4A2F72'
     },
     subView_1: {
