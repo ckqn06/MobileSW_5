@@ -103,18 +103,19 @@ const styles = StyleSheet.create({
         marginBottom: 28
     },
     subView_2: {
-        flex:1,
+       // flex:1,
         //alignItems: 'left',
         justifyContent:'center',
         marginLeft:30,
         marginRight:30
     },
     subView_3: {
-        flex:0.5,
+      //  flex:0.5,
         alignItems:'left',
         justifyContent:'center',
         marginLeft:160,
-        marginRight:160
+        marginRight:160,
+        marginTop: 15
     },
     mainText: {
         fontSize:40

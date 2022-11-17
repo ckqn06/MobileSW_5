@@ -89,7 +89,7 @@ const loginScreen = (props) => {
                 <Text style={{ marginVertical: 5, color: 'black' }}>Or</Text>
             </View>
 
-            <View style = {styles.subView_3}>
+            <View style = {[styles.subView_3, {marginBottom: 20}]}>
                 <Button
                  title = "SIGN UP"
                  color = '#FF9933'
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         marginLeft:30,
         marginRight:30,
-        marginBottom: 100
+        marginBottom: 75
     },
     subView_3: {
         //flex:0.5,

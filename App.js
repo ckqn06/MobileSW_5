@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { LogOut } from './Auth/AuthFunctions';
 
 import Start from './Screen/registration/Start'
-import loginScreen from './Screen/registration/login';
+import loginScreen from './Screen/registration/Login';
 import Register from './Screen/Register'
 import QuizList from './Screen/QuizList'
 import Welcome from './Screen/Welcome'
