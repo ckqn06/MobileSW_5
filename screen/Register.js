@@ -1,6 +1,6 @@
 import {View, Text, StyleSheet, Image,
     Button, TextInput, KeyboardAvoidingView,
-    Platform, TouchableWithoutFeedback, Keyboard} from "react-native";
+    Platform, TouchableWithoutFeedback, Keyboard, TouchableOpacity} from "react-native";
 //import Study from './assets/study.jpg';
 import LoginImage from '../assets/LoginImage.png';
 
@@ -21,14 +21,23 @@ const Register = (props) => {
             <img height={300} width={300} src={LoginImage}/>
             <Text style={styles.header}>Login</Text>
             <TextInput placeholder="Enter your Name" style={styles.textInput} />
-            <View style={styles.Button}>
+            {/* <View style={styles.Button}>
               <Button title="Login" onPress ={() => {
                         props.navigation.navigate("QuizList")
                     }} />
-            </View>
+            </View> */}
+            <TouchableOpacity>
+                <Text
+                style = {styles.button}
+                onPress ={() =>{
+                    props.navigation.navigate("QuizList")
+                }}
+                >Login</Text>
+            </TouchableOpacity>
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
+      
     );
 }
 
@@ -53,16 +62,19 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
       },
       textInput: {
+        position:'relative',
+        top: -40,
         height: 40,
         fontSize: 24,
         color: '#afafaf',
         borderBottomWidth: 1,
         marginBottom: 24,
       },
-      Button: {
+      button: {
         position:'relative',
-        top:-32,
-        height:32,
+        top:-68,
+        height:40,
+        width:96,
         margin:0,
         backgroundColor: '#8463ff',
         alignItems: 'center',
@@ -70,11 +82,12 @@ const styles = StyleSheet.create({
         paddingVertical: 2,
         paddingHorizontal:16,
         fontSize: 24,
-        width: '100%',
+        //width: '100%',
+      
         borderRadius: 5,
         fontWeight:'bold',
         borderColor: '#8463ff',
-      },
+    },
 });
 
 export default Register

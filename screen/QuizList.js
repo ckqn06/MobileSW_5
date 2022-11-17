@@ -30,7 +30,7 @@ const QuizList = (props) => {
             <View style = {styles.LImage}>
                 <img height={200} width={200} src={ListImage}/>
             </View>
-            <View style = {styles.QuizC}>
+            {/* <View style = {styles.QuizC}>
                 <img height={20} width={20} src={Correct}/>
             </View>
             <View style = {styles.QuizW}>
@@ -38,7 +38,7 @@ const QuizList = (props) => {
             </View>
                 <View style = {styles.QuizY}>
                 <img height={20} width={20} src={Yet}/>
-            </View>
+            </View> */}
             <View style = {styles.button}>
                 <Button
                 title = "Quiz.1"
@@ -129,8 +129,10 @@ const styles = StyleSheet.create({
 
     LImage: {
         position:'relative',
-        top:-60,
+        top:-20,
+        left:28,
     },
+
     QuizC: {
         position:'relative',
         top:76,
