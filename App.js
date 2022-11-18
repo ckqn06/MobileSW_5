@@ -43,16 +43,30 @@ import Strate8_1 from './Screen/Strate8_1'
 import Strate8_2 from './Screen/Strate8_2'
 import Strate8_3 from './Screen/Strate8_3'
 
-//주석 처리 된 부분들은 답이 3개 이상이어서 아직 미구현
 
 const Stack = createStackNavigator();
 export default function App() {
+  const [Score1,setScore1] =useState(0);
+  const [Score2,setScore2] =useState(0);
+  const [Score3,setScore3] =useState(0);
+  const [Score4,setScore4] =useState(0);
+  const [Score5,setScore5] =useState(0);
+  const [Score6,setScore6] =useState(0);
+  const [Score7,setScore7] =useState(0);
+  const [Score8,setScore8] =useState(0);
+  var total = Score1+Score2+Score3+Score4+Score5+Score6
+            +Score7+Score8;
+  //해결해야 할 것: 점수 
   return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name = "Start" component={Start}/>
         <Stack.Screen name = "Register" component={Register}/>
-        <Stack.Screen name = "QuizList" component={QuizList}/>
+        <Stack.Screen name = "QuizList" component={QuizList}
+          initialParams={{
+            Score1:Score1,
+          }}
+        />
         <Stack.Screen name = "Quiz1" component={Quiz1}/>
         <Stack.Screen name = "Quiz2" component={Quiz2}/>
         <Stack.Screen name = "Quiz3" component={Quiz3}/>
@@ -61,7 +75,11 @@ export default function App() {
         <Stack.Screen name = "Quiz6" component={Quiz6}/>
         <Stack.Screen name = "Quiz7" component={Quiz7}/>
         <Stack.Screen name = "Quiz8" component={Quiz8}/>
-        <Stack.Screen name = "Strate1_1" component={Strate1_1}/>
+        <Stack.Screen name = "Strate1_1" component={Strate1_1}
+          initialParams={{
+            Score1:Score1,
+          }}
+        />
         <Stack.Screen name = "Strate1_2" component={Strate1_2}/>
         <Stack.Screen name = "Strate1_3" component={Strate1_3}/>
         

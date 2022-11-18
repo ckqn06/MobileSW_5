@@ -4,7 +4,8 @@ import { View, Text, Button, StyleSheet, TextInput,
 import {useState} from 'react'
 
 const Strate1_1 = (props) => {
-    var score1 = 0;     //1_1번 점수
+    const {params} = props.route
+    var Score1 = params? params.Score1:0;
     var count1 = 3;     //연계형 문제 1번 기회 횟수
     var count2 = 3;     //연계형 문제 2번 기회 횟수
     //num 변수 없이 그냥  연계 1,2 최종적으로 맞추면 score+=1
