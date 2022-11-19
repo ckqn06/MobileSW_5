@@ -1,17 +1,55 @@
-import {View, Text, StyleSheet, Button, TouchableOpacity} from "react-native";
+import {View, Image, Text, TextInput, StyleSheet, Button, TouchableOpacity} from "react-native";
+import { useState } from 'react';
 
 const Start = (props) => {
+    const [mySIDInput,setmySIDInput] = useState("")
+    const onChangeSIDInput = (event) => {
+        console.log("event", event)
+        setmySIDInput(event)
+    }
+
+    const [myPWDInput,setmyPWDInput] = useState("")
+    const onChangePWDInput = (event) => {
+        console.log("event", event)
+        setmyPWDInput(event)
+    }
+
     return (
         <View style = {styles.main}>
-            <Text style = {styles.text}>QUIZ TEST</Text>
-            <TouchableOpacity>
-                <Text
-                style = {styles.button}
-                onPress ={() =>{
-                    props.navigation.navigate("Register")
-                }}
-                >start</Text>
-            </TouchableOpacity>
+            <View style = {styles.subView_1}>
+                <Image
+                 style = {{width:200, height:200}}
+                 source = {require('../assets/images/school.png')}
+                 resizeMode = "contain">
+                </Image>
+            </View>
+
+            <View style = {styles.subView_2}>
+                <Text style = {styles.subText}>School ID</Text>
+                <TextInput
+                 style = {styles.textInput}
+                 value = {mySIDInput}
+                 onChangeText = {onChangeSIDInput}
+                 placeholder = "Insert your school ID"
+                ></TextInput>
+
+                <Text style = {styles.subText}>PassWord</Text>
+                <TextInput
+                 style = {styles.textInput}
+                 value = {myPWDInput}
+                 onChangeText = {onChangePWDInput}
+                 placeholder = "Insert your password"
+                ></TextInput>
+            </View>
+
+            <View style = {styles.subView_3}>
+                <Button
+                 title = "LOGIN"
+                 color = '#8463ff'
+                 fontColor = 'black'
+                 onPress = {() => { props.navigation.navigate("Welcome") }}
+                />
+            </View>
         </View>
     );
 }
@@ -19,22 +57,39 @@ const Start = (props) => {
 const styles = StyleSheet.create({
     main: {
         flex: 1,
-        alignItems: 'center',
-        paddingTop: 130,
-        backgroundColor: '#DDA0DD',
+        backgroundColor: '#eefbff'
     },
-    text: {
-        margin: 70,
-        fontSize: 40,
+    subView_1: {
+        alignItems:'center',
+        justifyContent:'center'
     },
-    button: {
-        margin: 40,
-        backgroundColor: "skyblue",
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: 45,
-        width: '100%',
-        borderRadius: 20,
+    subView_2: {
+        flex:1.5,
+        justifyContent:'center',
+        marginLeft:10,
+        marginRight:30
+    },
+    subView_3: {
+        flex:0.5,
+        justifyContent:'center',
+        marginLeft:100,
+        marginRight:100
+    },
+    mainText: {
+        fontSize:40
+    },
+    subText: {
+        fontSize:30
+    },
+    textInput: {
+        height:40,
+        marginTop:20,
+        marginBottom:10,
+        paddingHorizontal:10,
+        borderRadius:10,
+        borderWidth:1,
+        borderColor:'black',
+        backgroundColor:'white'
     },
 });
 
