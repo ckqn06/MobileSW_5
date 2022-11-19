@@ -5,7 +5,7 @@ import { onAuthStateChanged } from "firebase/auth"
 import { Signin } from "../../Auth/AuthFunctions";
 
 
-const loginScreen = (props) => {
+const LoginScreen = (props) => {
 
     useEffect(() => {
         onAuthStateChanged(auth, (data) => {
@@ -144,4 +144,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default loginScreen
+export default LoginScreen

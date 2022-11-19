@@ -2,13 +2,15 @@ import { View, Text, StyleSheet, Button } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { LogOut } from './Auth/AuthFunctions';
+import { useState } from 'react';
 
 import Start from './Screen/registration/Start'
-import loginScreen from './Screen/registration/Login';
+import LoginScreen from './Screen/registration/login';
 import Register from './Screen/Register'
 import QuizList from './Screen/QuizList'
 import Welcome from './Screen/Welcome'
 import Main from './Screen/Main'
+
 import Quiz1 from './Screen/Quiz1'
 import Quiz2 from './Screen/Quiz2'
 import Quiz3 from './Screen/Quiz3'
@@ -49,16 +51,34 @@ import Strate8_1 from './Screen/Strate8_1'
 import Strate8_2 from './Screen/Strate8_2'
 import Strate8_3 from './Screen/Strate8_3'
 
+
 const Stack = createStackNavigator();
+
+
 export default function App() {
+  const [Score1,setScore1] =useState(0);
+  const [Score2,setScore2] =useState(0);
+  const [Score3,setScore3] =useState(0);
+  const [Score4,setScore4] =useState(0);
+  const [Score5,setScore5] =useState(0);
+  const [Score6,setScore6] =useState(0);
+  const [Score7,setScore7] =useState(0);
+  const [Score8,setScore8] =useState(0);
+  var total = Score1+Score2+Score3+Score4+Score5+Score6
+            +Score7+Score8;
+  //해결해야 할 것: 점수 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Login'>
-        <Stack.Screen name="Start" component={Start} />
-        <Stack.Screen name='Login' component={loginScreen} />
+          <Stack.Navigator initialRouteName='Login'>
+          <Stack.Screen name='Login' component={LoginScreen} />
+        <Stack.Screen name = "Start" component={Start}/>
         <Stack.Screen name = "Register" component={Register}/>
-        <Stack.Screen name="QuizList" component={QuizList} />
-        <Stack.Screen name='Welcome' component={Welcome} />
+        <Stack.Screen name = "QuizList" component={QuizList}
+          initialParams={{
+            Score1:Score1,
+          }}
+            />
+            <Stack.Screen name='Welcome' component={Welcome} />
         <Stack.Screen name='Main' component={Main} options={{
           headerRight: () => (
             <View style={{ marginRight: 8 }}>
@@ -77,7 +97,11 @@ export default function App() {
         <Stack.Screen name = "Quiz6" component={Quiz6}/>
         <Stack.Screen name = "Quiz7" component={Quiz7}/>
         <Stack.Screen name = "Quiz8" component={Quiz8}/>
-        <Stack.Screen name = "Strate1_1" component={Strate1_1}/>
+        <Stack.Screen name = "Strate1_1" component={Strate1_1}
+          initialParams={{
+            Score1:Score1,
+          }}
+        />
         <Stack.Screen name = "Strate1_2" component={Strate1_2}/>
         <Stack.Screen name = "Strate1_3" component={Strate1_3}/>
         
