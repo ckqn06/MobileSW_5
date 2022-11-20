@@ -13,9 +13,12 @@ const Quiz1 = (props) => {
 
 
     const [show, setShow] = useState(false);      //전략 선택 화면 상태 값 default는 false로 동작
+
     const showme = () => {
         setShow(true);
     }
+
+
     return (
         <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -53,7 +56,8 @@ const Quiz1 = (props) => {
                 <View style = {styles.button}>
                     <Text style = {styles.tt}>Which strategy do you want to use?</Text>
                     <Button
-                        title = "Write an equation to solve the problem"
+                        title="Write an equation to solve the problem"
+                        disabled={props.btnState}                
                         onPress ={() => {
                         props.navigation.navigate("Strate1_1")
                         }}

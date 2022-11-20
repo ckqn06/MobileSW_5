@@ -1,9 +1,14 @@
 import { View, Text, Button, StyleSheet, TextInput,
     KeyboardAvoidingView,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
-import {useState} from 'react'
+import { useState } from 'react'
+import { useSelector, useDispatch } from "react-redux"
+import { increment, decrement } from "../Redux/Actions";
 
 const Strate2_3 = (props) => {
+    const scoreCounter = useSelector(state => state.scoreCounter)
+    const dispatch = useDispatch()
+
     const [myTextInput, setMyTextInput] = useState("")
     const onChangeInput = (event) => {
         setMyTextInput(event)
@@ -11,17 +16,19 @@ const Strate2_3 = (props) => {
     const correct = () => {
         if (myTextInput == 11) {
             alert("Fantastic! You’ve found that Jen needs to run another 5 7/8 miles to reach her goal.");
+            dispatch(increment())
             props.navigation.navigate("Quiz2")
         } else {
             alert("miss");
         }
     }
+    //onPress={Keyboard.dismiss}
     return (
         <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
         > 
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>    
+        <TouchableWithoutFeedback >    
         <View style = {styles.container}>
             <View style = {styles.textcon}>
             <Text style = {styles.text}>Let’s subtract Jen’s miles from Monday through Friday from 22. 

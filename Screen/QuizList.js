@@ -4,9 +4,12 @@ import Correct from '../assets/QuizCorrect.png';    //해당 번호 모든 문�
 import Wrong from '../assets/QuizWrong.png';        //해결 못한 문제가 있는 경우
 import Yet from '../assets/QuizYet.png';            //기본 대기 체크 모양
 
+import { useSelector, useDispatch } from "react-redux"
+
 const QuizList = (props) => {
     const {params} = props.route
-    var Score1 = params? params.Score1:0;
+    var Score1 = params ? params.Score1 : 0;
+    const scoreCounter = useSelector(state => state.scoreCounter)
     return(
         <ScrollView style ={{width:"100%"}}>
         <View style ={styles.container}>
@@ -22,7 +25,7 @@ const QuizList = (props) => {
                     </Text>
                     </TouchableOpacity>
                     <Image
-                    style = {{width:20, height:20}}
+                    style = {{width:20, height:35}}
                     source = {Yet}
                     />
             </View>
@@ -38,7 +41,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -54,7 +57,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -70,7 +73,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -86,7 +89,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -102,7 +105,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -118,7 +121,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -134,7 +137,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -152,7 +155,8 @@ const QuizList = (props) => {
             </View>
         </View>
         <View>
-                <Text>Score1: {JSON.stringify(Score1)}</Text>
+                {/* <Text>Score1: {JSON.stringify(Score1)}</Text> */}
+                <Text>Current Score: {scoreCounter}</Text>
 
         </View>
         </ScrollView>
@@ -165,7 +169,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#DDA0DD',
         paddingTop: 30,
         paddingBottom: 30
-    },
+    }, 
     main: {
         marginLeft: 10,
         marginRight: 40,

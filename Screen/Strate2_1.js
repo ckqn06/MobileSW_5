@@ -1,9 +1,14 @@
 import { View, Text, Button, StyleSheet, TextInput,
     KeyboardAvoidingView,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
-import {useState} from 'react'
+import { useState } from 'react'
+import { useSelector, useDispatch } from "react-redux"
+import { increment, decrement } from "../Redux/Actions";
 
 const Strate2_1 = (props) => {
+    const scoreCounter = useSelector(state => state.scoreCounter)
+    const dispatch = useDispatch()
+
     const [show, setShow] = useState(false);                //2번째 화면 상태 값 default는 false로 동작
     const [myTextInput1, setMyTextInput1] = useState("")    //1번 답 저장 하는 공간
     const [myTextInput2, setMyTextInput2] = useState("")    //2번 답 저장 하는 공간
@@ -24,17 +29,19 @@ const Strate2_1 = (props) => {
     const correct2 = () => {
         if (myTextInput2 == 11) {
             alert("Fantastic! You’ve found that Jen needs to run another 5 7/8 miles to reach her goal. Let’s try a different way to solve this problem!");
+            dispatch(increment())
             props.navigation.navigate("Quiz2")
         } else {
             alert("miss");
         }
     }
+    //onPress={Keyboard.dismiss}
     return (
         <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
         > 
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>    
+        <TouchableWithoutFeedback >    
             <View style = {styles.container}>
                 <View style = {styles.textcon}>
                 <Text style = {styles.text}>Let’s add up Jen’s total from Monday through Thursday. 

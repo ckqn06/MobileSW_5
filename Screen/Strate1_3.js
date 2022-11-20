@@ -1,9 +1,14 @@
 import { View, Text, Button, StyleSheet, TextInput,
     KeyboardAvoidingView,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
-import {useState} from 'react'
+import { useState } from 'react'
+import { useSelector, useDispatch } from "react-redux"
+import { increment, decrement } from "../Redux/Actions";
 
 const Strate1_3 = (props) => {
+
+    const scoreCounter = useSelector(state => state.scoreCounter)
+    const dispatch = useDispatch()
 
     var score3 = 0;
     var count = 3;
@@ -14,7 +19,9 @@ const Strate1_3 = (props) => {
     }
     const correct = () => {
         if (myTextInput == 11) {
-            score3+=1;
+            dispatch(increment())
+            console.log("new score after 3 questions:", scoreCounter)
+           // score3+=1;
             alert("Ok! If you’re right, then Todd bought 11 pictures.");
             props.navigation.navigate("Quiz1",
             {
@@ -34,12 +41,14 @@ const Strate1_3 = (props) => {
             }
         }
     }
+
+    //onPress={Keyboard.dismiss}
     return (
         <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
         > 
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>    
+        <TouchableWithoutFeedback >    
         <View style = {styles.container}>
             <View style = {styles.textcon}>
             <Text style = {styles.text}>"OK. Start with $85.50.

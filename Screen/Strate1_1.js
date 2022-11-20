@@ -1,9 +1,16 @@
 import { View, Text, Button, StyleSheet, TextInput,
     KeyboardAvoidingView,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
-import {useState} from 'react'
+import { useCallback, useState } from 'react'
+import Quiz1 from "./Quiz1";
+import { useSelector, useDispatch } from "react-redux"
+import { increment, decrement } from "../Redux/Actions";
 
 const Strate1_1 = (props) => {
+    const scoreCounter = useSelector(state => state.scoreCounter)
+    const dispatch = useDispatch()
+
+    const [isDisabled, setIsDisabled] = useState(false)
     const {params} = props.route
     var Score1 = params? params.Score1:0;
     var count1 = 3;     //연계형 문제 1번 기회 횟수
@@ -21,6 +28,7 @@ const Strate1_1 = (props) => {
     }
     //correct1, 2 변경
     const correct1 = () => {
+        console.log("when starting, score: ", scoreCounter)
         if (myTextInput1 == 11) {
             alert("next");
             setShow(true)
@@ -33,19 +41,23 @@ const Strate1_1 = (props) => {
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz1", 
                 {
-                    score1:score1
+                    score1:Score1
                 })
             }
         }
     }
     const correct2 = () => {
         if (myTextInput2 == 11) {
-            score1+=1;
+           // Score1+=1;
+           dispatch(increment())
+           console.log("new count: ", scoreCounter)
             alert("Ok! If you’re right, then Todd bought 11 pictures.");
-            props.navigation.navigate("Quiz1", 
-            {
-                score1:score1
-            })
+            props.navigation.navigate("Quiz1",
+                {
+                    score1: Score1
+                });
+            //<Quiz1 btnState={!isDisabled} />  
+            
         } else {
             if(count2 > 0) {
                 count2 -=1;
@@ -55,19 +67,23 @@ const Strate1_1 = (props) => {
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz1",
                 {
-                    score1:score1
+                    score1:Score1
                 })
             }
         }
     }
+
+    
+
+    //onPress={Keyboard.dismiss}
 
     return (
         <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
         > 
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>    
-            <View style = {styles.container}>
+        <TouchableWithoutFeedback >      
+            <View style = {styles.container}> 
                 <View style = {styles.textcon}>
                 <Text style = {styles.text}>OK. Using p to represent the number of pictures, 
                 write an equation that represents how p, $7.50 per picture, 
@@ -83,7 +99,7 @@ const Strate1_1 = (props) => {
                 <View style = {styles.button}>
                     <Button
                         title = "check"
-                        onPress = {correct1}
+                            onPress={correct1} 
                     />
                 </View>
                 {/* 조건 연산자 사용 Ex. {조건 ? view : null} 초기 값이 false이기 때문에 null값이 선택되었다가 true로 바뀌면 view출력 */}
@@ -104,7 +120,7 @@ const Strate1_1 = (props) => {
                     <View style = {styles.button}>
                         <Button
                             title = "check"
-                            onPress = {correct2}
+                                    onPress={ correct2}    
                         />
                     </View>
                 </View>
@@ -159,6 +175,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
         marginBottom: 15,
         backgroundColor: 'white',
+        width: "90%",
 
     },
 }); 

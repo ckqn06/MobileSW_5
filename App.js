@@ -3,6 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { LogOut } from './Auth/AuthFunctions';
 import { useState } from 'react';
+import { store } from './Redux/store';
+import { Provider } from 'react-redux';
 
 import Start from './Screen/registration/Start'
 import LoginScreen from './Screen/registration/login';
@@ -68,7 +70,8 @@ export default function App() {
             +Score7+Score8;
   //해결해야 할 것: 점수 
   return (
-    <NavigationContainer>
+    <Provider store={store}>
+       <NavigationContainer>
           <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen name='Login' component={LoginScreen} />
         <Stack.Screen name = "Start" component={Start}/>
@@ -134,5 +137,6 @@ export default function App() {
         <Stack.Screen name = "Strate8_3" component={Strate8_3}/>
       </Stack.Navigator>
     </NavigationContainer>
+   </Provider>
   );
 }
