@@ -70,7 +70,7 @@ export default function App() {
             +Score7+Score8;
   //해결해야 할 것: 점수 
   return (
-    <Provider store={store}>
+    <Provider store={store}> {/* 앱 전체 state 저장소*/}
        <NavigationContainer>
           <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen name='Login' component={LoginScreen} />
