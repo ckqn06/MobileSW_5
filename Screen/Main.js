@@ -3,12 +3,13 @@ import { View, Text, StyleSheet, Image, Button, TouchableOpacity } from "react-n
 const Main = (props) => {
     return (
         <View style = {styles.main}>
-            {/*
-            <Text style = {styles.subText}>Name: LGH</Text>
-            <Text style = {styles.subText}>School ID: </Text>
-            <Text style = {styles.subText}>Password: </Text> */}
+            <View style = {{padding:15, flexDirection:'row'}}>
+                <Text style = {styles.profileText}>Name: </Text>
+                <Text style = {styles.profileText}>School ID: </Text>
+                <Text style = {styles.profileText}>Password: </Text>
+            </View>
 
-            <View style = {{marginTop:30, marginBottom:15}}>
+            <View style = {{marginBottom:15}}>
                 <View style = {styles.subView_1}>
                     <Image
                      style = {{marginTop:30, marginBottom:30, width:150, height:150}}
@@ -48,7 +49,12 @@ const Main = (props) => {
 const styles = StyleSheet.create({
     main: {
         flex: 1,
+        alignItems:'center',
         backgroundColor: '#eefbff'
+    },
+    profileText: {
+        marginRight:10,
+        fontSize:15
     },
     subView_1: {
         flexDirection:'row',
@@ -71,8 +77,6 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
         padding:10,
-        marginLeft:70,
-        marginRight:70,
         borderRadius:5,
         borderWidth:1,
         borderColor:'black',
@@ -80,6 +84,8 @@ const styles = StyleSheet.create({
     },
     quizButtonText: {
         fontSize:30,
+        marginLeft:15,
+        marginRight:15,
         fontWeight:'bold',
         color:'white'
     },
@@ -90,6 +96,7 @@ const styles = StyleSheet.create({
         padding:10,
         marginLeft:45,
         marginRight:45,
+        marginBottom:30,
         borderRadius:10,
         borderWidth:1,
         borderColor:'black',

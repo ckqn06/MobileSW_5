@@ -23,7 +23,7 @@ const Start = (props) => {
                  resizeMode = "contain">
                 </Image>
             </View>
-
+            
             <View style = {styles.subView_2}>
                 <Text style = {styles.subText}>School ID</Text>
                 <TextInput
