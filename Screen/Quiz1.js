@@ -4,13 +4,6 @@ import { View, Text, Button, StyleSheet, TextInput, ScrollView,
 import {useState} from 'react'
 
 const Quiz1 = (props) => {
-    const {params} = props.route
-    var score1 = params? params.score1:0;   //1번 전략에서 결과 값
-    var score2 = params? params.score2:0;   //2번 전략에서 결과 값
-    var score3 = params? params.score3:0;   //3번 전략에서 결과 값        
-    
-    var sumScore = score1 + score2 + score3;   //QuizList에 념겨줄 1번 문제 결과 값
-
 
     const [show, setShow] = useState(false);      //전략 선택 화면 상태 값 default는 false로 동작
     const showme = () => {
@@ -79,10 +72,7 @@ const Quiz1 = (props) => {
                     <Button
                         title = "submit"
                         onPress ={() => {
-                        props.navigation.navigate("QuizList",
-                            {
-                                score1:sumScore
-                            })
+                        props.navigation.navigate("QuizList")
                         }}
                     />
                 </View>

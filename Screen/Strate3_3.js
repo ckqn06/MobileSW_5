@@ -2,14 +2,23 @@ import { View, Text, Button, StyleSheet, TextInput,
     KeyboardAvoidingView, ScrollView,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {useState} from 'react'
+import { useSelector, useDispatch } from "react-redux"
+import { increment, decrement } from "../Redux/Actions";
 
 
 const Strate3_3 = (props) => {
+    const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
+    const dispatch = useDispatch() // 액션 불러오기 면어
+    //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
+
+    var count1 = 3;
+    var count2 = 3;
+    var count3 = 3;
     const [show1, setShow1] = useState(false);              //2번째 화면 상태 값 default는 false로 동작
     const [show2, setShow2] = useState(false);              //3번째 화면 상태 값 default는 false로 동작
     const [myTextInput1, setMyTextInput1] = useState("")    //1번 답 저장 하는 공간
     const [myTextInput2, setMyTextInput2] = useState("")    //2번 답 저장 하는 공간
-    const [myTextInput3, setMyTextInput3] = useState("")    //2번 답 저장 하는 공간
+    const [myTextInput3, setMyTextInput3] = useState("")    //3번 답 저장 하는 공간
     const onChangeInput1 = (event) => {
         setMyTextInput1(event)
     }
@@ -24,23 +33,45 @@ const Strate3_3 = (props) => {
             alert("next");
             setShow1(true)
         } else {
-            alert("miss");
+            if(count1 > 0) {
+                count1 -= 1;
+                alert("miss you have "+(count1)+" chance");
+            }
+            else if(count1 == 0) {
+                alert("miss you have no chance")
+                props.navigation.navigate("Quiz3")
+            }
         }
     }
     const correct2 = () => {
-        if (myTextInput2 == 11) {
+        if (myTextInput1 == 11) {
             alert("next");
             setShow2(true)
         } else {
-            alert("miss");
+            if(count2 > 0) {
+                count2 -= 1;
+                alert("miss you have "+(count2)+" chance");
+            }
+            else if(count2 == 0) {
+                alert("miss you have no chance")
+                props.navigation.navigate("Quiz3")
+            }
         }
     }
     const correct3 = () => {
-        if (myTextInput3 == 11) {
+        if (myTextInput2 == 11) {
+            dispatch(increment()) //점수 추가 액션 불러오기
             alert("Nice! Jennifer used 10.8 yards of fabric for each curtain. Let’s try a different method!");
             props.navigation.navigate("Quiz3")
         } else {
-            alert("miss");
+            if(count3 > 0) {
+                count3 -= 1;
+                alert("miss you have "+(count3)+" chance");
+            }
+            else if(count3 == 0) {
+                alert("miss you have no chance")
+                props.navigation.navigate("Quiz3")
+            }
         }
     }
     return (
