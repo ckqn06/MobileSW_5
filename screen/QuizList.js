@@ -50,15 +50,15 @@ const QuizList = (props) => {
                 />
             </View> */}
             
-            <View style = {styles.Qstatus}>
+            <View style = {styles.Qstatus1}>
                 <img height={20} width={20} src={Correct}/>
             </View>
 
-            <View style = {styles.Qstatus}>
+            <View style = {styles.Qstatus2}>
                 <img height={20} width={20} src={Yet}/>
             </View>
 
-            <View style = {styles.Qstatus}>
+            <View style = {styles.Qstatus3}>
                 <img height={20} width={20} src={Wrong}/>
             </View>
 
@@ -73,11 +73,25 @@ const QuizList = (props) => {
 
             <TouchableOpacity>
                 <Text
+                style = {styles.line}
+                    >----------------------------------------------------------------
+                    </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
                 style = {styles.button}
                 onPress ={() =>{
                     props.navigation.navigate("Quiz2")
                 }}
                 >Quiz2</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
+                style = {styles.line}
+                    >----------------------------------------------------------------
+                    </Text>
             </TouchableOpacity>
 
             <TouchableOpacity>
@@ -91,11 +105,25 @@ const QuizList = (props) => {
 
             <TouchableOpacity>
                 <Text
+                style = {styles.line}
+                    >----------------------------------------------------------------
+                    </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
                 style = {styles.button}
                 onPress ={() =>{
                     props.navigation.navigate("Quiz4")
                 }}
                 >Quiz4</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
+                style = {styles.line}
+                    >----------------------------------------------------------------
+                    </Text>
             </TouchableOpacity>
 
             <TouchableOpacity>
@@ -109,6 +137,13 @@ const QuizList = (props) => {
 
             <TouchableOpacity>
                 <Text
+                style = {styles.line}
+                    >----------------------------------------------------------------
+                    </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
                 style = {styles.button}
                 onPress ={() =>{
                     props.navigation.navigate("Quiz6")
@@ -118,11 +153,25 @@ const QuizList = (props) => {
 
             <TouchableOpacity>
                 <Text
+                style = {styles.line}
+                    >----------------------------------------------------------------
+                    </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
                 style = {styles.button}
                 onPress ={() =>{
                     props.navigation.navigate("Quiz7")
                 }}
                 >Quiz7</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
+                style = {styles.line}
+                    >----------------------------------------------------------------
+                    </Text>
             </TouchableOpacity>
 
             <TouchableOpacity>
@@ -156,13 +205,22 @@ const styles = StyleSheet.create({
         left:28,
     },
 
-    Qstatus: {
-        position:'relative',
-        marginLeft:420,
-        marginBottom:-32,
-        paddingVertical: 2,
-        paddingHorizontal:16,
-        
+    Qstatus1: {
+        position:'absolute',
+        marginLeft:340,
+        marginTop:216,
+    },
+
+    Qstatus2: {
+        position:'absolute',
+        marginLeft:340,
+        marginTop:272,
+    },
+
+    Qstatus3: {
+        position:'absolute',
+        marginLeft:340,
+        marginTop:328,
     },
 
     button: {
@@ -179,6 +237,16 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         marginTop: 10,
         fontWeight:'bold',
+    },
+
+    line: {
+        position:'relative',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin:-20,
+        marginLeft: 30,
+        marginRight: 30,
+        marginTop:-12,
     },
 }); 
 
