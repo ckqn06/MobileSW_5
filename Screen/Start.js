@@ -60,11 +60,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#eefbff'
     },
     subView_1: {
+        flex:1,
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        padding:10
     },
     subView_2: {
-        flex:1.5,
+        flex:1,
         justifyContent:'center',
         marginLeft:10,
         marginRight:30
