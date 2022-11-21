@@ -2,24 +2,23 @@ import { View, Text, Button, StyleSheet, TextInput,
     KeyboardAvoidingView,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {useState} from 'react'
+import { useSelector, useDispatch } from "react-redux"
+import { increment, decrement } from "../Redux/Actions";
 
 const Strate1_3 = (props) => {
-
-    var score3 = 0;
+    const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
+    const dispatch = useDispatch() // 액션 불러오기 면어
+    //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
     var count = 3;
-
     const [myTextInput, setMyTextInput] = useState("")
     const onChangeInput = (event) => {
         setMyTextInput(event)
     }
     const correct = () => {
         if (myTextInput == 11) {
-            score3+=1;
+            dispatch(increment()) //점수 추가 액션 불러오기
             alert("Ok! If you’re right, then Todd bought 11 pictures.");
-            props.navigation.navigate("Quiz1",
-            {
-                score3:score3
-            })
+            props.navigation.navigate("Quiz1")
         } else {
             if(count > 0) {
                 count -= 1;
@@ -27,10 +26,7 @@ const Strate1_3 = (props) => {
             }
             else if(count == 0) {
                 alert("miss you have no chance")
-                props.navigation.navigate("Quiz1", 
-                {
-                    score3:score3
-                })
+                props.navigation.navigate("Quiz1")
             }
         }
     }

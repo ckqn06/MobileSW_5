@@ -1,12 +1,25 @@
 import { View, Text, Button, StyleSheet, ScrollView, Image, TouchableOpacity } from "react-native";
 import {useState} from 'react'
-import Correct from '../assets/QuizCorrect.png';    //해당 번호 모든 문제 해결한 경우
-import Wrong from '../assets/QuizWrong.png';        //해결 못한 문제가 있는 경우
-import Yet from '../assets/QuizYet.png';            //기본 대기 체크 모양
+import { useSelector, useDispatch } from "react-redux"
 
 const QuizList = (props) => {
-    const {params} = props.route
-    var Score1 = params? params.Score1:0;
+    const scoreCounter = useSelector(state => state.scoreCounter)
+
+    const Correct = require('../assets/QuizCorrect.png');   //해당 번호 모든 문제 해결한 경우
+    const Wrong = require('../assets/QuizWrong.png');       //해결 못한 문제가 있는 경우
+    const Yet = require('../assets/QuizYet.png');           //기본 대기 체크 모양
+
+    const [icon1, setIcon1] = useState(Yet);
+    const [icon2, setIcon2] = useState(Yet);
+    const [icon3, setIcon3] = useState(Yet);
+    const [icon4, setIcon4] = useState(Yet);
+    const [icon5, setIcon5] = useState(Yet);
+    const [icon6, setIcon6] = useState(Yet);
+    const [icon7, setIcon7] = useState(Yet);
+    const [icon8, setIcon8] = useState(Yet);
+    //점수 값에 따라 해당 퀴즈 번호 사진들을 변경  (score == 0), (score != 0 || score !=3), (score == 3)
+    
+
     return(
         <ScrollView style ={{width:"100%"}}>
         <View style ={styles.container}>
@@ -22,8 +35,8 @@ const QuizList = (props) => {
                     </Text>
                     </TouchableOpacity>
                     <Image
-                    style = {{width:20, height:20}}
-                    source = {Yet}
+                    style = {{width:20, height:35}}
+                    source = {icon1}
                     />
             </View>
             <View style = {styles.main}>
@@ -38,7 +51,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -54,7 +67,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -70,7 +83,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -86,7 +99,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -102,7 +115,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -118,7 +131,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -134,7 +147,7 @@ const QuizList = (props) => {
                 </Text>
                 </TouchableOpacity>
                 <Image
-                style = {{width:20, height:20}}
+                style = {{width:20, height:35}}
                 source = {Yet}
                 />
             </View>
@@ -152,7 +165,8 @@ const QuizList = (props) => {
             </View>
         </View>
         <View>
-                <Text>Score1: {JSON.stringify(Score1)}</Text>
+                {/* <Text>Score1: {JSON.stringify(Score1)}</Text> */}
+                <Text>Current Score: {scoreCounter}</Text>
         </View>
         </ScrollView>
     );
