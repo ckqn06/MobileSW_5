@@ -8,7 +8,6 @@ const Welcome = (props) => {
                  style = {styles.image}
                  source = {require('../assets/images/hand.png')}
                  resizeMode = "contain"/>
-                 
                 <Text style = {styles.mainText}>Welcome</Text>
                 <Text style = {styles.mainText}>'LGH'!</Text>
                 <Text style = {styles.subText}>Touch anywhere to START</Text>
