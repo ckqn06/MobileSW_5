@@ -18,9 +18,10 @@ const Register = (props) => {
              source ={Study}
              resizeMode ="contain"
              /> */}
-            <img height={300} width={300} src={LoginImage}/>
+            <img height={240} width={240} src={LoginImage}/>
             <Text style={styles.header}>Login</Text>
-            <TextInput placeholder="Enter your Name" style={styles.textInput} />
+            <TextInput placeholder="Enter your ID" style={styles.textInput} />
+            <TextInput placeholder="Enter your PW" style={styles.textInputPW} />
             {/* <View style={styles.Button}>
               <Button title="Login" onPress ={() => {
                         props.navigation.navigate("QuizList")
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
         fontSize: 48,
         marginBottom: 48,
         fontWeight:'bold',
+        marginTop:-20,
       },
       textInput: {
         position:'relative',
@@ -68,7 +70,17 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: '#afafaf',
         borderBottomWidth: 1,
-        marginBottom: 24,
+        
+      },
+      textInputPW: {
+        position:'relative',
+        top: -40,
+        height: 40,
+        fontSize: 24,
+        color: '#afafaf',
+        borderBottomWidth: 1,
+        marginTop: -20,
+        marginBottom: 32,
       },
       button: {
         position:'relative',

@@ -1,9 +1,10 @@
-import { View, Text, Button, StyleSheet, ScrollView } from "react-native";
+import { View, Text, Button, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import {useState} from 'react'
 import Correct from '../assets/QuizCorrect.png';
 import Wrong from '../assets/QuizWrong.png';
 import Yet from '../assets/QuizYet.png';
 import ListImage from '../assets/QuizListImage.png';
+import { BorderlessButton } from "react-native-gesture-handler";
 
 
 const QuizList = (props) => {
@@ -39,82 +40,104 @@ const QuizList = (props) => {
                 <View style = {styles.QuizY}>
                 <img height={20} width={20} src={Yet}/>
             </View> */}
-            <View style = {styles.button}>
+            
+            {/* <View style = {styles.button}>
                 <Button
                 title = "Quiz.1"
                 onPress ={() => {
                     props.navigation.navigate("Quiz1")               
                 }}
                 />
+            </View> */}
+            
+            <View style = {styles.Qstatus}>
+                <img height={20} width={20} src={Correct}/>
             </View>
-                <View style = {styles.button}>
-                <Button
-                title = "Quiz.2"
-                onPress ={() => {
+
+            <View style = {styles.Qstatus}>
+                <img height={20} width={20} src={Yet}/>
+            </View>
+
+            <View style = {styles.Qstatus}>
+                <img height={20} width={20} src={Wrong}/>
+            </View>
+
+            <TouchableOpacity>
+                <Text
+                style = {styles.button}
+                onPress ={() =>{
+                    props.navigation.navigate("Quiz1")
+                }}
+                >Quiz1</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
+                style = {styles.button}
+                onPress ={() =>{
                     props.navigation.navigate("Quiz2")
                 }}
-                />
-            </View>
-                <View style = {styles.button}>
-                <Button
-                title = "Quiz.3"
-                onPress ={() => {
+                >Quiz2</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
+                style = {styles.button}
+                onPress ={() =>{
                     props.navigation.navigate("Quiz3")
                 }}
-                />
-            </View>
-                <View style = {styles.button}>
-                <Button
-                title = "Quiz.4"
-                onPress ={() => {
+                >Quiz3</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
+                style = {styles.button}
+                onPress ={() =>{
                     props.navigation.navigate("Quiz4")
                 }}
-                />
-            </View>
-                <View style = {styles.button}>
-                <Button
-                title = "Quiz.5"
-                onPress ={() => {
+                >Quiz4</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
+                style = {styles.button}
+                onPress ={() =>{
                     props.navigation.navigate("Quiz5")
                 }}
-                />
-            </View>
-                <View style = {styles.button}>
-                <Button
-                title = "Quiz.6"
-                onPress ={() => {
+                >Quiz5</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
+                style = {styles.button}
+                onPress ={() =>{
                     props.navigation.navigate("Quiz6")
                 }}
-                />
-            </View>
-                <View style = {styles.button}>
-                <Button
-                title = "Quiz.7"
-                onPress ={() => {
+                >Quiz6</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
+                style = {styles.button}
+                onPress ={() =>{
                     props.navigation.navigate("Quiz7")
                 }}
-                />
-            </View>
-                <View style = {styles.button}>
-                <Button
-                title = "Quiz.8"
-                onPress ={() => {
+                >Quiz7</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Text
+                style = {styles.button}
+                onPress ={() =>{
                     props.navigation.navigate("Quiz8")
                 }}
-                />
-            </View>
-            <View style = {styles.button}>
-                <Button
-                title ="submit"
-                onPress ={() => {
-                    props.navigation.navigate("Start")
-                }}
-                />
-            </View>
+                >Quiz8</Text>
+            </TouchableOpacity>
+
+            
+            
         </View>
-        <View>
-                <Text>Score1: {JSON.stringify(score1)}</Text>
-        </View>
+        
         </ScrollView>
     );
 }
@@ -133,28 +156,29 @@ const styles = StyleSheet.create({
         left:28,
     },
 
-    QuizC: {
+    Qstatus: {
         position:'relative',
-        top:76,
-        left:460,
- 
+        marginLeft:420,
+        marginBottom:-32,
+        paddingVertical: 2,
+        paddingHorizontal:16,
+        
     },
-    QuizW: {
-        position:'relative',
-        top:132,
-        left:460,
 
-    },
-    QuizY: {
-        position:'relative',
-        top:188,
-        left:460,
-    },
     button: {
+        position:'relative',
+        height:16,
+        width:96,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 2,
+        paddingHorizontal:16,
+        fontSize: 20,
         marginLeft: 30,
         marginRight: 30,
         marginBottom: 30,
         marginTop: 10,
+        fontWeight:'bold',
     },
 }); 
 
