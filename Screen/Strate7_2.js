@@ -10,7 +10,7 @@ const Strate7_2 = (props) => {
     const dispatch = useDispatch() // 액션 불러오기 면어
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
 
-    var count1 = 3;
+    var count = 3;
     var count2 = 3;
     var count3 = 3;
     const [show1, setShow1] = useState(false);              //2번째 화면 상태 값 default는 false로 동작

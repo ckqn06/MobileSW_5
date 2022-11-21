@@ -44,7 +44,7 @@ const Quiz1 = (props) => {
             {show ? (
             <View>
                 <View style = {styles.button}>
-                    <Text style = {styles.tt}>Which strategy do you want to use?</Text>
+                    <Text style = {styles.tt}>Which strategy do you want to use</Text>
                     <Button
                         title = "Write an equation to solve the problem"
                         onPress ={() => {

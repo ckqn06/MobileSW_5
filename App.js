@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Start from './Screen/Start'
 import Register from './Screen/Register'
 import QuizList from './Screen/QuizList'
-import Quiz1 from './Screen/Quiz1'
+import Quiz from './Screen/Quiz1'
 import Quiz2 from './Screen/Quiz2'
 import Quiz3 from './Screen/Quiz3'
 import Quiz4 from './Screen/Quiz4'
