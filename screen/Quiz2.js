@@ -1,6 +1,14 @@
-import { View, Text, Button, StyleSheet, TextInput } from "react-native";
+import { View, Text, Button, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 
 const Quiz2 = (props) => {
+    
+    const {params} = props.route
+    var score1 = params? params.score1:0;
+    var score2 = params? params.score2:0;
+    var score3 = params? params.score3:0;
+    
+    var sumScore = score1 + score2 + score3;
+
     return (
         <View style = {styles.container}>
             <View style = {styles.textcon}>
@@ -9,36 +17,48 @@ const Quiz2 = (props) => {
             How many miles must Jen run on Friday to reach her goal?
             </Text>
             </View>
-            <View style = {styles.button}>
-            <Text style = {styles.tt}>Which strategy do you want to use?</Text>
-                <Button
-                    title = "Add up her miles and then find out how many more she needs to get to 22 miles"
-                    onPress ={() => {
+
+            <View style = {styles.container1}>
+              <Text style = {styles.tt}>Which strategy do you want to use?</Text>
+                </View>
+
+                <View style = {styles.container2}>
+
+                <TouchableOpacity>
+                    <Text
+                    style = {styles.button}
+                    onPress ={() =>{
                         props.navigation.navigate("Strate2_1")
                     }}
-                />
-            </View>
-            <View style = {styles.button}>
-            <Button
-                    title = "Write an equation to solve it"
-                    onPress ={() => {
+                    >Add up her miles and then find out how many more she needs to get to 22 miles</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity>
+                    <Text
+                    style = {styles.button}
+                    onPress ={() =>{
                         props.navigation.navigate("Strate2_2")
-                    }}
-                />
-            </View>
-            <View style = {styles.button}>
-            <Button
-                    title = "Subtract her miles from 22 and see how many are left"              
-                    onPress ={() => {
+                     }}
+                    >Write an equation to solve it</Text>
+                </TouchableOpacity>   
+                <TouchableOpacity>
+                    <Text
+                    style = {styles.button}
+                    onPress ={() =>{
                         props.navigation.navigate("Strate2_3")
                     }}
-                />
+                    >Subtract her miles from 22 and see how many are left</Text> 
+                 </TouchableOpacity>
             </View>
+
             <View style = {styles.button}>
                 <Button
                     title = "submit"
                     onPress ={() => {
-                        props.navigation.navigate("QuizList")
+                        props.navigation.navigate("QuizList",
+                        {
+                            score1:sumScore
+                        })
                     }}
                 />
             </View>
@@ -53,32 +73,92 @@ const styles = StyleSheet.create({
         paddingTop: 30,
         paddingBottom: 30
     },
-    button: {
-        marginLeft: 30,
-        marginRight: 30,
-        marginBottom: 10,
-        marginTop: 10
+    // button: {
+    //     marginLeft: 30,
+    //     marginRight: 30,
+    //     marginBottom: 10,
+    //     marginTop: 10
+    // },
+
+    container1: {
+        marginLeft:20,
+        marginRight:20,
+        marginTop:8,
+        marginBottom:20,
+        backgroundColor: '#d9fffc',
+        height:140,
+        position:'relative',
+        borderTopStartRadius:16,
+        borderTopEndRadius:16,
+        borderColor:'#efefef',
+        borderWidth:1,
+        alignItems:"center",
+        justifyContent:"center",
+        
     },
+
+    container2: {
+        marginLeft:20,
+        marginRight:20,
+        marginTop:8,
+        marginBottom:20,
+        backgroundColor: '#ffffff',
+        top:-32,
+        position:'relative',
+        marginBottom: 24,
+        borderRadius:0,
+        borderBottomStartRadius:16,
+        borderBottomEndRadius:16,
+        borderColor:'#efefef',
+        borderWidth:1,
+    },
+    
+    tt: {
+        marginLeft:20,
+        marginRight:20,
+        marginTop:16,
+        marginBottom:20,
+        width: 400,
+        position:'relative',
+        color: 'black',
+        fontSize:24,
+        
+    },
+
+    button: {
+        marginLeft:16,
+        marginRight:20,
+        marginTop:8,
+        marginBottom:20,
+        position:'relative',
+        backgroundColor: '#f7f7f7',
+        paddingVertical: 0,
+        paddingHorizontal:12,
+        marginTop: 16,
+        fontSize: 20,
+        borderRadius: 8,
+        borderColor: '#8463ff',
+    },
+
     textcon: {
-        backgroundColor: 'white',
-        height: 200,
-        marginLeft: 30,
-        marginRight: 30,
-        marginBottom: 30,
-        marginTop: 10,
-        borderRadius: 3,
+        backgroundColor: '#d9fffc',
+        marginLeft:20,
+        marginRight:20,
+        marginTop:8,
+        marginBottom:20,
+        borderRadius:8,
+        borderColor:'#efefef',
+        borderWidth:1,
     },
     text: {
+        marginLeft:12,
+        marginRight:12,
+        marginTop:12,
+        marginBottom:12,
         fontSize: 20,
         color: 'black',
     },
-    tt: {
-        backgroundColor: '#8463ff',
-        color: 'black',
-        marginBottom: 5,
-    },
+    
 }); 
-
-
 
 export default Quiz2

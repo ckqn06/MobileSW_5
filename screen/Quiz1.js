@@ -89,13 +89,14 @@ const styles = StyleSheet.create({
         marginTop:8,
         marginBottom:20,
         backgroundColor: '#d9fffc',
-        height:160,
+        height:140,
         position:'relative',
-        marginBottom: 24,
         borderTopStartRadius:16,
         borderTopEndRadius:16,
         borderColor:'#efefef',
         borderWidth:1,
+        alignItems:"center",
+        justifyContent:"center",
         
     },
 
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
         marginTop:8,
         marginBottom:20,
         backgroundColor: '#ffffff',
-        top:-60,
+        top:-32,
         position:'relative',
         marginBottom: 24,
         borderRadius:0,
@@ -116,14 +117,15 @@ const styles = StyleSheet.create({
     },
     
     tt: {
-        marginTop:32,
-        left : 20,
+        marginLeft:20,
+        marginRight:20,
+        marginTop:16,
+        marginBottom:20,
         width: 400,
         position:'relative',
-        flex: 0,
         color: 'black',
-        marginBottom: 24,
         fontSize:24,
+        
     },
 
     button: {
