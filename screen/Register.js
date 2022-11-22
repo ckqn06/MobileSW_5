@@ -94,8 +94,6 @@ const styles = StyleSheet.create({
         paddingVertical: 2,
         paddingHorizontal:16,
         fontSize: 24,
-        //width: '100%',
-      
         borderRadius: 5,
         fontWeight:'bold',
         borderColor: '#8463ff',
