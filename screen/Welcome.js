@@ -2,50 +2,41 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 
 const Welcome = (props) => {
     return (
-        <View style = {styles.main}>
-            <View style = {styles.subView_1}>
-                <TouchableOpacity onPress = {() => { props.navigation.navigate("Main") }}>
-                    <Image
-                     style = {{width:300, height:300}}
-                     source = {require('../assets/images/hand.png')}
-                     resizeMode = "contain"
-                     >
-                    </Image>
-                </TouchableOpacity>
+        <TouchableOpacity onPress = {() => { props.navigation.navigate("Main") }}>
+            <View style = {styles.main}>
+                <Image
+                 style = {styles.image}
+                 source = {require('../assets/images/hand.png')}
+                 resizeMode = "contain"/>
                 <Text style = {styles.mainText}>Welcome</Text>
                 <Text style = {styles.mainText}>'LGH'!</Text>
+                <Text style = {styles.subText}>Touch anywhere to START</Text>
             </View>
-
-            <View style = {styles.subView_2}>
-                <Text style = {styles.subText}>Touch hand to START</Text>
-            </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
     main: {
-        flex: 1,
-        //backgroundColor: '#4A2F72'
+        padding:20,
+        alignItems:'center',
+        justifyContent:'center',
+        backgroundColor: '#eefbff'
     },
-    subView_1: {
+    image: {
         marginTop:50,
-        alignItems:'center',
-        justifyContent:'center'
-    },
-    subView_2: {
-        flex:1,
-        alignItems:'center',
-        justifyContent:'center'
+        marginBottom:50,
+        width:300,
+        height:300
     },
     mainText: {
+        marginBottom:15,
         fontSize:40
     },
     subText: {
-        fontSize:35
-    },
-    button: {
-        margin: 10
+        marginTop:30,
+        marginBottom:200,
+        fontSize:27
     }
 });
 
