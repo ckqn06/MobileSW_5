@@ -2,22 +2,16 @@ import { View, Text, Button, StyleSheet, TextInput,
     KeyboardAvoidingView,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
 import { useCallback, useState } from 'react'
-import Quiz1 from "./Quiz1";
 import { useSelector, useDispatch } from "react-redux"
 import { increment, decrement } from "../Redux/Actions";
 
 const Strate1_1 = (props) => {
-    const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
-    const dispatch = useDispatch() // 액션 불러오기 면어
+    //const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
+    //const dispatch = useDispatch() // 액션 불러오기 면어
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
 
-    const [isDisabled, setIsDisabled] = useState(false)
-    const {params} = props.route
-    var Score1 = params? params.Score1:0;
-    var count1 = 3;     //연계형 문제 1번 기회 횟수
-    var count2 = 3;     //연계형 문제 2번 기회 횟수
-    //num 변수 없이 그냥  연계 1,2 최종적으로 맞추면 score+=1
-    //연계 1은 맞추더라도 2는 못맞추면 score+=0 되게끔 설정
+    var count1 = 3;
+    var count2 = 3;
     const [show, setShow] = useState(false);                //2번째 화면 상태 값 default는 false로 동작
     const [myTextInput1, setMyTextInput1] = useState("")    //1번 답 저장 하는 공간
     const [myTextInput2, setMyTextInput2] = useState("")    //2번 답 저장 하는 공간
@@ -27,7 +21,6 @@ const Strate1_1 = (props) => {
     const onChangeInput2 = (event) => {
         setMyTextInput2(event)
     }
-    //correct1, 2 변경
     const correct1 = () => {
         console.log("when starting, score: ", scoreCounter)
         if (myTextInput1 == 11) {
@@ -40,25 +33,15 @@ const Strate1_1 = (props) => {
             }
             else if(count1 == 0) {
                 alert("miss you have no chance")
-                props.navigation.navigate("Quiz1", 
-                {
-                    score1:Score1
-                })
+                props.navigation.navigate("Quiz1")
             }
         }
     }
     const correct2 = () => {
         if (myTextInput2 == 11) {
-           // Score1+=1;
-           dispatch(increment()) //점수 추가 액션 불러오기
-           console.log("new count: ", scoreCounter)
+            //dispatch(increment()) //점수 추가 액션 불러오기
             alert("Ok! If you’re right, then Todd bought 11 pictures.");
-            props.navigation.navigate("Quiz1",
-                {
-                    score1: Score1
-                });
-            //<Quiz1 btnState={!isDisabled} />  
-            
+            props.navigation.navigate("Quiz1")
         } else {
             if(count2 > 0) {
                 count2 -=1;
@@ -66,18 +49,10 @@ const Strate1_1 = (props) => {
             }
             else if(count2 == 0) {
                 alert("miss you have no chance")
-                props.navigation.navigate("Quiz1",
-                {
-                    score1:Score1
-                })
+                props.navigation.navigate("Quiz1")
             }
         }
     }
-
-    
-
-    //onPress={Keyboard.dismiss}
-
     return (
         <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
