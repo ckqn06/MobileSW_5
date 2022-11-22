@@ -65,8 +65,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#eefbff'
     },
     subView_1: {
-        alignItems:'center',
-        justifyContent:'center',
+        alignItems:'center'
     },
     subView_2: {
         justifyContent:'center',
@@ -78,7 +77,7 @@ const styles = StyleSheet.create({
         marginLeft:100,
         marginRight:100,
         marginTop:10,
-        marginBottom:10
+        marginBottom:45
     },
     mainText: {
         fontSize:40

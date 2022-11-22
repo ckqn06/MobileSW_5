@@ -32,13 +32,13 @@ const Quiz2 = (props) => {
 
                         <TextInput
                          style = {styles.textInput}
-                         placeholder = "   Insert any answer">
+                         placeholder = "Insert any answer">
                         </TextInput>
 
                         <View style = {styles.sendButton}>
                             <Button
                              title="send"
-                             color='#B266FF'
+                             color='#8463ff'
                              onPress = {showme}/>
                         </View>
             
@@ -51,25 +51,25 @@ const Quiz2 = (props) => {
                             <View style = {styles.strateButton}>
                                 <Button
                                  title = {"Add up her miles and then find out" + "\n" + "how many more she needs to get to 22 miles"}
-                                 onPress ={() => {props.navigation.navigate("Strate2_1")}}/>
+                                 onPress = {() => {props.navigation.navigate("Strate2_1")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
                                  title = "Write an equation to solve it"
-                                 onPress ={() => {props.navigation.navigate("Strate2_2")}}/>
+                                 onPress = {() => {props.navigation.navigate("Strate2_2")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
                                  title = {"Subtract her miles from 22" + "\n" + "and see how many are left"}
-                                 onPress ={() => {props.navigation.navigate("Strate2_3")}}/>
+                                 onPress = {() => {props.navigation.navigate("Strate2_3")}}/>
                             </View>
 
                             <View style = {styles.sendButton}>
                                 <Button
-                                 title = "submit"
-                                 color='#B266FF'
+                                 title="submit"
+                                 color='#8463ff'
                                  onPress ={() => {props.navigation.navigate("QuizList")}}/>
                             </View>
                         </View>
@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
         marginBottom:20,
         marginLeft:20,
         marginRight:20,
+        paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,
         borderColor:'black',
