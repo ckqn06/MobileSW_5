@@ -9,55 +9,69 @@ const Quiz1 = (props) => {
     return (
         <KeyboardAvoidingView
          behavior={Platform.OS === "ios" ? "padding" : "height"}
-         style={styles.container}> 
+         style={styles.mainView}> 
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>  
                 <ScrollView style ={{width:"100%"}}>
-                    <View style = {styles.container}>
-                        <View style = {styles.textcon}>
-                            <Text style = {styles.text}>"Todd orders pictures from a photographer. Each picture costs $7.50.
-                                                        A one-time shipping fee of $3.25 is added to the cost of the order.
-                                                        The total cost of Todd’s order before tax is $85.75.
-                                                        {"\n"}{"\n"}How many pictures did Todd order?"
-                            </Text>
+                    <View style = {styles.mainView}>
+                        <View style = {styles.quizSpace}>
+                            <View style = {{alignItems:'center'}}>
+                                <Text style = {styles.header}>== QUIZ ==</Text>
+                                <Text style = {styles.quizText}>Todd orders pictures from a photographer.{"\n"}
+                                                        Each picture costs $7.50.{"\n"}
+                                                        A one-time shipping fee of $3.25 is added{"\n"}to the cost of the order.{"\n"}
+                                                        The total cost of Todd’s order before tax is $85.75.{"\n"}{"\n"}
+                                                        How many pictures did Todd order?
+                                </Text>
+                            </View>
                         </View>
 
-                        <View style = {styles.simpletext}>
-                            <Text style = {styles.text}>What do you think the problem is asking you to do?</Text>
-                            <TextInput
-                             style = {styles.input}
-                             placeholder="give me any strategy"/>
+                        <View style = {styles.subSpace}>
+                            <View style = {{alignItems:'center'}}>
+                                <Text style = {styles.header}>== Open-ended Question ==</Text>
+                                <Text style = {styles.subText}>What do you think the problem is asking you to do?</Text>
+                            </View>
                         </View>
 
-                        <View style = {styles.button}>
+                        <TextInput
+                         style = {styles.textInput}
+                         placeholder = "   Insert any answer">
+                        </TextInput>
+
+                        <View style = {styles.sendButton}>
                             <Button
-                             title = "send"
+                             title="send"
+                             color='#B266FF'
                              onPress = {showme}/>
                         </View>
             
                         {show ? (
                         <View>
-                            <View style = {styles.button}>
-                                <Text style = {styles.tt}>Which strategy do you want to use?</Text>
+                            <View style = {{padding:10, alignItems:'center'}}>
+                                <Text style = {styles.subText}>Which strategy do you want to use?</Text>
+                            </View>
+                            
+                            <View style = {styles.strateButton}>
                                 <Button
                                  title = "Write an equation to solve the problem"
                                  onPress ={() => {props.navigation.navigate("Strate1_1")}}/>
                             </View>
 
-                            <View style = {styles.button}>
+                            <View style = {styles.strateButton}>
                                 <Button
-                                 title = "Add on shipping fee until i get to $85.75"
+                                 title = "Add on shipping fee until I get to $85.75"
                                  onPress ={() => {props.navigation.navigate("Strate1_2")}}/>
                             </View>
 
-                            <View style = {styles.button}>
+                            <View style = {styles.strateButton}>
                                 <Button
-                                 title = "Subtract away from $85.75 what did you get? unil i get to 0"
+                                 title = "Subtract away from $85.75 what did you get? until I get to 0"
                                  onPress ={() => {props.navigation.navigate("Strate1_3")}}/>
                             </View>
 
-                            <View style = {styles.button}>
+                            <View style = {styles.sendButton}>
                                 <Button
                                  title = "submit"
+                                 color='#B266FF'
                                  onPress ={() => {props.navigation.navigate("QuizList")}}/>
                             </View>
                         </View>
@@ -70,48 +84,59 @@ const Quiz1 = (props) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
+    mainView: {
         flex:1,
-        backgroundColor: '#DDA0DD',
-        paddingBottom: 10
+        paddingBottom:10,
+        backgroundColor: '#eefbff'
     },
-    button: {
-        marginLeft: 30,
-        marginRight: 30,
-        marginBottom: 10,
-        marginTop: 10
+    header: {
+        alignItems:'center',
+        fontSize:17
     },
-    textcon: {
-        backgroundColor: 'white',
-        height: 220,
-        marginLeft: 30,
-        marginRight: 30,
-        marginBottom: 30,
-        marginTop: 10,
-        borderRadius: 3,
+    quizSpace: {
+        padding:5,
+        margin:10,
+        borderRadius:5,
+        borderWidth:2,
+        borderColor:'black',
+        backgroundColor:'#EFEFEF'
     },
-    text: {
-        fontSize: 20,
-        color: 'black',
+    quizText: {
+        fontSize:17
     },
-    tt: {
-        backgroundColor: '#DDA0DD',
-        color: 'black',
-        marginBottom: 5,
+    subSpace: {
+        padding:5,
+        marginLeft:20,
+        marginRight:20,
+        borderRadius:15,
+        borderWidth:2,
+        borderColor:'black',
+        backgroundColor:'#EFEFEF'
     },
-    input: {
-        marginTop: 15,
-        marginBottom: 15,
-        backgroundColor: 'white',
+    subText: {
+        fontSize:20
     },
-    simpletext: {
-        backgroundColor: 'white',
-        height: 60,
-        marginLeft: 30,
-        marginRight: 30,
-        marginBottom: 30,
-        borderRadius: 3,
+    textInput: {
+        marginTop:10,
+        marginBottom:20,
+        marginLeft:20,
+        marginRight:20,
+        borderRadius:5,
+        borderWidth:1,
+        borderColor:'black',
+        backgroundColor:'white'
     },
+    sendButton: {
+        marginLeft:100,
+        marginRight:100,
+        marginBottom:10,
+        marginTop:10
+    },
+    strateButton: {
+        alignItems:'center',
+        marginTop:10,
+        marginBottom:10,
+    }
 }); 
 
 export default Quiz1
