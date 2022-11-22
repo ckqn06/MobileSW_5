@@ -1,86 +1,70 @@
-import { View, Text, Button, StyleSheet, TextInput, ScrollView,
-    KeyboardAvoidingView,
-    Platform, Keyboard, TouchableWithoutFeedback } from "react-native";
-import {useState} from 'react'
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+         ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { useState } from 'react'
 
 const Quiz1 = (props) => {
+    const [show,setShow] = useState(false); //전략 선택 화면 상태 값 default는 false로 동작
+    const showme = () => { setShow(true); }
 
-    const [show, setShow] = useState(false);      //전략 선택 화면 상태 값 default는 false로 동작
-    const showme = () => {
-        setShow(true);
-    }
     return (
         <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.container}
-        > 
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>  
-        <ScrollView style ={{width:"100%"}}>
-        <View style = {styles.container}>
-            <View style = {styles.textcon}>
-            <Text style = {styles.text}>"Todd orders pictures from a photographer. Each picture costs $7.50.
-            A one-time shipping fee of $3.25 is added to the cost of the order.
-            The total cost of Todd’s order before tax is $85.75.
-            {"\n"}{"\n"}
-            How many pictures did Todd order?"
-            </Text>
-            </View>
+         behavior={Platform.OS === "ios" ? "padding" : "height"}
+         style={styles.container}> 
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>  
+                <ScrollView style ={{width:"100%"}}>
+                    <View style = {styles.container}>
+                        <View style = {styles.textcon}>
+                            <Text style = {styles.text}>"Todd orders pictures from a photographer. Each picture costs $7.50.
+                                                        A one-time shipping fee of $3.25 is added to the cost of the order.
+                                                        The total cost of Todd’s order before tax is $85.75.
+                                                        {"\n"}{"\n"}How many pictures did Todd order?"
+                            </Text>
+                        </View>
 
-            <View style = {styles.simpletext}>
-                <Text style = {styles.text}>
-                What do you think the problem is asking you to do?
-                </Text>
-                <TextInput
-                style = {styles.input}
-                placeholder="give me any strategy"
-                />
-            </View>
-            <View style = {styles.button}>
-                <Button
-                    title = "send"
-                    onPress = {showme}
-                />
-            </View>
-            {show ? (
-            <View>
-                <View style = {styles.button}>
-                    <Text style = {styles.tt}>Which strategy do you want to use?</Text>
-                    <Button
-                        title = "Write an equation to solve the problem"
-                        onPress ={() => {
-                        props.navigation.navigate("Strate1_1")
-                        }}
-                    />
-                </View>
-                <View style = {styles.button}>
-                    <Button
-                        title = "Add on shipping fee until i get to $85.75"
-                        onPress ={() => {
-                        props.navigation.navigate("Strate1_2")
-                        }}
-                    />
-                </View>
-                <View style = {styles.button}>
-                    <Button
-                        title = "Subtract away from $85.75 what did you get? unil i get to 0"
-                        onPress ={() => {
-                        props.navigation.navigate("Strate1_3")
-                        }}
-                    />
-                </View>
-                <View style = {styles.button}>
-                    <Button
-                        title = "submit"
-                        onPress ={() => {
-                        props.navigation.navigate("QuizList")
-                        }}
-                    />
-                </View>
-            </View>
-            ):null}
-        </View>
-        </ScrollView>
-        </TouchableWithoutFeedback> 
+                        <View style = {styles.simpletext}>
+                            <Text style = {styles.text}>What do you think the problem is asking you to do?</Text>
+                            <TextInput
+                             style = {styles.input}
+                             placeholder="give me any strategy"/>
+                        </View>
+
+                        <View style = {styles.button}>
+                            <Button
+                             title = "send"
+                             onPress = {showme}/>
+                        </View>
+            
+                        {show ? (
+                        <View>
+                            <View style = {styles.button}>
+                                <Text style = {styles.tt}>Which strategy do you want to use?</Text>
+                                <Button
+                                 title = "Write an equation to solve the problem"
+                                 onPress ={() => {props.navigation.navigate("Strate1_1")}}/>
+                            </View>
+
+                            <View style = {styles.button}>
+                                <Button
+                                 title = "Add on shipping fee until i get to $85.75"
+                                 onPress ={() => {props.navigation.navigate("Strate1_2")}}/>
+                            </View>
+
+                            <View style = {styles.button}>
+                                <Button
+                                 title = "Subtract away from $85.75 what did you get? unil i get to 0"
+                                 onPress ={() => {props.navigation.navigate("Strate1_3")}}/>
+                            </View>
+
+                            <View style = {styles.button}>
+                                <Button
+                                 title = "submit"
+                                 onPress ={() => {props.navigation.navigate("QuizList")}}/>
+                            </View>
+                        </View>
+                        ):null}
+                    </View>
+                </ScrollView>
+            </TouchableWithoutFeedback> 
         </KeyboardAvoidingView>
     );
 }

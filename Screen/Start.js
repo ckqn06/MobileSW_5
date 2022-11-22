@@ -1,4 +1,5 @@
-import {View, Image, Text, TextInput, StyleSheet, Button, TouchableOpacity} from "react-native";
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+         ScrollView, View, Image, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useState } from 'react';
 
 const Start = (props) => {
@@ -15,84 +16,100 @@ const Start = (props) => {
     }
 
     return (
-        <View style = {styles.main}>
-            <View style = {styles.subView_1}>
-                <Image
-                 style = {{width:200, height:200}}
-                 source = {require('../assets/images/school.png')}
-                 resizeMode = "contain">
-                </Image>
-            </View>
+        <KeyboardAvoidingView
+         behavior={Platform.OS === "ios" ? "padding" : "height"}
+         style={styles.main}> 
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}> 
+                <ScrollView style ={{width:"100%"}}>
+                    <View style = {styles.main}>
+                        <View style = {styles.subView_1}>
+                            <Image
+                             style = {{width:500, height:300}}
+                             source = {require('../assets/images/cube2.png')}
+                             resizeMode = "contain"/>
+                        </View>
             
-            <View style = {styles.subView_2}>
-                <Text style = {styles.subText}>School ID</Text>
-                <TextInput
-                 style = {styles.textInput}
-                 value = {mySIDInput}
-                 onChangeText = {onChangeSIDInput}
-                 placeholder = "Insert your school ID"
-                ></TextInput>
+                        <View style = {styles.subView_2}>
+                            <Text style = {styles.subText}>Name</Text>
+                            <TextInput
+                             style = {styles.textInput}
+                             value = {mySIDInput}
+                             onChangeText = {onChangeSIDInput}
+                             placeholder = "Insert your Name"/>
 
-                <Text style = {styles.subText}>PassWord</Text>
-                <TextInput
-                 style = {styles.textInput}
-                 value = {myPWDInput}
-                 onChangeText = {onChangePWDInput}
-                 placeholder = "Insert your password"
-                ></TextInput>
-            </View>
+                            <Text style = {styles.subText}>Password{'('}e-mail{')'}</Text>
+                            <TextInput
+                             style = {styles.textInput}
+                             value = {myPWDInput}
+                             onChangeText = {onChangePWDInput}
+                             placeholder = "Insert your Password"/>
+                        </View>
 
-            <View style = {styles.subView_3}>
-                <Button
-                 title = "LOGIN"
-                 color = '#8463ff'
-                 fontColor = 'black'
-                 onPress = {() => { props.navigation.navigate("Welcome") }}
-                />
-            </View>
-        </View>
+                        <View style = {styles.subView_3}>
+                            <TouchableOpacity onPress = {() => {props.navigation.navigate("Welcome")}}>
+                                <View style = {styles.button}>
+                                    <Text style = {styles.buttonText}>LOGIN</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </ScrollView>
+            </TouchableWithoutFeedback> 
+        </KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
     main: {
-        flex: 1,
+        flex:1,
         backgroundColor: '#eefbff'
     },
     subView_1: {
-        flex:1,
         alignItems:'center',
         justifyContent:'center',
-        padding:10
     },
     subView_2: {
-        flex:1,
         justifyContent:'center',
         marginLeft:10,
         marginRight:30
     },
     subView_3: {
-        flex:0.5,
         justifyContent:'center',
         marginLeft:100,
-        marginRight:100
+        marginRight:100,
+        marginTop:10,
+        marginBottom:10
     },
     mainText: {
         fontSize:40
     },
     subText: {
+        marginLeft:10,
         fontSize:30
     },
     textInput: {
         height:40,
         marginTop:20,
-        marginBottom:10,
+        marginBottom:30,
         paddingHorizontal:10,
         borderRadius:10,
         borderWidth:1,
         borderColor:'black',
         backgroundColor:'white'
     },
+    button: {
+        alignItems:'center',
+        padding:10,
+        borderRadius:10,
+        borderWidth:2,
+        borderColor:'black',
+        backgroundColor:'steelblue'
+    },
+    buttonText: {
+        fontSize:20,
+        fontWeight:'bold',
+        color:'white'
+    }
 });
 
 export default Start
