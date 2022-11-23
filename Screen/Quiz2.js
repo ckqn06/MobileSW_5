@@ -17,8 +17,8 @@ const Quiz2 = (props) => {
                             <View style = {{alignItems:'center'}}>
                                 <Text style = {styles.header}>== QUIZ ==</Text>
                                 <Text style = {styles.quizText}>Jen wants to run a total of 22 miles in five days. 
-                                                                The table shows her log for the miles she ran on Monday, Tuesday, Wednesday, and Thursday. {"\n"}{"\n"}
-                                                                How many miles must Jen run on Friday to reach her goal?
+                                    The table shows her log for the miles she ran on Monday, Tuesday, Wednesday, and Thursday. {"\n"}{"\n"}
+                                    How many miles must Jen run on Friday to reach her goal?
                                 </Text>
                             </View>
                         </View>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#eefbff'
     },
     header: {
-        alignItems:'center',
+        padding:3,
         fontSize:17
     },
     quizSpace: {

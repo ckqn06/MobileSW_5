@@ -17,10 +17,10 @@ const Quiz1 = (props) => {
                             <View style = {{alignItems:'center'}}>
                                 <Text style = {styles.header}>== QUIZ ==</Text>
                                 <Text style = {styles.quizText}>Todd orders pictures from a photographer.{"\n"}
-                                                        Each picture costs $7.50.{"\n"}
-                                                        A one-time shipping fee of $3.25 is added{"\n"}to the cost of the order.{"\n"}
-                                                        The total cost of Todd’s order before tax is $85.75.{"\n"}{"\n"}
-                                                        How many pictures did Todd order?
+                                    Each picture costs $7.50.{"\n"}
+                                    A one-time shipping fee of $3.25 is added{"\n"}to the cost of the order.{"\n"}
+                                    The total cost of Todd’s order before tax is $85.75.{"\n"}{"\n"}
+                                    How many pictures did Todd order?
                                 </Text>
                             </View>
                         </View>
@@ -64,7 +64,7 @@ const Quiz1 = (props) => {
 
                             <View style = {styles.strateButton}>
                                 <Button
-                                 title = "Subtract away from $85.75 what did you get? until I get to 0"
+                                 title = "Subtract away from $85,75 until I get to O"
                                  onPress = {() => {props.navigation.navigate("Strate1_3")}}/>
                             </View>
 
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#eefbff'
     },
     header: {
-        alignItems:'center',
+        padding:3,
         fontSize:17
     },
     quizSpace: {
