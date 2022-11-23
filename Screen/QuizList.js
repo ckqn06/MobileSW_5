@@ -97,7 +97,7 @@ const QuizList = (props) => {
                 </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress ={() => {props.navigation.navigate("Start")}}>
+            <TouchableOpacity onPress ={() => {props.navigation.navigate("Main")}}>
                 <View style = {styles.subView}>
                     <Text style = {styles.submitbutton}>SUBMIT</Text>
                 </View>
