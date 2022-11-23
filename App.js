@@ -53,7 +53,8 @@ import { Provider } from 'react-redux';
 const Stack = createStackNavigator();
 export default function App() {
   return (
-    <NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name = "Start" component={Start}/>
           <Stack.Screen name = "Welcome" component={Welcome}/>
@@ -102,5 +103,6 @@ export default function App() {
           <Stack.Screen name = "Strate8_3" component={Strate8_3}/>
         </Stack.Navigator>
       </NavigationContainer>
+    </Provider>
   );
 }

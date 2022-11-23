@@ -1,9 +1,9 @@
 import { ScrollView, View, Text, Button, StyleSheet, Image, TouchableOpacity } from "react-native";
-import {useState} from 'react'
+import { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 
 const QuizList = (props) => {
-    //const scoreCounter = useSelector(state => state.scoreCounter)
+    const scoreCounter = useSelector(state => state.scoreCounter)
 
     const Correct = require('../assets/images/QuizCorrect.png');   //해당 번호 모든 문제 해결한 경우
     const Wrong = require('../assets/images/QuizWrong.png');       //해결 못한 문제가 있는 경우
@@ -103,9 +103,8 @@ const QuizList = (props) => {
                 </View>
             </TouchableOpacity>
 
-            <View>
-                {/* <Text>Score1: {JSON.stringify(Score1)}</Text> */}
-                {/*<Text>Current Score: {scoreCounter}</Text>*/}
+            <View style = {styles.mainText}>
+                <Text style = {{fontSize:25}}>Current Score: {scoreCounter}</Text>
             </View>
         </ScrollView>
     );

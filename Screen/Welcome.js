@@ -30,8 +30,7 @@ const styles = StyleSheet.create({
         height:300
     },
     mainText: {
-        marginBottom:15,
-        fontSize:40
+        fontSize:50
     },
     subText: {
         marginTop:30,
