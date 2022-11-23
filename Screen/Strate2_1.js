@@ -7,7 +7,7 @@ import { increment, decrement } from "../Redux/Actions";
 
 const Strate2_1 = (props) => {
     //const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
-    //const dispatch = useDispatch() // 액션 불러오기 면어
+    const dispatch = useDispatch() // 액션 불러오기 면어
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
     var count1 = 3;
     var count2 = 3;
@@ -37,9 +37,8 @@ const Strate2_1 = (props) => {
     }
     const correct2 = () => {
         if (myTextInput2 == 11) {
-            //dispatch(increment()) //점수 추가 액션 불러오기
+            dispatch(increment()) //점수 추가 액션 불러오기
             alert("Fantastic! You’ve found that Jen needs to run another 5 7/8 miles to reach her goal. Let’s try a different way to solve this problem!");
-            dispatch(increment())
             props.navigation.navigate("Quiz2")
         } else {
             if(count2 > 0) {

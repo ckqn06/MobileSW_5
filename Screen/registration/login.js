@@ -9,10 +9,10 @@ const LoginScreen = (props) => {
 
     useEffect(() => {
         onAuthStateChanged(auth, (data) => {
-            if (data) {
+            if(data) {
                 props.navigation.replace("Welcome")
             } else {
-                props.navigation.navigate("Login")
+                props.navigation.navigate("LoginScreen")
            }
         })
     }, [])
@@ -20,13 +20,13 @@ const LoginScreen = (props) => {
 
     const [email, setEmail] = useState("")
     const onChangeEmail = (event) => {
-        console.log("event", event)
+        //console.log("event", event)
         setEmail(event)
     }
 
     const [myPWDInput,setmyPWDInput] = useState("")
     const onChangePWDInput = (event) => {
-        console.log("event", event)
+       // console.log("event", event)
         setmyPWDInput(event)
     }
 
@@ -39,6 +39,7 @@ const LoginScreen = (props) => {
         if (!email) { alert("email field is required") }
         if (!myPWDInput) { alert("password field is required") }
         Signin(email, myPWDInput)
+        props.navigation.navigate("Welcome")
         console.log("logged In")
         setEmpty();
     }
@@ -112,8 +113,6 @@ const styles = StyleSheet.create({
         marginBottom: 28
     },
     subView_2: {
-        //flex:1,
-        //alignItems: 'left',
         justifyContent:'center',
         marginLeft:30,
         marginRight:30,

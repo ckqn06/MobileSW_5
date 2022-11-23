@@ -19,7 +19,7 @@ export const SignUp = async (username, email, password) => {
         const userData = {
             Name: username,
             Email: email,
-            score: null,
+            score: 0,
             answeredQuestions: null,
             wrongQuestions: null
        }
@@ -43,7 +43,6 @@ export const LogOut = () => {
         signOut(auth)
         .then(()=>{
             console.log("user logged out")
-           // navigation.replace("Login")
         }).catch(error => console.log(error.message))
 }
 

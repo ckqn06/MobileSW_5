@@ -1,10 +1,14 @@
 import { ScrollView, View, Text, Button, StyleSheet, Image, TouchableOpacity } from "react-native";
-import {useState} from 'react'
+import { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
+import { doc, updateDoc } from "firebase/firestore"
+import { auth } from "../Auth/firebaseConfig";
+import { db } from "../Auth/firebaseConfig";
 
 const QuizList = (props) => {
-    //const scoreCounter = useSelector(state => state.scoreCounter)
 
+     const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
+ 
     const Correct = require('../assets/images/QuizCorrect.png');   //해당 번호 모든 문제 해결한 경우
     const Wrong = require('../assets/images/QuizWrong.png');       //해결 못한 문제가 있는 경우
     const Yet = require('../assets/images/QuizYet.png');           //기본 대기 체크 모양
@@ -18,6 +22,16 @@ const QuizList = (props) => {
     const [icon7, setIcon7] = useState(Yet);
     const [icon8, setIcon8] = useState(Yet);
     //점수 값에 따라 해당 퀴즈 번호 사진들을 변경  (score == 0), (score != 0 || score !=3), (score == 3)
+
+    //update student score
+    const updateData = async () => {
+        try {
+            const docRef = doc(db, "student", auth.currentUser.uid);
+            await updateDoc(docRef, {
+                score: scoreCounter
+            })
+        }catch(error){alert(error.message)}
+    }
     
     return(
         <ScrollView style ={styles.mainView}>
@@ -97,7 +111,10 @@ const QuizList = (props) => {
                 </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress ={() => {props.navigation.navigate("Start")}}>
+            <TouchableOpacity onPress={() => {
+                updateData(),
+                props.navigation.navigate("Main")
+            }}>
                 <View style = {styles.subView}>
                     <Text style = {styles.submitbutton}>SUBMIT</Text>
                 </View>

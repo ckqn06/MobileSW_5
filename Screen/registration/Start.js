@@ -37,7 +37,7 @@ const Start = (props) => {
                 myPWDInput
             );
             console.log("new user created")
-            props.navigation.navigate("Login")
+            props.navigation.navigate("LoginScreen")
             setEmpty();
         }
     }
@@ -103,8 +103,6 @@ const styles = StyleSheet.create({
         marginBottom: 28
     },
     subView_2: {
-       // flex:1,
-        //alignItems: 'left',
         justifyContent:'center',
         marginLeft:30,
         marginRight:30

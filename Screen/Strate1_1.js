@@ -5,9 +5,8 @@ import { useCallback, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { increment, decrement } from "../Redux/Actions";
 
-const Strate1_1 = (props) => {
-    //const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
-    //const dispatch = useDispatch() // 액션 불러오기 면어
+const Strate1_1 = (props) => { 
+    const dispatch = useDispatch() // 액션 불러오기 면어
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
 
     var count1 = 3;
@@ -22,7 +21,7 @@ const Strate1_1 = (props) => {
         setMyTextInput2(event)
     }
     const correct1 = () => {
-        console.log("when starting, score: ", scoreCounter)
+       //- console.log("when starting, score: ", scoreCounter)
         if (myTextInput1 == 11) {
             alert("next");
             setShow(true)
@@ -39,7 +38,7 @@ const Strate1_1 = (props) => {
     }
     const correct2 = () => {
         if (myTextInput2 == 11) {
-            //dispatch(increment()) //점수 추가 액션 불러오기
+            dispatch(increment()) //점수 추가 액션 불러오기
             alert("Ok! If you’re right, then Todd bought 11 pictures.");
             props.navigation.navigate("Quiz1")
         } else {

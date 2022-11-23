@@ -7,7 +7,7 @@ import { increment, decrement } from "../Redux/Actions";
 
 const Strate4_3 = (props) => {
     //const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
-    //const dispatch = useDispatch() // 액션 불러오기 면어
+    const dispatch = useDispatch() // 액션 불러오기 면어
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
 
     var count1 = 3;
@@ -49,6 +49,7 @@ const Strate4_3 = (props) => {
         }
     }
     const correct2 = () => {
+        dispatch(increment())
         if (myTextInput2 == 11) {
             alert("next");
             setShow2(true)
