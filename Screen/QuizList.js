@@ -43,7 +43,7 @@ const QuizList = (props) => {
             setIcon2(Yet)
         } 
          else if(score2 > 0 && score2 < 3) {
-            setIcon2(Wrong)
+            setIcon2(Middle)
         } else if(score2 == 3) {
             setIcon2(Correct)
         } 
@@ -53,7 +53,7 @@ const QuizList = (props) => {
             setIcon3(Yet)
         } 
          else if(score3 > 0 && score3 < 3) {
-            setIcon3(Wrong)
+            setIcon3(Middle)
         } else if(score1 == 3) {
             setIcon3(Correct)
         } 
@@ -63,7 +63,7 @@ const QuizList = (props) => {
             setIcon1(Yet)
         } 
          else if(score4 > 0 && score4 < 3) {
-            setIcon4(Wrong)
+            setIcon4(Middle)
         } else if(score4 == 3) {
             setIcon4(Correct)
         } 
@@ -73,7 +73,7 @@ const QuizList = (props) => {
             setIcon5(Yet)
         } 
          else if(score5 > 0 && score5 < 3) {
-            setIcon5(Wrong)
+            setIcon5(Middle)
         } else if(score5 == 3) {
             setIcon5(Correct)
         } 
@@ -83,7 +83,7 @@ const QuizList = (props) => {
             setIcon6(Yet)
         } 
          else if(score6 > 0 && score6 < 3) {
-            setIcon6(Wrong)
+            setIcon6(Middle)
         } else if(score6 == 3) {
             setIcon6(Correct)
         } 
@@ -93,7 +93,7 @@ const QuizList = (props) => {
             setIcon7(Yet)
         } 
          else if(score7 > 0 && score7 < 3) {
-            setIcon7(Wrong)
+            setIcon7(Middle)
         } else if(score7 == 3) {
             setIcon7(Correct)
         } 
@@ -103,7 +103,7 @@ const QuizList = (props) => {
             setIcon8(Yet)
         } 
          else if(score8 > 0 && score8 < 3) {
-            setIcon8(Wrong)
+            setIcon8(Middle)
         } else if(score8 == 3) {
             setIcon8(Correct)
         } 
