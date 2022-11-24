@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet, TextInput,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {useState} from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { increment, decrement } from "../Redux/Actions";
+import { up4 } from "../Redux/Actions";
 
 const Strate4_2 = (props) => {
     const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
@@ -80,7 +80,7 @@ const Strate4_2 = (props) => {
     }
     const correct4 = () => {
         if (myTextInput4 == 11) {
-            dispatch(increment()) //점수 추가 액션 불러오기
+            dispatch(up4()) //점수 추가 액션 불러오기
             alert("Ok! It looks like Faye scored the most.");
             props.navigation.navigate("Quiz4")
         } else {

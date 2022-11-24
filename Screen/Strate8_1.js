@@ -3,10 +3,10 @@ import { View, Text, Button, StyleSheet, TextInput,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {useState} from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { increment, decrement } from "../Redux/Actions";
+import { up8 } from "../Redux/Actions";
 
 const Strate8_1 = (props) => {
-    const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
+    
     const dispatch = useDispatch() // 액션 불러오기 면어
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
 
@@ -80,7 +80,7 @@ const Strate8_1 = (props) => {
     }
     const correct4 = () => {
         if (myTextInput4 == 11) {
-            dispatch(increment()) //점수 추가 액션 불러오기
+            dispatch(up8()) //점수 추가 액션 불러오기
             alert("Hey, that’s exactly 80 feet of fencing! It seems that 15 feet is a reasonable answer!");
             props.navigation.navigate("Quiz8")
         } else {

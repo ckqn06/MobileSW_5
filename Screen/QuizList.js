@@ -1,13 +1,21 @@
 import { View, Text, Button, StyleSheet, ScrollView, Image, TouchableOpacity } from "react-native";
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { useSelector, useDispatch } from "react-redux"
 
 const QuizList = (props) => {
-    const scoreCounter = useSelector(state => state.scoreCounter)
+    const score1 = useSelector((state) => state.Score1)
+    const score2 = useSelector((state) => state.Score2)
+    const score3 = useSelector((state) => state.Score3)
+    const score4 = useSelector((state) => state.Score4)
+    const score5 = useSelector((state) => state.Score5)
+    const score6 = useSelector((state) => state.Score6)
+    const score7 = useSelector((state) => state.Score7)
+    const score8 = useSelector((state) => state.Score8)
 
     const Correct = require('../assets/QuizCorrect.png');   //해당 번호 모든 문제 해결한 경우
-    const Wrong = require('../assets/QuizWrong.png');       //해결 못한 문제가 있는 경우
+    const Wrong = require('../assets/QuizWrong.png');       //3개 다 틀린 경우
     const Yet = require('../assets/QuizYet.png');           //기본 대기 체크 모양
+    const Middle = require('../assets/QuizMiddle.png');     //1,2개 맞춘 경우
 
     const [icon1, setIcon1] = useState(Yet);
     const [icon2, setIcon2] = useState(Yet);
@@ -19,190 +27,255 @@ const QuizList = (props) => {
     const [icon8, setIcon8] = useState(Yet);
     //점수 값에 따라 해당 퀴즈 번호 사진들을 변경  (score == 0), (score != 0 || score !=3), (score == 3)
     
+    function change1() {
+        if(score1 == 0) {
+            setIcon1(Yet)
+        } 
+         else if(score1 > 0 && score1 < 3) {
+            setIcon1(Middle)
+        } else if(score1 == 3) {
+            setIcon1(Correct)
+        } 
+    }
+    console.log(score1);
+    function change2() {
+        if(score2 == 0) {
+            setIcon2(Yet)
+        } 
+         else if(score2 > 0 && score2 < 3) {
+            setIcon2(Wrong)
+        } else if(score2 == 3) {
+            setIcon2(Correct)
+        } 
+    }
+    function change3() {
+        if(score3 == 0) {
+            setIcon3(Yet)
+        } 
+         else if(score3 > 0 && score3 < 3) {
+            setIcon3(Wrong)
+        } else if(score1 == 3) {
+            setIcon3(Correct)
+        } 
+    }
+    function change4() {
+        if(score4 == 0) {
+            setIcon1(Yet)
+        } 
+         else if(score4 > 0 && score4 < 3) {
+            setIcon4(Wrong)
+        } else if(score4 == 3) {
+            setIcon4(Correct)
+        } 
+    }
+    function change5() {
+        if(score5 == 0) {
+            setIcon5(Yet)
+        } 
+         else if(score5 > 0 && score5 < 3) {
+            setIcon5(Wrong)
+        } else if(score5 == 3) {
+            setIcon5(Correct)
+        } 
+    }
+    function change6() {
+        if(score6 == 0) {
+            setIcon6(Yet)
+        } 
+         else if(score6 > 0 && score6 < 3) {
+            setIcon6(Wrong)
+        } else if(score6 == 3) {
+            setIcon6(Correct)
+        } 
+    }
+    function change7() {
+        if(score7 == 0) {
+            setIcon7(Yet)
+        } 
+         else if(score7 > 0 && score7 < 3) {
+            setIcon7(Wrong)
+        } else if(score7 == 3) {
+            setIcon7(Correct)
+        } 
+    }
+    function change8() {
+        if(score8 == 0) {
+            setIcon8(Yet)
+        } 
+         else if(score8 > 0 && score8 < 3) {
+            setIcon8(Wrong)
+        } else if(score8 == 3) {
+            setIcon8(Correct)
+        } 
+    }
+    useEffect(()=>{
+        change1()
+    },[score1])
+
+    useEffect(()=>{
+        change2()
+    },[score2])
+
+    useEffect(()=>{
+        change3()
+    },[score3])
+
+    useEffect(()=>{
+        change4()
+    },[score4])
+    useEffect(()=>{
+        change5()
+    },[score5])
+    useEffect(()=>{
+        change6()
+    },[score6])
+
+    useEffect(()=>{
+        change7()
+    },[score7])
+
+    useEffect(()=>{
+        change8()
+    },[score8])
 
     return(
-        <ScrollView style ={{width:"100%"}}>
-        <View style ={styles.container}>
-            <View style = {styles.main}>
-                    <TouchableOpacity>
-                    <Text
-                    style = {styles.button}
-                    onPress ={() => {
-                        props.navigation.navigate("Quiz1")               
-                    }}
-                    >
-                    Quiz.1
-                    </Text>
-                    </TouchableOpacity>
-                    <Image
-                    style = {{width:20, height:35}}
-                    source = {icon1}
-                    />
-            </View>
-            <View style = {styles.main}>
-                <TouchableOpacity>
-                <Text
-                 style = {styles.button}
-                 onPress ={() => {
-                    props.navigation.navigate("Quiz2")               
-                }}
-                >
-                Quiz.2
-                </Text>
-                </TouchableOpacity>
-                <Image
-                style = {{width:20, height:35}}
-                source = {Yet}
-                />
-            </View>
-            <View style = {styles.main}>
-                <TouchableOpacity>
-                <Text
-                 style = {styles.button}
-                 onPress ={() => {
-                    props.navigation.navigate("Quiz3")               
-                }}
-                >
-                Quiz.3
-                </Text>
-                </TouchableOpacity>
-                <Image
-                style = {{width:20, height:35}}
-                source = {Yet}
-                />
-            </View>
-            <View style = {styles.main}>
-                <TouchableOpacity>
-                <Text
-                 style = {styles.button}
-                 onPress ={() => {
-                    props.navigation.navigate("Quiz4")               
-                }}
-                >
-                Quiz.4
-                </Text>
-                </TouchableOpacity>
-                <Image
-                style = {{width:20, height:35}}
-                source = {Yet}
-                />
-            </View>
-            <View style = {styles.main}>
-                <TouchableOpacity>
-                <Text
-                 style = {styles.button}
-                 onPress ={() => {
-                    props.navigation.navigate("Quiz5")               
-                }}
-                >
-                Quiz.5
-                </Text>
-                </TouchableOpacity>
-                <Image
-                style = {{width:20, height:35}}
-                source = {Yet}
-                />
-            </View>
-            <View style = {styles.main}>
-                <TouchableOpacity>
-                <Text
-                 style = {styles.button}
-                 onPress ={() => {
-                    props.navigation.navigate("Quiz6")               
-                }}
-                >
-                Quiz.6
-                </Text>
-                </TouchableOpacity>
-                <Image
-                style = {{width:20, height:35}}
-                source = {Yet}
-                />
-            </View>
-            <View style = {styles.main}>
-                <TouchableOpacity>
-                <Text
-                 style = {styles.button}
-                 onPress ={() => {
-                    props.navigation.navigate("Quiz7")               
-                }}
-                >
-                Quiz.7
-                </Text>
-                </TouchableOpacity>
-                <Image
-                style = {{width:20, height:35}}
-                source = {Yet}
-                />
-            </View>
-            <View style = {styles.main}>
-                <TouchableOpacity>
-                <Text
-                 style = {styles.button}
-                 onPress ={() => {
-                    props.navigation.navigate("Quiz8")               
-                }}
-                >
-                Quiz.8
-                </Text>
-                </TouchableOpacity>
-                <Image
-                style = {{width:20, height:35}}
-                source = {Yet}
-                />
-            </View>
-            <View style = {styles.main}>
-                <TouchableOpacity>
-                <Text
-                 style = {styles.submitbutton}
-                 onPress ={() => {
-                    props.navigation.navigate("Start")               
-                }}
-                >
-                submit
-                </Text>
-                </TouchableOpacity>
-            </View>
+        <ScrollView style ={styles.mainView}>
+        <View style = {styles.mainText}>
+            <Text style = {{fontSize:25}}>== QUIZ LIST ==</Text>
         </View>
+
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz1")}}>
+            <View style = {styles.subView}>
+                <Text style = {styles.button}>Quiz.1</Text>
+                <Image
+                 style = {styles.statusImage}
+                 source = {icon1}/>
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz2")}}>
+            <View style = {styles.subView}>
+                <Text style = {styles.button}>Quiz.2</Text>
+                <Image
+                 style = {styles.statusImage}
+                 source = {icon2}/>
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz3")}}>
+            <View style = {styles.subView}>
+                <Text style = {styles.button}>Quiz.3</Text>
+                <Image
+                 style = {styles.statusImage}
+                 source = {icon3}/>
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz4")}}>
+            <View style = {styles.subView}>
+                <Text style = {styles.button}>Quiz.4</Text>
+                <Image
+                 style = {styles.statusImage}
+                 source = {icon4}/>
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz5")}}>
+            <View style = {styles.subView}>
+                <Text style = {styles.button}>Quiz.5</Text>
+                <Image
+                 style = {styles.statusImage}
+                 source = {icon5}/>
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz6")}}>
+            <View style = {styles.subView}>
+                <Text style = {styles.button}>Quiz.6</Text>
+                <Image
+                 style = {styles.statusImage}
+                 source = {icon6}/>
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz7")}}>
+            <View style = {styles.subView}>
+                <Text style = {styles.button}>Quiz.7</Text>
+                <Image
+                 style = {styles.statusImage}
+                 source = {icon7}/>
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz8")}}>
+            <View style = {styles.subView}>
+                <Text style = {styles.button}>Quiz.8</Text>
+                <Image
+                 style = {styles.statusImage}
+                 source = {icon8}/>
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Start")}}>
+            <View style = {styles.subView}>
+                <Text style = {styles.submitbutton}>SUBMIT</Text>
+            </View>
+        </TouchableOpacity>
+
         <View>
-                {/* <Text>Score1: {JSON.stringify(Score1)}</Text> */}
-                <Text>Current Score: {scoreCounter}</Text>
+                <Text>Score1: {score1}</Text>
+                <Text>Score2: {score2}</Text>
+                <Text>Score3: {score3}</Text>
+                <Text>Score4: {score4}</Text>
+                <Text>Score5: {score5}</Text>
+                <Text>Score6: {score6}</Text>
+                <Text>Score7: {score7}</Text>
+                <Text>Score8: {score8}</Text>
         </View>
-        </ScrollView>
+    </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    mainView: {
         flex:1,
-        backgroundColor: '#DDA0DD',
-        paddingTop: 30,
-        paddingBottom: 30
+        width:'100%',
+        backgroundColor:'#eefbff'
     },
-    main: {
-        marginLeft: 10,
-        marginRight: 40,
-        marginBottom: 1,
-        marginTop: 10,
-        flexDirection: 'row',
-        alignItems: 'center'
+    subView: {
+        flexDirection:'row',
+        justifyContent:'center',
+        padding:10,
+        marginLeft:70,
+        marginRight:70,
+        marginTop:15,
+        marginBottom:25,
+        borderRadius:10,
+        borderWidth:2,
+        borderColor:'black',
+        backgroundColor:'steelblue'
+    },
+    mainText: {
+        alignItems:'center',
+        justifyContent:'center',
+        padding:10,
     },
     button: {
-        width: 260,
-        height: 40,
-        backgroundColor: 'steelblue',
-        color: 'white',
-        margin: 20,
-        fontSize: 25
+        alignItems:'center',
+        fontSize:30,
+        color:'white'
     },
     submitbutton: {
-        width: 300,
-        height: 40,
-        backgroundColor: 'steelblue',
-        color: 'white',
-        margin: 20,
+        backgroundColor:'steelblue',
+        color:'white',
         fontSize: 30
     },
+    statusImage: {
+        marginLeft:40,
+        width:20,
+        height:35,
+        resizeMode:'contain'    
+    }
 }); 
 
 
