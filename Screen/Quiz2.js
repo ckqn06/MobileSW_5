@@ -2,15 +2,20 @@ import { View, Text, Button, StyleSheet, TextInput, ScrollView,
     KeyboardAvoidingView,
     Platform, Keyboard, TouchableWithoutFeedback } from "react-native";
 import {useState} from 'react'
+import { useSelector, useDispatch } from "react-redux"
+import { change2, up2 } from "../Redux/Actions";
 
 const Quiz2 = (props) => {
-
-
+    const dispatch = useDispatch()
     const [show, setShow] = useState(false);                //전략 선택 화면 상태 값 default는 false로 동작
     const showme = () => {
+        dispatch(up2()) //점수 값 -1에서 0으로 변경
         setShow(true);
     }
-
+    const check=()=>{
+        dispatch(change2()) //submit버튼 누르면 해당 Quiz번호 버튼 비활성화 하기 위하여 reducers..change1.js state값 1 증가
+        props.navigation.navigate("QuizList")
+    }
     return (
         <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -72,9 +77,7 @@ const Quiz2 = (props) => {
             <View style = {styles.button}>
                 <Button
                     title = "submit"
-                    onPress ={() => {
-                        props.navigation.navigate("QuizList")
-                    }}
+                    onPress ={check}
                 />
             </View>
             </View>

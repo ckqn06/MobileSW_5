@@ -1,4 +1,4 @@
-const Score4 =  (state = 0, action) => {
+const Score4 =  (state = -1, action) => {
     switch (action.type) {
         case 'UP4':
             return state + 1;
