@@ -45,6 +45,46 @@ export const up8 = () => {
         type: 'UP8'
     }
 };
+export const change1 = () => {
+    return {
+        type: 'change1'
+    }
+};
+export const change2 = () => {
+    return {
+        type: 'change2'
+    }
+};
+export const change3 = () => {
+    return {
+        type: 'change3'
+    }
+};
+export const change4 = () => {
+    return {
+        type: 'change4'
+    }
+};
+export const change5 = () => {
+    return {
+        type: 'change5'
+    }
+};
+export const change6 = () => {
+    return {
+        type: 'change6'
+    }
+};
+export const change7 = () => {
+    return {
+        type: 'change7'
+    }
+};
+export const change8 = () => {
+    return {
+        type: 'change8'
+    }
+};
 
 //decrement 함수 불러오면 점수 감소
 

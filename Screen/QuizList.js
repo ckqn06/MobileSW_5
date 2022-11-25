@@ -11,6 +11,14 @@ const QuizList = (props) => {
     const score6 = useSelector((state) => state.Score6)
     const score7 = useSelector((state) => state.Score7)
     const score8 = useSelector((state) => state.Score8)
+    const ch1 = useSelector((state) => state.Change1)
+    const ch2 = useSelector((state) => state.Change2)
+    const ch3 = useSelector((state) => state.Change3)
+    const ch4 = useSelector((state) => state.Change4)
+    const ch5 = useSelector((state) => state.Change5)
+    const ch6 = useSelector((state) => state.Change6)
+    const ch7 = useSelector((state) => state.Change7)
+    const ch8 = useSelector((state) => state.Change8)
 
     const Correct = require('../assets/QuizCorrect.png');   //해당 번호 모든 문제 해결한 경우
     const Wrong = require('../assets/QuizWrong.png');       //3개 다 틀린 경우
@@ -26,10 +34,108 @@ const QuizList = (props) => {
     const [icon7, setIcon7] = useState(Yet);
     const [icon8, setIcon8] = useState(Yet);
     //점수 값에 따라 해당 퀴즈 번호 사진들을 변경  (score == 0), (score != 0 || score !=3), (score == 3)
-    
+    const [disable1, setdisable1] = useState(false);
+    const [disable2, setdisable2] = useState(false);
+    const [disable3, setdisable3] = useState(false);
+    const [disable4, setdisable4] = useState(false);
+    const [disable5, setdisable5] = useState(false);
+    const [disable6, setdisable6] = useState(false);
+    const [disable7, setdisable7] = useState(false);
+    const [disable8, setdisable8] = useState(false);
+    //reducers -> change1~8 각각의 값들이 0이면 flase, 1이 되면 true로 해당 버튼이 비활성화 됨
+    //여기 함수는 버튼 활성화 비활성화
+    function button1() {
+        if(ch1 == 0) {
+            setdisable1(false)
+        } else if(ch1 == 1) {
+            setdisable1(true)
+        }
+    }
+    useEffect(()=>{
+        button1()
+    },[ch1])
+
+    function button2() {
+        if(ch2 == 0) {
+            setdisable2(false)
+        } else if(ch1 == 1) {
+            setdisable2(true)
+        }
+    }
+    useEffect(()=>{
+        button2()
+    },[ch2])
+
+    function button3() {
+        if(ch3 == 0) {
+            setdisable3(false)
+        } else if(ch3 == 1) {
+            setdisable3(true)
+        }
+    }
+    useEffect(()=>{
+        button3()
+    },[ch3])
+
+    function button4() {
+        if(ch4 == 0) {
+            setdisable4(false)
+        } else if(ch4 == 1) {
+            setdisable4(true)
+        }
+    }
+    useEffect(()=>{
+        button4()
+    },[ch4])
+
+    function button5() {
+        if(ch5 == 0) {
+            setdisable5(false)
+        } else if(ch5 == 1) {
+            setdisable5(true)
+        }
+    }
+    useEffect(()=>{
+        button5()
+    },[ch5])
+
+    function button6() {
+        if(ch6 == 0) {
+            setdisable6(false)
+        } else if(ch6 == 1) {
+            setdisable6(true)
+        }
+    }
+    useEffect(()=>{
+        button6()
+    },[ch6])
+
+    function button7() {
+        if(ch7 == 0) {
+            setdisable7(false)
+        } else if(ch1 == 7) {
+            setdisable7(true)
+        }
+    }
+    useEffect(()=>{
+        button7()
+    },[ch7])
+
+    function button8() {
+        if(ch8 == 0) {
+            setdisable8(false)
+        } else if(ch1 == 1) {
+            setdisable8(true)
+        }
+    }
+    useEffect(()=>{
+        button8()
+    },[ch8])
+
+    //여기 아래는 점수 별로 사진 변경
     function change1() {
         if(score1 == 0) {
-            setIcon1(Yet)
+            setIcon1(Wrong)
         } 
          else if(score1 > 0 && score1 < 3) {
             setIcon1(Middle)
@@ -37,23 +143,22 @@ const QuizList = (props) => {
             setIcon1(Correct)
         } 
     }
-    console.log(score1);
     function change2() {
         if(score2 == 0) {
-            setIcon2(Yet)
+            setIcon2(Wrong)
         } 
          else if(score2 > 0 && score2 < 3) {
-            setIcon2(Middle)
+            setIcon2(Wrong)
         } else if(score2 == 3) {
             setIcon2(Correct)
         } 
     }
     function change3() {
         if(score3 == 0) {
-            setIcon3(Yet)
+            setIcon3(Wrong)
         } 
          else if(score3 > 0 && score3 < 3) {
-            setIcon3(Middle)
+            setIcon3(Wrong)
         } else if(score1 == 3) {
             setIcon3(Correct)
         } 
@@ -63,7 +168,7 @@ const QuizList = (props) => {
             setIcon1(Yet)
         } 
          else if(score4 > 0 && score4 < 3) {
-            setIcon4(Middle)
+            setIcon4(Wrong)
         } else if(score4 == 3) {
             setIcon4(Correct)
         } 
@@ -73,7 +178,7 @@ const QuizList = (props) => {
             setIcon5(Yet)
         } 
          else if(score5 > 0 && score5 < 3) {
-            setIcon5(Middle)
+            setIcon5(Wrong)
         } else if(score5 == 3) {
             setIcon5(Correct)
         } 
@@ -83,7 +188,7 @@ const QuizList = (props) => {
             setIcon6(Yet)
         } 
          else if(score6 > 0 && score6 < 3) {
-            setIcon6(Middle)
+            setIcon6(Wrong)
         } else if(score6 == 3) {
             setIcon6(Correct)
         } 
@@ -93,7 +198,7 @@ const QuizList = (props) => {
             setIcon7(Yet)
         } 
          else if(score7 > 0 && score7 < 3) {
-            setIcon7(Middle)
+            setIcon7(Wrong)
         } else if(score7 == 3) {
             setIcon7(Correct)
         } 
@@ -103,7 +208,7 @@ const QuizList = (props) => {
             setIcon8(Yet)
         } 
          else if(score8 > 0 && score8 < 3) {
-            setIcon8(Middle)
+            setIcon8(Wrong)
         } else if(score8 == 3) {
             setIcon8(Correct)
         } 
@@ -144,7 +249,7 @@ const QuizList = (props) => {
             <Text style = {{fontSize:25}}>== QUIZ LIST ==</Text>
         </View>
 
-        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz1")}}>
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz1")}} disabled = {disable1}>
             <View style = {styles.subView}>
                 <Text style = {styles.button}>Quiz.1</Text>
                 <Image
@@ -153,7 +258,7 @@ const QuizList = (props) => {
             </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz2")}}>
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz2")}} disabled = {disable2}>
             <View style = {styles.subView}>
                 <Text style = {styles.button}>Quiz.2</Text>
                 <Image
@@ -162,7 +267,7 @@ const QuizList = (props) => {
             </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz3")}}>
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz3")}} disabled = {disable3}>
             <View style = {styles.subView}>
                 <Text style = {styles.button}>Quiz.3</Text>
                 <Image
@@ -171,7 +276,7 @@ const QuizList = (props) => {
             </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz4")}}>
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz4")}} disabled = {disable4}>
             <View style = {styles.subView}>
                 <Text style = {styles.button}>Quiz.4</Text>
                 <Image
@@ -180,7 +285,7 @@ const QuizList = (props) => {
             </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz5")}}>
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz5")}} disabled = {disable5}>
             <View style = {styles.subView}>
                 <Text style = {styles.button}>Quiz.5</Text>
                 <Image
@@ -189,7 +294,7 @@ const QuizList = (props) => {
             </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz6")}}>
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz6")}} disabled = {disable6}>
             <View style = {styles.subView}>
                 <Text style = {styles.button}>Quiz.6</Text>
                 <Image
@@ -198,7 +303,7 @@ const QuizList = (props) => {
             </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz7")}}>
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz7")}} disabled = {disable7}>
             <View style = {styles.subView}>
                 <Text style = {styles.button}>Quiz.7</Text>
                 <Image
@@ -207,7 +312,7 @@ const QuizList = (props) => {
             </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz8")}}>
+        <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz8")}} disabled = {disable8}>
             <View style = {styles.subView}>
                 <Text style = {styles.button}>Quiz.8</Text>
                 <Image
@@ -221,7 +326,6 @@ const QuizList = (props) => {
                 <Text style = {styles.submitbutton}>SUBMIT</Text>
             </View>
         </TouchableOpacity>
-
         <View>
                 <Text>Score1: {score1}</Text>
                 <Text>Score2: {score2}</Text>
@@ -231,6 +335,7 @@ const QuizList = (props) => {
                 <Text>Score6: {score6}</Text>
                 <Text>Score7: {score7}</Text>
                 <Text>Score8: {score8}</Text>
+                <Text>Change1: {ch1}</Text>
         </View>
     </ScrollView>
     );
