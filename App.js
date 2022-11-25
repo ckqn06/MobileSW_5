@@ -1,5 +1,10 @@
+import { Button } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
+import { store } from './Redux/store';
+import { Provider } from 'react-redux'
+//import { LogOut } from './Auth/AuthFunctions';
 
 import Start from './Screen/Start'
 import Welcome from './Screen/Welcome'
@@ -47,10 +52,8 @@ import Strate8_1 from './Screen/Strate8_1'
 import Strate8_2 from './Screen/Strate8_2'
 import Strate8_3 from './Screen/Strate8_3'
 
-import { store } from './Redux/store';
-import { Provider } from 'react-redux';
-
 const Stack = createStackNavigator();
+
 export default function App() {
   return (
     <Provider store={store}>

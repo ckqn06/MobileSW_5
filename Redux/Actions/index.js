@@ -1,10 +1,48 @@
 //액션 타입
 
-//increment 합수 불러오면 점수 증가
-
-export const increment = () => {
+//up1~8 합수 불러오면 점수 증가
+export const up1 = () => {
     return {
-        type: 'INCREMENT'
+        type: 'UP1'
+    }
+};
+export const up2 = () => {
+    return {
+        type: 'UP2'
+    }
+};
+
+export const up3 = () => {
+    return {
+        type: 'UP3'
+    }
+};
+
+export const up4 = () => {
+    return {
+        type: 'UP4'
+    }
+};
+
+export const up5 = () => {
+    return {
+        type: 'UP5'
+    }
+};
+
+export const up6 = () => {
+    return {
+        type: 'UP6'
+    }
+};
+export const up7 = () => {
+    return {
+        type: 'UP7'
+    }
+};
+export const up8 = () => {
+    return {
+        type: 'UP8'
     }
 };
 
