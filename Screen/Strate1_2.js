@@ -2,10 +2,9 @@ import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { increment, decrement } from "../Redux/Actions";
+import { up1 } from "../Redux/Actions";
 
 const Strate1_2 = (props) => {
-    const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
     const dispatch = useDispatch() // 액션 불러오기 면어
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
 
@@ -17,7 +16,7 @@ const Strate1_2 = (props) => {
 
     const correct = () => {
         if (myTextInput == 11) {
-            dispatch(increment()) //점수 추가 액션 불러오기
+            dispatch(up1()) //점수 추가 액션 불러오기
             alert("Ok! If you’re right, then Todd bought 11 pictures.");
             props.navigation.navigate("Quiz1") } 
         else {
@@ -54,7 +53,7 @@ const Strate1_2 = (props) => {
 
                         <View style = {styles.checkButton}>
                             <Button
-                             title="check"
+                             title="submit"
                              color='#8463ff'
                              onPress = {correct}/>
                         </View>

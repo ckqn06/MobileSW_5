@@ -1,6 +1,6 @@
-const counterReducer =  (state = 0, action) => {
+const Score4 =  (state = -1, action) => {
     switch (action.type) {
-        case 'INCREMENT':
+        case 'UP4':
             return state + 1;
         case 'DECREMENT':
             return state - 1;
@@ -9,4 +9,4 @@ const counterReducer =  (state = 0, action) => {
     }
 }
 
-export default counterReducer;
+export default Score4;

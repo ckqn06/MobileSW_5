@@ -2,10 +2,9 @@ import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { increment, decrement } from "../Redux/Actions";
+import { up5 } from "../Redux/Actions";
 
 const Strate5_3 = (props) => {
-    const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
     const dispatch = useDispatch() // 액션 불러오기 면어
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
 
@@ -36,7 +35,7 @@ const Strate5_3 = (props) => {
 
     const correct2 = () => {
         if (myTextInput2 == 11) {
-            dispatch(increment()) //점수 추가 액션 불러오기
+            dispatch(up5()) //점수 추가 액션 불러오기
             alert("Nice! Mario can cut 6 sections of rope. Let’s try a different method!");
             props.navigation.navigate("Quiz5") }
         else {
