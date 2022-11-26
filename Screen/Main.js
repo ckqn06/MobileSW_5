@@ -54,7 +54,9 @@ const Main = (props) => {
 
                     <Text style = {{marginBottom:50, fontSize:25, color:'green'}}>Correct Answer</Text>
                     <Text style = {{marginBottom:50, fontSize:25, color:'red'}}>Wrong Answer</Text>
-                    <Text style = {{marginBottom:50, fontSize:25, color:'blue'}}>Unfinished Answer</Text>
+                    <Text style = {{marginBottom:50, fontSize:25, color:'blue'}}
+                        onPress={() => props.navigation.navigate("teacher")}
+                    >Unfinished Answer</Text>
                 </View>
 
                 <View style = {styles.graph}/>

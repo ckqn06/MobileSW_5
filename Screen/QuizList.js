@@ -1,6 +1,9 @@
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
+import { doc, updateDoc } from "firebase/firestore"
+import { auth } from "../Auth/firebaseConfig";
+import { db } from "../Auth/firebaseConfig";
 
 const QuizList = (props) => {
     const score1 = useSelector((state) => state.Score1)
@@ -171,6 +174,17 @@ const QuizList = (props) => {
     function changeStyle8() { if(ch8 == 1) { setStyle8(styles.disView)} }
     useEffect(()=>{changeStyle8()},[ch8])
 
+    const studentScore = score1 + score2 + score3 + score4 + score5 + score6 + score7 + score8
+    console.log(studentScore)
+
+    //update student score
+    const updateData = async () => {
+        try {
+            const docRef = doc(db, "student", auth.currentUser.uid);
+            await updateDoc(docRef, { score: studentScore })
+        }catch(error){alert(error.message)}
+    }
+
     return(
         <ScrollView style ={styles.mainView}>
             <View style = {styles.mainText}>
@@ -249,7 +263,9 @@ const QuizList = (props) => {
                 </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress ={() => {props.navigation.navigate("Main")}}>
+            <TouchableOpacity onPress ={() => {
+                updateData()
+                props.navigation.navigate("Main")}}>
                 <View style = {styles.subView}>
                     <Text style = {styles.submitbutton}>SUBMIT</Text>
                 </View>
