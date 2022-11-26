@@ -1,12 +1,13 @@
-import { Button } from 'react-native'
+import { LogBox, Button } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { store } from './Redux/store';
 import { Provider } from 'react-redux'
-//import { LogOut } from './Auth/AuthFunctions';
+import { LogOut } from './Auth/AuthFunctions';
 
-import Start from './Screen/Start'
+import Login from './Screen/registration/Login'
+import Sign_Up from './Screen/registration/Sign_Up'
 import Welcome from './Screen/Welcome'
 import Main from './Screen/Main'
 import QuizList from './Screen/QuizList'
@@ -55,13 +56,20 @@ import Strate8_3 from './Screen/Strate8_3'
 const Stack = createStackNavigator();
 
 export default function App() {
+  LogBox.ignoreAllLogs();
+  
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name = "Start" component={Start}/>
+        <Stack.Navigator initialRouteName='Login'>
+          <Stack.Screen name= "Login" component={Login}/>
+          <Stack.Screen name = "Sign_Up" component={Sign_Up}/>
           <Stack.Screen name = "Welcome" component={Welcome}/>
-          <Stack.Screen name = "Main" component={Main}/>
+          <Stack.Screen name = "Main" component={Main}
+           options={{ headerRight: () => (
+              <Button
+                title='Log Out'
+                onPress={LogOut}/> )}}/>
           <Stack.Screen name = "QuizList" component={QuizList}/>
 
           <Stack.Screen name = "Quiz1" component={Quiz1}/>

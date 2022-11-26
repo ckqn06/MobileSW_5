@@ -1,6 +1,27 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { auth } from "../Auth/firebaseConfig";
+import { db } from "../Auth/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore"
+import { useState, useEffect } from "react";
 
 const Welcome = (props) => {
+    const [studentData, setStudentData] = useState({});
+
+    useEffect(() => {
+        if (auth.currentUser) {
+            let uid = auth.currentUser.uid
+            const fetchData = async () => {
+                const docRef = doc(db, "student", uid)
+                await getDoc(docRef)
+                .then((snapshot) => {
+                    console.log(snapshot.data());
+                    setStudentData(snapshot.data())
+                })
+                .catch(error => console.log(error.message))
+            };
+            fetchData(); }
+    }, [auth])
+
     return (
         <TouchableOpacity onPress = {() => { props.navigation.navigate("Main") }}>
             <View style = {styles.main}>
@@ -9,7 +30,7 @@ const Welcome = (props) => {
                  source = {require('../assets/images/hand.png')}
                  resizeMode = "contain"/>
                 <Text style = {styles.mainText}>Welcome</Text>
-                <Text style = {styles.mainText}>'LGH'!</Text>
+                <Text style = {styles.mainText}>'{studentData.Name}'!</Text>
                 <Text style = {styles.subText}>Touch anywhere to START</Text>
             </View>
         </TouchableOpacity>
