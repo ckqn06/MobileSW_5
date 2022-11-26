@@ -2,41 +2,28 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { auth } from "../Auth/firebaseConfig";
 import { db } from "../Auth/firebaseConfig";
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
-import { useSelector, useDispatch } from "react-redux"
+import { doc, getDoc } from "firebase/firestore";
 
 const Main = (props) => {
-    
-   // const  scorePercent  = props.route.params;
-    
-    //const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든
-
     const [studentData, setStudentData] = useState({});
 
     useEffect(() => {
-        // const fetchData = async () => {
-        //     const docRef = await doc(db, "student", auth.currentUser.uid)
-        //     await getDoc(docRef)
-        //         .then((snapshot) => {
-        //             console.log(snapshot.data());
-        //             setStudentData(snapshot.data())
-        //         }).catch(error => console.log(error.message))
-        // };
         const fetchData = async () => {
             const docRef = await doc(db, "student", auth.currentUser.uid)
-            await onSnapshot(docRef, (snapshot) => {
+            await getDoc(docRef)
+            .then((snapshot) => {
                 console.log(snapshot.data());
-                setStudentData(snapshot.data())
-            })
-        }
-
+                setStudentData(snapshot.data())})
+            .catch(error => console.log(error.message))
+        };
         fetchData();
     }, [])
+
     return (
         <View style = {styles.main}>
             <View style = {{padding:15, flexDirection:'row'}}>
-                <Text style={styles.profileText}>Name: {studentData.Name}</Text>
-                <Text style={styles.profileText}>Email: {studentData.Email} </Text>
+                <Text style = {styles.profileText}>Name: {studentData.Name}</Text>
+                <Text style = {styles.profileText}>Email: {studentData.Email}</Text>
             </View>
 
             <View style = {{marginBottom:15}}>
@@ -49,8 +36,8 @@ const Main = (props) => {
                 
                     <View style = {{marginLeft:10, marginRight:30, alignItems:'center'}}>
                         <Text style = {{marginBottom:5, fontSize:25}}>Today's Quiz</Text>
-                        <Text style={{ marginBottom: 5, fontSize: 25 }}>0%</Text>
-                        <Text style={{ marginBottom: 5, fontSize: 25 }}>{studentData.score}/24</Text>
+                        <Text style = {{marginBottom:5, fontSize:25}}>0%</Text>
+                        <Text style = {{marginBottom:5, fontSize:25}}>{studentData.score}/20</Text>
                     </View>
                 </View>
             </View>

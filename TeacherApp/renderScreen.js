@@ -59,8 +59,6 @@ const TeacherScreen = () => {
             console.log(studentRecord[i].score)
 
             sum += studentRecord[i].score
-
-
         }
 
         console.log("sum of score is: ", sum)
@@ -75,17 +73,19 @@ const TeacherScreen = () => {
 
     return (
         <View style={styles.container}>
+            
             <View style={styles.upperView}>
                 <Image
-                    style={{ height: 45, width: 45 }}
+                    style={{ height: 30, width: 28 }}
                     source={require('../assets/images/trophy.png')}
                 />
-                <Text style={{ color: 'grey', fontSize: 20, marginTop: 15 }} onPress={scoreSum}>LeaderBoard</Text>
+                <Text style={{ color: 'grey', fontSize: 20, marginTop: 10 }} onPress={scoreSum}>LeaderBoard</Text>
+
+                </View>
                 <View style={styles.lowerView}>
-                    
                     <View style={{
                         flexDirection: 'row',
-                        flex: 1, marginBottom: 15, padding: 12, marginHorizontal: 8, borderRadius: 8
+                        flex: 1, padding: 12, marginHorizontal: 8, borderRadius: 8
                     }}>
                         <View style={{alignItems: 'flex-start', flex: 1}}>
                         <Text style={{fontSize: 16, color: "#FCFDF2"}}>Name</Text>
@@ -114,7 +114,6 @@ const TeacherScreen = () => {
                    />
                 </View>
             </View>
-        </View>
     )
 }
 
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
     },
     upperView: {
         alignItems: 'center',
-        marginTop: 30,
+        marginTop: 15,
         paddingVertical: 12,
         padding: 16
 
@@ -136,14 +135,14 @@ const styles = StyleSheet.create({
     lowerView: {
         backgroundColor: '#22A39F',
         flex: 1,
-        marginTop: 30,
+        marginTop: 20,
         borderRadius: 8,
         padding: 12,
     },
     Item: {
         flex: 1,
         //alignItems: 'center',
-        width: 450,
+        width: 300,
         backgroundColor: '#404258',
         padding: 15, 
         marginVertical: 2,

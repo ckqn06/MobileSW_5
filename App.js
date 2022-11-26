@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Button } from 'react-native'
+import { LogBox, Button } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useState } from 'react';
@@ -7,11 +7,10 @@ import { Provider } from 'react-redux';
 import { LogOut } from './Auth/AuthFunctions';
 import TeacherScreen from './TeacherApp/renderScreen';
 import IntroScreen from './TeacherApp/startScreen';
+import QuizList from './Screen/QuizList';
 
-import Start from './Screen/registration/Start'
-import LoginScreen from './Screen/registration/login';
-import Register from './Screen/Register'
-import QuizList from './Screen/QuizList'
+import Login from './Screen/registration/Login'
+import Sign_Up from './Screen/registration/Sign_Up'
 import Welcome from './Screen/Welcome'
 import Main from './Screen/Main'
 
@@ -55,42 +54,25 @@ import Strate7_3 from './Screen/Strate7_3'
 import Strate8_1 from './Screen/Strate8_1'
 import Strate8_2 from './Screen/Strate8_2'
 import Strate8_3 from './Screen/Strate8_3'
-import StartScreen from './TeacherApp/startScreen';
-
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [Score1,setScore1] =useState(0);
-  const [Score2,setScore2] =useState(0);
-  const [Score3,setScore3] =useState(0);
-  const [Score4,setScore4] =useState(0);
-  const [Score5,setScore5] =useState(0);
-  const [Score6,setScore6] =useState(0);
-  const [Score7,setScore7] =useState(0);
-  const [Score8,setScore8] =useState(0);
-  var total = Score1+Score2+Score3+Score4+Score5+Score6
-            +Score7+Score8;
-
+  LogBox.ignoreAllLogs();
+  
   return (
     <Provider store={store}>
-    <NavigationContainer>
+      <NavigationContainer>
         <Stack.Navigator initialRouteName='intro'>
-          <Stack.Screen name = "Start" component={Start}/>
-        <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name= "LoginScreen" component={LoginScreen}/>
-          <Stack.Screen name="Main" component={Main}
-            options={{
-              headerRight: () => (
-                <Button
-                  title='Log Out'
-                  onPress={LogOut}
-                />
-              )
-            }}
-          />
-          <Stack.Screen name="QuizList" component={QuizList} />
-          <Stack.Screen name='Register' component={Register}/>
+          <Stack.Screen name= "Login" component={Login}/>
+          <Stack.Screen name = "Sign_Up" component={Sign_Up}/>
+          <Stack.Screen name = "Welcome" component={Welcome}/>
+          <Stack.Screen name = "Main" component={Main}
+           options={{ headerRight: () => (
+              <Button
+                title='Log Out'
+                onPress={LogOut}/> )}}/>
+          <Stack.Screen name = "QuizList" component={QuizList}/>
 
           <Stack.Screen name = "Quiz1" component={Quiz1}/>
           <Stack.Screen name = "Quiz2" component={Quiz2}/>
@@ -129,16 +111,14 @@ export default function App() {
           <Stack.Screen name = "Strate7_2" component={Strate7_2}/>
           <Stack.Screen name = "Strate7_3" component={Strate7_3}/>
 
-        <Stack.Screen name = "Strate8_1" component={Strate8_1}/>
-        <Stack.Screen name = "Strate8_2" component={Strate8_2}/>
-        <Stack.Screen name="Strate8_3" component={Strate8_3} />
+          <Stack.Screen name = "Strate8_1" component={Strate8_1}/>
+          <Stack.Screen name = "Strate8_2" component={Strate8_2}/>
+          <Stack.Screen name="Strate8_3" component={Strate8_3} />
           
-          <Stack.Screen name="teacher" component={TeacherScreen} />
-
-          <Stack.Screen name='intro' component={IntroScreen} />
-
-      </Stack.Navigator>
-    </NavigationContainer>
-   </Provider>
+          <Stack.Screen name='teacher' component={TeacherScreen} />
+          <Stack.Screen name='intro' component={IntroScreen}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }

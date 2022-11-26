@@ -10,18 +10,18 @@ const Welcome = (props) => {
     useEffect(() => {
         if (auth.currentUser) {
             let uid = auth.currentUser.uid
-        const fetchData = async () => {
-            const docRef = doc(db, "student", uid)
-            await getDoc(docRef)
+            const fetchData = async () => {
+                const docRef = doc(db, "student", uid)
+                await getDoc(docRef)
                 .then((snapshot) => {
                     console.log(snapshot.data());
                     setStudentData(snapshot.data())
-                }).catch(error => console.log(error.message))
-        };
-        fetchData();
-        }
-        
+                })
+                .catch(error => console.log(error.message))
+            };
+            fetchData(); }
     }, [auth])
+
     return (
         <TouchableOpacity onPress = {() => { props.navigation.navigate("Main") }}>
             <View style = {styles.main}>
@@ -30,7 +30,7 @@ const Welcome = (props) => {
                  source = {require('../assets/images/hand.png')}
                  resizeMode = "contain"/>
                 <Text style = {styles.mainText}>Welcome</Text>
-                <Text style={styles.mainText}>{studentData.Name}!</Text>
+                <Text style = {styles.mainText}>'{studentData.Name}'!</Text>
                 <Text style = {styles.subText}>Touch anywhere to START</Text>
             </View>
         </TouchableOpacity>
@@ -51,8 +51,7 @@ const styles = StyleSheet.create({
         height:300
     },
     mainText: {
-        marginBottom:15,
-        fontSize:40
+        fontSize:50
     },
     subText: {
         marginTop:30,

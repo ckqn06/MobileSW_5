@@ -6,16 +6,16 @@ const IntroScreen = ({navigation}) => {
     <View style={styles.container}>
           <TouchableOpacity
               style={styles.btn}
-              onPress={()=> navigation.navigate("LoginScreen")}
+              onPress={()=> navigation.navigate("Login")}
           >
-        <Text> Student</Text>      
+        <Text style={{fontSize: 25, color: 'white'}}> Student</Text>      
           </TouchableOpacity>
           
           <TouchableOpacity
               style={styles.btn}
               onPress={()=> navigation.navigate("teacher")}
           >
-        <Text>Teacher</Text>      
+        <Text style={{fontSize: 25, color: 'white'}}>Teacher</Text>      
       </TouchableOpacity>
     </View>
   )
@@ -24,14 +24,16 @@ const IntroScreen = ({navigation}) => {
 export default IntroScreen
 
 const styles = StyleSheet.create({
-    container: {
+  container: {
+      backgroundColor: "#3B185F",
         flex: 1, 
         alignItems: 'center',
         justifyContent: 'center'
     },
     btn: {
-        margin: 12,
-        padding: 10,
+      margin: 12,
+        paddingVertical: 12,
+        paddingHorizontal: 45,
         borderRadius: 6,
         backgroundColor: '#9F73AB'
     }
