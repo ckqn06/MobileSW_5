@@ -3,7 +3,7 @@ import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
 import { useState } from 'react'; 
 import { SignUp } from "../../Auth/AuthFunctions";
 
-const Sign_Up = (props) => {
+const Sign_Up =  (props) =>{
     const [username,setUsername] = useState("")
     const onChangeName = (event => setUsername(event))
 
@@ -26,31 +26,19 @@ const Sign_Up = (props) => {
     }
 
     //creates a new user with email and password
-    const SignUpHandler = () => {
+    const SignUpHandler = async () => {
          
-        // if (!email && !myPWDInput && !username)
-        // { alert("username, email and password is required") }
-        // else {
-        //     SignUp(
-        //         username,
-        //         email,
-        //         myPWDInput
-        //     );
-        // }
-
-        // console.log("new user created")
-        // props.navigation.navigate("LoginScreen")
-        // setEmpty();
-
-
+      
         if (!username) { alert("Username is required") }
         else if (!email) { alert("Email is required") }
         else if (!myPWDInput) { alert("Password is required") }
         else {
-            SignUp(username, email, myPWDInput);
-            console.log("new User created")
-            props.navigation.navigate("Login")
-            setEmpty();
+            try {
+                await SignUp(username, email, myPWDInput);
+                console.log("new User created")
+                props.navigation.navigate("Login")
+                setEmpty();
+            }catch(error){alert(error.message)}
         }
     }
 

@@ -6,7 +6,7 @@ import { auth } from "../../Auth/firebaseConfig";
 import { Signin } from "../../Auth/AuthFunctions";
 
 const Login = (props) => {
-    
+
     useEffect(() => {
         onAuthStateChanged(auth, (data) => {
             if(data) { props.navigation.replace("Welcome") }
@@ -15,12 +15,10 @@ const Login = (props) => {
 
     const [email,setEmail] = useState("")
     const onChangeEmail = (event) => {
-        //console.log("event", event)
         setEmail(event)}
 
     const [myPWDInput,setmyPWDInput] = useState("")
     const onChangePWDInput = (event) => {
-       //console.log("event", event)
        setmyPWDInput(event)}
 
     const setEmpty = () => {
@@ -37,6 +35,7 @@ const Login = (props) => {
             Signin(email, myPWDInput)
             console.log("logged In")
             setEmpty();
+           
         }
     }
 
