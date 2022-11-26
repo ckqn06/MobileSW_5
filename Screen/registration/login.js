@@ -36,12 +36,17 @@ const LoginScreen = (props) => {
     }
 
     const loginHandler = () => {
-        if (!email) { alert("email field is required") }
-        if (!myPWDInput) { alert("password field is required") }
-        Signin(email, myPWDInput)
-        props.navigation.navigate("Welcome")
-        console.log("logged In")
-        setEmpty();
+        if (!email && !myPWDInput)
+        { alert("email and password is required") }
+        else if (!email || !myPWDInput) {
+            alert("email or password is required")
+        }
+        else {
+            Signin(email, myPWDInput)
+            console.log("logged In")
+            setEmpty();
+        }
+       
     }
 
 

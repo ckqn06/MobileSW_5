@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { store } from './Redux/store';
 import { Provider } from 'react-redux';
 import { LogOut } from './Auth/AuthFunctions';
+import TeacherScreen from './TeacherApp/renderScreen';
+import IntroScreen from './TeacherApp/startScreen';
 
 import Start from './Screen/registration/Start'
 import LoginScreen from './Screen/registration/login';
@@ -53,6 +55,7 @@ import Strate7_3 from './Screen/Strate7_3'
 import Strate8_1 from './Screen/Strate8_1'
 import Strate8_2 from './Screen/Strate8_2'
 import Strate8_3 from './Screen/Strate8_3'
+import StartScreen from './TeacherApp/startScreen';
 
 
 const Stack = createStackNavigator();
@@ -72,7 +75,7 @@ export default function App() {
   return (
     <Provider store={store}>
     <NavigationContainer>
-        <Stack.Navigator initialRouteName='LoginScreen'>
+        <Stack.Navigator initialRouteName='intro'>
           <Stack.Screen name = "Start" component={Start}/>
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name= "LoginScreen" component={LoginScreen}/>
@@ -128,7 +131,12 @@ export default function App() {
 
         <Stack.Screen name = "Strate8_1" component={Strate8_1}/>
         <Stack.Screen name = "Strate8_2" component={Strate8_2}/>
-        <Stack.Screen name = "Strate8_3" component={Strate8_3}/>
+        <Stack.Screen name="Strate8_3" component={Strate8_3} />
+          
+          <Stack.Screen name="teacher" component={TeacherScreen} />
+
+          <Stack.Screen name='intro' component={IntroScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
    </Provider>

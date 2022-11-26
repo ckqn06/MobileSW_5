@@ -9,13 +9,13 @@ const Start = (props) => {
 
     const [email, setEmail] = useState("")
     const onChangeEmail = (event) => {
-        console.log("event", event)
+       // console.log("event", event)
         setEmail(event)
     }
 
     const [myPWDInput,setmyPWDInput] = useState("")
     const onChangePWDInput = (event) => {
-        console.log("event", event)
+       // console.log("event", event)
         setmyPWDInput(event)
     }
 
@@ -27,19 +27,23 @@ const Start = (props) => {
 
     //creates a new user with email and password
     const SignUpHandler = () => {
-        if (!username) { alert("username is required") }
-        else if (!email) { alert("email is required") }
-        else if (!myPWDInput) { alert("password is required") }
+        // if (!username) { alert("username is required") }
+        // else if (!email) { alert("email is required") }
+        // else if (!myPWDInput) { alert("password is required") }
+            
+        if (!email && !myPWDInput && !username)
+        { alert("username, email and password is required") }
         else {
             SignUp(
                 username,
                 email,
                 myPWDInput
             );
-            console.log("new user created")
-            props.navigation.navigate("LoginScreen")
-            setEmpty();
         }
+
+        console.log("new user created")
+        props.navigation.navigate("LoginScreen")
+        setEmpty();
     }
 
     return (
@@ -67,7 +71,7 @@ const Start = (props) => {
                  style = {styles.textInput}
                  value = {email}
                  onChangeText = {onChangeEmail}
-                 placeholder = "Insert your email"
+                 placeholder = "test@example.com"
                 ></TextInput>
 
                 <Text style = {styles.subText}>PassWord</Text>

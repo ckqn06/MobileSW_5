@@ -2,28 +2,33 @@ import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { auth } from "../Auth/firebaseConfig";
 import { db } from "../Auth/firebaseConfig";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { useSelector, useDispatch } from "react-redux"
 
 const Main = (props) => {
-
-   // const [scorePercent, setScorePercent] = useState(0);
-
-    //const scorePercentage = () => setScorePercent(Math.floor((scoreCounter*24)/100))
-
-    const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든
+    
+   // const  scorePercent  = props.route.params;
+    
+    //const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든
 
     const [studentData, setStudentData] = useState({});
 
     useEffect(() => {
+        // const fetchData = async () => {
+        //     const docRef = await doc(db, "student", auth.currentUser.uid)
+        //     await getDoc(docRef)
+        //         .then((snapshot) => {
+        //             console.log(snapshot.data());
+        //             setStudentData(snapshot.data())
+        //         }).catch(error => console.log(error.message))
+        // };
         const fetchData = async () => {
             const docRef = await doc(db, "student", auth.currentUser.uid)
-            await getDoc(docRef)
-                .then((snapshot) => {
-                    console.log(snapshot.data());
-                    setStudentData(snapshot.data())
-                }).catch(error => console.log(error.message))
-        };
+            await onSnapshot(docRef, (snapshot) => {
+                console.log(snapshot.data());
+                setStudentData(snapshot.data())
+            })
+        }
 
         fetchData();
     }, [])
@@ -45,12 +50,12 @@ const Main = (props) => {
                     <View style = {{marginLeft:10, marginRight:30, alignItems:'center'}}>
                         <Text style = {{marginBottom:5, fontSize:25}}>Today's Quiz</Text>
                         <Text style={{ marginBottom: 5, fontSize: 25 }}>0%</Text>
-                        <Text style={{ marginBottom: 5, fontSize: 25 }}>{studentData.score}/20</Text>
+                        <Text style={{ marginBottom: 5, fontSize: 25 }}>{studentData.score}/24</Text>
                     </View>
                 </View>
             </View>
 
-            <TouchableOpacity onPress = {() => { props.navigation.navigate("QuizList") }}>
+            <TouchableOpacity onPress = {() => {props.navigation.navigate("QuizList") }}>
                 <View style = {styles.quizButton}>
                     <Text style = {styles.quizButtonText}>Quiz Start!</Text>
                 </View>
@@ -62,7 +67,9 @@ const Main = (props) => {
 
                     <Text style = {{marginBottom:50, fontSize:25, color:'green'}}>Correct Answer</Text>
                     <Text style = {{marginBottom:50, fontSize:25, color:'red'}}>Wrong Answer</Text>
-                    <Text style = {{marginBottom:50, fontSize:25, color:'blue'}}>Unfinished Answer</Text>
+                    <Text style={{ marginBottom: 50, fontSize: 25, color: 'blue' }}
+                        onPress={() => props.navigation.navigate("teacher")}
+                    >Unfinished Answer</Text>
                 </View>
 
                 <View style = {styles.graph}/>
@@ -130,3 +137,6 @@ const styles = StyleSheet.create({
 });
 
 export default Main
+
+
+// {JSON.stringify(scorePercent)}

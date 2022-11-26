@@ -113,7 +113,9 @@ const QuizList = (props) => {
 
             <TouchableOpacity onPress={() => {
                 updateData(),
-                props.navigation.navigate("Main")
+                    props.navigation.navigate('Main',
+                        {scorePercent: Math.floor((scoreCounter * 100) / 20)}
+                    )
             }}>
                 <View style = {styles.subView}>
                     <Text style = {styles.submitbutton}>SUBMIT</Text>
