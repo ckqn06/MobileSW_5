@@ -27,8 +27,7 @@ const Sign_Up =  (props) =>{
 
     //creates a new user with email and password
     const SignUpHandler = async () => {
-         
-      
+        
         if (!username) { alert("Username is required") }
         else if (!email) { alert("Email is required") }
         else if (!myPWDInput) { alert("Password is required") }

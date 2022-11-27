@@ -5,8 +5,6 @@ import { useState } from 'react';
 import { store } from './Redux/store';
 import { Provider } from 'react-redux';
 import { LogOut } from './Auth/AuthFunctions';
-import TeacherScreen from './TeacherApp/renderScreen';
-import IntroScreen from './TeacherApp/startScreen';
 import QuizList from './Screen/QuizList';
 
 import Login from './Screen/registration/Login'
@@ -63,7 +61,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='intro'>
+        <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen name= "Login" component={Login}/>
           <Stack.Screen name = "Sign_Up" component={Sign_Up}/>
           <Stack.Screen name = "Welcome" component={Welcome}/>
@@ -115,8 +113,6 @@ export default function App() {
           <Stack.Screen name = "Strate8_2" component={Strate8_2}/>
           <Stack.Screen name="Strate8_3" component={Strate8_3} />
           
-          <Stack.Screen name='teacher' component={TeacherScreen} />
-          <Stack.Screen name='intro' component={IntroScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

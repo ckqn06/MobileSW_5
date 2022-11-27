@@ -56,8 +56,6 @@ export const Signin = (email, password) => {
                 })
 }
             
-
-
 export const LogOut = () => { signOut(auth)
         .then(()=>{ console.log("user logged out") })
         .catch(error => console.log(error.message))
