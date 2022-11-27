@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { onAuthStateChanged } from "firebase/auth"
 import { auth } from "../../Auth/firebaseConfig";
 import { Signin } from "../../Auth/AuthFunctions";
+import { BackHandler } from 'react-native';
 
 const Login = (props) => {
     useEffect(() => {
@@ -12,27 +13,29 @@ const Login = (props) => {
             else { props.navigation.navigate("Login") }})
     }, [])
 
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
+            return () => backHandler.remove() }
+    }, [])
+
     const [email,setEmail] = useState("")
-    const onChangeEmail = (event) => {
-        //console.log("event", event)
-        setEmail(event)}
+    const onChangeEmail = (event) => {setEmail(event)}
 
     const [myPWDInput,setmyPWDInput] = useState("")
-    const onChangePWDInput = (event) => {
-       //console.log("event", event)
-       setmyPWDInput(event)}
+    const onChangePWDInput = (event) => {setmyPWDInput(event)}
 
     const setEmpty = () => {
         setEmail("")
         setmyPWDInput("")}
 
     const loginHandler = () => {
-        if (!email) { alert("email field is required") }
-        else if (!myPWDInput) { alert("password field is required") }
-        else { Signin(email, myPWDInput)
-        props.navigation.navigate("Welcome")
-        console.log("logged In")
-        setEmpty(); }
+        if (!email && !myPWDInput) { alert("email and password is required") }
+        else if (!email || !myPWDInput) { alert("email or password is required") }
+        else {
+            Signin(email, myPWDInput)
+            console.log("logged In")
+            setEmpty(); }
     }
 
     return (

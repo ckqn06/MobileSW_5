@@ -8,16 +8,10 @@ const Sign_Up = (props) => {
     const onChangeName = (event => setUsername(event))
 
     const [email,setEmail] = useState("")
-    const onChangeEmail = (event) => {
-        //console.log("event", event)
-        setEmail(event)
-    }
+    const onChangeEmail = (event) => {setEmail(event)}
 
     const [myPWDInput,setmyPWDInput] = useState("")
-    const onChangePWDInput = (event) => {
-        //console.log("event", event)
-        setmyPWDInput(event)
-    }
+    const onChangePWDInput = (event) => {setmyPWDInput(event)}
 
     const setEmpty = () => {
         setUsername(""),
@@ -26,15 +20,17 @@ const Sign_Up = (props) => {
     }
 
     //creates a new user with email and password
-    const SignUpHandler = () => {
+    const SignUpHandler = async() => {
         if (!username) { alert("Username is required") }
         else if (!email) { alert("Email is required") }
         else if (!myPWDInput) { alert("Password is required") }
         else {
-            SignUp(username, email, myPWDInput);
-            console.log("new User created")
-            props.navigation.navigate("Login")
-            setEmpty();
+            try {
+                await SignUp(username, email, myPWDInput);
+                console.log("new User created")
+                props.navigation.navigate("Login")
+                setEmpty();
+            } catch(error){alert(error.message)}
         }
     }
 
@@ -65,14 +61,14 @@ const Sign_Up = (props) => {
                              style = {styles.textInput}
                              value = {email}
                              onChangeText = {onChangeEmail}
-                             placeholder = "Insert your Email"/>
+                             placeholder = "test@example.com"/>
 
                             <Text style = {styles.subText}>PassWord</Text>
                             <TextInput
                              style = {styles.textInput}
                              value = {myPWDInput}
                              onChangeText = {onChangePWDInput}
-                             placeholder = "Insert your Password"
+                             placeholder = "At least 6 characters"
                              secureTextEntry={true}/>
                         </View>
 

@@ -8,12 +8,10 @@ const Quiz5 = (props) => {
     const dispatch = useDispatch()
     const [show,setShow] = useState(false); //전략 선택 화면 상태 값 default는 false로 동작
     
-    const showme = () => {
-        dispatch(up5()) //점수 값 -1에서 0으로 변경
-        setShow(true);
-    }
+    const showme = () => { setShow(true); }
 
     const check=()=>{
+        dispatch(up5()) //점수 값 -1에서 0으로 변경
         dispatch(change5()) //submit버튼 누르면 해당 Quiz번호 버튼 비활성화 하기 위하여 reducers..change1.js state값 1 증가
         props.navigation.navigate("QuizList")
     }
