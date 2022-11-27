@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, BackHandler } from "react-native";
 import { useState, useEffect } from "react";
 import { auth } from "../Auth/firebaseConfig";
 import { db } from "../Auth/firebaseConfig";
@@ -7,6 +7,14 @@ import { doc, getDoc } from "firebase/firestore";
 const Main = (props) => {
     const [studentData, setStudentData] = useState({});
 
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
+            return () => backHandler.remove() }
+    }, [])
+
+    //onSnapshot 기능 사용해서 실사간으로 Quiz 점수 정보 갱신하기 
+    //useEffect hook은 화면 실행할 떄 실행하기    
     useEffect(() => {
         const fetchData = async () => {
             const docRef = await doc(db, "student", auth.currentUser.uid)
@@ -37,7 +45,7 @@ const Main = (props) => {
                     <View style = {{marginLeft:10, marginRight:30, alignItems:'center'}}>
                         <Text style = {{marginBottom:5, fontSize:25}}>Today's Quiz</Text>
                         <Text style = {{marginBottom:5, fontSize:25}}>0%</Text>
-                        <Text style = {{marginBottom:5, fontSize:25}}>{studentData.score}/20</Text>
+                        <Text style = {{marginBottom:5, fontSize:25}}>{studentData.score}/24</Text>
                     </View>
                 </View>
             </View>

@@ -1,12 +1,18 @@
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { up2 } from "../Redux/Actions";
 
 const Strate2_3 = (props) => {
     const dispatch = useDispatch() // 액션 불러오기 면어
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
+
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
+            return () => backHandler.remove() }
+    }, [])
 
     var count = 3;
 
@@ -15,7 +21,7 @@ const Strate2_3 = (props) => {
     const onChangeInput = (event) => { setMyTextInput(event) }
 
     const correct = () => {
-        if (myTextInput == 11) {
+        if (myTextInput == '5 7/8') {
             dispatch(up2()) //점수 추가 액션 불러오기
             alert("Fantastic! You’ve found that Jen needs to run another 5 7/8 miles to reach her goal.");
             props.navigation.navigate("Quiz2") } 
@@ -44,16 +50,20 @@ const Strate2_3 = (props) => {
                                     How many miles does Jen have left to run?
                                 </Text>
                             </View>
-                            <TextInput
-                             style = {styles.textInput}
-                             placeholder="Answer"
-                             value = {myTextInput}
-                             onChangeText = {onChangeInput}/>
+                            <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput}
+                                 onChangeText = {onChangeInput}
+                                 maxLength = {10}/>
+                                <Text style = {{fontSize:18}}>miles</Text>
+                            </View>
                         </View >
 
                         <View style = {styles.checkButton}>
                             <Button
-                             title="check"
+                             title="submit"
                              color='#8463ff'
                              onPress = {correct}/>
                         </View>
@@ -87,7 +97,10 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     textInput: {
-        margin:20,
+        marginTop:15,
+        marginBottom:15,
+        marginLeft:10,
+        marginRight:10,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,

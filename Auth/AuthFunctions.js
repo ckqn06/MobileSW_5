@@ -5,8 +5,7 @@ import { auth } from "./firebaseConfig";
 import { db } from "./firebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
-//const navigation = useNavigation();
-
+//학생 새 계정 만들 기 위한 파이어베이스 auth createUserWithEmailAndPassword 기능 사용하기
 export const SignUp = async (username, email, password) => {
         await createUserWithEmailAndPassword(auth, email, password)
         .then((cred) => {
@@ -30,6 +29,7 @@ export const SignUp = async (username, email, password) => {
                 if (error.code === 'auth/weak-password') { throw new Error ("Password is too weak. Enter 6 characters at least") }})
 }
 
+//Login 하기 위한 기능  
 export const Signin = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
             .then((cred) => { const currentUser = cred.user 
@@ -40,6 +40,7 @@ export const Signin = (email, password) => {
                 if (error.code === 'auth/wrong-password') { alert("The password is invalid for the given email") }})
 }
 
+//Logout 하기 위한 기능
 export const LogOut = () => { signOut(auth)
         .then(()=>{ console.log("user logged out") })
         .catch(error => console.log(error.message))

@@ -29,7 +29,6 @@ const Login = (props) => {
         setEmail("")
         setmyPWDInput("")}
 
-
     const loginHandler = () => {
         if (!email && !myPWDInput) { alert("email and password is required") }
         else if (!email || !myPWDInput) { alert("email or password is required") }
