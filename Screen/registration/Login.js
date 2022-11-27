@@ -7,10 +7,11 @@ import { Signin } from "../../Auth/AuthFunctions";
 
 const Login = (props) => {
 
+    // 데이터베이스 데이터 있는 경우 Welcome 화면 이동
     useEffect(() => {
         onAuthStateChanged(auth, (data) => {
             if(data) { props.navigation.replace("Welcome") }
-            else { props.navigation.navigate("Login") }})
+            else { props.navigation.navigate("Login") }}) //replace function error
     }, [])
 
     const [email,setEmail] = useState("")
@@ -61,7 +62,7 @@ const Login = (props) => {
                              onChangeText = {onChangeEmail}
                              placeholder = "Insert your Email"/>
 
-                            <Text style = {styles.subText}>PassWord</Text>
+                            <Text style = {styles.subText}>Password</Text>
                             <TextInput
                              style = {styles.textInput}
                              value = {myPWDInput}

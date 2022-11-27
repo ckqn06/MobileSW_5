@@ -7,8 +7,8 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } f
 import { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 
-//const navigation = useNavigation();
 
+//학생 새 계정 만들 기 위한 파이어베이스 auth createUserWithEmailAndPassword 기능 사용하기
 export const SignUp = async (username, email, password) => {
         await createUserWithEmailAndPassword(auth, email, password)
         .then((cred) => {
@@ -39,6 +39,7 @@ export const SignUp = async (username, email, password) => {
                 
         })}
 
+      //Login 하기 위한 기능  
 export const Signin = (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
             .then((cred) => { const currentUser = cred.user 
@@ -55,7 +56,8 @@ export const Signin = (email, password) => {
                         }
                 })
 }
-            
+
+//Logout 하기 위한 기능
 export const LogOut = () => { signOut(auth)
         .then(()=>{ console.log("user logged out") })
         .catch(error => console.log(error.message))

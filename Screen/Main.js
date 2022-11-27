@@ -7,21 +7,15 @@ import { doc, getDoc, onSnapshot } from "firebase/firestore";
 const Main = (props) => {
     const [studentData, setStudentData] = useState({});
 
+    //onSnapshot 기능 사용해서 실사간으로 Quiz 점수 정보 갱신하기 
+    //useEffect hook은 화면 실행할 떄 실행하기
     useEffect(() => {
         const fetchData = async () => {
             const docRef = await doc(db, "student", auth.currentUser.uid)
-
             onSnapshot(docRef, (snapshot) => {
                 console.log(snapshot.data())
                 setStudentData(snapshot.data())
             })
-            
-
-            // await getDoc(docRef)
-            // .then((snapshot) => {
-            //     console.log(snapshot.data());
-            //     setStudentData(snapshot.data())})
-            // .catch(error => console.log(error.message))
         };
         fetchData();
     }, [])

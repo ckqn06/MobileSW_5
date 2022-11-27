@@ -147,7 +147,7 @@ const QuizList = (props) => {
     const studentScore = score1 + score2 + score3 + score4 + score5 + score6 + score7 + score8
     console.log(studentScore)
 
-    //update student score
+    //학생 점수 데이터베이스에서 갱신
     const updateData = async () => {
         try {
             const docRef = doc(db, "student", auth.currentUser.uid);
