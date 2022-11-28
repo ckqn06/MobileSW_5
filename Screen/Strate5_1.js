@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet, TextInput,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {useState} from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { up5 } from "../Redux/Actions";
+import { up5, change5_1 } from "../Redux/Actions";
 
 const Strate5_1 = (props) => {
     const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
@@ -38,6 +38,7 @@ const Strate5_1 = (props) => {
                 alert("miss you have "+(count1)+" chance");
             }
             else if(count1 == 0) {
+                dispatch(change5_1())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz5")
             }
@@ -45,6 +46,7 @@ const Strate5_1 = (props) => {
     }
     const correct2 = () => {
         if (myTextInput2 == 11) {
+            dispatch(change5_1())          //11-28(2)추가
             dispatch(up5()) //점수 추가 액션 불러오기
             alert("Nice! Mario can cut 6 sections of rope. Let’s try a different method!");
             props.navigation.navigate("Quiz5")
@@ -54,6 +56,7 @@ const Strate5_1 = (props) => {
                 alert("miss you have "+(count2)+" chance");
             }
             else if(count2 == 0) {
+                dispatch(change5_1())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz5")
             }

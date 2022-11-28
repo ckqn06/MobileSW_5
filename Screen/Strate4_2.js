@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet, TextInput,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {useState} from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { up4 } from "../Redux/Actions";
+import { up4, change4_2 } from "../Redux/Actions";
 
 const Strate4_2 = (props) => {
     const scoreCounter = useSelector(state => state.scoreCounter) // 앱에서 어디든 
@@ -56,6 +56,7 @@ const Strate4_2 = (props) => {
                 alert("miss you have "+(count1)+" chance");
             }
             else if(count1 == 0) {
+                dispatch(change4_2())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz4")
             }
@@ -71,6 +72,7 @@ const Strate4_2 = (props) => {
                 alert("miss you have "+(count2)+" chance");
             }
             else if(count2 == 0) {
+                dispatch(change4_2())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz4")
             }
@@ -86,6 +88,7 @@ const Strate4_2 = (props) => {
                 alert("miss you have "+(count3)+" chance");
             }
             else if(count3 == 0) {
+                dispatch(change4_2())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz4")
             }
@@ -93,6 +96,7 @@ const Strate4_2 = (props) => {
     }
     const correct4 = () => {
         if (myTextInput4 == 11) {
+            dispatch(change4_2())          //11-28(2)추가
             dispatch(up4()) //점수 추가 액션 불러오기
             alert("Ok! It looks like Faye scored the most.");
             props.navigation.navigate("Quiz4")
@@ -102,6 +106,7 @@ const Strate4_2 = (props) => {
                 alert("miss you have "+(count4)+" chance");
             }
             else if(count4 == 0) {
+                dispatch(change4_2())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz4")
             }

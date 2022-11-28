@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet, TextInput,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {useState} from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { up2 } from "../Redux/Actions";
+import { up2, change2_2 } from "../Redux/Actions";
 
 const Strate2_2 = (props) => {
     const dispatch = useDispatch() // 액션 불러오기 면어
@@ -36,6 +36,7 @@ const Strate2_2 = (props) => {
                 alert("miss you have "+(count1)+" chance");
             }
             else if(count1 == 0) {
+                dispatch(change2_2())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz2")
             }
@@ -43,6 +44,7 @@ const Strate2_2 = (props) => {
     }
     const correct2 = () => {
         if (myTextInput2 == 11) {
+            dispatch(change2_2())          //11-28(2)추가
             dispatch(up2()) //점수 추가 액션 불러오기
             alert("Fantastic! You’ve found that Jen needs to run another 5 7/8 miles to reach her goal!");
             props.navigation.navigate("Quiz2")
@@ -52,6 +54,7 @@ const Strate2_2 = (props) => {
                 alert("miss you have "+(count2)+" chance");
             }
             else if(count2 == 0) {
+                dispatch(change2_2())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz2")
             }

@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet, TextInput,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {useState} from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { up8 } from "../Redux/Actions";
+import { up8, change8_1 } from "../Redux/Actions";
 
 const Strate8_1 = (props) => {
     
@@ -56,6 +56,7 @@ const Strate8_1 = (props) => {
                 alert("miss you have "+(count1)+" chance");
             }
             else if(count1 == 0) {
+                dispatch(change8_1())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz8")
             }
@@ -71,6 +72,7 @@ const Strate8_1 = (props) => {
                 alert("miss you have "+(count2)+" chance");
             }
             else if(count2 == 0) {
+                dispatch(change8_1())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz8")
             }
@@ -86,6 +88,7 @@ const Strate8_1 = (props) => {
                 alert("miss you have "+(count3)+" chance");
             }
             else if(count3 == 0) {
+                dispatch(change8_1())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz8")
             }
@@ -93,6 +96,7 @@ const Strate8_1 = (props) => {
     }
     const correct4 = () => {
         if (myTextInput4 == 11) {
+            dispatch(change8_1())          //11-28(2)추가
             dispatch(up8()) //점수 추가 액션 불러오기
             alert("Hey, that’s exactly 80 feet of fencing! It seems that 15 feet is a reasonable answer!");
             props.navigation.navigate("Quiz8")
@@ -102,6 +106,7 @@ const Strate8_1 = (props) => {
                 alert("miss you have "+(count4)+" chance");
             }
             else if(count4 == 0) {
+                dispatch(change8_1())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz8")
             }

@@ -85,6 +85,133 @@ export const change8 = () => {
         type: 'change8'
     }
 };
+export const change1_1 = () => {
+    return {
+        type: 'change1_1'
+    }
+};
+export const change1_2 = () => {
+    return {
+        type: 'change1_2'
+    }
+};
+export const change1_3 = () => {
+    return {
+        type: 'change1_3'
+    }
+};
+
+export const change2_1 = () => {
+    return {
+        type: 'change2_1'
+    }
+};
+export const change2_2 = () => {
+    return {
+        type: 'change2_2'
+    }
+};
+export const change2_3 = () => {
+    return {
+        type: 'change2_3'
+    }
+};
+
+export const change3_1 = () => {
+    return {
+        type: 'change3_1'
+    }
+};
+export const change3_2 = () => {
+    return {
+        type: 'change3_2'
+    }
+};
+export const change3_3 = () => {
+    return {
+        type: 'change3_3'
+    }
+};
+
+export const change4_1 = () => {
+    return {
+        type: 'change4_1'
+    }
+};
+export const change4_2 = () => {
+    return {
+        type: 'change4_2'
+    }
+};
+export const change4_3 = () => {
+    return {
+        type: 'change4_3'
+    }
+};
+
+export const change5_1 = () => {
+    return {
+        type: 'change5_1'
+    }
+};
+export const change5_2 = () => {
+    return {
+        type: 'change5_2'
+    }
+};
+export const change5_3 = () => {
+    return {
+        type: 'change5_3'
+    }
+};
+
+export const change6_1 = () => {
+    return {
+        type: 'change6_1'
+    }
+};
+export const change6_2 = () => {
+    return {
+        type: 'change6_2'
+    }
+};
+export const change6_3 = () => {
+    return {
+        type: 'change6_3'
+    }
+};
+
+export const change7_1 = () => {
+    return {
+        type: 'change7_1'
+    }
+};
+export const change7_2 = () => {
+    return {
+        type: 'change7_2'
+    }
+};
+export const change7_3 = () => {
+    return {
+        type: 'change7_3'
+    }
+};
+
+export const change8_1 = () => {
+    return {
+        type: 'change8_1'
+    }
+};
+export const change8_2 = () => {
+    return {
+        type: 'change8_2'
+    }
+};
+export const change8_3 = () => {
+    return {
+        type: 'change8_3'
+    }
+};
 
 //decrement 함수 불러오면 점수 감소
 
