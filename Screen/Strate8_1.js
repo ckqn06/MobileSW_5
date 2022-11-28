@@ -15,7 +15,6 @@ const Strate8_1 = (props) => {
     }, [])
 
     var count1 = 3;
-    var count2 = 3;
     var count3 = 3;
     var count4 = 3;
 
@@ -33,7 +32,7 @@ const Strate8_1 = (props) => {
     const onChangeInput4 = (event) => { setMyTextInput4(event) }
 
     const correct1 = () => {
-        if (myTextInput1 == 11) {
+        if (myTextInput1 == 50) {
             alert("next");
             setShow1(true) }
         else {
@@ -47,23 +46,10 @@ const Strate8_1 = (props) => {
             } }
     }
 
-    const correct2 = () => {
-        if (myTextInput2 == 11) {
-            alert("next");
-            setShow2(true) }
-        else {
-            if(count2 > 0) {
-                count2 -= 1;
-                alert("miss you have "+(count2)+" chance");
-            }
-            else if(count2 == 0) {
-                alert("miss you have no chance")
-                props.navigation.navigate("Quiz8")
-            } }
-    }
+    const correct2 = () => {setShow2(true)}
 
     const correct3 = () => {
-        if (myTextInput3 == 11) {
+        if (myTextInput3 == myTextInput2 * 2) {
             alert("next");
             setShow3(true) }
         else {
@@ -78,7 +64,7 @@ const Strate8_1 = (props) => {
     }
 
     const correct4 = () => {
-        if (myTextInput4 == 11) {
+        if (myTextInput4 == 80) {
             dispatch(up8()) //점수 추가 액션 불러오기
             alert("Hey, that’s exactly 80 feet of fencing! It seems that 15 feet is a reasonable answer!");
             props.navigation.navigate("Quiz8") }
@@ -107,11 +93,15 @@ const Strate8_1 = (props) => {
                                     First, how much fencing will he need for the two sides of the fence that go along the length of the garden?
                                 </Text>
                             </View>
-                            <TextInput
-                             style = {styles.textInput}
-                             placeholder="Answer"
-                             value = {myTextInput1}
-                             onChangeText = {onChangeInput1}/>
+                            <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1}
+                                 onChangeText = {onChangeInput1}
+                                 maxLength = {10}/>
+                                <Text style = {{fontSize:18}}>feet</Text>
+                            </View>
                         </View >
 
                         <View style = {styles.checkButton}>
@@ -225,7 +215,10 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     textInput: {
-        margin:20,
+        marginTop:15,
+        marginBottom:15,
+        marginLeft:10,
+        marginRight:10,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,

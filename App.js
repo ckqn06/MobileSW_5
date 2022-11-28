@@ -68,12 +68,11 @@ export default function App() {
           <Stack.Screen name = "Login" component={Login} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
           <Stack.Screen name = "Sign_Up" component={Sign_Up} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
           <Stack.Screen name = "Welcome" component={Welcome} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Main" component={Main}
-           options={{ headerTitleAlign:'center', headerLeft:()=>null, headerRight: () => (
-              <Button
-               title='Log Out'
-               color='#8463ff'
-               onPress={LogOut}/>)}}/>
+          <Stack.Screen name = "Main" component={Main} options={{headerTitleAlign:'center',headerLeft:()=>null,
+            headerRight:()=><Button
+             title='Log Out'
+             color='#8463ff'
+             onPress={LogOut}/>}}/>
           <Stack.Screen name = "QuizList" component={QuizList} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
 
           <Stack.Screen name = "Quiz1" component={Quiz1} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>

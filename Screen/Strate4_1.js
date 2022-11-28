@@ -14,7 +14,6 @@ const Strate4_1 = (props) => {
             return () => backHandler.remove() }
     }, [])
     
-    var count1 = 3;
     var count2 = 3;
     var count3 = 3;
     var count4 = 3;
@@ -23,32 +22,21 @@ const Strate4_1 = (props) => {
     const [show2, setShow2] = useState(false); //3번째 화면 상태 값 default는 false로 동작
     const [show3, setShow3] = useState(false); //4번째 화면 상태 값 default는 false로 동작
     const [myTextInput1, setMyTextInput1] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput2, setMyTextInput2] = useState("") //2번 답 저장 하는 공간
+    const [myTextInput2_1, setMyTextInput2_1] = useState("") //2번 답 저장 하는 공간
+    const [myTextInput2_2, setMyTextInput2_2] = useState("") //2번 답 저장 하는 공간
     const [myTextInput3, setMyTextInput3] = useState("") //3번 답 저장 하는 공간
     const [myTextInput4, setMyTextInput4] = useState("") //4번 답 저장 하는 공간
 
     const onChangeInput1 = (event) => { setMyTextInput1(event) }
-    const onChangeInput2 = (event) => { setMyTextInput2(event) }
+    const onChangeInput2_1 = (event) => { setMyTextInput2_1(event) }
+    const onChangeInput2_2 = (event) => { setMyTextInput2_2(event) }
     const onChangeInput3 = (event) => { setMyTextInput3(event) }
     const onChangeInput4 = (event) => { setMyTextInput4(event) }
 
-    const correct1 = () => {
-        if (myTextInput1 == 11) {
-            alert("next");
-            setShow1(true) }
-        else {
-            if(count1 > 0) {
-                count1 -= 1;
-                alert("miss you have "+(count1)+" chance");
-            }
-            else if(count1 == 0) {
-                alert("miss you have no chance")
-                props.navigation.navigate("Quiz4")
-            } }
-    }
+    const correct1 = () => {setShow1(true)}
 
     const correct2 = () => {
-        if (myTextInput2 == 11) {
+        if (myTextInput2_1==myTextInput1*2 && myTextInput2_2==(Number(myTextInput1)+30)) {
             alert("next");
             setShow2(true) }
         else {
@@ -63,7 +51,7 @@ const Strate4_1 = (props) => {
     }
 
     const correct3 = () => {
-        if (myTextInput3 == 11) {
+        if (myTextInput3 == 114) {
             alert("next");
             setShow3(true) }
         else {
@@ -78,7 +66,7 @@ const Strate4_1 = (props) => {
     }
 
     const correct4 = () => {
-        if (myTextInput4 == 11) {
+        if (myTextInput4 == 'Faye') {
             dispatch(up4()) //점수 추가 액션 불러오기
             alert("Ok! It looks like Faye scored the most.");
             props.navigation.navigate("Quiz4") }
@@ -131,11 +119,23 @@ const Strate4_1 = (props) => {
                                         Then how many would Karla and Faye win?
                                     </Text>
                                 </View>
-                                <TextInput
-                                 style = {styles.textInput}
-                                 placeholder="Answer"
-                                 value = {myTextInput2}
-                                 onChangeText = {onChangeInput2}/>
+                                <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                    <Text style = {{fontSize:18}}>Karla:</Text>
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput2_1}
+                                     onChangeText = {onChangeInput2_1}
+                                     maxLength = {6}/>
+
+                                    <Text style = {{fontSize:18}}>Elena:</Text>
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput2_2}
+                                     onChangeText = {onChangeInput2_2}
+                                     maxLength = {6}/>
+                                </View>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -227,7 +227,10 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     textInput: {
-        margin:20,
+        marginTop:15,
+        marginBottom:15,
+        marginLeft:10,
+        marginRight:10,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,

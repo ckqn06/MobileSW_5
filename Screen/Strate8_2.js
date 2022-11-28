@@ -20,16 +20,23 @@ const Strate8_2 = (props) => {
 
     const [show1, setShow1] = useState(false);              //2번째 화면 상태 값 default는 false로 동작
     const [show2, setShow2] = useState(false);              //3번째 화면 상태 값 default는 false로 동작
-    const [myTextInput1, setMyTextInput1] = useState("")    //1번 답 저장 하는 공간
-    const [myTextInput2, setMyTextInput2] = useState("")    //2번 답 저장 하는 공간
+    const [myTextInput1_1, setMyTextInput1_1] = useState("") //1번 답 저장 하는 공간
+    const [myTextInput1_2, setMyTextInput1_2] = useState("") //1번 답 저장 하는 공간
+    const [myTextInput1_3, setMyTextInput1_3] = useState("") //1번 답 저장 하는 공간
+    const [myTextInput2_1, setMyTextInput2_1] = useState("")    //2번 답 저장 하는 공간
+    const [myTextInput2_2, setMyTextInput2_2] = useState("")    //2번 답 저장 하는 공간
     const [myTextInput3, setMyTextInput3] = useState("")    //3번 답 저장 하는 공간
 
-    const onChangeInput1 = (event) => { setMyTextInput1(event) }
-    const onChangeInput2 = (event) => { setMyTextInput2(event) }
+    const onChangeInput1_1 = (event) => { setMyTextInput1_1(event) }
+    const onChangeInput1_2 = (event) => { setMyTextInput1_2(event) }
+    const onChangeInput1_3 = (event) => { setMyTextInput1_3(event) }
+    const onChangeInput2_1 = (event) => { setMyTextInput2_1(event) }
+    const onChangeInput2_2 = (event) => { setMyTextInput2_2(event) }
     const onChangeInput3 = (event) => { setMyTextInput3(event) }
     
     const correct1 = () => {
-        if (myTextInput1 == 11) {
+        if (myTextInput1_2==50 && myTextInput1_3==80 &&
+            (myTextInput1_1=='2*w' || myTextInput1_1=='w*2' || myTextInput1_1=='2w' || myTextInput1_1=='w2')) {
             alert("next");
             setShow1(true) }
         else {
@@ -44,7 +51,7 @@ const Strate8_2 = (props) => {
     }
 
     const correct2 = () => {
-        if (myTextInput2 == 11) {
+        if (myTextInput2_1=='w' && myTextInput2_2==15) {
             alert("next");
             setShow2(true) }
         else {
@@ -59,7 +66,7 @@ const Strate8_2 = (props) => {
     }
 
     const correct3 = () => {
-        if (myTextInput3 == 11) {
+        if (myTextInput3 == 15) {
             dispatch(up8()) //점수 추가 액션 불러오기
             alert("Nice work! That’s correct!");
             props.navigation.navigate("Quiz8") }
@@ -88,11 +95,30 @@ const Strate8_2 = (props) => {
                                     Use the letter w as your variable.
                                 </Text>
                             </View>
-                            <TextInput
-                             style = {styles.textInput}
-                             placeholder="Answer"
-                             value = {myTextInput1}
-                             onChangeText = {onChangeInput1}/>
+                            <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1_1}
+                                 onChangeText = {onChangeInput1_1}
+                                 maxLength = {6}/>
+                                <Text style = {{fontSize:18}}>+</Text>
+
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1_2}
+                                 onChangeText = {onChangeInput1_2}
+                                 maxLength = {6}/>
+                                <Text style = {{fontSize:18}}>{'<='}</Text>
+
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1_3}
+                                 onChangeText = {onChangeInput1_3}
+                                 maxLength = {6}/>
+                            </View>
                         </View >
 
                         <View style = {styles.checkButton}>
@@ -112,11 +138,22 @@ const Strate8_2 = (props) => {
                                         Now, solve for w and enter your answer as an inequality
                                     </Text>
                                 </View>
-                                <TextInput
-                                 style = {styles.textInput}
-                                 placeholder="Answer"
-                                 value = {myTextInput2}
-                                 onChangeText = {onChangeInput2}/>
+                                <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput2_1}
+                                     onChangeText = {onChangeInput2_1}
+                                     maxLength = {6}/>
+                                    <Text style = {{fontSize:18}}>{'<='}</Text>
+
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput2_2}
+                                     onChangeText = {onChangeInput2_2}
+                                     maxLength = {6}/>
+                                </View>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -137,11 +174,15 @@ const Strate8_2 = (props) => {
                                         If that’s correct, then how wide could the fence be?
                                     </Text>
                                 </View>
-                                <TextInput
-                                 style = {styles.textInput}
-                                 placeholder="Answer"
-                                 value = {myTextInput3}
-                                 onChangeText = {onChangeInput3}/>
+                                <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput3}
+                                     onChangeText = {onChangeInput3}
+                                     maxLength = {10}/>
+                                    <Text style = {{fontSize:18}}>feet</Text>
+                                </View>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -185,7 +226,10 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     textInput: {
-        margin:20,
+        marginTop:15,
+        marginBottom:15,
+        marginLeft:10,
+        marginRight:10,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,

@@ -70,11 +70,15 @@ const Strate7_3 = (props) => {
                                     How much will that cost?
                                 </Text>
                             </View>
-                            <TextInput
-                             style = {styles.textInput}
-                             placeholder="Answer"
-                             value = {myTextInput1}
-                             onChangeText = {onChangeInput1}/>
+                            <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                <Text style = {{fontSize:18}}>$</Text>
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1}
+                                 onChangeText = {onChangeInput1}
+                                 maxLength = {6}/>
+                            </View>
                         </View >
 
                         <View style = {styles.checkButton}>
@@ -95,15 +99,11 @@ const Strate7_3 = (props) => {
                                         How many times can you add $21 without going over $115?
                                     </Text>
                                 </View>
-                                <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-                                    <Text style = {{fontSize:18}}>$</Text>
-                                    <TextInput
-                                     style = {styles.textInput}
-                                     placeholder="Answer"
-                                     value = {myTextInput3_1}
-                                     onChangeText = {onChangeInput2}
-                                     maxLength = {6}/>
-                                </View>
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput2}
+                                 onChangeText = {onChangeInput2}/>
                             </View>
 
                             <View style = {styles.checkButton}>

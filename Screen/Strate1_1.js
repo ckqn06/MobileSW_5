@@ -1,11 +1,11 @@
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
-    ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler, 
+    Modal, Pressable, ScrollView, View, Image, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { up1 } from "../Redux/Actions";
 
 const Strate1_1 = (props) => {
-    const dispatch = useDispatch() // 액션 불러오기 면어
+    const dispatch = useDispatch() 
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
 
     useEffect(() => {
@@ -14,14 +14,16 @@ const Strate1_1 = (props) => {
             return () => backHandler.remove() }
     }, [])
 
-    var count1 = 3;
-    var count2 = 3;
+    const [count1, setCount1] = useState(3) 
+    const [count2, setCount2] = useState(3) 
+    const decrease1 = () => { setCount1(count1-1); }                                
+    const decrease2 = () => { setCount2(count2-1); }     
 
-    const [show, setShow] = useState(false); //2번째 화면 상태 값 default는 false로 동작
-    const [myTextInput1_1, setMyTextInput1_1] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput1_2, setMyTextInput1_2] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput1_3, setMyTextInput1_3] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput2, setMyTextInput2] = useState("") //2번 답 저장 하는 공간
+    const [show, setShow] = useState(false); 
+    const [myTextInput1_1, setMyTextInput1_1] = useState("") 
+    const [myTextInput1_2, setMyTextInput1_2] = useState("") 
+    const [myTextInput1_3, setMyTextInput1_3] = useState("")
+    const [myTextInput2, setMyTextInput2] = useState("")
 
     const onChangeInput1_1 = (event) => { setMyTextInput1_1(event) }
     const onChangeInput1_2 = (event) => { setMyTextInput1_2(event) }
@@ -36,8 +38,7 @@ const Strate1_1 = (props) => {
             setShow(true)}
         else {
             if(count1 > 0) {
-                //setModalVisible(true)
-                count1 -= 1;
+                decrease1();
                 alert("miss you have "+(count1)+" chance");
             }
             else if(count1 == 0) {
@@ -53,7 +54,7 @@ const Strate1_1 = (props) => {
             props.navigation.navigate("Quiz1") }
         else {
             if(count2 > 0) {
-                count2 -=1;
+                decrease2();
                 alert("miss you have "+(count2)+" chance");
             }
             else if(count2 == 0) {

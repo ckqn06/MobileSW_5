@@ -20,16 +20,27 @@ const Strate7_1 = (props) => {
 
     const [show1, setShow1] = useState(false);              //2번째 화면 상태 값 default는 false로 동작
     const [show2, setShow2] = useState(false);              //3번째 화면 상태 값 default는 false로 동작
-    const [myTextInput1, setMyTextInput1] = useState("")    //1번 답 저장 하는 공간
-    const [myTextInput2, setMyTextInput2] = useState("")    //2번 답 저장 하는 공간
+    const [myTextInput1_1, setMyTextInput1_1] = useState("") //1번 답 저장 하는 공간
+    const [myTextInput1_2, setMyTextInput1_2] = useState("") //1번 답 저장 하는 공간
+    const [myTextInput1_3, setMyTextInput1_3] = useState("") //1번 답 저장 하는 공간
+    const [myTextInput1_4, setMyTextInput1_4] = useState("") //1번 답 저장 하는 공간
+    const [myTextInput2_1, setMyTextInput2_1] = useState("")    //2번 답 저장 하는 공간
+    const [myTextInput2_2, setMyTextInput2_2] = useState("")    //2번 답 저장 하는 공간
     const [myTextInput3, setMyTextInput3] = useState("")    //3번 답 저장 하는 공간
 
-    const onChangeInput1 = (event) => { setMyTextInput1(event) }
-    const onChangeInput2 = (event) => { setMyTextInput2(event) }
+    const onChangeInput1_1 = (event) => { setMyTextInput1_1(event) }
+    const onChangeInput1_2 = (event) => { setMyTextInput1_2(event) }
+    const onChangeInput1_3 = (event) => { setMyTextInput1_3(event) }
+    const onChangeInput1_4 = (event) => { setMyTextInput1_4(event) }
+    const onChangeInput2_1 = (event) => { setMyTextInput2_1(event) }
+    const onChangeInput2_2 = (event) => { setMyTextInput2_2(event) }
     const onChangeInput3 = (event) => { setMyTextInput3(event) }
     
     const correct1 = () => {
-        if (myTextInput1 == 11) {
+        if ((myTextInput1_1=='21*d' || myTextInput1_1=='d*21' || myTextInput1_1=='21d' || myTextInput1_1=='d21') &&
+            (myTextInput1_2==250 && (myTextInput1_3==0.10 || myTextInput1_3==0.1)) ||
+            (myTextInput1_3==250 && (myTextInput1_2==0.10 || myTextInput1_2==0.1)) &&
+            myTextInput1_4==115) {
             alert("next");
             setShow1(true) }
         else {
@@ -44,7 +55,7 @@ const Strate7_1 = (props) => {
     }
 
     const correct2 = () => {
-        if (myTextInput2 == 11) {
+        if (myTextInput2_1=='d' && myTextInput2_2=='4 2/7') {
             alert("next");
             setShow2(true) }
         else {
@@ -59,7 +70,7 @@ const Strate7_1 = (props) => {
     }
 
     const correct3 = () => {
-        if (myTextInput3 == 11) {
+        if (myTextInput3 == 4) {
             dispatch(up7()) //점수 추가 액션 불러오기
             alert("Fantastic! Jim can rent the car for 4 days!");
             props.navigation.navigate("Quiz7") }
@@ -88,11 +99,38 @@ const Strate7_1 = (props) => {
                                     Use the letter “d” as your vairable
                                 </Text>
                             </View>
-                            <TextInput
-                             style = {styles.textInput}
-                             placeholder="Answer"
-                             value = {myTextInput1}
-                             onChangeText = {onChangeInput1}/>
+                            <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1_1}
+                                 onChangeText = {onChangeInput1_1}
+                                 maxLength = {5}/>
+                                <Text style = {{fontSize:18}}>+</Text>
+
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1_2}
+                                 onChangeText = {onChangeInput1_2}
+                                 maxLength = {5}/>
+                                <Text style = {{fontSize:18}}>*</Text>
+
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1_3}
+                                 onChangeText = {onChangeInput1_3}
+                                 maxLength = {5}/>
+                                <Text style = {{fontSize:18}}>{'<='}</Text>
+
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1_4}
+                                 onChangeText = {onChangeInput1_4}
+                                 maxLength = {5}/>
+                            </View>
                         </View >
 
                         <View style = {styles.checkButton}>
@@ -113,11 +151,22 @@ const Strate7_1 = (props) => {
                                         Now can you solve for “d” and enter{"\n"}your answer as an inequality?
                                     </Text>
                                 </View>
-                                <TextInput
-                                 style = {styles.textInput}
-                                 placeholder="Answer"
-                                 value = {myTextInput2}
-                                 onChangeText = {onChangeInput2}/>
+                                <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput2_1}
+                                     onChangeText = {onChangeInput2_1}
+                                     maxLength = {6}/>
+                                    <Text style = {{fontSize:18}}>{'<='}</Text>
+
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput2_2}
+                                     onChangeText = {onChangeInput2_2}
+                                     maxLength = {6}/>
+                                </View>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -138,11 +187,15 @@ const Strate7_1 = (props) => {
                                         Now based on that inequality, how many days can Jim rent the car for?
                                     </Text>
                                 </View>
-                                <TextInput
-                                 style = {styles.textInput}
-                                 placeholder="Answer"
-                                 value = {myTextInput3}
-                                 onChangeText = {onChangeInput3}/>
+                                <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput3}
+                                     onChangeText = {onChangeInput3}
+                                     maxLength = {10}/>
+                                    <Text style = {{fontSize:18}}>days</Text>
+                                </View>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -186,8 +239,11 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     textInput: {
-        margin:20,
-        paddingHorizontal:10,
+        marginTop:15,
+        marginBottom:15,
+        marginLeft:5,
+        marginRight:5,
+        paddingHorizontal:5,
         borderRadius:5,
         borderWidth:1,
         borderColor:'black',

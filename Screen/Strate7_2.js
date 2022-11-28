@@ -15,7 +15,6 @@ const Strate7_2 = (props) => {
     }, [])
 
     var count1 = 3;
-    var count2 = 3;
     var count3 = 3;
 
     const [show1, setShow1] = useState(false);              //2번째 화면 상태 값 default는 false로 동작
@@ -29,7 +28,7 @@ const Strate7_2 = (props) => {
     const onChangeInput3 = (event) => { setMyTextInput3(event) }
     
     const correct1 = () => {
-        if (myTextInput1 == 11) {
+        if (myTextInput1 == 25) {
             alert("next");
             setShow1(true) }
         else {
@@ -43,23 +42,10 @@ const Strate7_2 = (props) => {
             } }
     }
 
-    const correct2 = () => {
-        if (myTextInput2 == 11) {
-            alert("next");
-            setShow2(true) }
-        else {
-            if(count2 > 0) {
-                count2 -= 1;
-                alert("miss you have "+(count2)+" chance");
-            }
-            else if(count2 == 0) {
-                alert("miss you have no chance")
-                props.navigation.navigate("Quiz7")
-            } }
-    }
+    const correct2 = () => {setShow2(true)}
 
     const correct3 = () => {
-        if (myTextInput3 == 11) {
+        if (myTextInput3 == 4) {
             dispatch(up7()) //점수 추가 액션 불러오기
             alert("Fantastic! Jim can rent the car for 4 days!");
             props.navigation.navigate("Quiz7") }
@@ -88,11 +74,15 @@ const Strate7_2 = (props) => {
                                     First, how much will he pay in mileage?
                                 </Text>
                             </View>
-                            <TextInput
-                             style = {styles.textInput}
-                             placeholder="Answer"
-                             value = {myTextInput1}
-                             onChangeText = {onChangeInput1}/>
+                            <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                <Text style = {{fontSize:18}}>$</Text>
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1}
+                                 onChangeText = {onChangeInput1}
+                                 maxLength = {6}/>
+                            </View>
                         </View >
 
                         <View style = {styles.checkButton}>
@@ -185,7 +175,10 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     textInput: {
-        margin:20,
+        marginTop:15,
+        marginBottom:15,
+        marginLeft:10,
+        marginRight:10,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,

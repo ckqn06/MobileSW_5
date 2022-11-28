@@ -14,7 +14,6 @@ const Strate6_2 = (props) => {
             return () => backHandler.remove() }
     }, [])
 
-    var count1 = 3;
     var count2 = 3;
     var count3 = 3;
     var count4 = 3;
@@ -32,23 +31,10 @@ const Strate6_2 = (props) => {
     const onChangeInput3 = (event) => { setMyTextInput3(event) }
     const onChangeInput4 = (event) => { setMyTextInput4(event) }
 
-    const correct1 = () => {
-        if (myTextInput1 == 11) {
-            alert("next");
-            setShow1(true) }
-        else {
-            if(count1 > 0) {
-                count1 -= 1;
-                alert("miss you have "+(count1)+" chance");
-            }
-            else if(count1 == 0) {
-                alert("miss you have no chance")
-                props.navigation.navigate("Quiz6")
-            } }
-    }
+    const correct1 = () => {setShow1(true)}
 
     const correct2 = () => {
-        if (myTextInput2 == 11) {
+        if (myTextInput2 == (Number(myTextInput1) + 12)) {
             alert("next");
             setShow2(true) }
         else {
@@ -63,22 +49,17 @@ const Strate6_2 = (props) => {
     }
 
     const correct3 = () => {
-        if (myTextInput3 == 11) {
+        if (myTextInput3 == 104) {
+            dispatch(up6()) //점수 추가 액션 불러오기
+            alert("Nice! The width of the rectangle 20. Let’s try a different method!");
+            props.navigation.navigate("Quiz6") }
+        else {
             alert("next");
             setShow3(true) }
-        else {
-            if(count3 > 0) {
-                count3 -= 1;
-                alert("miss you have "+(count3)+" chance");
-            }
-            else if(count3 == 0) {
-                alert("miss you have no chance")
-                props.navigation.navigate("Quiz6")
-            } }
     }
 
     const correct4 = () => {
-        if (myTextInput4 == 11) {
+        if (myTextInput4 == 20) {
             dispatch(up6()) //점수 추가 액션 불러오기
             alert("Nice! The width of the rectangle 20. Let’s try a different method!");
             props.navigation.navigate("Quiz6") }
