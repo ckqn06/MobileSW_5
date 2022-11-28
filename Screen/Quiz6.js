@@ -1,11 +1,51 @@
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { change6, up6 } from "../Redux/Actions";
 
 const Quiz6 = (props) => {
     const dispatch = useDispatch()
+
+    const ch6_1 = useSelector((state) => state.Change6_1)
+    const ch6_2 = useSelector((state) => state.Change6_2)
+    const ch6_3 = useSelector((state) => state.Change6_3)
+    const [disable1, setdisable1] = useState(false);
+    const [disable2, setdisable2] = useState(false);
+    const [disable3, setdisable3] = useState(false);
+    function button1() {
+        if(ch6_1 == 0) {
+            setdisable1(false)
+        } else if(ch6_1 == 1) {
+            setdisable1(true)
+        }
+    }
+    useEffect(()=>{
+        button1()
+    },[ch6_1])
+
+    function button2() {
+        if(ch6_2 == 0) {
+            setdisable2(false)
+        } else if(ch6_2 == 1) {
+            setdisable2(true)
+        }
+    }
+    useEffect(()=>{
+        button2()
+    },[ch6_2])
+
+    function button3() {
+        if(ch6_3 == 0) {
+            setdisable3(false)
+        } else if(ch6_3 == 1) {
+            setdisable3(true)
+        }
+    }
+    useEffect(()=>{
+        button3()
+    },[ch6_3])
+
     const [show,setShow] = useState(false); //전략 선택 화면 상태 값 default는 false로 동작
     
     const showme = () => { setShow(true); }
@@ -60,18 +100,21 @@ const Quiz6 = (props) => {
                             
                             <View style = {styles.strateButton}>
                                 <Button
+                                disabled = {disable1}
                                  title = "Write an equation to solve it"
                                  onPress = {() => {props.navigation.navigate("Strate6_1")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
+                                disabled = {disable2}
                                  title = "Guess and check"
                                  onPress = {() => {props.navigation.navigate("Strate6_2")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
+                                disabled = {disable3}
                                  title = "Use a diagram to understand the problem"
                                  onPress = {() => {props.navigation.navigate("Strate6_3")}}/>
                             </View>

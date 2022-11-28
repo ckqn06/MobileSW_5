@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet, TextInput,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {useState} from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { up3 } from "../Redux/Actions";
+import { up3, change3_3 } from "../Redux/Actions";
 
 
 const Strate3_3 = (props) => {
@@ -47,6 +47,7 @@ const Strate3_3 = (props) => {
                 alert("miss you have "+(count1)+" chance");
             }
             else if(count1 == 0) {
+                dispatch(change3_3())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz3")
             }
@@ -62,6 +63,7 @@ const Strate3_3 = (props) => {
                 alert("miss you have "+(count2)+" chance");
             }
             else if(count2 == 0) {
+                dispatch(change3_3())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz3")
             }
@@ -69,6 +71,7 @@ const Strate3_3 = (props) => {
     }
     const correct3 = () => {
         if (myTextInput2 == 11) {
+            dispatch(change3_3())          //11-28(2)추가
             dispatch(up3()) //점수 추가 액션 불러오기
             alert("Nice! Jennifer used 10.8 yards of fabric for each curtain. Let’s try a different method!");
             props.navigation.navigate("Quiz3")
@@ -78,6 +81,7 @@ const Strate3_3 = (props) => {
                 alert("miss you have "+(count3)+" chance");
             }
             else if(count3 == 0) {
+                dispatch(change3_3())          //11-28(2)추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz3")
             }
