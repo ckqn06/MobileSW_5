@@ -48,6 +48,10 @@ import Change8_1 from "./Reducers/Change8_1";
 import Change8_2 from "./Reducers/Change8_2";
 import Change8_3 from "./Reducers/Change8_3";
 
+import Correct from "./Reducers/Correct";
+import Wrong from "./Reducers/Wrong";
+import UnQuiz from "./Reducers/UnQuiz";
+
 import { createStore, combineReducers } from "redux" // createStore는 스토어를 만들어주는 함수입니다.
                                                     // 리액트 프로젝트에서는 단 하나의 스토어를 만듭니다.
 
@@ -57,7 +61,7 @@ const rootReducer = combineReducers({
     Change1_2, Change1_3, Change2_1, Change2_2, Change2_3, Change3_1, Change3_2
     , Change3_3, Change4_1, Change4_2, Change4_3, Change5_1, Change5_2, Change5_3
     , Change6_1, Change6_2, Change6_3, Change7_1, Change7_2, Change7_3
-    , Change8_1, Change8_2, Change8_3
+    , Change8_1, Change8_2, Change8_3, Correct, Wrong, UnQuiz
 })
 
 export const store = createStore(rootReducer)

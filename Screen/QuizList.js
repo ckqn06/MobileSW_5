@@ -19,6 +19,9 @@ const QuizList = (props) => {
     const ch6 = useSelector((state) => state.Change6)
     const ch7 = useSelector((state) => state.Change7)
     const ch8 = useSelector((state) => state.Change8)
+    const corr = useSelector((state) => state.Correct)
+    const wron = useSelector((state) => state.Wrong)
+    const unquiz = useSelector((state) => state.UnQuiz)
 
     const Correct = require('../assets/QuizCorrect.png');   //해당 번호 모든 문제 해결한 경우
     const Wrong = require('../assets/QuizWrong.png');       //3개 다 틀린 경우
@@ -327,15 +330,9 @@ const QuizList = (props) => {
             </View>
         </TouchableOpacity>
         <View>
-                <Text>Score1: {score1}</Text>
-                <Text>Score2: {score2}</Text>
-                <Text>Score3: {score3}</Text>
-                <Text>Score4: {score4}</Text>
-                <Text>Score5: {score5}</Text>
-                <Text>Score6: {score6}</Text>
-                <Text>Score7: {score7}</Text>
-                <Text>Score8: {score8}</Text>
-                <Text>Change1: {ch1}</Text>
+                <Text>Correct: {corr}</Text>
+                <Text>Wrong: {wron}</Text>
+                <Text>Quiz: {unquiz}</Text>
         </View>
     </ScrollView>
     );
