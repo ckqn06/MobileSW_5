@@ -1,167 +1,153 @@
-import { View, Text, Button, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+    ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { useState } from 'react'
+import { useSelector, useDispatch } from "react-redux"
+import { change1, up1 } from "../Redux/Actions";
 
 const Quiz1 = (props) => {
+    const dispatch = useDispatch()
+    const [show,setShow] = useState(false); //전략 선택 화면 상태 값 default는 false로 동작
     
-    const {params} = props.route
-    var score1 = params? params.score1:0;
-    var score2 = params? params.score2:0;
-    var score3 = params? params.score3:0;
-    
-    var sumScore = score1 + score2 + score3;
+    const showme = () => { setShow(true); }
+
+    const check=()=>{
+        dispatch(up1()) //점수 값 -1에서 0으로 변경
+        dispatch(change1()) //submit버튼 누르면 해당 Quiz번호 버튼 비활성화 하기 위하여 reducers..change1.js state값 1 증가
+        props.navigation.navigate("QuizList")
+    }
 
     return (
-        <View style = {styles.container}>
-            <View style = {styles.textcon}>
-            <Text style = {styles.text}>"Todd orders pictures from a photographer. Each picture costs $7.50.
-            A one-time shipping fee of $3.25 is added to the cost of the order.
-            The total cost of Todd’s order before tax is $85.75.
-            {"\n"}{"\n"}
-            How many pictures did Todd order?"
-            </Text>
-            </View>
+        <KeyboardAvoidingView
+         behavior={Platform.OS === "ios" ? "padding" : "height"}
+         style={styles.mainView}> 
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>  
+                <ScrollView style ={{width:"100%"}}>
+                    <View style = {styles.mainView}>
+                        <View style = {styles.quizSpace}>
+                            <View style = {{alignItems:'center'}}>
+                                <Text style = {styles.header}>== QUIZ ==</Text>
+                                <Text style = {styles.quizText}>Todd orders pictures from a photographer.{"\n"}
+                                    Each picture costs $7.50.{"\n"}
+                                    A one-time shipping fee of $3.25 is added{"\n"}to the cost of the order.{"\n"}
+                                    The total cost of Todd’s order before tax is $85.75.{"\n"}{"\n"}
+                                    How many pictures did Todd order?
+                                </Text>
+                            </View>
+                        </View>
 
-            <View style = {styles.container1}>
-              <Text style = {styles.tt}>Which strategy do you want to use?</Text>
-                </View>
+                        <View style = {styles.subSpace}>
+                            <View style = {{alignItems:'center'}}>
+                                <Text style = {styles.header}>== Open-ended Question ==</Text>
+                                <Text style = {styles.subText}>What do you think the problem is asking you to do?</Text>
+                            </View>
+                        </View>
 
-                <View style = {styles.container2}>
+                        <TextInput
+                         style = {styles.textInput}
+                         placeholder = "Insert any answer">
+                        </TextInput>
 
-                <TouchableOpacity>
-                    <Text
-                    style = {styles.button}
-                    onPress ={() =>{
-                        props.navigation.navigate("Strate1_1")
-                    }}
-                    >Write an equation to solve the problem</Text>
-                </TouchableOpacity>
+                        <View style = {styles.sendButton}>
+                            <Button
+                             title="send"
+                             color='#8463ff'
+                             onPress = {showme}/>
+                        </View>
+            
+                        {show ? (
+                        <View>
+                            <View style = {{padding:10, alignItems:'center'}}>
+                                <Text style = {styles.subText}>Which strategy do you want to use?</Text>
+                            </View>
+                            
+                            <View style = {styles.strateButton}>
+                                <Button
+                                 title = "Write an equation to solve the problem"
+                                 onPress = {() => {props.navigation.navigate("Strate1_1")}}/>
+                            </View>
 
-                <TouchableOpacity>
-                    <Text
-                    style = {styles.button}
-                    onPress ={() =>{
-                        props.navigation.navigate("Strate1_2")
-                     }}
-                    >Add on shipping fee until i get to $85.75</Text>
-                </TouchableOpacity>   
+                            <View style = {styles.strateButton}>
+                                <Button
+                                 title = "Add on shipping fee until I get to $85.75"
+                                 onPress = {() => {props.navigation.navigate("Strate1_2")}}/>
+                            </View>
 
-                <TouchableOpacity>
-                    <Text
-                    style = {styles.button}
-                    onPress ={() =>{
-                        props.navigation.navigate("Strate1_3")
-                    }}
-                    >Subtract away from $85.75 what did you get? unil i get to 0</Text> 
-                 </TouchableOpacity>
-            </View>
+                            <View style = {styles.strateButton}>
+                                <Button
+                                 title = "Subtract away from $85,75 until I get to O"
+                                 onPress = {() => {props.navigation.navigate("Strate1_3")}}/>
+                            </View>
 
-            <View style = {styles.button}>
-                <Button
-                    title = "submit"
-                    onPress ={() => {
-                        props.navigation.navigate("QuizList",
-                        {
-                            score1:sumScore
-                        })
-                    }}
-                />
-            </View>
-        </View>
+                            <View style = {styles.sendButton}>
+                                <Button
+                                 title="submit"
+                                 color='#8463ff'
+                                 onPress ={check}/>
+                            </View>
+                        </View>
+                        ):null}
+                    </View>
+                </ScrollView>
+            </TouchableWithoutFeedback> 
+        </KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    mainView: {
         flex:1,
-        backgroundColor: '#eefbff',
-        paddingTop: 30,
-        paddingBottom: 30
+        paddingBottom:10,
+        backgroundColor: '#eefbff'
     },
-    // button: {
-    //     marginLeft: 30,
-    //     marginRight: 30,
-    //     marginBottom: 10,
-    //     marginTop: 10
-    // },
-
-    container1: {
+    header: {
+        padding:3,
+        fontSize:17
+    },
+    quizSpace: {
+        padding:5,
+        margin:10,
+        borderRadius:5,
+        borderWidth:2,
+        borderColor:'black',
+        backgroundColor:'#EFEFEF'
+    },
+    quizText: {
+        fontSize:17
+    },
+    subSpace: {
+        padding:5,
         marginLeft:20,
         marginRight:20,
-        marginTop:8,
+        borderRadius:15,
+        borderWidth:2,
+        borderColor:'black',
+        backgroundColor:'#EFEFEF'
+    },
+    subText: {
+        fontSize:20
+    },
+    textInput: {
+        marginTop:10,
         marginBottom:20,
-        backgroundColor: '#d9fffc',
-        height:140,
-        position:'relative',
-        borderTopStartRadius:16,
-        borderTopEndRadius:16,
-        borderColor:'#efefef',
+        marginLeft:20,
+        marginRight:20,
+        paddingHorizontal:10,
+        borderRadius:5,
         borderWidth:1,
-        alignItems:"center",
-        justifyContent:"center",
-        
+        borderColor:'black',
+        backgroundColor:'white'
     },
-
-    container2: {
-        marginLeft:20,
-        marginRight:20,
-        marginTop:8,
-        marginBottom:20,
-        backgroundColor: '#ffffff',
-        top:-32,
-        position:'relative',
-        marginBottom: 24,
-        borderRadius:0,
-        borderBottomStartRadius:16,
-        borderBottomEndRadius:16,
-        borderColor:'#efefef',
-        borderWidth:1,
+    sendButton: {
+        marginLeft:100,
+        marginRight:100,
+        marginBottom:10,
+        marginTop:10
     },
-    
-    tt: {
-        marginLeft:20,
-        marginRight:20,
-        marginTop:16,
-        marginBottom:20,
-        width: 400,
-        position:'relative',
-        color: 'black',
-        fontSize:24,
-        
-    },
-
-    button: {
-        marginLeft:16,
-        marginRight:20,
-        marginTop:8,
-        marginBottom:20,
-        position:'relative',
-        backgroundColor: '#f7f7f7',
-        paddingVertical: 0,
-        paddingHorizontal:12,
-        marginTop: 16,
-        fontSize: 20,
-        borderRadius: 8,
-        borderColor: '#8463ff',
-    },
-
-    textcon: {
-        backgroundColor: '#d9fffc',
-        marginLeft:20,
-        marginRight:20,
-        marginTop:8,
-        marginBottom:20,
-        borderRadius:8,
-        borderColor:'#efefef',
-        borderWidth:1,
-    },
-    text: {
-        marginLeft:12,
-        marginRight:12,
-        marginTop:12,
-        marginBottom:12,
-        fontSize: 20,
-        color: 'black',
-    },
-    
+    strateButton: {
+        alignItems:'center',
+        marginTop:10,
+        marginBottom:10,
+    }
 }); 
 
 export default Quiz1

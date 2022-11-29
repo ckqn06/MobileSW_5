@@ -1,164 +1,151 @@
-import { View, Text, Button, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+    ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { useState } from 'react'
+import { useSelector, useDispatch } from "react-redux"
+import { change2, up2 } from "../Redux/Actions";
 
 const Quiz2 = (props) => {
+    const dispatch = useDispatch()
+    const [show,setShow] = useState(false); //전략 선택 화면 상태 값 default는 false로 동작
     
-    const {params} = props.route
-    var score1 = params? params.score1:0;
-    var score2 = params? params.score2:0;
-    var score3 = params? params.score3:0;
-    
-    var sumScore = score1 + score2 + score3;
+    const showme = () => { setShow(true); }
+
+    const check=()=>{
+        dispatch(up2()) //점수 값 -1에서 0으로 변경
+        dispatch(change2()) //submit버튼 누르면 해당 Quiz번호 버튼 비활성화 하기 위하여 reducers..change1.js state값 1 증가
+        props.navigation.navigate("QuizList")
+    }
 
     return (
-        <View style = {styles.container}>
-            <View style = {styles.textcon}>
-            <Text style = {styles.text}>Jen wants to run a total of 22 miles in five days. 
-            The table shows her log for the miles she ran on Monday, Tuesday, Wednesday, and Thursday. {"\n"}{"\n"}
-            How many miles must Jen run on Friday to reach her goal?
-            </Text>
-            </View>
+        <KeyboardAvoidingView
+         behavior={Platform.OS === "ios" ? "padding" : "height"}
+         style={styles.mainView}> 
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>  
+                <ScrollView style ={{width:"100%"}}>
+                    <View style = {styles.mainView}>
+                        <View style = {styles.quizSpace}>
+                            <View style = {{alignItems:'center'}}>
+                                <Text style = {styles.header}>== QUIZ ==</Text>
+                                <Text style = {styles.quizText}>Jen wants to run a total of 22 miles in five days. 
+                                    The table shows her log for the miles she ran on Monday, Tuesday, Wednesday, and Thursday. {"\n"}{"\n"}
+                                    How many miles must Jen run on Friday to reach her goal?
+                                </Text>
+                            </View>
+                        </View>
 
-            <View style = {styles.container1}>
-              <Text style = {styles.tt}>Which strategy do you want to use?</Text>
-                </View>
+                        <View style = {styles.subSpace}>
+                            <View style = {{alignItems:'center'}}>
+                                <Text style = {styles.header}>== Open-ended Question ==</Text>
+                                <Text style = {styles.subText}>What do you think the problem is asking you to do?</Text>
+                            </View>
+                        </View>
 
-                <View style = {styles.container2}>
+                        <TextInput
+                         style = {styles.textInput}
+                         placeholder = "Insert any answer">
+                        </TextInput>
 
-                <TouchableOpacity>
-                    <Text
-                    style = {styles.button}
-                    onPress ={() =>{
-                        props.navigation.navigate("Strate2_1")
-                    }}
-                    >Add up her miles and then find out how many more she needs to get to 22 miles</Text>
-                </TouchableOpacity>
+                        <View style = {styles.sendButton}>
+                            <Button
+                             title="send"
+                             color='#8463ff'
+                             onPress = {showme}/>
+                        </View>
+            
+                        {show ? (
+                        <View>
+                            <View style = {{padding:10, alignItems:'center'}}>
+                                <Text style = {styles.subText}>Which strategy do you want to use?</Text>
+                            </View>
+                            
+                            <View style = {styles.strateButton}>
+                                <Button
+                                 title = {"Add up her miles and then find out" + "\n" + "how many more she needs to get to 22 miles"}
+                                 onPress = {() => {props.navigation.navigate("Strate2_1")}}/>
+                            </View>
 
-                <TouchableOpacity>
-                    <Text
-                    style = {styles.button}
-                    onPress ={() =>{
-                        props.navigation.navigate("Strate2_2")
-                     }}
-                    >Write an equation to solve it</Text>
-                </TouchableOpacity>   
-                <TouchableOpacity>
-                    <Text
-                    style = {styles.button}
-                    onPress ={() =>{
-                        props.navigation.navigate("Strate2_3")
-                    }}
-                    >Subtract her miles from 22 and see how many are left</Text> 
-                 </TouchableOpacity>
-            </View>
+                            <View style = {styles.strateButton}>
+                                <Button
+                                 title = "Write an equation to solve it"
+                                 onPress = {() => {props.navigation.navigate("Strate2_2")}}/>
+                            </View>
 
-            <View style = {styles.button}>
-                <Button
-                    title = "submit"
-                    onPress ={() => {
-                        props.navigation.navigate("QuizList",
-                        {
-                            score1:sumScore
-                        })
-                    }}
-                />
-            </View>
-        </View>
+                            <View style = {styles.strateButton}>
+                                <Button
+                                 title = {"Subtract her miles from 22" + "\n" + "and see how many are left"}
+                                 onPress = {() => {props.navigation.navigate("Strate2_3")}}/>
+                            </View>
+
+                            <View style = {styles.sendButton}>
+                                <Button
+                                 title="submit"
+                                 color='#8463ff'
+                                 onPress ={check}/>
+                            </View>
+                        </View>
+                        ):null}
+                    </View>
+                </ScrollView>
+            </TouchableWithoutFeedback> 
+        </KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
+    mainView: {
         flex:1,
-        backgroundColor: '#eefbff',
-        paddingTop: 30,
-        paddingBottom: 30
+        paddingBottom:10,
+        backgroundColor: '#eefbff'
     },
-    // button: {
-    //     marginLeft: 30,
-    //     marginRight: 30,
-    //     marginBottom: 10,
-    //     marginTop: 10
-    // },
-
-    container1: {
+    header: {
+        padding:3,
+        fontSize:17
+    },
+    quizSpace: {
+        padding:5,
+        margin:10,
+        borderRadius:5,
+        borderWidth:2,
+        borderColor:'black',
+        backgroundColor:'#EFEFEF'
+    },
+    quizText: {
+        fontSize:17
+    },
+    subSpace: {
+        padding:5,
         marginLeft:20,
         marginRight:20,
-        marginTop:8,
+        borderRadius:15,
+        borderWidth:2,
+        borderColor:'black',
+        backgroundColor:'#EFEFEF'
+    },
+    subText: {
+        fontSize:20
+    },
+    textInput: {
+        marginTop:10,
         marginBottom:20,
-        backgroundColor: '#d9fffc',
-        height:140,
-        position:'relative',
-        borderTopStartRadius:16,
-        borderTopEndRadius:16,
-        borderColor:'#efefef',
+        marginLeft:20,
+        marginRight:20,
+        paddingHorizontal:10,
+        borderRadius:5,
         borderWidth:1,
-        alignItems:"center",
-        justifyContent:"center",
-        
+        borderColor:'black',
+        backgroundColor:'white'
     },
-
-    container2: {
-        marginLeft:20,
-        marginRight:20,
-        marginTop:8,
-        marginBottom:20,
-        backgroundColor: '#ffffff',
-        top:-32,
-        position:'relative',
-        marginBottom: 24,
-        borderRadius:0,
-        borderBottomStartRadius:16,
-        borderBottomEndRadius:16,
-        borderColor:'#efefef',
-        borderWidth:1,
+    sendButton: {
+        marginLeft:100,
+        marginRight:100,
+        marginBottom:10,
+        marginTop:10
     },
-    
-    tt: {
-        marginLeft:20,
-        marginRight:20,
-        marginTop:16,
-        marginBottom:20,
-        width: 400,
-        position:'relative',
-        color: 'black',
-        fontSize:24,
-        
-    },
-
-    button: {
-        marginLeft:16,
-        marginRight:20,
-        marginTop:8,
-        marginBottom:20,
-        position:'relative',
-        backgroundColor: '#f7f7f7',
-        paddingVertical: 0,
-        paddingHorizontal:12,
-        marginTop: 16,
-        fontSize: 20,
-        borderRadius: 8,
-        borderColor: '#8463ff',
-    },
-
-    textcon: {
-        backgroundColor: '#d9fffc',
-        marginLeft:20,
-        marginRight:20,
-        marginTop:8,
-        marginBottom:20,
-        borderRadius:8,
-        borderColor:'#efefef',
-        borderWidth:1,
-    },
-    text: {
-        marginLeft:12,
-        marginRight:12,
-        marginTop:12,
-        marginBottom:12,
-        fontSize: 20,
-        color: 'black',
-    },
-    
+    strateButton: {
+        alignItems:'center',
+        marginTop:10,
+        marginBottom:10,
+    }
 }); 
 
 export default Quiz2
