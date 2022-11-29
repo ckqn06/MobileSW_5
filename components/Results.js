@@ -39,12 +39,11 @@ const ResultScreen = () => {
 
        await onSnapshot(q, (snapshot) => {
             snapshot.docs.forEach((doc) => {
-                console.log(doc.data())
                 user.push({
                     ...doc.data(),
                     key: doc.id
                 })
-                console.log(user)
+
                 setStudentRecord(user)
             })
         })
@@ -75,10 +74,11 @@ const ResultScreen = () => {
             var average = (sum / studentRecord.length).toFixed(2)
             
             console.log("The average score is: ", average)
-            if(average === NaN){
-                setScoreAverage(0)
-            }else
-                setScoreAverage(average)
+            // if(average === NaN){
+            //     setScoreAverage(0)
+            // }else
+            //     setScoreAverage(average)
+            setScoreAverage(average)
         }
 
     }
