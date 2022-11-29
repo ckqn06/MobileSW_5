@@ -1,7 +1,7 @@
-import { LogBox, Button } from 'react-native'
+import { LogBox, Button, Text, View, BackHandler, Alert } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { store } from './Redux/store';
 import { Provider } from 'react-redux';
 import { LogOut } from './Auth/AuthFunctions';
@@ -57,6 +57,33 @@ const Stack = createStackNavigator();
 
 export default function App() {
   LogBox.ignoreAllLogs();
+
+  //앱 종료 기능
+  //함수 호출 할 떄 사용자가 LogOut과 앱 종료
+  useEffect(() => {
+    const backAction = () =>{
+      Alert.alert("Hold on!", "Are you sure you want to exit?",
+      [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+          style: 'cancel'
+        },
+        { text: "YES", onPress: () => {
+          LogOut()
+          BackHandler.exitApp()
+        }}
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+    return () => backHandler.remove()
+  }, [])
+
   
   return (
     <Provider store={store}>
@@ -65,11 +92,7 @@ export default function App() {
           <Stack.Screen name= "Login" component={Login}/>
           <Stack.Screen name = "Sign_Up" component={Sign_Up}/>
           <Stack.Screen name = "Welcome" component={Welcome}/>
-          <Stack.Screen name = "Main" component={Main}
-           options={{ headerRight: () => (
-              <Button
-                title='Log Out'
-                onPress={LogOut}/> )}}/>
+          <Stack.Screen name = "Main" component={Main}/>
           <Stack.Screen name = "QuizList" component={QuizList}/>
 
           <Stack.Screen name = "Quiz1" component={Quiz1}/>
