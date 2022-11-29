@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet, TextInput,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
 import { useCallback, useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { up1, change1_1 } from "../Redux/Actions";
+import { up1, change1_1, cor, wrong, unquiz } from "../Redux/Actions";
 
 const Strate1_1 = (props) => {
     const dispatch = useDispatch() // 액션 불러오기 면어
@@ -38,6 +38,8 @@ const Strate1_1 = (props) => {
             }
             else if(count1 == 0) {
                 dispatch(change1_1());      //11-28(2)추가
+                dispatch(wrong());          //11-29추가
+                dispatch(unquiz());         //11-29추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz1")
             }
@@ -47,6 +49,8 @@ const Strate1_1 = (props) => {
         if (myTextInput2 == 11) {
             dispatch(change1_1());      //11-28(2)추가
             dispatch(up1()) //점수 추가 액션 불러오기
+            dispatch(cor());          //11-29추가
+            dispatch(unquiz());         //11-29추가
             alert("Ok! If you’re right, then Todd bought 11 pictures.");
             props.navigation.navigate("Quiz1")
         } else {
@@ -56,6 +60,8 @@ const Strate1_1 = (props) => {
             }
             else if(count2 == 0) {
                 dispatch(change1_1());      //11-28(2)추가
+                dispatch(wrong());          //11-29추가
+                dispatch(unquiz());         //11-29추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz1")
             }

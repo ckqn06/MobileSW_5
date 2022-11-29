@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet, TextInput,
     Platform, Keyboard, TouchableWithoutFeedback} from "react-native";
 import {useState} from 'react'
 import { useSelector, useDispatch } from "react-redux"
-import { up7, change7_3 } from "../Redux/Actions";
+import { up7, change7_3, cor, wrong, unquiz } from "../Redux/Actions";
 
 const Strate7_3 = (props) => {
     const dispatch = useDispatch() // 액션 불러오기 면어
@@ -38,6 +38,8 @@ const Strate7_3 = (props) => {
             }
             else if(count1 == 0) {
                 dispatch(change7_3())          //11-28(2)추가
+                dispatch(wrong());          //11-29추가
+                dispatch(unquiz());         //11-29추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz7")
             }
@@ -47,6 +49,8 @@ const Strate7_3 = (props) => {
         if (myTextInput2 == 11) {
             dispatch(change7_3())          //11-28(2)추가
             dispatch(up7()) //점수 추가 액션 불러오기
+            dispatch(cor());          //11-29추가
+            dispatch(unquiz());         //11-29추가
             alert("Fantastic! Jim can rent the car for 4 days!");
             props.navigation.navigate("Quiz7")
         } else {
@@ -56,6 +60,8 @@ const Strate7_3 = (props) => {
             }
             else if(count2 == 0) {
                 dispatch(change7_3())          //11-28(2)추가
+                dispatch(wrong());          //11-29추가
+                dispatch(unquiz());         //11-29추가
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz7")
             }

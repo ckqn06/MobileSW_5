@@ -212,6 +212,17 @@ export const change8_3 = () => {
         type: 'change8_3'
     }
 };
+export const cor = () => {
+    return {
+        type: 'cor'
+    }
+};
+
+export const wrong = () => {
+    return {
+        type: 'wrong'
+    }
+};
 
 //decrement 함수 불러오면 점수 감소
 
@@ -219,4 +230,10 @@ export const decrement = () => {
     return {
         type: 'DECREMENT'
     }
-}
+};
+
+export const  unquiz = () => {
+    return {
+        type: 'unquiz'
+    }
+};
