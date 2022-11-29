@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, FlatList, ActivityIndicator} from "react-native";
+import { View, Text, StyleSheet, Image, FlatList, ActivityIndicator, ScrollView} from "react-native";
 import { db } from "../auth/firebaseConfig";
 import { collection, doc, getDocs, onSnapshot, orderBy, query, waitForPendingWrites } from "firebase/firestore";
 import { useState, useEffect } from "react";
@@ -12,78 +12,80 @@ const wait = (timeout) => {
 
 const ResultScreen = () => {
 
+    // 파이어베이스 모두 정보 가져오며 저장하기
     const [studentRecord, setStudentRecord] = useState([]);
 
+    // 학생들 평균 점수 저장하기
     const [scoreAverage, setScoreAverage] = useState(0)
 
     const [isLoading, setIsLoading] = useState(false)
 
+    //학생들 모두 정보 가져오기 함수
     const fetchData = async () => {
 
         const q = query(collection(db, "student"), orderBy("score", "desc") ,) // q for collection reference
 
-       const querySnapshot = await getDocs(q)
+      // const querySnapshot = await getDocs(q)
 
         let user = []
 
-        querySnapshot.forEach((doc) => {
-            console.log(doc.data())
-            console.log(doc.id, "==>", { ...doc.data(), })
-            user.push({
-                ...doc.data(),
-                id: doc.id
+        // querySnapshot.forEach((doc) => {
+        //     user.push({
+        //         ...doc.data(),
+        //         id: doc.id
+        //     })
+        //     setStudentRecord(user)
+        // })
+
+       await onSnapshot(q, (snapshot) => {
+            snapshot.docs.forEach((doc) => {
+                console.log(doc.data())
+                user.push({
+                    ...doc.data(),
+                    key: doc.id
+                })
+                console.log(user)
+                setStudentRecord(user)
             })
-            console.log("user =>", user)
-
-            setStudentRecord(user)
         })
-
-    //    await onSnapshot(q, (snapshot) => {
-    //         snapshot.docs.forEach((doc) => {
-    //             console.log(doc.data())
-    //             user.push({
-    //                 ...doc.data(),
-    //                 key: doc.id
-    //             })
-    //             console.log(user)
-
-    //             setStudentRecord(user)
-    //         })
-    //     })
     }
 
+    // 화면 처룸에 제시할때 useEffect 실행
     useEffect(() => {
         fetchData();
     }, [])
-
-
 
     const scoreSum = async () => {
 
         var sum = 0;
 
-        console.log(studentRecord)
+        let studentScore = []
 
         for (let i = 0; i < studentRecord.length; i++){
 
-            console.log(studentRecord[i].score)
+           // console.log(studentRecord[i].score)
 
             sum += studentRecord[i].score
+
+            studentScore.push(studentRecord[i].score)
         }
 
-        console.log("sum of score is: ", sum)
-
-         var average = (sum / studentRecord.length).toFixed(2)
-        
-        console.log("The average score is: ", average)
-
-       setScoreAverage(average)
+       console.log("sum of score is: ", sum)
+            if(studentRecord.length>0){
+            var average = (sum / studentRecord.length).toFixed(2)
+            
+            console.log("The average score is: ", average)
+            if(average === NaN){
+                setScoreAverage(0)
+            }else
+                setScoreAverage(average)
+        }
 
     }
 
     useEffect(() => {
         scoreSum()
-    }, [])
+    }, [studentRecord])
     
     const onRefresh = React.useCallback(() => {
         setIsLoading(true);
@@ -96,25 +98,21 @@ const ResultScreen = () => {
     })
 
 
-    //const renderItem = ({item}) => <Item name={item.name} email={item.email} />
-
     return (
-        <View style={styles.container}>
+         <View style={styles.container}>
             
             <View style={styles.upperView}>
-                
-            <Text style={{ color: 'grey', fontSize: 28, color: '#2C3333' }} onPress={scoreSum}>Quiz Results</Text>
-                
-                <View style={{backgroundColor: '#2C3333', marginTop: 25, padding: 16, borderWidth: 1, borderRadius: 4}}>
+                <Text style={{ color: 'grey', fontSize: 28, color: '#2C3333' }}>Quiz Results</Text>
+                <View style={{backgroundColor: '#2C3333', marginTop: 20, padding: 16, borderWidth: 1, borderRadius: 10}}>
                 <Text style={{fontSize: 22, color: 'white'}}>Score Average: {scoreAverage}</Text>
                 </View>
-                
             </View>
             
                 <View style={styles.lowerView}>
                     <View style={{
                         flexDirection: 'row',
-                        flex: 1, padding: 12, marginHorizontal: 5, borderRadius: 8
+                         padding: 10, marginHorizontal: 5, borderRadius: 8,
+                        
                     }}>
                         <View style={{alignItems: 'flex-start', flex: 1}}>
                         <Text style={{fontSize: 16, color: "#FCFDF2"}}>Name</Text>
@@ -124,6 +122,8 @@ const ResultScreen = () => {
                         <Text style={{fontSize: 16, color: "#FCFDF2"}}>Score</Text>
                         </View>
                     </View>
+
+                    {/* 각 학생 이름과 점수 표시*/}
                     <FlatList
                         data={studentRecord}
                         renderItem={({ item, index }) => (
@@ -139,11 +139,11 @@ const ResultScreen = () => {
                                 </View>
                             </View> : <View> <Text> No Data...</Text></View>
                         )}
-                       // keyExtractor={(item) => item.id}
                         refreshing={isLoading}
                         onRefresh={onRefresh}
                         />
                 </View>
+
             </View>
     )
 }
@@ -160,7 +160,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 10,
         paddingVertical: 12,
-        marginBottom: 10,
         padding: 16,
     },
     lowerView: {
@@ -169,6 +168,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         borderRadius: 8,
         padding: 12,
+        marginBottom: 10
     },
     Item: {
         flex: 1,
