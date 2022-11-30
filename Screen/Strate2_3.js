@@ -1,11 +1,11 @@
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { up2 } from "../Redux/Actions";
 
 const Strate2_3 = (props) => {
-    const dispatch = useDispatch() // 액션 불러오기 면어
+    const dispatch = useDispatch()
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
 
     useEffect(() => {
@@ -14,10 +14,10 @@ const Strate2_3 = (props) => {
             return () => backHandler.remove() }
     }, [])
 
-    var count = 3;
+    const [count, setCount] = useState(2);
+    const decrease = () => { setCount(count-1); } 
 
     const [myTextInput, setMyTextInput] = useState("")
-
     const onChangeInput = (event) => { setMyTextInput(event) }
 
     const correct = () => {
@@ -27,7 +27,7 @@ const Strate2_3 = (props) => {
             props.navigation.navigate("Quiz2") } 
         else {
             if(count > 0) {
-                count -= 1;
+                decrease();
                 alert("miss you have "+(count)+" chance");
             }
             else if(count == 0) {

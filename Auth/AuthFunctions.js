@@ -18,7 +18,15 @@ export const SignUp = async (username, email, password) => {
                  Email: email,
                  score: 0,
                  answeredQuestions: null,
-                 wrongQuestions: null}
+                 wrongQuestions: null,
+                 score1: 0,
+                 score2: 0,
+                 score3: 0,
+                 score4: 0,
+                 score5: 0,
+                 score6: 0,
+                 score7: 0,
+                 score8: 0 }
 
         setDoc(mydoc, userData)
         .then(() => alert("data entered succesfully!"))

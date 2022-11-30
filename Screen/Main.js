@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, BackHandler } from "react-native";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux"
 import { auth } from "../Auth/firebaseConfig";
 import { db } from "../Auth/firebaseConfig";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
@@ -7,22 +8,29 @@ import { doc, getDoc, onSnapshot } from "firebase/firestore";
 const Main = (props) => {
     const [studentData, setStudentData] = useState({});
 
+    const corr = useSelector((state) => state.Correct)
+    const wron = useSelector((state) => state.Wrong)
+    const unquiz = useSelector((state) => state.UnQuiz)
+
     useEffect(() => {
         if (Platform.OS === 'android') {
             const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
             return () => backHandler.remove() }
     }, [])
 
+    //onSnapshot 기능 사용해서 실사간으로 Quiz 점수 정보 갱신하기 
+    //useEffect hook은 화면 실행할 떄 실행하기  
+    const id = auth.currentUser.uid 
     useEffect(() => {
         const fetchData = async () => {
-            const docRef = await doc(db, "student", auth.currentUser.uid)
+            const docRef = await doc(db, "student", id)
             onSnapshot(docRef, (snapshot) => {
                 console.log(snapshot.data())
                 setStudentData(snapshot.data())
             })
         };
         fetchData();
-    }, [])
+    }, [id, setStudentData])
 
     //onSnapshot 기능 사용해서 실사간으로 Quiz 점수 정보 갱신하기 
     //useEffect hook은 화면 실행할 떄 실행하기    
@@ -70,10 +78,9 @@ const Main = (props) => {
             <View style = {styles.subView_2}>
                 <View>
                     <Text style = {{marginBottom:10, fontSize:25, fontWeight:'bold'}}>ANALYSIS</Text>
-                    <Text style = {{marginBottom:10, fontSize:25, color:'green'}}>Correct Answer: 0</Text>
-                    <Text style = {{marginBottom:10, fontSize:25, color:'red'}}>Wrong Answer: 0</Text>
-                    <Text style = {{marginBottom:10, fontSize:25, color:'blue'}}
-                        onPress={() => props.navigation.navigate("teacher")}>Unfinished Answer: 0</Text>
+                    <Text style = {{marginBottom:10, fontSize:25, color:'green'}}>Correct Answer: {corr}</Text>
+                    <Text style = {{marginBottom:10, fontSize:25, color:'red'}}>Wrong Answer: {wron}</Text>
+                    <Text style = {{marginBottom:10, fontSize:25, color:'blue'}}>Unfinished Answer: {unquiz}</Text>
                 </View>
             </View>
         </View>

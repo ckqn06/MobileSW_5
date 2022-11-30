@@ -6,13 +6,38 @@ import { change3, up3 } from "../Redux/Actions";
 
 const Quiz3 = (props) => {
     const dispatch = useDispatch()
-    const [show,setShow] = useState(false); //전략 선택 화면 상태 값 default는 false로 동작
-    
+
+    const ch3_1 = useSelector((state) => state.Change3_1)
+    const ch3_2 = useSelector((state) => state.Change3_2)
+    const ch3_3 = useSelector((state) => state.Change3_3)
+    const [disable1, setdisable1] = useState(false);
+    const [disable2, setdisable2] = useState(false);
+    const [disable3, setdisable3] = useState(false);
+
+    function button1() {
+        if(ch1_1 == 0) { setdisable1(false) }
+        else if(ch1_1 == 1) { setdisable1(true) }
+    }
+    useEffect(()=>{ button1() },[ch1_1])
+
+    function button2() {
+        if(ch1_2 == 0) { setdisable2(false) }
+        else if(ch1_2 == 1) { setdisable2(true) }
+    }
+    useEffect(()=>{ button2() },[ch1_2])
+
+    function button3() {
+        if(ch1_3 == 0) { setdisable3(false) }
+        else if(ch1_3 == 1) { setdisable3(true) }
+    }
+    useEffect(()=>{ button3() },[ch1_3])
+
+    const [show,setShow] = useState(false);
     const showme = () => { setShow(true); }
 
     const check=()=>{
-        dispatch(up3()) //점수 값 -1에서 0으로 변경
-        dispatch(change3()) //submit버튼 누르면 해당 Quiz번호 버튼 비활성화 하기 위하여 reducers..change1.js state값 1 증가
+        dispatch(up3())
+        dispatch(change3())
         props.navigation.navigate("QuizList")
     }
 

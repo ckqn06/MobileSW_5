@@ -1,11 +1,11 @@
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { up3 } from "../Redux/Actions";
 
 const Strate3_3 = (props) => {
-    const dispatch = useDispatch() // 액션 불러오기 면어
+    const dispatch = useDispatch()
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
 
     useEffect(() => {
@@ -14,15 +14,18 @@ const Strate3_3 = (props) => {
             return () => backHandler.remove() }
     }, [])
 
-    var count1 = 3;
-    var count2 = 3;
-    var count3 = 3;
+    const [count1, setCount1] = useState(2) 
+    const [count2, setCount2] = useState(2) 
+    const [count3, setCount3] = useState(2) 
+    const decrease1 = () => { setCount1(count1-1); }                                
+    const decrease2 = () => { setCount2(count2-1); } 
+    const decrease3 = () => { setCount3(count3-1); } 
 
-    const [show1, setShow1] = useState(false);              //2번째 화면 상태 값 default는 false로 동작
-    const [show2, setShow2] = useState(false);              //3번째 화면 상태 값 default는 false로 동작
-    const [myTextInput1, setMyTextInput1] = useState("")    //1번 답 저장 하는 공간
-    const [myTextInput2, setMyTextInput2] = useState("")    //2번 답 저장 하는 공간
-    const [myTextInput3, setMyTextInput3] = useState("")    //3번 답 저장 하는 공간
+    const [show1, setShow1] = useState(false);
+    const [show2, setShow2] = useState(false);
+    const [myTextInput1, setMyTextInput1] = useState("")
+    const [myTextInput2, setMyTextInput2] = useState("")
+    const [myTextInput3, setMyTextInput3] = useState("")
 
     const onChangeInput1 = (event) => { setMyTextInput1(event) }
     const onChangeInput2 = (event) => { setMyTextInput2(event) }
@@ -34,7 +37,7 @@ const Strate3_3 = (props) => {
             setShow1(true) }
         else {
             if(count1 > 0) {
-                count1 -= 1;
+                decrease1();
                 alert("miss you have "+(count1)+" chance");
             }
             else if(count1 == 0) {
@@ -49,7 +52,7 @@ const Strate3_3 = (props) => {
             setShow2(true) }
         else {
             if(count2 > 0) {
-                count2 -= 1;
+                decrease2();
                 alert("miss you have "+(count2)+" chance");
             }
             else if(count2 == 0) {
@@ -65,7 +68,7 @@ const Strate3_3 = (props) => {
             props.navigation.navigate("Quiz3") }
         else {
             if(count3 > 0) {
-                count3 -= 1;
+                decrease3();
                 alert("miss you have "+(count3)+" chance");
             }
             else if(count3 == 0) {

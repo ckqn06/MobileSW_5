@@ -1,6 +1,7 @@
-import { LogBox, Button } from 'react-native'
+import { LogBox, BackHandler, Alert } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useEffect } from 'react';
 
 import { store } from './Redux/store';
 import { Provider } from 'react-redux'
@@ -53,26 +54,37 @@ import Strate8_1 from './Screen/Strate8_1'
 import Strate8_2 from './Screen/Strate8_2'
 import Strate8_3 from './Screen/Strate8_3'
 
-import TeacherScreen from './TeacherApp/renderScreen';
-import IntroScreen from './TeacherApp/startScreen';
-
 const Stack = createStackNavigator();
 
 export default function App() {
   LogBox.ignoreAllLogs();
+
+  useEffect(() => {
+    const backAction = () =>{ Alert.alert("Hold on!", "Are you sure you want to exit?",
+      [{ 
+        text: 'Cancel',
+        onPress: () => null,
+        style: 'cancel' },
+      { text: "YES",
+        onPress: () => {
+          LogOut()
+          BackHandler.exitApp()
+        } }]);
+      return true; };
+
+    const backHandler = BackHandler.addEventListener( "hardwareBackPress", backAction );
+    
+    return () => backHandler.remove() 
+  }, [])
   
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='intro'>
+        <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen name = "Login" component={Login} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
           <Stack.Screen name = "Sign_Up" component={Sign_Up} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
           <Stack.Screen name = "Welcome" component={Welcome} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Main" component={Main} options={{headerTitleAlign:'center',headerLeft:()=>null,
-            headerRight:()=><Button
-             title='Log Out'
-             color='#8463ff'
-             onPress={LogOut}/>}}/>
+          <Stack.Screen name = "Main" component={Main} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
           <Stack.Screen name = "QuizList" component={QuizList} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
 
           <Stack.Screen name = "Quiz1" component={Quiz1} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
@@ -115,9 +127,6 @@ export default function App() {
           <Stack.Screen name = "Strate8_1" component={Strate8_1} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
           <Stack.Screen name = "Strate8_2" component={Strate8_2} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
           <Stack.Screen name = "Strate8_3" component={Strate8_3} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-
-          <Stack.Screen name = 'teacher' component={TeacherScreen} />
-          <Stack.Screen name = 'intro' component={IntroScreen}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

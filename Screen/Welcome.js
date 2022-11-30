@@ -14,19 +14,17 @@ const Welcome = (props) => {
     }, [])
 
     useEffect(() => {
-        if (auth.currentUser) {
-            let uid = auth.currentUser.uid
-            const fetchData = async () => {
-                const docRef = doc(db, "student", uid)
-                await getDoc(docRef)
-                .then((snapshot) => {
-                    console.log(snapshot.data());
-                    setStudentData(snapshot.data())
-                })
-                .catch(error => console.log(error.message))
-            };
-            fetchData(); }
-    }, [auth])
+        const fetchData = async () => {
+            const docRef = doc(db, "student", auth.currentUser.uid)
+            await getDoc(docRef)
+            .then((snapshot) => {
+                console.log(snapshot.data());
+                setStudentData(snapshot.data())
+            })
+            .catch(error => console.log(error.message))
+        };
+        fetchData(); 
+}, [])
 
     return (
         <TouchableOpacity onPress = {() => { props.navigation.navigate("Main") }}>

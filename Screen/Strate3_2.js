@@ -1,7 +1,7 @@
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { up3 } from "../Redux/Actions";
 
 const Strate3_2 = (props) => {
@@ -14,14 +14,16 @@ const Strate3_2 = (props) => {
             return () => backHandler.remove() }
     }, [])
 
-    var count1 = 3;
-    var count2 = 3;
+    const [count1, setCount1] = useState(2) 
+    const [count2, setCount2] = useState(2) 
+    const decrease1 = () => { setCount1(count1-1); }                                
+    const decrease2 = () => { setCount2(count2-1); } 
 
-    const [show, setShow] = useState(false); //2번째 화면 상태 값 default는 false로 동작
-    const [myTextInput1_1, setMyTextInput1_1] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput1_2, setMyTextInput1_2] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput1_3, setMyTextInput1_3] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput2, setMyTextInput2] = useState("") //2번 답 저장 하는 공간
+    const [show, setShow] = useState(false); 
+    const [myTextInput1_1, setMyTextInput1_1] = useState("") 
+    const [myTextInput1_2, setMyTextInput1_2] = useState("") 
+    const [myTextInput1_3, setMyTextInput1_3] = useState("") 
+    const [myTextInput2, setMyTextInput2] = useState("") 
 
     const onChangeInput1_1 = (event) => { setMyTextInput1_1(event) }
     const onChangeInput1_2 = (event) => { setMyTextInput1_2(event) }
@@ -36,7 +38,7 @@ const Strate3_2 = (props) => {
             setShow(true) }
         else {
             if(count1 > 0) {
-                count1 -= 1;
+                decrease1();
                 alert("miss you have "+(count1)+" chance");
             }
             else if(count1 == 0) {
@@ -52,7 +54,7 @@ const Strate3_2 = (props) => {
             props.navigation.navigate("Quiz3") }
         else {
             if(count2 > 0) {
-                count2 -=1;
+                decrease2();
                 alert("miss you have "+(count2)+" chance");
             }
             else if(count2 == 0) {

@@ -1,8 +1,8 @@
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler, 
     Modal, Pressable, ScrollView, View, Image, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux"
-import { up1 } from "../Redux/Actions";
+import { useDispatch } from "react-redux"
+import { up1, change1_1 } from "../Redux/Actions";
 
 const Strate1_1 = (props) => {
     const dispatch = useDispatch() 
@@ -14,8 +14,8 @@ const Strate1_1 = (props) => {
             return () => backHandler.remove() }
     }, [])
 
-    const [count1, setCount1] = useState(3) 
-    const [count2, setCount2] = useState(3) 
+    const [count1, setCount1] = useState(2) 
+    const [count2, setCount2] = useState(2) 
     const decrease1 = () => { setCount1(count1-1); }                                
     const decrease2 = () => { setCount2(count2-1); }     
 
@@ -42,6 +42,7 @@ const Strate1_1 = (props) => {
                 alert("miss you have "+(count1)+" chance");
             }
             else if(count1 == 0) {
+                dispatch(change1_1());
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz1")
             } }
@@ -50,6 +51,7 @@ const Strate1_1 = (props) => {
     const correct2 = () => {
         if (myTextInput2 == 11) {
             dispatch(up1()) //점수 추가 액션 불러오기
+            dispatch(change1_1());
             alert("Ok! If you’re right, then Todd bought 11 pictures.");
             props.navigation.navigate("Quiz1") }
         else {
@@ -58,6 +60,7 @@ const Strate1_1 = (props) => {
                 alert("miss you have "+(count2)+" chance");
             }
             else if(count2 == 0) {
+                dispatch(change1_1());
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz1")
             } }
