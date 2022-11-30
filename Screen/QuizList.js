@@ -152,7 +152,15 @@ const QuizList = (props) => {
         try {
             const docRef = doc(db, "student", auth.currentUser.uid);
             await updateDoc(docRef, {
-                score: studentScore
+                score: studentScore,
+                score1: score1,
+                score2: score2,
+                score3: score3,
+                score4: score4,
+                score5: score5,
+                score6: score6,
+                score7: score7,
+                score8: score8,
             })
         }catch(error){alert(error.message)}
     }
