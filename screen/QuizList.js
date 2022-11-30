@@ -334,13 +334,14 @@ const styles = StyleSheet.create({
     submitbutton: {
         backgroundColor:'#ade6ff',
         color:'black',
-        fontSize:20,
+        fontSize:18,
         padding:4,
         paddingRight:20,
         paddingLeft:20,
         paddingBottom:6,
         borderRadius:12,
         borderWidth:0,
+        fontWeight:'bold',
         borderColor:'black',
 
     },
