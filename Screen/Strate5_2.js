@@ -1,25 +1,26 @@
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux"
-import { up5 } from "../Redux/Actions";
+import { useDispatch } from "react-redux"
+import { up5, change5_2, cor, wrong, unquiz } from "../Redux/Actions";
 
 const Strate5_2 = (props) => {
-    const dispatch = useDispatch() // 액션 불러오기 면어
-    //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
-
     useEffect(() => {
         if (Platform.OS === 'android') {
             const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
             return () => backHandler.remove() }
     }, [])
 
-    var count1 = 3;
-    var count2 = 3;
+    const dispatch = useDispatch()
 
-    const [show, setShow] = useState(false); //2번째 화면 상태 값 default는 false로 동작
-    const [myTextInput1, setMyTextInput1] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput2, setMyTextInput2] = useState("") //2번 답 저장 하는 공간
+    const [count1, setCount1] = useState(2) 
+    const [count2, setCount2] = useState(2) 
+    const decrease1 = () => { setCount1(count1-1); }
+    const decrease2 = () => { setCount2(count2-1); }
+
+    const [show, setShow] = useState(false);
+    const [myTextInput1, setMyTextInput1] = useState("")
+    const [myTextInput2, setMyTextInput2] = useState("")
 
     const onChangeInput1 = (event) => { setMyTextInput1(event) }
     const onChangeInput2 = (event) => { setMyTextInput2(event) }
@@ -30,10 +31,13 @@ const Strate5_2 = (props) => {
             setShow(true) }
         else {
             if(count1 > 0) {
-                count1 -= 1;
+                decrease1();
                 alert("miss you have "+(count1)+" chance");
             }
             else if(count1 == 0) {
+                dispatch(change5_2())
+                dispatch(wrong())
+                dispatch(unquiz())
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz5")
             } }
@@ -41,15 +45,21 @@ const Strate5_2 = (props) => {
 
     const correct2 = () => {
         if (myTextInput2 == 6) {
-            dispatch(up5()) //점수 추가 액션 불러오기
+            dispatch(up5())
+            dispatch(change5_2())
+            dispatch(cor())
+            dispatch(unquiz())
             alert("Nice! Mario can cut 6 sections of rope. Let’s try a different method!");
             props.navigation.navigate("Quiz5") }
         else {
             if(count2 > 0) {
-                count2 -=1;
+                decrease2();
                 alert("miss you have "+(count2)+" chance");
             }
             else if(count2 == 0) {
+                dispatch(change5_2())
+                dispatch(wrong())
+                dispatch(unquiz())
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz5")
             } }

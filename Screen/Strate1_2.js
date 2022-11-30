@@ -2,17 +2,16 @@ import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Bac
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
 import { useDispatch } from "react-redux"
-import { up1 } from "../Redux/Actions";
+import { up1, change1_2, cor, wrong, unquiz } from "../Redux/Actions";
 
 const Strate1_2 = (props) => {
-    const dispatch = useDispatch()
-    //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
-
     useEffect(() => {
         if (Platform.OS === 'android') {
             const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
             return () => backHandler.remove() }
     }, [])
+
+    const dispatch = useDispatch()
 
     const [count, setCount] = useState(2);
     const decrease = () => { setCount(count-1); }   
@@ -22,7 +21,10 @@ const Strate1_2 = (props) => {
 
     const correct = () => {
         if (myTextInput == 11) {
-            dispatch(up1()) //점수 추가 액션 불러오기
+            dispatch(up1())
+            dispatch(change1_2())
+            dispatch(cor())
+            dispatch(unquiz())
             alert("Ok! If you’re right, then Todd bought 11 pictures.");
             props.navigation.navigate("Quiz1") } 
         else {
@@ -31,6 +33,9 @@ const Strate1_2 = (props) => {
                 alert("miss you have "+(count)+" chance");
             }
             else if(count == 0) {
+                dispatch(change1_2())
+                dispatch(wrong())
+                dispatch(unquiz())
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz1")
             } }

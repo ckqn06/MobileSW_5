@@ -2,17 +2,16 @@ import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Bac
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
 import { useDispatch } from "react-redux"
-import { up4 } from "../Redux/Actions";
+import { up4, change4_1, cor, wrong, unquiz } from "../Redux/Actions";
 
 const Strate4_1 = (props) => {
-    const dispatch = useDispatch()
-    //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
-
     useEffect(() => {
         if (Platform.OS === 'android') {
             const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
             return () => backHandler.remove() }
     }, [])
+
+    const dispatch = useDispatch()
     
     const [count2, setCount1] = useState(2) 
     const [count3, setCount2] = useState(2) 
@@ -48,6 +47,9 @@ const Strate4_1 = (props) => {
                 alert("miss you have "+(count2)+" chance");
             }
             else if(count2 == 0) {
+                dispatch(change4_1())
+                dispatch(wrong())
+                dispatch(unquiz())
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz4")
             } }
@@ -63,6 +65,9 @@ const Strate4_1 = (props) => {
                 alert("miss you have "+(count3)+" chance");
             }
             else if(count3 == 0) {
+                dispatch(change4_1())
+                dispatch(wrong())
+                dispatch(unquiz())
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz4")
             } }
@@ -70,7 +75,10 @@ const Strate4_1 = (props) => {
 
     const correct4 = () => {
         if (myTextInput4 == 'Faye') {
-            dispatch(up4()) //점수 추가 액션 불러오기
+            dispatch(up4())
+            dispatch(change4_1())
+            dispatch(cor())
+            dispatch(unquiz())
             alert("Ok! It looks like Faye scored the most.");
             props.navigation.navigate("Quiz4") }
         else {
@@ -79,6 +87,9 @@ const Strate4_1 = (props) => {
                 alert("miss you have "+(count4)+" chance");
             }
             else if(count4 == 0) {
+                dispatch(change4_1())
+                dispatch(wrong())
+                dispatch(unquiz())
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz4")
             } }

@@ -1,10 +1,16 @@
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { change1, up1 } from "../Redux/Actions";
 
 const Quiz1 = (props) => {
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
+            return () => backHandler.remove() }
+    }, [])
+    
     const dispatch = useDispatch()
 
     const ch1_1 = useSelector((state) => state.Change1_1)

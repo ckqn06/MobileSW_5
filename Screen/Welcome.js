@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, BackHandler } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { auth } from "../Auth/firebaseConfig";
 import { db } from "../Auth/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore"
@@ -6,12 +6,6 @@ import { useState, useEffect } from "react";
 
 const Welcome = (props) => {
     const [studentData, setStudentData] = useState({});
-
-    useEffect(() => {
-        if (Platform.OS === 'android') {
-            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
-            return () => backHandler.remove() }
-    }, [])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -24,7 +18,7 @@ const Welcome = (props) => {
             .catch(error => console.log(error.message))
         };
         fetchData(); 
-}, [])
+    }, [])
 
     return (
         <TouchableOpacity onPress = {() => { props.navigation.navigate("Main") }}>

@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, NativeModules,
     ScrollView, View, Image, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
 import { useState } from 'react'; 
 import { SignUp } from "../../Auth/AuthFunctions";
@@ -29,6 +29,7 @@ const Sign_Up = (props) => {
                 await SignUp(username, email, myPWDInput);
                 console.log("new User created")
                 props.navigation.navigate("Login")
+                NativeModules.DevSettings.reload();
                 setEmpty();
             } catch(error){alert(error.message)}
         }

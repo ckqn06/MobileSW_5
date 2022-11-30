@@ -1,18 +1,49 @@
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { change4, up4 } from "../Redux/Actions";
 
 const Quiz4 = (props) => {
-    const dispatch = useDispatch()
-    const [show,setShow] = useState(false); //전략 선택 화면 상태 값 default는 false로 동작
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
+            return () => backHandler.remove() }
+    }, [])
     
+    const dispatch = useDispatch()
+
+    const ch4_1 = useSelector((state) => state.Change4_1)
+    const ch4_2 = useSelector((state) => state.Change4_2)
+    const ch4_3 = useSelector((state) => state.Change4_3)
+    const [disable1, setdisable1] = useState(false);
+    const [disable2, setdisable2] = useState(false);
+    const [disable3, setdisable3] = useState(false);
+
+    function button1() {
+        if(ch4_1 == 0) { setdisable1(false) }
+        else if(ch4_1 == 1) { setdisable1(true) }
+    }
+    useEffect(()=>{ button1() },[ch4_1])
+
+    function button2() {
+        if(ch4_2 == 0) { setdisable2(false) }
+        else if(ch4_2 == 1) { setdisable2(true) }
+    }
+    useEffect(()=>{ button2() },[ch4_2])
+
+    function button3() {
+        if(ch4_3 == 0) { setdisable3(false) }
+        else if(ch4_3 == 1) { setdisable3(true) }
+    }
+    useEffect(()=>{ button3() },[ch4_3])
+
+    const [show,setShow] = useState(false);
     const showme = () => { setShow(true); }
 
     const check=()=>{
-        dispatch(up4()) //점수 값 -1에서 0으로 변경
-        dispatch(change4()) //submit버튼 누르면 해당 Quiz번호 버튼 비활성화 하기 위하여 reducers..change1.js state값 1 증가
+        dispatch(up4())
+        dispatch(change4())
         props.navigation.navigate("QuizList")
     }
 
@@ -60,18 +91,21 @@ const Quiz4 = (props) => {
                             
                             <View style = {styles.strateButton}>
                                 <Button
+                                 disabled = {disable1}
                                  title = {"Guess the number of points" + "\n" + "and see if it works."}
                                  onPress = {() => {props.navigation.navigate("Strate4_1")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
+                                 disabled = {disable2}
                                  title = "Write equations to solve the problem"
                                  onPress = {() => {props.navigation.navigate("Strate4_2")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
+                                 disabled = {disable3}
                                  title = {"Use a diagram to try" + "\n" + "and understand the problem"}
                                  onPress = {() => {props.navigation.navigate("Strate4_3")}}/>
                             </View>

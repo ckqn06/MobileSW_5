@@ -1,6 +1,6 @@
 import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { doc, updateDoc } from "firebase/firestore"
 import { auth } from "../Auth/firebaseConfig";
 import { db } from "../Auth/firebaseConfig";
@@ -24,10 +24,10 @@ const QuizList = (props) => {
     const ch7 = useSelector((state) => state.Change7)
     const ch8 = useSelector((state) => state.Change8)
 
-    const Correct = require('../assets/images/QuizCorrect.png'); //해당 번호 모든 문제 해결한 경우
-    const Wrong = require('../assets/images/QuizWrong.png'); //3개 다 틀린 경우
-    const Yet = require('../assets/images/QuizYet.png'); //기본 대기 체크 모양
-    const Middle = require('../assets/images/QuizMiddle.png'); //1,2개 맞춘 경우
+    const Correct = require('../assets/images/QuizCorrect.png');
+    const Wrong = require('../assets/images/QuizWrong.png');
+    const Yet = require('../assets/images/QuizYet.png');
+    const Middle = require('../assets/images/QuizMiddle.png');
 
     //점수 값에 따라 해당 퀴즈 번호 사진들을 변경  (score == 0), (score != 0 || score !=3), (score == 3)
     const [icon1, setIcon1] = useState(Yet);

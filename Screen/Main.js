@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, BackHandler } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux"
 import { auth } from "../Auth/firebaseConfig";
@@ -11,12 +11,6 @@ const Main = (props) => {
     const corr = useSelector((state) => state.Correct)
     const wron = useSelector((state) => state.Wrong)
     const unquiz = useSelector((state) => state.UnQuiz)
-
-    useEffect(() => {
-        if (Platform.OS === 'android') {
-            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
-            return () => backHandler.remove() }
-    }, [])
 
     //onSnapshot 기능 사용해서 실사간으로 Quiz 점수 정보 갱신하기 
     //useEffect hook은 화면 실행할 떄 실행하기  

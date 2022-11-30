@@ -82,19 +82,19 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen name = "Login" component={Login} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Sign_Up" component={Sign_Up} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Sign_Up" component={Sign_Up} options={{headerTitleAlign:'center'}}/>
           <Stack.Screen name = "Welcome" component={Welcome} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
           <Stack.Screen name = "Main" component={Main} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
           <Stack.Screen name = "QuizList" component={QuizList} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
 
-          <Stack.Screen name = "Quiz1" component={Quiz1} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Quiz2" component={Quiz2} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Quiz3" component={Quiz3} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Quiz4" component={Quiz4} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Quiz5" component={Quiz5} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Quiz6" component={Quiz6} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Quiz7" component={Quiz7} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Quiz8" component={Quiz8} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Quiz1" component={Quiz1} options={{headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz2" component={Quiz2} options={{headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz3" component={Quiz3} options={{headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz4" component={Quiz4} options={{headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz5" component={Quiz5} options={{headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz6" component={Quiz6} options={{headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz7" component={Quiz7} options={{headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz8" component={Quiz8} options={{headerTitleAlign:'center'}}/>
 
           <Stack.Screen name = "Strate1_1" component={Strate1_1} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
           <Stack.Screen name = "Strate1_2" component={Strate1_2} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>

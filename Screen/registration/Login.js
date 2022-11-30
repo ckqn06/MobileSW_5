@@ -4,19 +4,12 @@ import { useState, useEffect } from 'react';
 import { onAuthStateChanged } from "firebase/auth"
 import { auth } from "../../Auth/firebaseConfig";
 import { Signin } from "../../Auth/AuthFunctions";
-import { BackHandler } from 'react-native';
 
 const Login = (props) => {
     useEffect(() => {
         onAuthStateChanged(auth, (data) => {
             if(data) { props.navigation.replace("Welcome") }
             else { props.navigation.navigate("Login") }})
-    }, [])
-
-    useEffect(() => {
-        if (Platform.OS === 'android') {
-            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
-            return () => backHandler.remove() }
     }, [])
 
     const [email,setEmail] = useState("")

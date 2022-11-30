@@ -1,10 +1,16 @@
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { change2, up2 } from "../Redux/Actions";
 
 const Quiz2 = (props) => {
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
+            return () => backHandler.remove() }
+    }, [])
+    
     const dispatch = useDispatch()
 
     const ch2_1 = useSelector((state) => state.Change2_1)
@@ -24,7 +30,7 @@ const Quiz2 = (props) => {
         if(ch2_2 == 0) { setdisable2(false) }
         else if(ch2_2 == 1) { setdisable2(true) }
     }
-    useEffect(()=>{ button2() },[ch1_2])
+    useEffect(()=>{ button2() },[ch2_2])
 
     function button3() {
         if(ch2_3 == 0) { setdisable3(false) }
@@ -85,18 +91,21 @@ const Quiz2 = (props) => {
                             
                             <View style = {styles.strateButton}>
                                 <Button
+                                 disabled = {disable1}
                                  title = {"Add up her miles and then find out" + "\n" + "how many more she needs to get to 22 miles"}
                                  onPress = {() => {props.navigation.navigate("Strate2_1")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
+                                 disabled = {disable2}
                                  title = "Write an equation to solve it"
                                  onPress = {() => {props.navigation.navigate("Strate2_2")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
+                                 disabled = {disable3}
                                  title = {"Subtract her miles from 22" + "\n" + "and see how many are left"}
                                  onPress = {() => {props.navigation.navigate("Strate2_3")}}/>
                             </View>

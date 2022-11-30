@@ -2,17 +2,16 @@ import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Bac
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
 import { useDispatch } from "react-redux"
-import { up3 } from "../Redux/Actions";
+import { up3, change3_2, cor, wrong, unquiz } from "../Redux/Actions";
 
 const Strate3_2 = (props) => {
-    const dispatch = useDispatch() // 액션 불러오기 면어
-    //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
-
     useEffect(() => {
         if (Platform.OS === 'android') {
             const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
             return () => backHandler.remove() }
     }, [])
+
+    const dispatch = useDispatch()
 
     const [count1, setCount1] = useState(2) 
     const [count2, setCount2] = useState(2) 
@@ -42,6 +41,9 @@ const Strate3_2 = (props) => {
                 alert("miss you have "+(count1)+" chance");
             }
             else if(count1 == 0) {
+                dispatch(change3_2())
+                dispatch(wrong())
+                dispatch(unquiz())
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz3")
             } }
@@ -49,7 +51,10 @@ const Strate3_2 = (props) => {
 
     const correct2 = () => {
         if (myTextInput2 == 10.8) {
-            dispatch(up3()) //점수 추가 액션 불러오기
+            dispatch(up3())
+            dispatch(change3_2())
+            dispatch(cor())
+            dispatch(unquiz())
             alert("Nice! Jennifer used 10.8 yards of fabric for each curtain. Let’s try a different method!");
             props.navigation.navigate("Quiz3") }
         else {
@@ -58,6 +63,9 @@ const Strate3_2 = (props) => {
                 alert("miss you have "+(count2)+" chance");
             }
             else if(count2 == 0) {
+                dispatch(change3_2())
+                dispatch(wrong())
+                dispatch(unquiz())
                 alert("miss you have no chance")
                 props.navigation.navigate("Quiz3")
             } }
