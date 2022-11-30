@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, FlatList, ActivityIndicator, ScrollView} from "react-native";
+import { View, Text, StyleSheet, Image, FlatList, ActivityIndicator, ScrollView, TouchableOpacity} from "react-native";
 import { db } from "../auth/firebaseConfig";
 import { collection, doc, getDocs, onSnapshot, orderBy, query, waitForPendingWrites } from "firebase/firestore";
 import { useState, useEffect } from "react";
@@ -10,7 +10,7 @@ const wait = (timeout) => {
 }
 
 
-const ResultScreen = () => {
+const ResultScreen = ({navigation}) => {
 
     // 파이어베이스 모두 정보 가져오며 저장하기
     const [studentRecord, setStudentRecord] = useState([]);
@@ -25,28 +25,28 @@ const ResultScreen = () => {
 
         const q = query(collection(db, "student"), orderBy("score", "desc") ,) // q for collection reference
 
-      // const querySnapshot = await getDocs(q)
+       const querySnapshot = await getDocs(q)
 
         let user = []
 
-        // querySnapshot.forEach((doc) => {
-        //     user.push({
-        //         ...doc.data(),
-        //         id: doc.id
-        //     })
-        //     setStudentRecord(user)
-        // })
-
-       await onSnapshot(q, (snapshot) => {
-            snapshot.docs.forEach((doc) => {
-                user.push({
-                    ...doc.data(),
-                    key: doc.id
-                })
-
-                setStudentRecord(user)
+      await  querySnapshot.forEach((doc) => {
+            user.push({
+                ...doc.data(),
+                id: doc.id
             })
+            setStudentRecord(user)
         })
+
+    //    await onSnapshot(q, (snapshot) => {
+    //         snapshot.docs.forEach((doc) => {
+    //             user.push({
+    //                 ...doc.data(),
+    //                 key: doc.id
+    //             })
+
+    //             setStudentRecord(user)
+    //         })
+    //     })
     }
 
     // 화면 처룸에 제시할때 useEffect 실행
@@ -58,7 +58,7 @@ const ResultScreen = () => {
 
         var sum = 0;
 
-        let studentScore = []
+       // var studentScore = []
 
         for (let i = 0; i < studentRecord.length; i++){
 
@@ -66,7 +66,7 @@ const ResultScreen = () => {
 
             sum += studentRecord[i].score
 
-            studentScore.push(studentRecord[i].score)
+           // studentScore.push(studentRecord[i].score)
         }
 
        console.log("sum of score is: ", sum)
@@ -74,18 +74,20 @@ const ResultScreen = () => {
             var average = (sum / studentRecord.length).toFixed(2)
             
             console.log("The average score is: ", average)
-            // if(average === NaN){
-            //     setScoreAverage(0)
-            // }else
-            //     setScoreAverage(average)
-            setScoreAverage(average)
+            if(average === NaN){
+                setScoreAverage(0)
+            }else{
+                setScoreAverage(average)
+            }
+                
+            //setScoreAverage(average)
         }
 
     }
 
     useEffect(() => {
         scoreSum()
-    }, [studentRecord])
+    }, [])
     
     const onRefresh = React.useCallback(() => {
         setIsLoading(true);
@@ -102,7 +104,7 @@ const ResultScreen = () => {
          <View style={styles.container}>
             
             <View style={styles.upperView}>
-                <Text style={{ color: 'grey', fontSize: 28, color: '#2C3333' }}>Quiz Results</Text>
+                <Text style={{fontSize: 28, color: 'white' }}>Quiz Results</Text>
                 <View style={{backgroundColor: '#2C3333', marginTop: 20, padding: 16, borderWidth: 1, borderRadius: 10}}>
                 <Text style={{fontSize: 22, color: 'white'}}>Score Average: {scoreAverage}</Text>
                 </View>
@@ -127,7 +129,24 @@ const ResultScreen = () => {
                     <FlatList
                         data={studentRecord}
                         renderItem={({ item, index }) => (
-                            item ? <View style={styles.Item}>
+                            item ? <TouchableOpacity 
+                                    style={styles.Item}
+                                    onPress={() => {
+                                        navigation.navigate('Student', {
+                                            name: item.Name,
+                                            email: item.Email,
+                                            score: item.score,
+                                            score1: item.score1,
+                                            score2: item.score2,
+                                            score3: item.score3,
+                                            score4: item.score4,
+                                            score5: item.score5,
+                                            score6: item.score6,
+                                            score7: item.score7,
+                                            score8: item.score8
+                                        })
+                                    }}
+                                    >
                                 <View style={{ flex: 1, alignItems: "flex-start", flexDirection: 'row' }}>
                                     <Text style={{fontSize: 18, color: "#FFDE00"}}>{index+1}</Text>
                                     <Text style={{ fontSize: 18, marginLeft: 18, color: 'white'}}>{item.Name}</Text>
@@ -137,7 +156,7 @@ const ResultScreen = () => {
                                     flex: 1, alignItems: "flex-end",}}>
                                 <Text style={{fontSize: 20, color: 'white'}}>{item.score}</Text>
                                 </View>
-                            </View> : <View> <Text> No Data...</Text></View>
+                            </TouchableOpacity> : <View> <Text> No Data...</Text></View>
                         )}
                         refreshing={isLoading}
                         onRefresh={onRefresh}
@@ -154,7 +173,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
         alignItems: 'center',
-        backgroundColor: '#f9c2ff'
+        backgroundColor: '#3F0071'     //'#f9c2ff'
     },
     upperView: {
         alignItems: 'center',
