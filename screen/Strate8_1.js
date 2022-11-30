@@ -102,7 +102,7 @@ const Strate8_1 = (props) => {
                     <View style = {styles.mainView}>
                         <View style = {styles.quizSpace}>
                             <View style = {{alignItems:'center'}}>
-                               <Text style = {styles.header}>== PROMPT.1 ==</Text>
+                               <Text style = {styles.header}>PROMPT.1</Text>
                                 <Text style = {styles.quizText}>Ok, you want to guess and check.{"\n"}{"\n"}
                                     First, how much fencing will he need for the two sides of the fence that go along the length of the garden?
                                 </Text>
@@ -126,7 +126,7 @@ const Strate8_1 = (props) => {
                         <View>
                             <View style = {styles.quizSpace}>
                                 <View style = {{alignItems:'center'}}>
-                                    <Text style = {styles.header}>== PROMPT.2 ==</Text>
+                                    <Text style = {styles.header}>PROMPT.2</Text>
                                     <Text style = {styles.quizText}>Ok, you said he will need 50 feet of fencing for the sides that go along the length of the garden.{"\n"}{"\n"}
                                         So, what is the widest garden that you think he could make?
                                     </Text>
@@ -151,7 +151,7 @@ const Strate8_1 = (props) => {
                         <View>
                             <View style = {styles.quizSpace}>
                                 <View style = {{alignItems:'center'}}>
-                                    <Text style = {styles.header}>== PROMPT.3 ==</Text>
+                                    <Text style = {styles.header}>PROMPT.3</Text>
                                     <Text style = {styles.quizText}>Ok, so you’re guessing the garden would be [x] feet wide.{"\n"}{"\n"}
                                         How much fencing would he need to make the two sides that go along the width?
                                     </Text>
@@ -176,7 +176,7 @@ const Strate8_1 = (props) => {
                         <View>
                             <View style = {styles.quizSpace}>
                                 <View style = {{alignItems:'center'}}>
-                                    <Text style = {styles.header}>== PROMPT.4 ==</Text>
+                                    <Text style = {styles.header}>PROMPT.4</Text>
                                     <Text style = {styles.quizText}>Ok, if that’s true, then how much fencing would he use all together to make his rectangular garden fence? work!
                                     </Text>
                                 </View>
@@ -210,27 +210,32 @@ const styles = StyleSheet.create({
         backgroundColor: '#eefbff'
     },
     header: {
-        padding:5,
-        fontSize:17
+        padding:12,
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
-        padding:5,
-        margin:10,
-        borderRadius:5,
-        borderWidth:2,
+        padding:4,
+        margin:20,
+        marginTop:10,
+        borderRadius:10,
+        borderWidth:0,
         borderColor:'black',
-        backgroundColor:'#EFEFEF'
+        backgroundColor:'#fbf3ff'
     },
     quizText: {
         fontSize:18
     },
     textInput: {
-        margin:20,
+        marginTop:15,
+        marginBottom:15,
+        marginLeft:10,
+        marginRight:10,
         paddingHorizontal:10,
-        borderRadius:5,
+        borderRadius:8,
         borderWidth:1,
-        borderColor:'black',
-        backgroundColor:'white'
+        borderColor:'#d6d6d6',
+        backgroundColor:'white',
     },
     checkButton: {
         marginLeft:100,

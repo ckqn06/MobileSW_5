@@ -125,7 +125,8 @@ const styles = StyleSheet.create({
         borderRadius:10,
         borderWidth:1,
         borderColor:'#d6d6d6',
-        backgroundColor:'white'
+        backgroundColor:'white',
+        color:'#d6d6d6',   
     },
     loginButton: {
         alignItems:'center',

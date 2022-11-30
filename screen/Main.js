@@ -58,11 +58,10 @@ const Main = (props) => {
 
             <View style = {styles.subView_2}>
                 <View>
-                    <Text style = {{marginBottom:10, fontSize:25, fontWeight:'bold'}}>ANALYSIS</Text>
-
-                    <Text style = {{marginBottom:50, fontSize:25, color:'green'}}>Correct Answer</Text>
-                    <Text style = {{marginBottom:50, fontSize:25, color:'red'}}>Wrong Answer</Text>
-                    <Text style = {{marginBottom:50, fontSize:25, color:'blue'}}
+                    <Text style = {{marginBottom:20, fontSize:20, fontWeight:'bold'}}>ANALYSIS</Text>
+                    <Text style = {{marginBottom:36, fontSize:20, color:'#60ff60'}}>Correct Answer</Text>
+                    <Text style = {{marginBottom:36, fontSize:20, color:'#ff3434'}}>Wrong Answer</Text>
+                    <Text style = {{marginBottom:36, fontSize:20, color:'#3e48ff'}}
                         onPress={() => props.navigation.navigate("teacher")}
                     >Unfinished Answer</Text>
                 </View>
@@ -124,17 +123,17 @@ const styles = StyleSheet.create({
         color:'white'
     },
     graph: {
-        flex:1,
         alignItems:'center',
         justifyContent:'center',
-        padding:10,
+        left:20,
+        padding:12,
         marginLeft:45,
         marginRight:45,
         marginBottom:30,
         borderRadius:10,
-        borderWidth:1,
+        borderWidth:0,
         borderColor:'black',
-        backgroundColor:'blue'
+        backgroundColor:'#b1ddff'
     }
 });
 

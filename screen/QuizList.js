@@ -188,12 +188,12 @@ const QuizList = (props) => {
     return(
         <ScrollView style ={styles.mainView}>
             <View style = {styles.mainText}>
-                <Text style = {{fontSize:25}}>== QUIZ LIST ==</Text>
+                <Text style = {{fontSize:25, textDecorationLine:"underline"}}>QUIZ LIST</Text>
             </View>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz1")}} disabled = {disable1}>
-                <View style = {style1}>
-                    <Text style = {styles.button}>Quiz.1</Text>
+                <View style = {styles.quizbutton}>
+                    <Text style = {styles.button}>Quiz 1</Text>
                     <Image
                      style = {styles.statusImage}
                      source = {icon1}/>
@@ -201,8 +201,8 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz2")}} disabled = {disable2}>
-                <View style = {style2}>
-                    <Text style = {styles.button}>Quiz.2</Text>
+                <View style = {styles.quizbutton}>
+                    <Text style = {styles.button}>Quiz 2</Text>
                     <Image
                      style = {styles.statusImage}
                      source = {icon2}/>
@@ -210,8 +210,8 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz3")}} disabled = {disable3}>
-                <View style = {style3}>
-                    <Text style = {styles.button}>Quiz.3</Text>
+                <View style = {styles.quizbutton}>
+                    <Text style = {styles.button}>Quiz 3</Text>
                     <Image
                      style = {styles.statusImage}
                      source = {icon3}/>
@@ -219,8 +219,8 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz4")}} disabled = {disable4}>
-                <View style = {style4}>
-                    <Text style = {styles.button}>Quiz.4</Text>
+                <View style = {styles.quizbutton}>
+                    <Text style = {styles.button}>Quiz 4</Text>
                     <Image
                      style = {styles.statusImage}
                      source = {icon4}/>
@@ -228,8 +228,8 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz5")}} disabled = {disable5}>
-                <View style = {style5}>
-                    <Text style = {styles.button}>Quiz.5</Text>
+                <View style = {styles.quizbutton}>
+                    <Text style = {styles.button}>Quiz 5</Text>
                     <Image
                      style = {styles.statusImage}
                      source = {icon5}/>
@@ -237,8 +237,8 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz6")}} disabled = {disable6}>
-                <View style = {style6}>
-                    <Text style = {styles.button}>Quiz.6</Text>
+                <View style = {styles.quizbutton}>
+                    <Text style = {styles.button}>Quiz 6</Text>
                     <Image
                      style = {styles.statusImage}
                      source = {icon6}/>
@@ -246,8 +246,8 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz7")}} disabled = {disable7}>
-                <View style = {style7}>
-                    <Text style = {styles.button}>Quiz.7</Text>
+                <View style = {styles.quizbutton}>
+                    <Text style = {styles.button}>Quiz 7</Text>
                     <Image
                      style = {styles.statusImage}
                      source = {icon7}/>
@@ -255,8 +255,8 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz8")}} disabled = {disable8}>
-                <View style = {style8}>
-                    <Text style = {styles.button}>Quiz.8</Text>
+                <View style = {styles.quizbutton}>
+                    <Text style = {styles.button}>Quiz 8</Text>
                     <Image
                      style = {styles.statusImage}
                      source = {icon8}/>
@@ -267,7 +267,7 @@ const QuizList = (props) => {
                 updateData()
                 props.navigation.navigate("Main")}}>
                 <View style = {styles.subView}>
-                    <Text style = {styles.submitbutton}>SUBMIT</Text>
+                    <Text style = {styles.submitbutton}>Submit</Text>
                 </View>
             </TouchableOpacity>
         </ScrollView>
@@ -278,20 +278,33 @@ const styles = StyleSheet.create({
     mainView: {
         flex:1,
         width:'100%',
+        backgroundColor:'#eefbff',
+    },
+    quizbutton: {
+        flexDirection:'row',
+        justifyContent:'center',
+        padding:1,
+        marginLeft:20,
+        marginRight:20,
+        marginTop:15,
+        marginBottom:8,
+        borderRadius:12,
+        borderWidth:1,
+        borderColor:'#bd96ff',
         backgroundColor:'#eefbff'
     },
     subView: {
         flexDirection:'row',
         justifyContent:'center',
-        padding:10,
-        marginLeft:70,
-        marginRight:70,
-        marginTop:15,
-        marginBottom:25,
-        borderRadius:10,
-        borderWidth:2,
+        padding:2,
+        marginLeft:20,
+        marginRight:20,
+        marginTop:32,
+        marginBottom:20,
+        borderRadius:50,
+        borderWidth:0,
         borderColor:'black',
-        backgroundColor:'steelblue'
+        backgroundColor:'#eefbff'
     },
     disView: {
         flexDirection:'row',
@@ -313,18 +326,29 @@ const styles = StyleSheet.create({
     },
     button: {
         alignItems:'center',
-        fontSize:30,
-        color:'white'
+        fontSize:24,
+        paddingRight:100,
+        color:'black',
+        marginBottom:2,
     },
     submitbutton: {
-        backgroundColor:'steelblue',
-        color:'white',
-        fontSize: 30
+        backgroundColor:'#ade6ff',
+        color:'black',
+        fontSize:20,
+        padding:4,
+        paddingRight:20,
+        paddingLeft:20,
+        paddingBottom:6,
+        borderRadius:12,
+        borderWidth:0,
+        borderColor:'black',
+
     },
     statusImage: {
         marginLeft:40,
-        width:35,
-        height:35,
+        marginTop:8,
+        width:24,
+        height:24,
         resizeMode:'contain'    
     }
 }); 

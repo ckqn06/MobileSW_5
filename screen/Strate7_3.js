@@ -64,7 +64,7 @@ const Strate7_3 = (props) => {
                     <View style = {styles.mainView}>
                         <View style = {styles.quizSpace}>
                             <View style = {{alignItems:'center'}}>
-                               <Text style = {styles.header}>== PROMPT.1 ==</Text>
+                               <Text style = {styles.header}>PROMPT.1</Text>
                                 <Text style = {styles.quizText}>Ok, you want to try adding up.{"\n"}
                                     Let’s start by finding the cost of driving 250 miles.{"\n"}{"\n"}
                                     How much will that cost?
@@ -89,7 +89,7 @@ const Strate7_3 = (props) => {
                         <View>
                             <View style = {styles.quizSpace}>
                                 <View style = {{alignItems:'center'}}>
-                                    <Text style = {styles.header}>== PROMPT.2 ==</Text>
+                                    <Text style = {styles.header}>PROMPT.2</Text>
                                     <Text style = {styles.quizText}>All right, you say he pays $25 for mileage.
                                         Then he has to pay $21 for each day that he rents.{"\n"}{"\n"}
                                         How many times can you add $21 without going over $115?
@@ -129,19 +129,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#eefbff'
     },
     header: {
-        padding:5,
-        fontSize:17
+        padding:12,
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
-        padding:5,
+        padding:4,
+        margin:20,
         marginTop:10,
-        marginBottom:10,
-        marginLeft:25,
-        marginRight:25,
-        borderRadius:5,
-        borderWidth:2,
+        borderRadius:10,
+        borderWidth:0,
         borderColor:'black',
-        backgroundColor:'#EFEFEF'
+        backgroundColor:'#fbf3ff'
     },
     quizText: {
         fontSize:18
@@ -152,10 +151,10 @@ const styles = StyleSheet.create({
         marginLeft:10,
         marginRight:10,
         paddingHorizontal:10,
-        borderRadius:5,
+        borderRadius:8,
         borderWidth:1,
-        borderColor:'black',
-        backgroundColor:'white'
+        borderColor:'#d6d6d6',
+        backgroundColor:'white',
     },
     checkButton: {
         marginLeft:100,

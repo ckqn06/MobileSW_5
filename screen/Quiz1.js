@@ -25,7 +25,7 @@ const Quiz1 = (props) => {
                     <View style = {styles.mainView}>
                         <View style = {styles.quizSpace}>
                             <View style = {{alignItems:'center'}}>
-                                <Text style = {styles.header}>== QUIZ ==</Text>
+                                <Text style = {styles.header}>QUIZ</Text>
                                 <Text style = {styles.quizText}>Todd orders pictures from a photographer.{"\n"}
                                     Each picture costs $7.50.{"\n"}
                                     A one-time shipping fee of $3.25 is added{"\n"}to the cost of the order.{"\n"}
@@ -37,7 +37,7 @@ const Quiz1 = (props) => {
 
                         <View style = {styles.subSpace}>
                             <View style = {{alignItems:'center'}}>
-                                <Text style = {styles.header}>== Open-ended Question ==</Text>
+                                <Text style = {styles.header}>Open-ended Question</Text>
                                 <Text style = {styles.subText}>What do you think the problem is asking you to do?</Text>
                             </View>
                         </View>
@@ -63,18 +63,21 @@ const Quiz1 = (props) => {
                             <View style = {styles.strateButton}>
                                 <Button
                                  title = "Write an equation to solve the problem"
+                                 color='#bd96ff'
                                  onPress = {() => {props.navigation.navigate("Strate1_1")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
                                  title = "Add on shipping fee until I get to $85.75"
+                                 color='#bd96ff'
                                  onPress = {() => {props.navigation.navigate("Strate1_2")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
                                  title = "Subtract away from $85,75 until I get to O"
+                                 color='#bd96ff'
                                  onPress = {() => {props.navigation.navigate("Strate1_3")}}/>
                             </View>
 
@@ -101,47 +104,59 @@ const styles = StyleSheet.create({
     },
     header: {
         padding:3,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
-        padding:5,
-        margin:10,
-        borderRadius:5,
-        borderWidth:2,
+        padding:4,
+        margin:20,
+        borderRadius:32,
+        borderWidth:0,
         borderColor:'black',
-        backgroundColor:'#EFEFEF'
+        backgroundColor:'#fbf3ff',
+        paddingBottom:60,
     },
     quizText: {
-        fontSize:17
+        fontSize:18
     },
     subSpace: {
         padding:5,
+        bottom:60,
+        paddingTop:24,
+        paddingBottom:24,
         marginLeft:20,
         marginRight:20,
-        borderRadius:15,
-        borderWidth:2,
+        borderRadius:32,
+        borderWidth:0,
+        borderTopStartRadius:0,
+        borderTopEndRadius:0,
         borderColor:'black',
-        backgroundColor:'#EFEFEF'
+        backgroundColor:'#ffffff'
     },
     subText: {
-        fontSize:20
+        padding:10,
+        paddingLeft:24,
+        paddingRight:24,
+        fontSize:18,
+        borderRadius:8,
+        backgroundColor:'#ffffff',
     },
     textInput: {
-        marginTop:10,
+        marginTop:0,
         marginBottom:20,
         marginLeft:20,
         marginRight:20,
         paddingHorizontal:10,
-        borderRadius:5,
+        borderRadius:8,
         borderWidth:1,
-        borderColor:'black',
-        backgroundColor:'white'
+        borderColor:'#d6d6d6',
+        backgroundColor:'white',
     },
     sendButton: {
         marginLeft:100,
         marginRight:100,
         marginBottom:10,
-        marginTop:10
+        marginTop:10,
     },
     strateButton: {
         alignItems:'center',

@@ -64,7 +64,7 @@ const Strate6_3 = (props) => {
                     <View style = {styles.mainView}>
                         <View style = {styles.quizSpace}>
                             <View style = {{alignItems:'center'}}>
-                               <Text style = {styles.header}>== PROMPT.1 ==</Text>
+                               <Text style = {styles.header}>PROMPT.1</Text>
                                 <Text style = {styles.quizText}>Let’s try a diagram to help.{"\n"}{"\n"}
                                     The rectangle has two sides with one measure, and two sides with a longer measure.{"\n"}{"\n"}
                                     How much extra length is on the longer segments?
@@ -93,7 +93,7 @@ const Strate6_3 = (props) => {
                         <View>
                             <View style = {styles.quizSpace}>
                                 <View style = {{alignItems:'center'}}>
-                                    <Text style = {styles.header}>== PROMPT.2 ==</Text>
+                                    <Text style = {styles.header}>PROMPT.2</Text>
                                     <Text style = {styles.quizText}>Nice work!{"\n"}{"\n"}
                                         Now, if the total length of all the segments are 104 inches, how long are the shorter segments?
                                     </Text>
@@ -132,19 +132,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#eefbff'
     },
     header: {
-        padding:5,
-        fontSize:17
+        padding:12,
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
-        padding:5,
+        padding:4,
+        margin:20,
         marginTop:10,
-        marginBottom:10,
-        marginLeft:10,
-        marginRight:10,
-        borderRadius:5,
-        borderWidth:2,
+        borderRadius:10,
+        borderWidth:0,
         borderColor:'black',
-        backgroundColor:'#EFEFEF'
+        backgroundColor:'#fbf3ff'
     },
     quizText: {
         fontSize:18
@@ -155,10 +154,10 @@ const styles = StyleSheet.create({
         marginLeft:10,
         marginRight:10,
         paddingHorizontal:10,
-        borderRadius:5,
+        borderRadius:8,
         borderWidth:1,
-        borderColor:'black',
-        backgroundColor:'white'
+        borderColor:'#d6d6d6',
+        backgroundColor:'white',
     },
     checkButton: {
         marginLeft:100,

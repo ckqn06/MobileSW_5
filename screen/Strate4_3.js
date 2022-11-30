@@ -104,7 +104,7 @@ const Strate4_3 = (props) => {
                     <View style = {styles.mainView}>
                         <View style = {styles.quizSpace}>
                             <View style = {{alignItems:'center'}}>
-                               <Text style = {styles.header}>== PROMPT.1 ==</Text>
+                               <Text style = {styles.header}>PROMPT.1</Text>
                                 <Text style = {styles.quizText}>Each tall rectangle is equal to the number of points that Elena won.{"\n"}{"\n"}
                                     How many points are ALL of the tall rectangles together?
                                 </Text>
@@ -128,7 +128,7 @@ const Strate4_3 = (props) => {
                         <View>
                             <View style = {styles.quizSpace}>
                                 <View style = {{alignItems:'center'}}>
-                                    <Text style = {styles.header}>== PROMPT.2 ==</Text>
+                                    <Text style = {styles.header}>PROMPT.2</Text>
                                     <Text style = {styles.quizText}>Ok, so the four bars represent 84 points.{"\n"}{"\n"}
                                         Then how many points did Elena score?
                                     </Text>
@@ -224,16 +224,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#eefbff'
     },
     header: {
-        padding:5,
-        fontSize:17
+        padding:12,
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
-        padding:5,
-        margin:10,
-        borderRadius:5,
-        borderWidth:2,
+        padding:4,
+        margin:20,
+        marginTop:10,
+        borderRadius:10,
+        borderWidth:0,
         borderColor:'black',
-        backgroundColor:'#EFEFEF'
+        backgroundColor:'#fbf3ff'
     },
     quizText: {
         fontSize:18
@@ -244,10 +246,10 @@ const styles = StyleSheet.create({
         marginLeft:10,
         marginRight:10,
         paddingHorizontal:10,
-        borderRadius:5,
+        borderRadius:8,
         borderWidth:1,
-        borderColor:'black',
-        backgroundColor:'white'
+        borderColor:'#d6d6d6',
+        backgroundColor:'white',
     },
     checkButton: {
         marginLeft:100,
@@ -255,6 +257,6 @@ const styles = StyleSheet.create({
         marginBottom:20,
         marginTop:10
     }
-});  
+}); 
 
 export default Strate4_3

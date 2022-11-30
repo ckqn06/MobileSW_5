@@ -71,7 +71,7 @@ const Strate1_1 = (props) => {
                     <View style = {styles.mainView}>
                         <View style = {styles.quizSpace}>
                             <View style = {{alignItems:'center'}}>
-                               <Text style = {styles.header}>== PROMPT.1 ==</Text>
+                               <Text style = {styles.header}>PROMPT.1</Text>
                                 <Text style = {styles.quizText}>OK. Using p to represent the number of pictures, 
                                     write an equation that represents how p, $7.50 per picture,{"\n"} 
                                     and the $3.25 shipping fee combine to make $85.75
@@ -115,7 +115,7 @@ const Strate1_1 = (props) => {
                         <View>
                             <View style = {styles.quizSpace}>
                                 <View style = {{alignItems:'center'}}>
-                                    <Text style = {styles.header}>== PROMPT.2 ==</Text>
+                                    <Text style = {styles.header}>PROMPT.2</Text>
                                     <Text style = {styles.quizText}>Ok, your equation is equivalent to{"\n"} 
                                         3.25 + 7.50p = 85.75{"\n"}{"\n"} 
                                         Can you solve to find the value of p?
@@ -151,16 +151,18 @@ const styles = StyleSheet.create({
         backgroundColor: '#eefbff'
     },
     header: {
-        padding:5,
-        fontSize:17
+        padding:12,
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
-        padding:5,
-        margin:10,
-        borderRadius:5,
-        borderWidth:2,
+        padding:4,
+        margin:20,
+        marginTop:10,
+        borderRadius:10,
+        borderWidth:0,
         borderColor:'black',
-        backgroundColor:'#EFEFEF'
+        backgroundColor:'#fbf3ff'
     },
     quizText: {
         fontSize:18
@@ -171,10 +173,10 @@ const styles = StyleSheet.create({
         marginLeft:10,
         marginRight:10,
         paddingHorizontal:10,
-        borderRadius:5,
+        borderRadius:8,
         borderWidth:1,
-        borderColor:'black',
-        backgroundColor:'white'
+        borderColor:'#d6d6d6',
+        backgroundColor:'white',
     },
     checkButton: {
         marginLeft:100,

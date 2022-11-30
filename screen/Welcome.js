@@ -33,9 +33,9 @@ const Welcome = (props) => {
             <View style = {styles.main}>
                 <Image
                  style = {styles.image}
-                 source = {require('../assets/images/hand.png')}
+                 source = {require('../assets/images/welcome1.png')}
                  resizeMode = "contain"/>
-                <Text style = {styles.mainText}>Welcome,</Text>
+                 {/* <Text style = {styles.mainText}>Welcome,</Text> */}
                 <Text style = {styles.mainText}>'{studentData.Name}'!</Text>
                 <Text style = {styles.subText}>Touch anywhere to START</Text>
             </View>
@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#eefbff'
     },
     image: {
-        marginTop:50,
-        marginBottom:50,
+        marginTop:48,
+        marginBottom:40,
         width:300,
         height:300
     },

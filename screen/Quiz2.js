@@ -25,7 +25,7 @@ const Quiz2 = (props) => {
                     <View style = {styles.mainView}>
                         <View style = {styles.quizSpace}>
                             <View style = {{alignItems:'center'}}>
-                                <Text style = {styles.header}>== QUIZ ==</Text>
+                                <Text style = {styles.header}>QUIZ</Text>
                                 <Text style = {styles.quizText}>Jen wants to run a total of 22 miles in five days. 
                                     The table shows her log for the miles she ran on Monday, Tuesday, Wednesday, and Thursday. {"\n"}{"\n"}
                                     How many miles must Jen run on Friday to reach her goal?
@@ -35,7 +35,7 @@ const Quiz2 = (props) => {
 
                         <View style = {styles.subSpace}>
                             <View style = {{alignItems:'center'}}>
-                                <Text style = {styles.header}>== Open-ended Question ==</Text>
+                                <Text style = {styles.header}>Open-ended Question</Text>
                                 <Text style = {styles.subText}>What do you think the problem is asking you to do?</Text>
                             </View>
                         </View>
@@ -61,18 +61,21 @@ const Quiz2 = (props) => {
                             <View style = {styles.strateButton}>
                                 <Button
                                  title = {"Add up her miles and then find out" + "\n" + "how many more she needs to get to 22 miles"}
+                                 color='#bd96ff'
                                  onPress = {() => {props.navigation.navigate("Strate2_1")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
                                  title = "Write an equation to solve it"
+                                 color='#bd96ff'
                                  onPress = {() => {props.navigation.navigate("Strate2_2")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
                                  title = {"Subtract her miles from 22" + "\n" + "and see how many are left"}
+                                 color='#bd96ff'
                                  onPress = {() => {props.navigation.navigate("Strate2_3")}}/>
                             </View>
 
@@ -99,53 +102,66 @@ const styles = StyleSheet.create({
     },
     header: {
         padding:3,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
-        padding:5,
-        margin:10,
-        borderRadius:5,
-        borderWidth:2,
+        padding:4,
+        margin:20,
+        borderRadius:32,
+        borderWidth:0,
         borderColor:'black',
-        backgroundColor:'#EFEFEF'
+        backgroundColor:'#fbf3ff',
+        paddingBottom:60,
     },
     quizText: {
-        fontSize:17
+        fontSize:18
     },
     subSpace: {
         padding:5,
+        bottom:60,
+        paddingTop:24,
+        paddingBottom:24,
         marginLeft:20,
         marginRight:20,
-        borderRadius:15,
-        borderWidth:2,
+        borderRadius:32,
+        borderWidth:0,
+        borderTopStartRadius:0,
+        borderTopEndRadius:0,
         borderColor:'black',
-        backgroundColor:'#EFEFEF'
+        backgroundColor:'#ffffff'
     },
     subText: {
-        fontSize:20
+        padding:10,
+        paddingLeft:24,
+        paddingRight:24,
+        fontSize:18,
+        borderRadius:8,
+        backgroundColor:'#ffffff',
     },
     textInput: {
-        marginTop:10,
+        marginTop:0,
         marginBottom:20,
         marginLeft:20,
         marginRight:20,
         paddingHorizontal:10,
-        borderRadius:5,
+        borderRadius:8,
         borderWidth:1,
-        borderColor:'black',
-        backgroundColor:'white'
+        borderColor:'#d6d6d6',
+        backgroundColor:'white',
+        
     },
     sendButton: {
         marginLeft:100,
         marginRight:100,
         marginBottom:10,
-        marginTop:10
+        marginTop:10,
     },
     strateButton: {
         alignItems:'center',
         marginTop:10,
         marginBottom:10,
     }
-}); 
+});  
 
 export default Quiz2

@@ -102,7 +102,7 @@ const Strate4_1 = (props) => {
                     <View style = {styles.mainView}>
                         <View style = {styles.quizSpace}>
                             <View style = {{alignItems:'center'}}>
-                               <Text style = {styles.header}>== PROMPT.1 ==</Text>
+                               <Text style = {styles.header}>PROMPT.1</Text>
                                 <Text style = {styles.quizText}>Ok, you want to guess-and-check.{"\n"}{"\n"} 
                                     How many points do you want to guess that Elena won?
                                 </Text>
@@ -126,7 +126,7 @@ const Strate4_1 = (props) => {
                         <View>
                             <View style = {styles.quizSpace}>
                                 <View style = {{alignItems:'center'}}>
-                                    <Text style = {styles.header}>== PROMPT.2 ==</Text>
+                                    <Text style = {styles.header}>PROMPT.2</Text>
                                     <Text style = {styles.quizText}>Ok, you guessed [x] points for Elena.{"\n"}{"\n"}
                                         Then how many would Karla and Faye win?
                                     </Text>
@@ -151,7 +151,7 @@ const Strate4_1 = (props) => {
                         <View>
                             <View style = {styles.quizSpace}>
                                 <View style = {{alignItems:'center'}}>
-                                    <Text style = {styles.header}>== PROMPT.3 ==</Text>
+                                    <Text style = {styles.header}>PROMPT.3</Text>
                                     <Text style = {styles.quizText}>Nice work!{"\n"}{"\n"}
                                         Now, what do Elena’s, Karla’s and Faye’s scores add up to?
                                     </Text>
@@ -176,7 +176,7 @@ const Strate4_1 = (props) => {
                         <View>
                             <View style = {styles.quizSpace}>
                                 <View style = {{alignItems:'center'}}>
-                                    <Text style = {styles.header}>== PROMPT.4 ==</Text>
+                                    <Text style = {styles.header}>PROMPT.4</Text>
                                     <Text style = {styles.quizText}>Nice work!{"\n"}{"\n"}
                                         The points for Elena, Karla, and Faye{"\n"}add up to 114, so that seems correct!{"\n"}{"\n"}
                                         So who scored the most?
@@ -212,27 +212,32 @@ const styles = StyleSheet.create({
         backgroundColor: '#eefbff'
     },
     header: {
-        padding:5,
-        fontSize:17
+        padding:12,
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
-        padding:5,
-        margin:10,
-        borderRadius:5,
-        borderWidth:2,
+        padding:4,
+        margin:20,
+        marginTop:10,
+        borderRadius:10,
+        borderWidth:0,
         borderColor:'black',
-        backgroundColor:'#EFEFEF'
+        backgroundColor:'#fbf3ff'
     },
     quizText: {
         fontSize:18
     },
     textInput: {
-        margin:20,
+        marginTop:15,
+        marginBottom:15,
+        marginLeft:10,
+        marginRight:10,
         paddingHorizontal:10,
-        borderRadius:5,
+        borderRadius:8,
         borderWidth:1,
-        borderColor:'black',
-        backgroundColor:'white'
+        borderColor:'#d6d6d6',
+        backgroundColor:'white',
     },
     checkButton: {
         marginLeft:100,
