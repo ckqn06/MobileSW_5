@@ -1,12 +1,18 @@
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { up3 } from "../Redux/Actions";
 
 const Strate3_1 = (props) => {
     const dispatch = useDispatch() // 액션 불러오기 면어
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
+
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
+            return () => backHandler.remove() }
+    }, [])
 
     var count1 = 3;
     var count2 = 3;
@@ -19,7 +25,7 @@ const Strate3_1 = (props) => {
     const onChangeInput2 = (event) => { setMyTextInput2(event) }
     
     const correct1 = () => {
-        if (myTextInput1 == 11) {
+        if (myTextInput1 == 64.8) {
             alert("next");
             setShow(true) }
         else {
@@ -34,7 +40,7 @@ const Strate3_1 = (props) => {
     }
 
     const correct2 = () => {
-        if (myTextInput2 == 11) {
+        if (myTextInput2 == 10.8) {
             dispatch(up3()) //점수 추가 액션 불러오기
             alert("Nice! Jennifer used 10.8 yards of fabric for each curtain. Let’s try a different method!");
             props.navigation.navigate("Quiz3") }
@@ -63,11 +69,15 @@ const Strate3_1 = (props) => {
                                     How much did Jennifer use for 6 curtains?
                                 </Text>
                             </View>
-                            <TextInput
-                             style = {styles.textInput}
-                             placeholder="Answer"
-                             value = {myTextInput1}
-                             onChangeText = {onChangeInput1}/>
+                            <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1}
+                                 onChangeText = {onChangeInput1}
+                                 maxLength = {10}/>
+                                <Text style = {{fontSize:18}}>yards</Text>
+                            </View>
                         </View >
 
                         <View style = {styles.checkButton}>
@@ -87,11 +97,15 @@ const Strate3_1 = (props) => {
                                         Now, how much fabric did she use for one curtain?
                                     </Text>
                                 </View>
-                                <TextInput
-                                 style = {styles.textInput}
-                                 placeholder="Answer"
-                                 value = {myTextInput2}
-                                 onChangeText = {onChangeInput2}/>
+                                <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput2}
+                                     onChangeText = {onChangeInput2}
+                                     maxLength = {10}/>
+                                    <Text style = {{fontSize:18}}>yards</Text>
+                                </View>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -135,7 +149,10 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     textInput: {
-        margin:20,
+        marginTop:15,
+        marginBottom:15,
+        marginLeft:10,
+        marginRight:10,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,

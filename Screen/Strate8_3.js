@@ -1,12 +1,18 @@
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { up8 } from "../Redux/Actions";
 
 const Strate8_3 = (props) => {
     const dispatch = useDispatch() // 액션 불러오기 면어
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
+
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
+            return () => backHandler.remove() }
+    }, [])
 
     var count1 = 3;
     var count2 = 3;
@@ -23,7 +29,7 @@ const Strate8_3 = (props) => {
     const onChangeInput3 = (event) => { setMyTextInput3(event) }
     
     const correct1 = () => {
-        if (myTextInput1 == 11) {
+        if (myTextInput1 == 50) {
             alert("next");
             setShow1(true) }
         else {
@@ -38,7 +44,7 @@ const Strate8_3 = (props) => {
     }
 
     const correct2 = () => {
-        if (myTextInput2 == 11) {
+        if (myTextInput2 == 30) {
             alert("next");
             setShow2(true) }
         else {
@@ -53,7 +59,7 @@ const Strate8_3 = (props) => {
     }
 
     const correct3 = () => {
-        if (myTextInput3 == 11) {
+        if (myTextInput3 == 15) {
             dispatch(up8()) //점수 추가 액션 불러오기
             alert("Nice work! That’s correct!");
             props.navigation.navigate("Quiz8") }
@@ -83,11 +89,15 @@ const Strate8_3 = (props) => {
                                     How much fence will Owen use for those sides?
                                 </Text>
                             </View>
-                            <TextInput
-                             style = {styles.textInput}
-                             placeholder="Answer"
-                             value = {myTextInput1}
-                             onChangeText = {onChangeInput1}/>
+                            <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1}
+                                 onChangeText = {onChangeInput1}
+                                 maxLength = {10}/>
+                                <Text style = {{fontSize:18}}>feet</Text>
+                            </View>
                         </View >
 
                         <View style = {styles.checkButton}>
@@ -107,11 +117,15 @@ const Strate8_3 = (props) => {
                                         Now, how much fencing can you add without going over 80 feet?
                                     </Text>
                                 </View>
-                                <TextInput
-                                 style = {styles.textInput}
-                                 placeholder="Answer"
-                                 value = {myTextInput2}
-                                 onChangeText = {onChangeInput2}/>
+                                <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput2}
+                                     onChangeText = {onChangeInput2}
+                                     maxLength = {10}/>
+                                    <Text style = {{fontSize:18}}>feet</Text>
+                                </View>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -131,11 +145,15 @@ const Strate8_3 = (props) => {
                                     <Text style = {styles.quizText}>All right, so if you can add 30 feet of fencing before running out, then how wide could the garden be?
                                     </Text>
                                 </View>
-                                <TextInput
-                                 style = {styles.textInput}
-                                 placeholder="Answer"
-                                 value = {myTextInput3}
-                                 onChangeText = {onChangeInput3}/>
+                                <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput3}
+                                     onChangeText = {onChangeInput3}
+                                     maxLength = {10}/>
+                                    <Text style = {{fontSize:18}}>feet</Text>
+                                </View>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -179,7 +197,10 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     textInput: {
-        margin:20,
+        marginTop:15,
+        marginBottom:15,
+        marginLeft:10,
+        marginRight:10,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,

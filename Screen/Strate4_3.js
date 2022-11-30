@@ -1,12 +1,18 @@
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { up4 } from "../Redux/Actions";
 
 const Strate4_3 = (props) => {
     const dispatch = useDispatch() // 액션 불러오기 면어
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
+
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
+            return () => backHandler.remove() }
+    }, [])
 
     var count1 = 3;
     var count2 = 3;
@@ -18,16 +24,18 @@ const Strate4_3 = (props) => {
     const [show3, setShow3] = useState(false); //4번째 화면 상태 값 default는 false로 동작
     const [myTextInput1, setMyTextInput1] = useState("") //1번 답 저장 하는 공간
     const [myTextInput2, setMyTextInput2] = useState("") //2번 답 저장 하는 공간
-    const [myTextInput3, setMyTextInput3] = useState("") //3번 답 저장 하는 공간
+    const [myTextInput3_1, setMyTextInput3_1] = useState("") //3번 답 저장 하는 공간
+    const [myTextInput3_2, setMyTextInput3_2] = useState("") //3번 답 저장 하는 공간
     const [myTextInput4, setMyTextInput4] = useState("") //4번 답 저장 하는 공간
 
     const onChangeInput1 = (event) => { setMyTextInput1(event) }
     const onChangeInput2 = (event) => { setMyTextInput2(event) }
-    const onChangeInput3 = (event) => { setMyTextInput3(event) }
+    const onChangeInput3_1 = (event) => { setMyTextInput3_1(event) }
+    const onChangeInput3_2 = (event) => { setMyTextInput3_2(event) }
     const onChangeInput4 = (event) => { setMyTextInput4(event) }
 
     const correct1 = () => {
-        if (myTextInput1 == 11) {
+        if (myTextInput1 == 84) {
             alert("next");
             setShow1(true) }
         else {
@@ -42,7 +50,7 @@ const Strate4_3 = (props) => {
     }
 
     const correct2 = () => {
-        if (myTextInput2 == 11) {
+        if (myTextInput2 == 21) {
             alert("next");
             setShow2(true) }
         else {
@@ -57,7 +65,7 @@ const Strate4_3 = (props) => {
     }
 
     const correct3 = () => {
-        if (myTextInput3 == 11) {
+        if (myTextInput3_1 == 42 && myTextInput3_2 == 51) {
             alert("next");
             setShow3(true) }
         else {
@@ -72,7 +80,7 @@ const Strate4_3 = (props) => {
     }
 
     const correct4 = () => {
-        if (myTextInput4 == 11) {
+        if (myTextInput4 == 'Faye') {
             dispatch(up4()) //점수 추가 액션 불러오기
             alert("Ok! It looks like Faye scored the most.");
             props.navigation.navigate("Quiz4") }
@@ -150,11 +158,23 @@ const Strate4_3 = (props) => {
                                         So then, how many points did Karla and Faye score?
                                     </Text>
                                 </View>
-                                <TextInput
-                                 style = {styles.textInput}
-                                 placeholder="Answer"
-                                 value = {myTextInput3}
-                                 onChangeText = {onChangeInput3}/>
+                                <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                    <Text style = {{fontSize:18}}>Karla:</Text>
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput3_1}
+                                     onChangeText = {onChangeInput3_1}
+                                     maxLength = {6}/>
+
+                                    <Text style = {{fontSize:18}}>Faye:</Text>
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput3_2}
+                                     onChangeText = {onChangeInput3_2}
+                                     maxLength = {6}/>
+                                </View>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -219,7 +239,10 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     textInput: {
-        margin:20,
+        marginTop:15,
+        marginBottom:15,
+        marginLeft:10,
+        marginRight:10,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,

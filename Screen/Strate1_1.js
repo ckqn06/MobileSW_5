@@ -1,6 +1,6 @@
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { up1 } from "../Redux/Actions";
 
@@ -8,23 +8,35 @@ const Strate1_1 = (props) => {
     const dispatch = useDispatch() // 액션 불러오기 면어
     //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
 
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
+            return () => backHandler.remove() }
+    }, [])
+
     var count1 = 3;
     var count2 = 3;
 
     const [show, setShow] = useState(false); //2번째 화면 상태 값 default는 false로 동작
-    const [myTextInput1, setMyTextInput1] = useState("") //1번 답 저장 하는 공간
+    const [myTextInput1_1, setMyTextInput1_1] = useState("") //1번 답 저장 하는 공간
+    const [myTextInput1_2, setMyTextInput1_2] = useState("") //1번 답 저장 하는 공간
+    const [myTextInput1_3, setMyTextInput1_3] = useState("") //1번 답 저장 하는 공간
     const [myTextInput2, setMyTextInput2] = useState("") //2번 답 저장 하는 공간
 
-    const onChangeInput1 = (event) => { setMyTextInput1(event) }
+    const onChangeInput1_1 = (event) => { setMyTextInput1_1(event) }
+    const onChangeInput1_2 = (event) => { setMyTextInput1_2(event) }
+    const onChangeInput1_3 = (event) => { setMyTextInput1_3(event) }
     const onChangeInput2 = (event) => { setMyTextInput2(event) }
     
     const correct1 = () => {
-       //- console.log("when starting, score: ", scoreCounter)
-        if (myTextInput1 == 11) {
+        if (myTextInput1_1==85.75 &&
+            (myTextInput1_2==3.25 && (myTextInput1_3=='7.5*p' || myTextInput1_3=='p*7.5' || myTextInput1_3=='7.5p' || myTextInput1_3=='p7.5')) ||
+            (myTextInput1_3==3.25 && (myTextInput1_2=='7.5*p' || myTextInput1_2=='p*7.5' || myTextInput1_2=='7.5p' || myTextInput1_2=='p7.5'))) {
             alert("next");
-            setShow(true) }
+            setShow(true)}
         else {
             if(count1 > 0) {
+                //setModalVisible(true)
                 count1 -= 1;
                 alert("miss you have "+(count1)+" chance");
             }
@@ -54,7 +66,7 @@ const Strate1_1 = (props) => {
         <KeyboardAvoidingView
          behavior={Platform.OS === "ios" ? "padding" : "height"}
          style={styles.mainView}> 
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>    
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <ScrollView style ={{width:"100%"}}>
                     <View style = {styles.mainView}>
                         <View style = {styles.quizSpace}>
@@ -65,11 +77,30 @@ const Strate1_1 = (props) => {
                                     and the $3.25 shipping fee combine to make $85.75
                                 </Text>
                             </View>
-                            <TextInput
-                             style = {styles.textInput}
-                             placeholder="Answer"
-                             value = {myTextInput1}
-                             onChangeText = {onChangeInput1}/>
+                            <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1_1}
+                                 onChangeText = {onChangeInput1_1}
+                                 maxLength = {6}/>
+                                <Text style = {{fontSize:18}}>=</Text>
+
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1_2}
+                                 onChangeText = {onChangeInput1_2}
+                                 maxLength = {6}/>
+                                <Text style = {{fontSize:18}}>+</Text>
+
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1_3}
+                                 onChangeText = {onChangeInput1_3}
+                                 maxLength = {6}/>
+                            </View>
                         </View >
 
                         <View style = {styles.checkButton}>
@@ -135,7 +166,10 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     textInput: {
-        margin:20,
+        marginTop:15,
+        marginBottom:15,
+        marginLeft:10,
+        marginRight:10,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,

@@ -1,4 +1,4 @@
-const Change5 =  (state = 0, action) => {
+const Change5 = (state = 0, action) => {
     switch (action.type) {
         case 'change5':
             return state + 1;

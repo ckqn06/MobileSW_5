@@ -8,16 +8,10 @@ const Sign_Up =  (props) =>{
     const onChangeName = (event => setUsername(event))
 
     const [email,setEmail] = useState("")
-    const onChangeEmail = (event) => {
-        //console.log("event", event)
-        setEmail(event)
-    }
+    const onChangeEmail = (event) => {setEmail(event)}
 
     const [myPWDInput,setmyPWDInput] = useState("")
-    const onChangePWDInput = (event) => {
-        //console.log("event", event)
-        setmyPWDInput(event)
-    }
+    const onChangePWDInput = (event) => {setmyPWDInput(event)}
 
     const setEmpty = () => {
         setUsername(""),
@@ -35,7 +29,6 @@ const Sign_Up =  (props) =>{
             try {
                 await SignUp(username, email, myPWDInput);
                 console.log("new User created")
-                props.navigation.navigate("Login")
                 setEmpty();
             }catch(error){alert(error.message)}
         }

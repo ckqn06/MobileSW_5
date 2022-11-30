@@ -53,6 +53,16 @@ const QuizList = (props) => {
     const [disable7, setdisable7] = useState(false);
     const [disable8, setdisable8] = useState(false);
 
+    //change1~8의 값이 1이면 버튼 색깔 회색으로 변경
+    const [style1, setStyle1] = useState(styles.subView);
+    const [style2, setStyle2] = useState(styles.subView);
+    const [style3, setStyle3] = useState(styles.subView);
+    const [style4, setStyle4] = useState(styles.subView);
+    const [style5, setStyle5] = useState(styles.subView);
+    const [style6, setStyle6] = useState(styles.subView);
+    const [style7, setStyle7] = useState(styles.subView);
+    const [style8, setStyle8] = useState(styles.subView);
+
     //여기 함수는 버튼 활성화 비활성화
     function button1() {
         if(ch1 == 0) { setdisable1(false) }
@@ -99,36 +109,43 @@ const QuizList = (props) => {
         if(score1 == 0) { setIcon1(Wrong) } 
         else if(score1 > 0 && score1 < 3) { setIcon1(Middle) }
         else if(score1 == 3) { setIcon1(Correct) } }
+    useEffect(()=>{ change1() }, [score1])
 
     function change2() {
         if(score2 == 0) { setIcon2(Wrong) } 
         else if(score2 > 0 && score2 < 3) { setIcon2(Middle) }
         else if(score2 == 3) { setIcon2(Correct) } }
+    useEffect(()=>{ change2() }, [score2])
 
     function change3() {
         if(score3 == 0) { setIcon3(Wrong) } 
         else if(score3 > 0 && score3 < 3) { setIcon3(Middle) }
         else if(score3 == 3) { setIcon3(Correct) } }
+    useEffect(()=>{ change3() }, [score3])
 
     function change4() {
         if(score4 == 0) { setIcon4(Wrong) } 
         else if(score4 > 0 && score4 < 3) { setIcon4(Middle) }
         else if(score4 == 3) { setIcon4(Correct) } }
+    useEffect(()=>{ change4() }, [score4])
 
     function change5() {
         if(score5 == 0) { setIcon5(Wrong) } 
         else if(score5 > 0 && score5 < 3) { setIcon5(Middle) }
         else if(score5 == 3) { setIcon5(Correct) } }
+    useEffect(()=>{ change5() }, [score5])
 
     function change6() {
         if(score6 == 0) { setIcon6(Wrong) } 
         else if(score6 > 0 && score6 < 3) { setIcon6(Middle) }
         else if(score6 == 3) { setIcon6(Correct) } }
+    useEffect(()=>{ change6() }, [score6])
 
     function change7() {
         if(score7 == 0) { setIcon7(Wrong) } 
         else if(score7 > 0 && score7 < 3) { setIcon7(Middle) }
         else if(score7 == 3) { setIcon7(Correct) } }
+    useEffect(()=>{ change7() }, [score7])
 
     function change8() {
         if(score8 == 0) { setIcon8(Wrong) } 
@@ -165,6 +182,31 @@ const QuizList = (props) => {
         }catch(error){alert(error.message)}
     }
 
+    //스타일 변경 함수
+    function changeStyle1() { if(ch1 == 1) { setStyle1(styles.disView)} }
+    useEffect(()=>{changeStyle1()},[ch1])
+
+    function changeStyle2() { if(ch2 == 1) { setStyle2(styles.disView)} }
+    useEffect(()=>{changeStyle2()},[ch2])
+
+    function changeStyle3() { if(ch3 == 1) { setStyle3(styles.disView)} }
+    useEffect(()=>{changeStyle3()},[ch3])
+
+    function changeStyle4() { if(ch4 == 1) { setStyle4(styles.disView)} }
+    useEffect(()=>{changeStyle4()},[ch4])
+
+    function changeStyle5() { if(ch5 == 1) { setStyle5(styles.disView)} }
+    useEffect(()=>{changeStyle5()},[ch5])
+
+    function changeStyle6() { if(ch6 == 1) { setStyle6(styles.disView)} }
+    useEffect(()=>{changeStyle6()},[ch6])
+
+    function changeStyle7() { if(ch7 == 1) { setStyle7(styles.disView)} }
+    useEffect(()=>{changeStyle7()},[ch7])
+
+    function changeStyle8() { if(ch8 == 1) { setStyle8(styles.disView)} }
+    useEffect(()=>{changeStyle8()},[ch8])
+
     return(
         <ScrollView style ={styles.mainView}>
             <View style = {styles.mainText}>
@@ -172,7 +214,7 @@ const QuizList = (props) => {
             </View>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz1")}} disabled = {disable1}>
-                <View style = {styles.subView}>
+                <View style = {style1}>
                     <Text style = {styles.button}>Quiz.1</Text>
                     <Image
                      style = {styles.statusImage}
@@ -181,7 +223,7 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz2")}} disabled = {disable2}>
-                <View style = {styles.subView}>
+                <View style = {style2}>
                     <Text style = {styles.button}>Quiz.2</Text>
                     <Image
                      style = {styles.statusImage}
@@ -190,7 +232,7 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz3")}} disabled = {disable3}>
-                <View style = {styles.subView}>
+                <View style = {style3}>
                     <Text style = {styles.button}>Quiz.3</Text>
                     <Image
                      style = {styles.statusImage}
@@ -199,7 +241,7 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz4")}} disabled = {disable4}>
-                <View style = {styles.subView}>
+                <View style = {style4}>
                     <Text style = {styles.button}>Quiz.4</Text>
                     <Image
                      style = {styles.statusImage}
@@ -208,7 +250,7 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz5")}} disabled = {disable5}>
-                <View style = {styles.subView}>
+                <View style = {style5}>
                     <Text style = {styles.button}>Quiz.5</Text>
                     <Image
                      style = {styles.statusImage}
@@ -217,7 +259,7 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz6")}} disabled = {disable6}>
-                <View style = {styles.subView}>
+                <View style = {style6}>
                     <Text style = {styles.button}>Quiz.6</Text>
                     <Image
                      style = {styles.statusImage}
@@ -226,7 +268,7 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz7")}} disabled = {disable7}>
-                <View style = {styles.subView}>
+                <View style = {style7}>
                     <Text style = {styles.button}>Quiz.7</Text>
                     <Image
                      style = {styles.statusImage}
@@ -235,7 +277,7 @@ const QuizList = (props) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz8")}} disabled = {disable8}>
-                <View style = {styles.subView}>
+                <View style = {style8}>
                     <Text style = {styles.button}>Quiz.8</Text>
                     <Image
                      style = {styles.statusImage}
@@ -251,18 +293,6 @@ const QuizList = (props) => {
                     <Text style = {styles.submitbutton}>SUBMIT</Text>
                 </View>
             </TouchableOpacity>
-
-            <View style = {styles.mainText}>
-                <Text style = {{fontSize:25}}>Score1: {score1}</Text>
-                <Text style = {{fontSize:25}}>Score2: {score2}</Text>
-                <Text style = {{fontSize:25}}>Score3: {score3}</Text>
-                <Text style = {{fontSize:25}}>Score4: {score4}</Text>
-                <Text style = {{fontSize:25}}>Score5: {score5}</Text>
-                <Text style = {{fontSize:25}}>Score6: {score6}</Text>
-                <Text style = {{fontSize:25}}>Score7: {score7}</Text>
-                <Text style = {{fontSize:25}}>Score8: {score8}</Text>
-                <Text style = {{fontSize:25}}>Change1: {ch1}</Text>
-            </View>
         </ScrollView>
     );
 }
@@ -285,6 +315,19 @@ const styles = StyleSheet.create({
         borderWidth:2,
         borderColor:'black',
         backgroundColor:'steelblue'
+    },
+    disView: {
+        flexDirection:'row',
+        justifyContent:'center',
+        padding:10,
+        marginLeft:70,
+        marginRight:70,
+        marginTop:15,
+        marginBottom:25,
+        borderRadius:10,
+        borderWidth:2,
+        borderColor:'black',
+        backgroundColor:'gray'
     },
     mainText: {
         alignItems:'center',
