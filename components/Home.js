@@ -16,7 +16,7 @@ const Home = ({navigation}) => {
         source={require('../assets/images/cube2.png')}
       />
       </View>
-          <Text style={styles.upperText}>Welcome</Text> 
+          <Text style={styles.upperText}>Welcome Teacher</Text> 
 
           <TouchableOpacity
               style={styles.btn}
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     },
     upperText: {
         marginTop: 30,
-        fontSize: 60,
+        fontSize: 35,
         fontWeight: "bold",
         color: 'white'
     },

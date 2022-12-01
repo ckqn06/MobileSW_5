@@ -9,7 +9,6 @@ const wait = (timeout) => {
     return new Promise(resolve => setTimeout(resolve, timeout));
 }
 
-
 const ResultScreen = ({navigation}) => {
 
     // 파이어베이스 모두 정보 가져오며 저장하기
@@ -36,17 +35,6 @@ const ResultScreen = ({navigation}) => {
             })
             setStudentRecord(user)
         })
-
-    //    await onSnapshot(q, (snapshot) => {
-    //         snapshot.docs.forEach((doc) => {
-    //             user.push({
-    //                 ...doc.data(),
-    //                 key: doc.id
-    //             })
-
-    //             setStudentRecord(user)
-    //         })
-    //     })
     }
 
     // 화면 처룸에 제시할때 useEffect 실행
@@ -54,22 +42,16 @@ const ResultScreen = ({navigation}) => {
         fetchData();
     }, [])
 
+
     const scoreSum = async () => {
 
         var sum = 0;
 
-       // var studentScore = []
-
-        for (let i = 0; i < studentRecord.length; i++){
-
-           // console.log(studentRecord[i].score)
-
-            sum += studentRecord[i].score
-
-           // studentScore.push(studentRecord[i].score)
-        }
+        for (let i = 0; i < studentRecord.length; i++)
+        { sum += studentRecord[i].score}
 
        console.log("sum of score is: ", sum)
+
             if(studentRecord.length>0){
             var average = (sum / studentRecord.length).toFixed(2)
             
@@ -79,10 +61,7 @@ const ResultScreen = ({navigation}) => {
             }else{
                 setScoreAverage(average)
             }
-                
-            //setScoreAverage(average)
         }
-
     }
 
     useEffect(() => {
@@ -92,13 +71,12 @@ const ResultScreen = ({navigation}) => {
     const onRefresh = React.useCallback(() => {
         setIsLoading(true);
         wait(2000).then(() => {
-            scoreSum()
             fetchData()
+            scoreSum()
             console.log("refresh control working")
             setIsLoading(false)
         })
     })
-
 
     return (
          <View style={styles.container}>
@@ -129,7 +107,7 @@ const ResultScreen = ({navigation}) => {
                     <FlatList
                         data={studentRecord}
                         renderItem={({ item, index }) => (
-                            item ? <TouchableOpacity 
+                            item !== null ? <TouchableOpacity 
                                     style={styles.Item}
                                     onPress={() => {
                                         navigation.navigate('Student', {

@@ -1,16 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, BackHandler, Alert, LogBox } from 'react-native';
+import { StyleSheet, Text, View, BackHandler, Alert, LogBox} from 'react-native';
 import { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './components/Home';
 import ResultScreen from './components/Results';
-import {createDrawerNavigator} from '@react-navigation/drawer'
 import StudentResult from './components/StudentResult';
 
 
-//const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
 
@@ -41,13 +39,20 @@ export default function App() {
 
 
   return (
-    <NavigationContainer>
-      <Drawer.Navigator>
-        <Drawer.Screen name='Home' component={Home} />
-        <Drawer.Screen name='ResultScreen' component={ResultScreen}/>
-        <Drawer.Screen name='Student' component={StudentResult}/>
-      </Drawer.Navigator>
+    <>
+    <StatusBar backgroundColor='#fff'/>
+     <NavigationContainer>
+    <Stack.Navigator screenOptions={{headerTitleAlign: 'center',
+                     headerStyle :{backgroundColor :  '#540375'},
+                     headerTintColor: '#fff',
+                     headerTitleStyle: {fontWeight: 'bold'}}}>
+      <Stack.Screen name='Home' component={Home}/>
+      <Stack.Screen name='ResultScreen' component={ResultScreen}/>
+      <Stack.Screen name='Student' component={StudentResult}/>
+    </Stack.Navigator>
     </NavigationContainer>
+    </>
+   
   );
 }
 

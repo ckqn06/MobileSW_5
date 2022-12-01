@@ -17,16 +17,20 @@ const StudentResult = ({route, navigation}) => {
         {score: JSON.stringify(score8)},
 
     ]    
+ 
+    const percent = (JSON.stringify(score) * 100 / (24)).toFixed(0) //student score in percentage
+    const studentName = JSON.stringify(name).replace(/"/g,"") // student's name
+    const studentEmail = JSON.stringify(email).replace(/"/g,"") // student's email
 
-    const percent = (JSON.stringify(score) * 100 / (24)).toFixed(0)
+
   return (
     <>
         <ScrollView>
         <View style={styles.item}>
 
 <View style={styles.upperView}>
-    <Text style={styles.upperText}>name: {JSON.stringify(name)}</Text>
-    <Text  style={styles.upperText}>email: {JSON.stringify(email)}</Text>
+    <Text style={styles.upperText}>name: {studentName}</Text>
+    <Text  style={styles.upperText}>email: {studentEmail}</Text>
 </View>
 
   <View style={styles.lowerView}>
@@ -125,7 +129,6 @@ const styles = StyleSheet.create({
     scoreItem:{
         padding: 12,
         marginVertical: 3,
-        marginHorizontal: 6,
         backgroundColor: '#80489C',
         borderRadius: 5,
         alignItems: 'center'
@@ -135,14 +138,4 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '900'
     }
-})
-
-
-{/* <Text>{JSON.stringify(score1)}/3</Text>
-<Text>{JSON.stringify(score2)}/3</Text>
-<Text>{JSON.stringify(score3)}/3</Text>
-<Text>{JSON.stringify(score4)}/3</Text>
-<Text>{JSON.stringify(score5)}/3</Text>
-<Text>{JSON.stringify(score6)}/3</Text>
-<Text>{JSON.stringify(score7)}/3</Text>
-<Text>{JSON.stringify(score8)}/3</Text> */}
+})  
