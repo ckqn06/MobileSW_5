@@ -30,13 +30,13 @@ const Strate1_3 = (props) => {
         else {
             if(count > 0) {
                 decrease();
-                alert("miss you have "+(count)+" chance");
+                alert("Wrong.. You have "+(count)+" chance left.");
             }
             else if(count == 0) {
                 dispatch(change1_3())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz1")
             } }
     }
@@ -81,11 +81,12 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,

@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Bac
 import { useState, useEffect } from 'react'
 import { useDispatch } from "react-redux"
 import { up7, change7_1, cor, wrong, unquiz } from "../Redux/Actions";
+import { Picker } from '@react-native-picker/picker';
 
 const Strate7_1 = (props) => {
     useEffect(() => {
@@ -12,6 +13,11 @@ const Strate7_1 = (props) => {
     }, [])
 
     const dispatch = useDispatch()
+
+    const [category1, setCategory1] = useState('+');
+    const [category2, setCategory2] = useState('+');
+    const [category3, setCategory3] = useState('<');
+    const [category4, setCategory4] = useState('<');
 
     const [count1, setCount1] = useState(2) 
     const [count2, setCount2] = useState(2) 
@@ -39,39 +45,57 @@ const Strate7_1 = (props) => {
     const onChangeInput3 = (event) => { setMyTextInput3(event) }
     
     const correct1 = () => {
-        if (myTextInput1_4==115 && (myTextInput1_1=='21*d' || myTextInput1_1=='d*21' || myTextInput1_1=='21d' || myTextInput1_1=='d21') &&
-            (myTextInput1_2==250 && (myTextInput1_3==0.10 || myTextInput1_3==0.1)) ||
-            (myTextInput1_3==250 && (myTextInput1_2==0.10 || myTextInput1_2==0.1))) {
-            alert("next");
+        if ((myTextInput1_1=='21*d' || myTextInput1_1=='d*21' || myTextInput1_1=='21d' || myTextInput1_1=='d21') &&
+            category1=='+' && myTextInput1_2==250 && category2=='*' && category3=='<=' && myTextInput1_4==115 &&
+            (myTextInput1_3==0.10 || myTextInput1_3==0.1)) {
+            alert("Correct! Let's solve the next prompt.");
+            setShow1(true) }
+        else if ((myTextInput1_1=='21*d' || myTextInput1_1=='d*21' || myTextInput1_1=='21d' || myTextInput1_1=='d21') &&
+            category1=='+' && myTextInput1_3==250 && category2=='*' && category3=='<=' && myTextInput1_4==115 &&
+            (myTextInput1_2==0.10 || myTextInput1_2==0.1)) {
+            alert("Correct! Let's solve the next prompt.");
+            setShow1(true) }
+        else if ((myTextInput1_3=='21*d' || myTextInput1_3=='d*21' || myTextInput1_3=='21d' || myTextInput1_3=='d21') &&
+            category2=='+' && myTextInput1_1==250 && category1=='*' && category3=='<=' && myTextInput1_4==115 &&
+            (myTextInput1_2==0.10 || myTextInput1_2==0.1)) {
+            alert("Correct! Let's solve the next prompt.");
+            setShow1(true) }
+        else if ((myTextInput1_3=='21*d' || myTextInput1_3=='d*21' || myTextInput1_3=='21d' || myTextInput1_3=='d21') &&
+            category2=='+' && myTextInput1_2==250 && category1=='*' && category3=='<=' && myTextInput1_4==115 &&
+            (myTextInput1_1==0.10 || myTextInput1_1==0.1)) {
+            alert("Correct! Let's solve the next prompt.");
             setShow1(true) }
         else {
             if(count1 > 0) {
                 decrease1();
-                alert("miss you have "+(count1)+" chance");
+                alert("Wrong.. You have "+(count1)+" chance left.");
             }
             else if(count1 == 0) {
                 dispatch(change7_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz7")
             } }
     }
 
     const correct2 = () => {
-        if (myTextInput2_1=='d' && myTextInput2_2=='4 2/7') {
-            alert("next");
+        if (myTextInput2_1=='d' && category4=='<=' && myTextInput2_2=='4 2/7') {
+            alert("Correct! Let's solve the next prompt.");
+            setShow2(true) }
+        else if (myTextInput2_1=='4 2/7' && category4=='>=' && myTextInput2_2=='d') {
+            alert("Correct! Let's solve the next prompt.");
             setShow2(true) }
         else {
             if(count2 > 0) {
                 decrease2();
-                alert("miss you have "+(count2)+" chance");
+                alert("Wrong.. You have "+(count2)+" chance left.");
             }
             else if(count2 == 0) {
                 dispatch(change7_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz7")
             } }
     }
@@ -82,18 +106,18 @@ const Strate7_1 = (props) => {
             dispatch(change7_1())
             dispatch(cor())
             dispatch(unquiz())
-            alert("Fantastic! Jim can rent the car for 4 days!");
+            alert("Fantastic! \nJim can rent the car for 4 days!");
             props.navigation.navigate("Quiz7") }
         else {
             if(count3 > 0) {
                 decrease3();
-                alert("miss you have "+(count3)+" chance");
+                alert("Wrong.. You have "+(count3)+" chance left.");
             }
             else if(count3 == 0) {
                 dispatch(change7_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz7")
             } }
     }
@@ -119,7 +143,17 @@ const Strate7_1 = (props) => {
                                  value = {myTextInput1_1}
                                  onChangeText = {onChangeInput1_1}
                                  maxLength = {5}/>
-                                <Text style = {{fontSize:18}}>+</Text>
+                                
+                                <View style = {styles.selection}>
+                                    <Picker
+                                        selectedValue = {category1}
+                                        onValueChange = {(itemValue) => setCategory1(itemValue)}>
+                                        <Picker.Item label = '+' value = "+"></Picker.Item>
+                                        <Picker.Item label = '-' value = "-"></Picker.Item>
+                                        <Picker.Item label = '*' value = "*"></Picker.Item>
+                                        <Picker.Item label = '/' value = "/"></Picker.Item>
+                                    </Picker>
+                                </View>
 
                                 <TextInput
                                  style = {styles.textInput}
@@ -127,15 +161,37 @@ const Strate7_1 = (props) => {
                                  value = {myTextInput1_2}
                                  onChangeText = {onChangeInput1_2}
                                  maxLength = {5}/>
-                                <Text style = {{fontSize:18}}>*</Text>
+                                
+                                <View style = {styles.selection}>
+                                    <Picker
+                                        selectedValue = {category2}
+                                        onValueChange = {(itemValue) => setCategory2(itemValue)}>
+                                        <Picker.Item label = '+' value = "+"></Picker.Item>
+                                        <Picker.Item label = '-' value = "-"></Picker.Item>
+                                        <Picker.Item label = '*' value = "*"></Picker.Item>
+                                        <Picker.Item label = '/' value = "/"></Picker.Item>
+                                    </Picker>
+                                </View>
+                            </View>
 
+                            <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                                 <TextInput
                                  style = {styles.textInput}
                                  placeholder="Answer"
                                  value = {myTextInput1_3}
                                  onChangeText = {onChangeInput1_3}
                                  maxLength = {5}/>
-                                <Text style = {{fontSize:18}}>{'<='}</Text>
+
+                                <View style = {styles.selection}>
+                                    <Picker
+                                        selectedValue = {category3}
+                                        onValueChange = {(itemValue) => setCategory3(itemValue)}>
+                                        <Picker.Item label = '<' value = "<"></Picker.Item>
+                                        <Picker.Item label = '>' value = ">"></Picker.Item>
+                                        <Picker.Item label = '<=' value = "<="></Picker.Item>
+                                        <Picker.Item label = '>=' value = ">="></Picker.Item>
+                                    </Picker>
+                                </View>
 
                                 <TextInput
                                  style = {styles.textInput}
@@ -171,7 +227,17 @@ const Strate7_1 = (props) => {
                                      value = {myTextInput2_1}
                                      onChangeText = {onChangeInput2_1}
                                      maxLength = {6}/>
-                                    <Text style = {{fontSize:18}}>{'<='}</Text>
+                                    
+                                    <View style = {styles.selection}>
+                                        <Picker
+                                            selectedValue = {category4}
+                                            onValueChange = {(itemValue) => setCategory4(itemValue)}>
+                                            <Picker.Item label = '<' value = "<"></Picker.Item>
+                                            <Picker.Item label = '>' value = ">"></Picker.Item>
+                                            <Picker.Item label = '<=' value = "<="></Picker.Item>
+                                            <Picker.Item label = '>=' value = ">="></Picker.Item>
+                                        </Picker>
+                                    </View>
 
                                     <TextInput
                                      style = {styles.textInput}
@@ -231,18 +297,16 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,
-        marginTop:10,
-        marginBottom:10,
-        marginLeft:20,
-        marginRight:20,
+        margin:10,
         borderRadius:5,
         borderWidth:2,
         borderColor:'black',
@@ -252,10 +316,10 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     textInput: {
-        marginTop:15,
-        marginBottom:15,
-        marginLeft:5,
-        marginRight:5,
+        marginTop:8,
+        marginBottom:8,
+        marginLeft:8,
+        marginRight:8,
         paddingHorizontal:5,
         borderRadius:5,
         borderWidth:1,
@@ -267,6 +331,15 @@ const styles = StyleSheet.create({
         marginRight:100,
         marginBottom:20,
         marginTop:10
+    },
+    selection: {
+        justifyContent:'center',
+        width:85,
+        height:30,
+        borderRadius:5,
+        borderWidth:1,
+        borderColor:'black',
+        backgroundColor:'white'
     }
 }); 
 

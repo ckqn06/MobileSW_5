@@ -35,18 +35,18 @@ const Strate8_1 = (props) => {
 
     const correct1 = () => {
         if (myTextInput1 == 50) {
-            alert("next");
+            alert("Correct! Let's solve the next prompt.");
             setShow1(true) }
         else {
             if(count1 > 0) {
                 decrease1();
-                alert("miss you have "+(count1)+" chance");
+                alert("Wrong.. You have "+(count1)+" chance left.");
             }
             else if(count1 == 0) {
                 dispatch(change8_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz8")
             } }
     }
@@ -55,18 +55,18 @@ const Strate8_1 = (props) => {
 
     const correct3 = () => {
         if (myTextInput3 == myTextInput2 * 2) {
-            alert("next");
+            alert("Correct! Let's solve the next prompt.");
             setShow3(true) }
         else {
             if(count3 > 0) {
                 decrease2();
-                alert("miss you have "+(count3)+" chance");
+                alert("Wrong.. You have "+(count3)+" chance left.");
             }
             else if(count3 == 0) {
                 dispatch(change8_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz8")
             } }
     }
@@ -77,18 +77,18 @@ const Strate8_1 = (props) => {
             dispatch(change8_1())
             dispatch(cor())
             dispatch(unquiz())
-            alert("Hey, that’s exactly 80 feet of fencing! It seems that 15 feet is a reasonable answer!");
+            alert("Hey, that’s exactly 80 feet of fencing! \n\nIt seems that 15 feet is a reasonable answer!");
             props.navigation.navigate("Quiz8") }
         else {
             if(count4 > 0) {
                 decrease3();
-                alert("miss you have "+(count4)+" chance");
+                alert("Wrong.. You have "+(count4)+" chance left.");
             }
             else if(count4 == 0) {
                 dispatch(change8_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz8")
             } }
     }
@@ -211,11 +211,12 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,

@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Bac
 import { useState, useEffect } from 'react'
 import { useDispatch } from "react-redux"
 import { up6, change6_1, cor, wrong, unquiz } from "../Redux/Actions";
+import { Picker } from '@react-native-picker/picker';
 
 const Strate6_1 = (props) => {
     useEffect(() => {
@@ -12,6 +13,8 @@ const Strate6_1 = (props) => {
     }, [])
 
     const dispatch = useDispatch()
+
+    const [category, setCategory] = useState('+');
 
     const [count1, setCount1] = useState(2) 
     const [count2, setCount2] = useState(2) 
@@ -30,21 +33,24 @@ const Strate6_1 = (props) => {
     const onChangeInput2 = (event) => { setMyTextInput2(event) }
     
     const correct1 = () => {
-        if (myTextInput1_3==104 &&
-            (myTextInput1_1==24 && (myTextInput1_2=='4*x' || myTextInput1_2=='x*4' || myTextInput1_2=='4x' || myTextInput1_2=='x4')) &&
-            (myTextInput1_2==24 && (myTextInput1_1=='4*x' || myTextInput1_1=='x*4' || myTextInput1_1=='4x' || myTextInput1_1=='x4'))) {
-            alert("next");
+        if (myTextInput1_2==24 && category=='+' && myTextInput1_3==104 &&
+            (myTextInput1_1=='4*x' || myTextInput1_1=='x*4' || myTextInput1_1=='4x' || myTextInput1_1=='x4')) {
+            alert("Correct! Let's solve the next prompt.");
+            setShow(true) }
+        else if (myTextInput1_1==24 && category=='+' && myTextInput1_3==104 &&
+            (myTextInput1_2=='4*x' || myTextInput1_2=='x*4' || myTextInput1_2=='4x' || myTextInput1_2=='x4')) {
+            alert("Correct! Let's solve the next prompt.");
             setShow(true) }
         else {
             if(count1 > 0) {
                 decrease1();
-                alert("miss you have "+(count1)+" chance");
+                alert("Wrong.. You have "+(count1)+" chance left.");
             }
             else if(count1 == 0) {
                 dispatch(change6_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz6")
             } }
     }
@@ -55,18 +61,18 @@ const Strate6_1 = (props) => {
             dispatch(change6_1())
             dispatch(cor())
             dispatch(unquiz())
-            alert("Nice! The width of the rectangle 20. Let’s try a different method!");
+            alert("Nice! The width of the rectangle 20. \n\nLet’s try a different method!");
             props.navigation.navigate("Quiz6") }
         else {
             if(count2 > 0) {
                 decrease2();
-                alert("miss you have "+(count2)+" chance");
+                alert("Wrong.. You have "+(count2)+" chance left.");
             }
             else if(count2 == 0) {
                 dispatch(change6_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz6")
             } }
     }
@@ -78,7 +84,7 @@ const Strate6_1 = (props) => {
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>    
                 <ScrollView style ={{width:"100%"}}>
                     <View style = {styles.mainView}>
-                        <View style = {styles.quizSpace}>
+                        <View style = {styles.quizSpace1}>
                             <View style = {{alignItems:'center'}}>
                                <Text style = {styles.header}>== PROMPT.1 ==</Text>
                                 <Text style = {styles.quizText}>What equation will represent the situation?{"\n"}{"\n"}
@@ -92,7 +98,17 @@ const Strate6_1 = (props) => {
                                  value = {myTextInput1_1}
                                  onChangeText = {onChangeInput1_1}
                                  maxLength = {6}/>
-                                <Text style = {{fontSize:18}}>+</Text>
+                                
+                                <View style = {styles.selection}>
+                                    <Picker
+                                        selectedValue = {category}
+                                        onValueChange = {(itemValue) => setCategory(itemValue)}>
+                                        <Picker.Item label = '+' value = "+"></Picker.Item>
+                                        <Picker.Item label = '-' value = "-"></Picker.Item>
+                                        <Picker.Item label = '*' value = "*"></Picker.Item>
+                                        <Picker.Item label = '/' value = "/"></Picker.Item>
+                                    </Picker>
+                                </View>
 
                                 <TextInput
                                  style = {styles.textInput}
@@ -121,7 +137,7 @@ const Strate6_1 = (props) => {
                         {/* 조건 연산자 사용 Ex. {조건 ? view : null} 초기 값이 false이기 때문에 null값이 선택되었다가 true로 바뀌면 view출력 */}
                         {show ? (
                         <View>
-                            <View style = {styles.quizSpace}>
+                            <View style = {styles.quizSpace2}>
                                 <View style = {{alignItems:'center'}}>
                                     <Text style = {styles.header}>== PROMPT.2 ==</Text>
                                     <Text style = {styles.quizText}>Nice job!{"\n"}
@@ -156,18 +172,27 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
-    quizSpace: {
+    quizSpace1: {
+        padding:5,
+        margin:10,
+        borderRadius:5,
+        borderWidth:2,
+        borderColor:'black',
+        backgroundColor:'#EFEFEF'
+    },
+    quizSpace2: {
         padding:5,
         marginTop:10,
         marginBottom:10,
-        marginLeft:35,
-        marginRight:35,
+        marginLeft:50,
+        marginRight:50,
         borderRadius:5,
         borderWidth:2,
         borderColor:'black',
@@ -179,8 +204,8 @@ const styles = StyleSheet.create({
     textInput: {
         marginTop:15,
         marginBottom:15,
-        marginLeft:10,
-        marginRight:10,
+        marginLeft:8,
+        marginRight:8,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,
@@ -192,6 +217,15 @@ const styles = StyleSheet.create({
         marginRight:100,
         marginBottom:20,
         marginTop:10
+    },
+    selection: {
+        justifyContent:'center',
+        width:75,
+        height:30,
+        borderRadius:5,
+        borderWidth:1,
+        borderColor:'black',
+        backgroundColor:'white'
     }
 }); 
 

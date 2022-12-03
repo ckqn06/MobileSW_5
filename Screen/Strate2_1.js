@@ -27,18 +27,18 @@ const Strate2_1 = (props) => {
 
     const correct1 = () => {
         if (myTextInput1 == '16 1/8') {
-            alert("next");
+            alert("Correct! Let's solve the next prompt.");
             setShow(true) }
         else {
             if(count1 > 0) {
                 decrease1();
-                alert("miss you have "+(count1)+" chance");
+                alert("Wrong.. You have "+(count1)+" chance left.");
             }
             else if(count1 == 0) {
                 dispatch(change2_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz2")
             } }
     }
@@ -49,18 +49,18 @@ const Strate2_1 = (props) => {
             dispatch(change2_1())
             dispatch(cor())
             dispatch(unquiz())
-            alert("Fantastic! You’ve found that Jen needs to run another 5 7/8 miles to reach her goal. Let’s try a different way to solve this problem!");
+            alert("Fantastic! You’ve found that Jen needs to run another 5 7/8 miles to reach her goal. \n\nLet’s try a different way to solve this problem!");
             props.navigation.navigate("Quiz2") }
         else {
             if(count2 > 0) {
                 decrease2();
-                alert("miss you have "+(count2)+" chance");
+                alert("Wrong.. You have "+(count2)+" chance left.");
             }
             else if(count2 == 0) {
                 dispatch(change2_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz2")
             } }
     }
@@ -138,11 +138,12 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,

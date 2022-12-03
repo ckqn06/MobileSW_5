@@ -16,6 +16,7 @@ const Quiz5 = (props) => {
     const ch5_1 = useSelector((state) => state.Change5_1)
     const ch5_2 = useSelector((state) => state.Change5_2)
     const ch5_3 = useSelector((state) => state.Change5_3)
+
     const [disable1, setdisable1] = useState(false);
     const [disable2, setdisable2] = useState(false);
     const [disable3, setdisable3] = useState(false);
@@ -42,9 +43,13 @@ const Quiz5 = (props) => {
     const showme = () => { setShow(true); }
 
     const check=()=>{
-        dispatch(up5())
-        dispatch(change5())
-        props.navigation.navigate("QuizList")
+        if(ch5_1!=1 || ch5_2!=1 || ch5_3!=1) {
+            alert("There is a strategy that has not been solved yet! \n\nPlease solve all the strategy and submit.") }
+        else {
+            dispatch(up5())
+            dispatch(change5())
+            props.navigation.navigate("QuizList")
+            alert("Successfully submitted!")}
     }
 
     return (
@@ -57,8 +62,8 @@ const Quiz5 = (props) => {
                         <View style = {styles.quizSpace}>
                             <View style = {{alignItems:'center'}}>
                                 <Text style = {styles.header}>== QUIZ ==</Text>
-                                <Text style = {styles.quizText}>Mario is setting up a new tent during a camping trip.{"\n"}
-                                    The tent came with 7 feet of rope.{"\n"}The instructions are to use 34.5 inches of the rope to tie a tarp on top of the tent.{"\n"} 
+                                <Text style = {styles.quizText}>Mario is setting up a new tent during a camping trip.
+                                    The tent came with 7 feet of rope.The instructions are to use 34.5 inches of the rope to tie a tarp on top of the tent.{"\n"} 
                                     Then, the remaining rope should be cut into 8¼-inch sections to tie the tent to stakes in the ground.{"\n"}  
                                     Mario will use all of the rope as instructed.{"\n"}{"\n"}  
                                     Write and solve an equation to determine the number of 8¼-inch sections of rope Mario can cut from the rope.
@@ -131,17 +136,20 @@ const styles = StyleSheet.create({
     mainView: {
         flex:1,
         paddingBottom:10,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:3,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,
-        margin:10,
-        borderRadius:5,
-        borderWidth:2,
+        marginTop:10,
+        marginLeft:10,
+        marginRight:10,
+        borderRadius:0,
+        borderWidth:1.5,
         borderColor:'black',
         backgroundColor:'#EFEFEF'
     },
@@ -150,14 +158,17 @@ const styles = StyleSheet.create({
     },
     subSpace: {
         padding:5,
-        marginLeft:20,
-        marginRight:20,
+        marginLeft:10,
+        marginRight:10,
         borderRadius:15,
-        borderWidth:2,
+        borderWidth:1.5,
+        borderTopStartRadius:0,
+        borderTopEndRadius:0,
         borderColor:'black',
         backgroundColor:'#EFEFEF'
     },
     subText: {
+        padding:7,
         fontSize:20
     },
     textInput: {
@@ -174,13 +185,12 @@ const styles = StyleSheet.create({
     sendButton: {
         marginLeft:100,
         marginRight:100,
-        marginBottom:10,
         marginTop:10
     },
     strateButton: {
         alignItems:'center',
         marginTop:10,
-        marginBottom:10,
+        marginBottom:10
     }
 });
 

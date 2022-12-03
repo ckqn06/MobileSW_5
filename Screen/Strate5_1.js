@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Bac
 import { useState, useEffect } from 'react'
 import { useDispatch } from "react-redux"
 import { up5, change5_1, cor, wrong, unquiz } from "../Redux/Actions";
+import { Picker } from '@react-native-picker/picker';
 
 const Strate5_1 = (props) => {
     useEffect(() => {
@@ -12,6 +13,8 @@ const Strate5_1 = (props) => {
     }, [])
 
     const dispatch = useDispatch()
+
+    const [category, setCategory] = useState('+');
 
     const [count1, setCount1] = useState(2) 
     const [count2, setCount2] = useState(2) 
@@ -30,21 +33,24 @@ const Strate5_1 = (props) => {
     const onChangeInput2 = (event) => { setMyTextInput2(event) }
     
     const correct1 = () => {
-        if (myTextInput1_3==84 &&
-            (myTextInput1_1==34.5 && (myTextInput1_2=='8.25*m' || myTextInput1_2=='m*8.25' || myTextInput1_2=='8.25m' || myTextInput1_2=='m8.25')) ||
-            (myTextInput1_2==34.5 && (myTextInput1_1=='8.25*m' || myTextInput1_1=='m*8.25' || myTextInput1_1=='8.25m' || myTextInput1_1=='m8.25'))) {
-            alert("next");
+        if (myTextInput1_1==34.5 && category=='+' && myTextInput1_3==84 &&
+            (myTextInput1_2=='8.25*m' || myTextInput1_2=='m*8.25' || myTextInput1_2=='8.25m' || myTextInput1_2=='m8.25')){
+            alert("Correct! Let's solve the next prompt.");
+            setShow(true) }
+        else if (myTextInput1_2==34.5 && category=='+' && myTextInput1_3==84 &&
+            (myTextInput1_1=='8.25*m' || myTextInput1_1=='m*8.25' || myTextInput1_1=='8.25m' || myTextInput1_1=='m8.25')){
+            alert("Correct! Let's solve the next prompt.");
             setShow(true) }
         else {
             if(count1 > 0) {
                 decrease1();
-                alert("miss you have "+(count1)+" chance");
+                alert("Wrong.. You have "+(count1)+" chance left.");
             }
             else if(count1 == 0) {
                 dispatch(change5_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz5")
             } }
     }
@@ -55,18 +61,18 @@ const Strate5_1 = (props) => {
             dispatch(change5_1())
             dispatch(cor())
             dispatch(unquiz())
-            alert("Nice! Mario can cut 6 sections of rope. Let’s try a different method!");
+            alert("Nice! \nMario can cut 6 sections of rope. \n\nLet’s try a different method!");
             props.navigation.navigate("Quiz5") }
         else {
             if(count2 > 0) {
                 decrease2();
-                alert("miss you have "+(count2)+" chance");
+                alert("Wrong.. You have "+(count2)+" chance left.");
             }
             else if(count2 == 0) {
                 dispatch(change5_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz5")
             } }
     }
@@ -92,7 +98,17 @@ const Strate5_1 = (props) => {
                                  value = {myTextInput1_1}
                                  onChangeText = {onChangeInput1_1}
                                  maxLength = {6}/>
-                                <Text style = {{fontSize:18}}>+</Text>
+                                
+                                <View style = {styles.selection}>
+                                    <Picker
+                                        selectedValue = {category}
+                                        onValueChange = {(itemValue) => setCategory(itemValue)}>
+                                        <Picker.Item label = '+' value = "+"></Picker.Item>
+                                        <Picker.Item label = '-' value = "-"></Picker.Item>
+                                        <Picker.Item label = '*' value = "*"></Picker.Item>
+                                        <Picker.Item label = '/' value = "/"></Picker.Item>
+                                    </Picker>
+                                </View>
 
                                 <TextInput
                                  style = {styles.textInput}
@@ -159,18 +175,16 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,
-        marginTop:10,
-        marginBottom:10,
-        marginLeft:25,
-        marginRight:25,
+        margin:10,
         borderRadius:5,
         borderWidth:2,
         borderColor:'black',
@@ -182,8 +196,8 @@ const styles = StyleSheet.create({
     textInput: {
         marginTop:15,
         marginBottom:15,
-        marginLeft:10,
-        marginRight:10,
+        marginLeft:8,
+        marginRight:8,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,
@@ -195,6 +209,15 @@ const styles = StyleSheet.create({
         marginRight:100,
         marginBottom:20,
         marginTop:10
+    },
+    selection: {
+        justifyContent:'center',
+        width:75,
+        height:30,
+        borderRadius:5,
+        borderWidth:1,
+        borderColor:'black',
+        backgroundColor:'white'
     }
 }); 
 

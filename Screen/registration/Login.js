@@ -19,8 +19,8 @@ const Login = (props) => {
     const onChangePWDInput = (event) => {setmyPWDInput(event)}
 
     const loginHandler = () => {
-        if (!email && !myPWDInput) { alert("email and password is required") }
-        else if (!email || !myPWDInput) { alert("email or password is required") }
+        if (!email && !myPWDInput) { alert("Email and Password is required.") }
+        else if (!email || !myPWDInput) { alert("Email or Password is required.") }
         else {
             Signin(email, myPWDInput)
             console.log("logged In")

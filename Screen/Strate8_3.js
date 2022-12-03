@@ -20,11 +20,11 @@ const Strate8_3 = (props) => {
     const decrease2 = () => { setCount2(count2-1); }
     const decrease3 = () => { setCount3(count3-1); }
 
-    const [show1, setShow1] = useState(false);              //2번째 화면 상태 값 default는 false로 동작
-    const [show2, setShow2] = useState(false);              //3번째 화면 상태 값 default는 false로 동작
-    const [myTextInput1, setMyTextInput1] = useState("")    //1번 답 저장 하는 공간
-    const [myTextInput2, setMyTextInput2] = useState("")    //2번 답 저장 하는 공간
-    const [myTextInput3, setMyTextInput3] = useState("")    //3번 답 저장 하는 공간
+    const [show1, setShow1] = useState(false);
+    const [show2, setShow2] = useState(false);
+    const [myTextInput1, setMyTextInput1] = useState("")
+    const [myTextInput2, setMyTextInput2] = useState("")
+    const [myTextInput3, setMyTextInput3] = useState("")
 
     const onChangeInput1 = (event) => { setMyTextInput1(event) }
     const onChangeInput2 = (event) => { setMyTextInput2(event) }
@@ -32,36 +32,36 @@ const Strate8_3 = (props) => {
     
     const correct1 = () => {
         if (myTextInput1 == 50) {
-            alert("next");
+            alert("Correct! Let's solve the next prompt.");
             setShow1(true) }
         else {
             if(count1 > 0) {
                 decrease1();
-                alert("miss you have "+(count1)+" chance");
+                alert("Wrong.. You have "+(count1)+" chance left.");
             }
             else if(count1 == 0) {
                 dispatch(change8_3())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz8")
             } }
     }
 
     const correct2 = () => {
         if (myTextInput2 == 30) {
-            alert("next");
+            alert("Correct! Let's solve the next prompt.");
             setShow2(true) }
         else {
             if(count2 > 0) {
                 decrease2();
-                alert("miss you have "+(count2)+" chance");
+                alert("Wrong.. You have "+(count2)+" chance left.");
             }
             else if(count2 == 0) {
                 dispatch(change8_3())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz8")
             } }
     }
@@ -77,13 +77,13 @@ const Strate8_3 = (props) => {
         else {
             if(count3 > 0) {
                 decrease3();
-                alert("miss you have "+(count3)+" chance");
+                alert("Wrong.. You have "+(count3)+" chance left.");
             }
             else if(count3 == 0) {
                 dispatch(change8_3())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz8")
             } }
     }
@@ -190,11 +190,12 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,

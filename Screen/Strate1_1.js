@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Bac
 import { useState, useEffect } from 'react'
 import { useDispatch } from "react-redux"
 import { up1, change1_1, cor, wrong, unquiz } from "../Redux/Actions";
+import { Picker } from '@react-native-picker/picker';
 
 const Strate1_1 = (props) => {
     useEffect(() => {
@@ -12,6 +13,8 @@ const Strate1_1 = (props) => {
     }, [])
 
     const dispatch = useDispatch() 
+
+    const [category, setCategory] = useState('+');
 
     const [count1, setCount1] = useState(2) 
     const [count2, setCount2] = useState(2) 
@@ -30,21 +33,24 @@ const Strate1_1 = (props) => {
     const onChangeInput2 = (event) => { setMyTextInput2(event) }
     
     const correct1 = () => {
-        if (myTextInput1_1==85.75 &&
-            (myTextInput1_2==3.25 && (myTextInput1_3=='7.5*p' || myTextInput1_3=='p*7.5' || myTextInput1_3=='7.5p' || myTextInput1_3=='p7.5')) ||
-            (myTextInput1_3==3.25 && (myTextInput1_2=='7.5*p' || myTextInput1_2=='p*7.5' || myTextInput1_2=='7.5p' || myTextInput1_2=='p7.5'))) {
-            alert("next");
+        if (myTextInput1_1==85.75 && myTextInput1_2==3.25 && category=='+' &&
+            (myTextInput1_3=='7.5*p' || myTextInput1_3=='p*7.5' || myTextInput1_3=='7.5p' || myTextInput1_3=='p7.5')) {
+            alert("Correct! Let's solve the next prompt.");
+            setShow(true)}
+        else if (myTextInput1_1==85.75 && myTextInput1_3==3.25 && category=='+' &&
+            (myTextInput1_2=='7.5*p' || myTextInput1_2=='p*7.5' || myTextInput1_2=='7.5p' || myTextInput1_2=='p7.5')) {
+            alert("Correct! Let's solve the next prompt.");
             setShow(true)}
         else {
             if(count1 > 0) {
                 decrease1()
-                alert("miss you have "+(count1)+" chance");
+                alert("Wrong.. You have "+(count1)+" chance left.");
             }
             else if(count1 == 0) {
                 dispatch(change1_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz1")
             } }
     }
@@ -60,13 +66,13 @@ const Strate1_1 = (props) => {
         else {
             if(count2 > 0) {
                 decrease2();
-                alert("miss you have "+(count2)+" chance");
+                alert("Wrong.. You have "+(count2)+" chance left.");
             }
             else if(count2 == 0) {
                 dispatch(change1_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz1")
             } }
     }
@@ -101,7 +107,17 @@ const Strate1_1 = (props) => {
                                  value = {myTextInput1_2}
                                  onChangeText = {onChangeInput1_2}
                                  maxLength = {6}/>
-                                <Text style = {{fontSize:18}}>+</Text>
+
+                                <View style = {styles.selection}>
+                                    <Picker
+                                        selectedValue = {category}
+                                        onValueChange = {(itemValue) => setCategory(itemValue)}>
+                                        <Picker.Item label = '+' value = "+"></Picker.Item>
+                                        <Picker.Item label = '-' value = "-"></Picker.Item>
+                                        <Picker.Item label = '*' value = "*"></Picker.Item>
+                                        <Picker.Item label = '/' value = "/"></Picker.Item>
+                                    </Picker>
+                                </View>
 
                                 <TextInput
                                  style = {styles.textInput}
@@ -157,11 +173,12 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,
@@ -177,8 +194,8 @@ const styles = StyleSheet.create({
     textInput: {
         marginTop:15,
         marginBottom:15,
-        marginLeft:10,
-        marginRight:10,
+        marginLeft:8,
+        marginRight:8,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,
@@ -190,6 +207,15 @@ const styles = StyleSheet.create({
         marginRight:100,
         marginBottom:20,
         marginTop:10
+    },
+    selection: {
+        justifyContent:'center',
+        width:75,
+        height:30,
+        borderRadius:5,
+        borderWidth:1,
+        borderColor:'black',
+        backgroundColor:'white'
     }
 }); 
 

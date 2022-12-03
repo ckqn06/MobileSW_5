@@ -35,18 +35,18 @@ const Strate6_2 = (props) => {
 
     const correct2 = () => {
         if (myTextInput2 == (Number(myTextInput1) + 12)) {
-            alert("next");
+            alert("Correct! Let's solve the next prompt.");
             setShow2(true) }
         else {
             if(count2 > 0) {
                 decrease1();
-                alert("miss you have "+(count2)+" chance");
+                alert("Wrong.. You have "+(count2)+" chance left.");
             }
             else if(count2 == 0) {
                 dispatch(change6_2())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz6")
             } }
     }
@@ -57,10 +57,9 @@ const Strate6_2 = (props) => {
             dispatch(change6_2())
             dispatch(cor())
             dispatch(unquiz())
-            alert("Nice! The width of the rectangle 20. Let’s try a different method!");
+            alert("Nice! The width of the rectangle 20. \n\nLet’s try a different method!");
             props.navigation.navigate("Quiz6") }
         else {
-            alert("next");
             setShow3(true) }
     }
 
@@ -70,18 +69,18 @@ const Strate6_2 = (props) => {
             dispatch(change6_2())
             dispatch(cor())
             dispatch(unquiz())
-            alert("Nice! The width of the rectangle 20. Let’s try a different method!");
+            alert("Nice! The width of the rectangle 20. \n\nLet’s try a different method!");
             props.navigation.navigate("Quiz6") }
         else {
             if(count4 > 0) {
                 decrease2();
-                alert("miss you have "+(count4)+" chance");
+                alert("Wrong.. You have "+(count4)+" chance left.");
             }
             else if(count4 == 0) {
                 dispatch(change6_2())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz6")
             } }
     }
@@ -202,11 +201,12 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,

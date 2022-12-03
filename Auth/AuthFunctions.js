@@ -29,12 +29,12 @@ export const SignUp = async (username, email, password) => {
                  score8: 0 }
 
         setDoc(mydoc, userData)
-        .then(() => alert("data entered succesfully!"))
+        .then(() => alert("Sign Up Succesfully!"))
         .catch(error => console.log(error.message))})
         .catch(error => {
-                if (error.code === 'auth/email-already-in-use') { throw new Error ("email is already in use") }
-                if (error.code === 'auth/invalid-email') { throw new Error ("this email is not valid") }
-                if (error.code === 'auth/weak-password') { throw new Error ("Password is too weak. Enter 6 characters at least") }})
+                if (error.code === 'auth/email-already-in-use') { throw new Error ("Email is already in use.") }
+                if (error.code === 'auth/invalid-email') { throw new Error ("This Email is not valid.") }
+                if (error.code === 'auth/weak-password') { throw new Error ("Password is too weak. Enter 6 characters at least.") }})
 }
 
 //Login 하기 위한 기능  
@@ -43,9 +43,9 @@ export const Signin = (email, password) => {
             .then((cred) => { const currentUser = cred.user 
                 console.log(currentUser) })
             .catch(error => {
-                if (error.code === 'auth/invalid-email') { alert("Entered email is not valid") }
-                if (error.code === 'auth/user-not-found') { alert("There is no user corresponding to the given email") }
-                if (error.code === 'auth/wrong-password') { alert("The password is invalid for the given email") }})
+                if (error.code === 'auth/invalid-email') { alert("Entered email is not valid.") }
+                if (error.code === 'auth/user-not-found') { alert("There is no user corresponding to the given email.") }
+                if (error.code === 'auth/wrong-password') { alert("The password is invalid for the given email.") }})
 }
 
 //Logout 하기 위한 기능

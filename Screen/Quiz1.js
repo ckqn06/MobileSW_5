@@ -1,4 +1,4 @@
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler, Alert,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
@@ -16,6 +16,7 @@ const Quiz1 = (props) => {
     const ch1_1 = useSelector((state) => state.Change1_1)
     const ch1_2 = useSelector((state) => state.Change1_2)
     const ch1_3 = useSelector((state) => state.Change1_3)
+
     const [disable1, setdisable1] = useState(false);
     const [disable2, setdisable2] = useState(false);
     const [disable3, setdisable3] = useState(false);
@@ -42,9 +43,13 @@ const Quiz1 = (props) => {
     const showme = () => { setShow(true); }
 
     const check=()=>{
-        dispatch(up1())
-        dispatch(change1())
-        props.navigation.navigate("QuizList")
+        if(ch1_1!=1 || ch1_2!=1 || ch1_3!=1) {
+            alert("There is a strategy that has not been solved yet! \n\nPlease solve all the strategy and submit.") }
+        else {
+            dispatch(up1())
+            dispatch(change1())
+            props.navigation.navigate("QuizList")
+            alert("Successfully submitted!")}
     }
 
     return (
@@ -131,17 +136,20 @@ const styles = StyleSheet.create({
     mainView: {
         flex:1,
         paddingBottom:10,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:3,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,
-        margin:10,
-        borderRadius:5,
-        borderWidth:2,
+        marginTop:10,
+        marginLeft:10,
+        marginRight:10,
+        borderRadius:0,
+        borderWidth:1.5,
         borderColor:'black',
         backgroundColor:'#EFEFEF'
     },
@@ -150,14 +158,17 @@ const styles = StyleSheet.create({
     },
     subSpace: {
         padding:5,
-        marginLeft:20,
-        marginRight:20,
+        marginLeft:10,
+        marginRight:10,
         borderRadius:15,
-        borderWidth:2,
+        borderWidth:1.5,
+        borderTopStartRadius:0,
+        borderTopEndRadius:0,
         borderColor:'black',
         backgroundColor:'#EFEFEF'
     },
     subText: {
+        padding:7,
         fontSize:20
     },
     textInput: {
@@ -174,13 +185,12 @@ const styles = StyleSheet.create({
     sendButton: {
         marginLeft:100,
         marginRight:100,
-        marginBottom:10,
         marginTop:10
     },
     strateButton: {
         alignItems:'center',
         marginTop:10,
-        marginBottom:10,
+        marginBottom:10
     }
 }); 
 

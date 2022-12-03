@@ -62,14 +62,13 @@ export default function App() {
   useEffect(() => {
     const backAction = () =>{ Alert.alert("Hold on!", "Are you sure you want to exit?",
       [{ 
-        text: 'Cancel',
+        text: 'No',
         onPress: () => null,
         style: 'cancel' },
       { text: "YES",
         onPress: () => {
           LogOut()
-          BackHandler.exitApp()
-        } }]);
+          BackHandler.exitApp() }}]);
       return true; };
 
     const backHandler = BackHandler.addEventListener( "hardwareBackPress", backAction );
@@ -82,51 +81,51 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName='Login'>
           <Stack.Screen name = "Login" component={Login} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Sign_Up" component={Sign_Up} options={{headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Sign_Up" component={Sign_Up} options={{title:'Sign Up',headerTitleAlign:'center'}}/>
           <Stack.Screen name = "Welcome" component={Welcome} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
           <Stack.Screen name = "Main" component={Main} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "QuizList" component={QuizList} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "QuizList" component={QuizList} options={{title:'Quiz List',headerTitleAlign:'center'}}/>
 
-          <Stack.Screen name = "Quiz1" component={Quiz1} options={{headerTitleAlign:'center'}}/>
-          <Stack.Screen name = "Quiz2" component={Quiz2} options={{headerTitleAlign:'center'}}/>
-          <Stack.Screen name = "Quiz3" component={Quiz3} options={{headerTitleAlign:'center'}}/>
-          <Stack.Screen name = "Quiz4" component={Quiz4} options={{headerTitleAlign:'center'}}/>
-          <Stack.Screen name = "Quiz5" component={Quiz5} options={{headerTitleAlign:'center'}}/>
-          <Stack.Screen name = "Quiz6" component={Quiz6} options={{headerTitleAlign:'center'}}/>
-          <Stack.Screen name = "Quiz7" component={Quiz7} options={{headerTitleAlign:'center'}}/>
-          <Stack.Screen name = "Quiz8" component={Quiz8} options={{headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz1" component={Quiz1} options={{title:'Quiz.1',headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz2" component={Quiz2} options={{title:'Quiz.2',headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz3" component={Quiz3} options={{title:'Quiz.3',headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz4" component={Quiz4} options={{title:'Quiz.4',headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz5" component={Quiz5} options={{title:'Quiz.5',headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz6" component={Quiz6} options={{title:'Quiz.6',headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz7" component={Quiz7} options={{title:'Quiz.7',headerTitleAlign:'center'}}/>
+          <Stack.Screen name = "Quiz8" component={Quiz8} options={{title:'Quiz.8',headerTitleAlign:'center'}}/>
 
-          <Stack.Screen name = "Strate1_1" component={Strate1_1} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate1_2" component={Strate1_2} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate1_3" component={Strate1_3} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate1_1" component={Strate1_1} options={{title:'Strategy A',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate1_2" component={Strate1_2} options={{title:'Strategy B',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate1_3" component={Strate1_3} options={{title:'Strategy C',headerTitleAlign:'center',headerLeft:()=>null}}/>
         
-          <Stack.Screen name = "Strate2_1" component={Strate2_1} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate2_2" component={Strate2_2} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate2_3" component={Strate2_3} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate2_1" component={Strate2_1} options={{title:'Strategy A',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate2_2" component={Strate2_2} options={{title:'Strategy B',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate2_3" component={Strate2_3} options={{title:'Strategy C',headerTitleAlign:'center',headerLeft:()=>null}}/>
 
-          <Stack.Screen name = "Strate3_1" component={Strate3_1} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate3_2" component={Strate3_2} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate3_3" component={Strate3_3} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate3_1" component={Strate3_1} options={{title:'Strategy A',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate3_2" component={Strate3_2} options={{title:'Strategy B',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate3_3" component={Strate3_3} options={{title:'Strategy C',headerTitleAlign:'center',headerLeft:()=>null}}/>
 
-          <Stack.Screen name = "Strate4_1" component={Strate4_1} options={{headerTitleAlign:'center',headerLeft:()=>null}}/> 
-          <Stack.Screen name = "Strate4_2" component={Strate4_2} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate4_3" component={Strate4_3} options={{headerTitleAlign:'center',headerLeft:()=>null}}/> 
+          <Stack.Screen name = "Strate4_1" component={Strate4_1} options={{title:'Strategy A',headerTitleAlign:'center',headerLeft:()=>null}}/> 
+          <Stack.Screen name = "Strate4_2" component={Strate4_2} options={{title:'Strategy B',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate4_3" component={Strate4_3} options={{title:'Strategy C',headerTitleAlign:'center',headerLeft:()=>null}}/> 
 
-          <Stack.Screen name = "Strate5_1" component={Strate5_1} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate5_2" component={Strate5_2} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate5_3" component={Strate5_3} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate5_1" component={Strate5_1} options={{title:'Strategy A',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate5_2" component={Strate5_2} options={{title:'Strategy B',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate5_3" component={Strate5_3} options={{title:'Strategy C',headerTitleAlign:'center',headerLeft:()=>null}}/>
 
-          <Stack.Screen name = "Strate6_1" component={Strate6_1} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate6_2" component={Strate6_2} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate6_3" component={Strate6_3} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate6_1" component={Strate6_1} options={{title:'Strategy A',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate6_2" component={Strate6_2} options={{title:'Strategy B',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate6_3" component={Strate6_3} options={{title:'Strategy C',headerTitleAlign:'center',headerLeft:()=>null}}/>
 
-          <Stack.Screen name = "Strate7_1" component={Strate7_1} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate7_2" component={Strate7_2} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate7_3" component={Strate7_3} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate7_1" component={Strate7_1} options={{title:'Strategy A',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate7_2" component={Strate7_2} options={{title:'Strategy B',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate7_3" component={Strate7_3} options={{title:'Strategy C',headerTitleAlign:'center',headerLeft:()=>null}}/>
 
-          <Stack.Screen name = "Strate8_1" component={Strate8_1} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate8_2" component={Strate8_2} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
-          <Stack.Screen name = "Strate8_3" component={Strate8_3} options={{headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate8_1" component={Strate8_1} options={{title:'Strategy A',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate8_2" component={Strate8_2} options={{title:'Strategy B',headerTitleAlign:'center',headerLeft:()=>null}}/>
+          <Stack.Screen name = "Strate8_3" component={Strate8_3} options={{title:'Strategy C',headerTitleAlign:'center',headerLeft:()=>null}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

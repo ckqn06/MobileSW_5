@@ -53,8 +53,8 @@ import Correct from "./Reducers/Correct";
 import Wrong from "./Reducers/Wrong";
 import UnQuiz from "./Reducers/UnQuiz";
 
-import { createStore, combineReducers } from "redux" // createStore는 스토어를 만들어주는 함수입니다.
-                                                    // 리액트 프로젝트에서는 단 하나의 스토어를 만듭니다.
+import { createStore, combineReducers } from "redux"
+
 const rootReducer = combineReducers({
     Score1, Score2, Score3, Score4, Score5, Score6, Score7, Score8,
     Change1, Change1_1, Change1_2, Change1_3, Change2, Change2_1, Change2_2, Change2_3,

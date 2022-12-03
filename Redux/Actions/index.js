@@ -55,4 +55,4 @@ export const wrong = () => { return {type:'wrong'}};
 
 //decrement 함수 불러오면 점수 감소
 export const decrement = () => { return {type: 'DECREMENT'} };
-export const  unquiz = () => { return {type: 'unquiz'} };
+export const unquiz = () => { return {type: 'unquiz'} };

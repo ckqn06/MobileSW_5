@@ -3,6 +3,7 @@ import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Bac
 import { useState, useEffect } from 'react'
 import { useDispatch } from "react-redux"
 import { up4, change4_1, cor, wrong, unquiz } from "../Redux/Actions";
+import { Picker } from '@react-native-picker/picker';
 
 const Strate4_1 = (props) => {
     useEffect(() => {
@@ -12,6 +13,8 @@ const Strate4_1 = (props) => {
     }, [])
 
     const dispatch = useDispatch()
+
+    const [category, setCategory] = useState('Elena');
     
     const [count2, setCount1] = useState(2) 
     const [count3, setCount2] = useState(2) 
@@ -27,70 +30,68 @@ const Strate4_1 = (props) => {
     const [myTextInput2_1, setMyTextInput2_1] = useState("")
     const [myTextInput2_2, setMyTextInput2_2] = useState("")
     const [myTextInput3, setMyTextInput3] = useState("")
-    const [myTextInput4, setMyTextInput4] = useState("")
 
     const onChangeInput1 = (event) => { setMyTextInput1(event) }
     const onChangeInput2_1 = (event) => { setMyTextInput2_1(event) }
     const onChangeInput2_2 = (event) => { setMyTextInput2_2(event) }
     const onChangeInput3 = (event) => { setMyTextInput3(event) }
-    const onChangeInput4 = (event) => { setMyTextInput4(event) }
 
     const correct1 = () => { setShow1(true) }
 
     const correct2 = () => {
         if (myTextInput2_1==myTextInput1*2 && myTextInput2_2==(Number(myTextInput1)+30)) {
-            alert("next");
+            alert("Correct! Let's solve the next prompt.");
             setShow2(true) }
         else {
             if(count2 > 0) {
                 decrease1();
-                alert("miss you have "+(count2)+" chance");
+                alert("Wrong.. You have "+(count2)+" chance left.");
             }
             else if(count2 == 0) {
                 dispatch(change4_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz4")
             } }
     }
 
     const correct3 = () => {
         if (myTextInput3 == 114) {
-            alert("next");
+            alert("Correct! Let's solve the next prompt.");
             setShow3(true) }
         else {
             if(count3 > 0) {
                 decrease2();
-                alert("miss you have "+(count3)+" chance");
+                alert("Wrong.. You have "+(count3)+" chance left.");
             }
             else if(count3 == 0) {
                 dispatch(change4_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz4")
             } }
     }
 
     const correct4 = () => {
-        if (myTextInput4 == 'Faye') {
+        if (category == 'Faye') {
             dispatch(up4())
             dispatch(change4_1())
             dispatch(cor())
             dispatch(unquiz())
-            alert("Ok! It looks like Faye scored the most.");
+            alert("Ok! \nIt looks like Faye scored the most.");
             props.navigation.navigate("Quiz4") }
         else {
             if(count4 > 0) {
                 decrease3();
-                alert("miss you have "+(count4)+" chance");
+                alert("Wrong.. You have "+(count4)+" chance left.");
             }
             else if(count4 == 0) {
                 dispatch(change4_1())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz4")
             } }
     }
@@ -195,12 +196,17 @@ const Strate4_1 = (props) => {
                                         The points for Elena, Karla, and Faye{"\n"}add up to 114, so that seems correct!{"\n"}{"\n"}
                                         So who scored the most?
                                     </Text>
+
+                                    <View style = {styles.selection}>
+                                        <Picker
+                                            selectedValue = {category}
+                                            onValueChange = {(itemValue) => setCategory(itemValue)}>
+                                            <Picker.Item label = 'Elena' value = "Elena"></Picker.Item>
+                                            <Picker.Item label = 'Karla' value = "Karla"></Picker.Item>
+                                            <Picker.Item label = 'Faye' value = "Faye"></Picker.Item>
+                                        </Picker>
+                                    </View>
                                 </View>
-                                <TextInput
-                                 style = {styles.textInput}
-                                 placeholder="Answer"
-                                 value = {myTextInput4}
-                                 onChangeText = {onChangeInput4}/>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -223,11 +229,12 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,
@@ -256,6 +263,17 @@ const styles = StyleSheet.create({
         marginRight:100,
         marginBottom:20,
         marginTop:10
+    },
+    selection: {
+        justifyContent:'center',
+        marginTop:15,
+        marginBottom:15,
+        width:150,
+        height:30,
+        borderRadius:5,
+        borderWidth:1,
+        borderColor:'black',
+        backgroundColor:'white'
     }
 }); 
 

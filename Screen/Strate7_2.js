@@ -30,18 +30,18 @@ const Strate7_2 = (props) => {
     
     const correct1 = () => {
         if (myTextInput1 == 25) {
-            alert("next");
+            alert("Correct! Let's solve the next prompt.");
             setShow1(true) }
         else {
             if(count1 > 0) {
                 decrease1();
-                alert("miss you have "+(count1)+" chance");
+                alert("Wrong.. You have "+(count1)+" chance left.");
             }
             else if(count1 == 0) {
                 dispatch(change7_2())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz7")
             } }
     }
@@ -54,18 +54,18 @@ const Strate7_2 = (props) => {
             dispatch(change7_2())
             dispatch(cor())
             dispatch(unquiz())
-            alert("Fantastic! Jim can rent the car for 4 days!");
+            alert("Fantastic! \nJim can rent the car for 4 days!");
             props.navigation.navigate("Quiz7") }
         else {
             if(count3 > 0) {
                 decrease2();
-                alert("miss you have "+(count3)+" chance");
+                alert("Wrong.. You have "+(count3)+" chance left.");
             }
             else if(count3 == 0) {
                 dispatch(change7_2())
                 dispatch(wrong())
                 dispatch(unquiz())
-                alert("miss you have no chance")
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz7")
             } }
     }
@@ -164,11 +164,12 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,
