@@ -1,94 +1,86 @@
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux"
-import { up6 } from "../Redux/Actions";
+import { useDispatch } from "react-redux"
+import { up6, change6_2, cor, wrong, unquiz } from "../Redux/Actions";
 
 const Strate6_2 = (props) => {
-    const dispatch = useDispatch() // 액션 불러오기 면어
-    //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
-
     useEffect(() => {
         if (Platform.OS === 'android') {
             const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
             return () => backHandler.remove() }
     }, [])
 
-    var count1 = 3;
-    var count2 = 3;
-    var count3 = 3;
-    var count4 = 3;
+    const dispatch = useDispatch()
 
-    const [show1, setShow1] = useState(false); //2번째 화면 상태 값 default는 false로 동작
-    const [show2, setShow2] = useState(false); //3번째 화면 상태 값 default는 false로 동작
-    const [show3, setShow3] = useState(false); //4번째 화면 상태 값 default는 false로 동작
-    const [myTextInput1, setMyTextInput1] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput2, setMyTextInput2] = useState("") //2번 답 저장 하는 공간
-    const [myTextInput3, setMyTextInput3] = useState("") //3번 답 저장 하는 공간
-    const [myTextInput4, setMyTextInput4] = useState("") //4번 답 저장 하는 공간
+    const [count2, setCount1] = useState(2) 
+    const [count4, setCount2] = useState(2) 
+    const decrease1 = () => { setCount1(count2-1); }                                
+    const decrease2 = () => { setCount2(count4-1); } 
+
+    const [show1, setShow1] = useState(false);
+    const [show2, setShow2] = useState(false);
+    const [show3, setShow3] = useState(false);
+    const [myTextInput1, setMyTextInput1] = useState("")
+    const [myTextInput2, setMyTextInput2] = useState("")
+    const [myTextInput3, setMyTextInput3] = useState("")
+    const [myTextInput4, setMyTextInput4] = useState("")
 
     const onChangeInput1 = (event) => { setMyTextInput1(event) }
     const onChangeInput2 = (event) => { setMyTextInput2(event) }
     const onChangeInput3 = (event) => { setMyTextInput3(event) }
     const onChangeInput4 = (event) => { setMyTextInput4(event) }
 
-    const correct1 = () => {
-        if (myTextInput1 == 11) {
-            alert("next");
-            setShow1(true) }
-        else {
-            if(count1 > 0) {
-                count1 -= 1;
-                alert("miss you have "+(count1)+" chance");
-            }
-            else if(count1 == 0) {
-                alert("miss you have no chance")
-                props.navigation.navigate("Quiz6")
-            } }
-    }
+    const correct1 = () => {setShow1(true)}
 
     const correct2 = () => {
-        if (myTextInput2 == 11) {
-            alert("next");
+        if (myTextInput2 == (Number(myTextInput1) + 12)) {
+            alert("Correct! Let's solve the next prompt.");
             setShow2(true) }
         else {
             if(count2 > 0) {
-                count2 -= 1;
-                alert("miss you have "+(count2)+" chance");
+                decrease1();
+                alert("Wrong.. You have "+(count2)+" chance left.");
             }
             else if(count2 == 0) {
-                alert("miss you have no chance")
+                dispatch(change6_2())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz6")
             } }
     }
 
     const correct3 = () => {
-        if (myTextInput3 == 11) {
-            alert("next");
-            setShow3(true) }
+        if (myTextInput3 == 104) {
+            dispatch(up6())
+            dispatch(change6_2())
+            dispatch(cor())
+            dispatch(unquiz())
+            alert("Nice! The width of the rectangle 20. \n\nLet’s try a different method!");
+            props.navigation.navigate("Quiz6") }
         else {
-            if(count3 > 0) {
-                count3 -= 1;
-                alert("miss you have "+(count3)+" chance");
-            }
-            else if(count3 == 0) {
-                alert("miss you have no chance")
-                props.navigation.navigate("Quiz6")
-            } }
+            setShow3(true) }
     }
 
     const correct4 = () => {
-        if (myTextInput4 == 11) {
-            dispatch(up6()) //점수 추가 액션 불러오기
-            alert("Nice! The width of the rectangle 20. Let’s try a different method!");
+        if (myTextInput4 == 20) {
+            dispatch(up6())
+            dispatch(change6_2())
+            dispatch(cor())
+            dispatch(unquiz())
+            alert("Nice! The width of the rectangle 20. \n\nLet’s try a different method!");
             props.navigation.navigate("Quiz6") }
         else {
             if(count4 > 0) {
-                count4 -= 1;
-                alert("miss you have "+(count4)+" chance");
+                decrease2();
+                alert("Wrong.. You have "+(count4)+" chance left.");
             }
             else if(count4 == 0) {
-                alert("miss you have no chance")
+                dispatch(change6_2())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz6")
             } }
     }
@@ -209,11 +201,12 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,

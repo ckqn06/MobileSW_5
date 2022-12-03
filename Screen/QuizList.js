@@ -1,11 +1,17 @@
-import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { ScrollView, View, Text, StyleSheet, Image, TouchableOpacity, BackHandler } from "react-native";
 import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { doc, updateDoc } from "firebase/firestore"
 import { auth } from "../Auth/firebaseConfig";
 import { db } from "../Auth/firebaseConfig";
 
 const QuizList = (props) => {
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
+            return () => backHandler.remove() }
+    }, [])
+
     const score1 = useSelector((state) => state.Score1)
     const score2 = useSelector((state) => state.Score2)
     const score3 = useSelector((state) => state.Score3)
@@ -24,12 +30,12 @@ const QuizList = (props) => {
     const ch7 = useSelector((state) => state.Change7)
     const ch8 = useSelector((state) => state.Change8)
 
-    const Correct = require('../assets/images/QuizCorrect.png'); //해당 번호 모든 문제 해결한 경우
-    const Wrong = require('../assets/images/QuizWrong.png'); //3개 다 틀린 경우
-    const Yet = require('../assets/images/QuizYet.png'); //기본 대기 체크 모양
-    const Middle = require('../assets/images/QuizMiddle.png'); //1,2개 맞춘 경우
+    const Correct = require('../assets/images/QuizCorrect.png');
+    const Wrong = require('../assets/images/QuizWrong.png');
+    const Yet = require('../assets/images/QuizYet.png');
+    const Middle = require('../assets/images/QuizMiddle.png');
 
-    //점수 값에 따라 해당 퀴즈 번호 사진들을 변경  (score == 0), (score != 0 || score !=3), (score == 3)
+    //점수 값에 따라 해당 퀴즈 번호 사진들을 변경
     const [icon1, setIcon1] = useState(Yet);
     const [icon2, setIcon2] = useState(Yet);
     const [icon3, setIcon3] = useState(Yet);
@@ -39,7 +45,7 @@ const QuizList = (props) => {
     const [icon7, setIcon7] = useState(Yet);
     const [icon8, setIcon8] = useState(Yet);
 
-    //reducers -> change1~8 각각의 값들이 0이면 flase, 1이 되면 true로 해당 버튼이 비활성화 됨
+    //각각의 값들이 0이면 flase, 1이 되면 true로 해당 버튼이 비활성화 됨
     const [disable1, setdisable1] = useState(false);
     const [disable2, setdisable2] = useState(false);
     const [disable3, setdisable3] = useState(false);
@@ -177,18 +183,37 @@ const QuizList = (props) => {
     const studentScore = score1 + score2 + score3 + score4 + score5 + score6 + score7 + score8
     console.log(studentScore)
 
-    //update student score
+    //학생 점수 데이터베이스에서 갱신
     const updateData = async () => {
         try {
             const docRef = doc(db, "student", auth.currentUser.uid);
-            await updateDoc(docRef, { score: studentScore })
+            await updateDoc(docRef, {
+                score: studentScore,
+                score1: score1,
+                score2: score2,
+                score3: score3,
+                score4: score4,
+                score5: score5,
+                score6: score6,
+                score7: score7,
+                score8: score8,
+             })
         }catch(error){alert(error.message)}
+    }
+
+    const submit = () => {
+        if(score1==-1 || score2==-1 || score3==-1 || score4==-1 || score5==-1 || score6==-1 || score7==-1 || score8==-1 ) {
+            alert("There is a Quiz that has not been solved yet! \n\nPlease solve all the Quiz and submit") }
+        else { 
+            updateData()
+            props.navigation.navigate("Main")
+            alert("Successfully submitted! \n\nThank you for solving the problem!")}
     }
 
     return(
         <ScrollView style ={styles.mainView}>
             <View style = {styles.mainText}>
-                <Text style = {{fontSize:25}}>== QUIZ LIST ==</Text>
+                <Text style = {{fontSize:25, textDecorationLine:"underline"}}>== QUIZ LIST ==</Text>
             </View>
 
             <TouchableOpacity onPress ={() => {props.navigation.navigate("Quiz1")}} disabled = {disable1}>
@@ -263,9 +288,7 @@ const QuizList = (props) => {
                 </View>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress ={() => {
-                updateData()
-                props.navigation.navigate("Main")}}>
+            <TouchableOpacity onPress ={() => {submit()}}>
                 <View style = {styles.subView}>
                     <Text style = {styles.submitbutton}>SUBMIT</Text>
                 </View>

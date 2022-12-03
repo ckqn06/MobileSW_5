@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { onAuthStateChanged } from "firebase/auth"
 import { auth } from "../../Auth/firebaseConfig";
 import { Signin } from "../../Auth/AuthFunctions";
-import { BackHandler } from 'react-native';
 
 const Login = (props) => {
     useEffect(() => {
@@ -13,30 +12,24 @@ const Login = (props) => {
             else { props.navigation.navigate("Login") }})
     }, [])
 
-    useEffect(() => {
-        if (Platform.OS === 'android') {
-            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
-            return () => backHandler.remove() }
-    }, [])
-
     const [email,setEmail] = useState("")
     const onChangeEmail = (event) => {setEmail(event)}
 
     const [myPWDInput,setmyPWDInput] = useState("")
     const onChangePWDInput = (event) => {setmyPWDInput(event)}
 
-    const setEmpty = () => {
-        setEmail("")
-        setmyPWDInput("")}
-
     const loginHandler = () => {
-        if (!email && !myPWDInput) { alert("email and password is required") }
-        else if (!email || !myPWDInput) { alert("email or password is required") }
+        if (!email && !myPWDInput) { alert("Email and Password is required.") }
+        else if (!email || !myPWDInput) { alert("Email or Password is required.") }
         else {
             Signin(email, myPWDInput)
             console.log("logged In")
             setEmpty(); }
     }
+
+    const setEmpty = () => {
+        setEmail("")
+        setmyPWDInput("")} 
 
     return (
         <KeyboardAvoidingView
@@ -70,7 +63,7 @@ const Login = (props) => {
                         </View>
 
                         <View style = {styles.subView_3}>
-                            <TouchableOpacity onPress = {loginHandler}>
+                            <TouchableOpacity onPress={loginHandler}>
                                 <View style = {styles.loginButton}>
                                     <Text style = {styles.buttonText}>LOGIN</Text>
                                 </View>

@@ -1,27 +1,31 @@
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux"
-import { up2 } from "../Redux/Actions";
+import { useDispatch } from "react-redux"
+import { up2, change2_2, cor, wrong, unquiz } from "../Redux/Actions";
+import { Picker } from '@react-native-picker/picker';
 
 const Strate2_2 = (props) => {
-    const dispatch = useDispatch() // 액션 불러오기 면어
-    //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
-
     useEffect(() => {
         if (Platform.OS === 'android') {
             const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
             return () => backHandler.remove() }
     }, [])
-    
-    var count1 = 3;
-    var count2 = 3;
 
-    const [show, setShow] = useState(false); //2번째 화면 상태 값 default는 false로 동작
-    const [myTextInput1_1, setMyTextInput1_1] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput1_2, setMyTextInput1_2] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput1_3, setMyTextInput1_3] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput2, setMyTextInput2] = useState("") //2번 답 저장 하는 공간
+    const dispatch = useDispatch()
+
+    const [category, setCategory] = useState('+');
+    
+    const [count1, setCount1] = useState(2)
+    const [count2, setCount2] = useState(2)
+    const decrease1 = () => { setCount1(count1-1); }
+    const decrease2 = () => { setCount2(count2-1); }
+
+    const [show, setShow] = useState(false); 
+    const [myTextInput1_1, setMyTextInput1_1] = useState("") 
+    const [myTextInput1_2, setMyTextInput1_2] = useState("") 
+    const [myTextInput1_3, setMyTextInput1_3] = useState("") 
+    const [myTextInput2, setMyTextInput2] = useState("") 
 
     const onChangeInput1_1 = (event) => { setMyTextInput1_1(event) }
     const onChangeInput1_2 = (event) => { setMyTextInput1_2(event) }
@@ -29,32 +33,44 @@ const Strate2_2 = (props) => {
     const onChangeInput2 = (event) => { setMyTextInput2(event) }
 
     const correct1 = () => {
-        if ((myTextInput1_1=='16 1/8' && myTextInput1_2=='m') || (myTextInput1_1=='m' && myTextInput1_2=='16 1/8') && myTextInput1_3==22) {
-            alert("next");
+        if (myTextInput1_1=='16 1/8' && category=='+' && myTextInput1_2=='m' && myTextInput1_3==22) {
+            alert("Correct! Let's solve the next prompt.");
+            setShow(true) }
+        else if (myTextInput1_1=='m' && category=='+' && myTextInput1_2=='16 1/8' && myTextInput1_3==22) {
+            alert("Correct! Let's solve the next prompt.");
             setShow(true) }
         else {
             if(count1 > 0) {
-                count1 -= 1;
-                alert("miss you have "+(count1)+" chance");
+                decrease1();
+                alert("Wrong.. You have "+(count1)+" chance left.");
             }
             else if(count1 == 0) {
-                alert("miss you have no chance")
+                dispatch(change2_2())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz2")
             } }
     }
 
     const correct2 = () => {
         if (myTextInput2 == '5 7/8') {
-            dispatch(up2()) //점수 추가 액션 불러오기
+            dispatch(up2())
+            dispatch(change2_2())
+            dispatch(cor())
+            dispatch(unquiz())
             alert("Fantastic! You’ve found that Jen needs to run another 5 7/8 miles to reach her goal!");
             props.navigation.navigate("Quiz2") }
         else {
             if(count2 > 0) {
-                count2 -=1;
-                alert("miss you have "+(count2)+" chance");
+                decrease2();
+                alert("Wrong.. You have "+(count2)+" chance left.");
             }
             else if(count2 == 0) {
-                alert("miss you have no chance")
+                dispatch(change2_2())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz2")
             } }
     }
@@ -80,7 +96,17 @@ const Strate2_2 = (props) => {
                                  value = {myTextInput1_1}
                                  onChangeText = {onChangeInput1_1}
                                  maxLength = {6}/>
-                                <Text style = {{fontSize:18}}>+</Text>
+
+                                <View style = {styles.selection}>
+                                    <Picker
+                                        selectedValue = {category}
+                                        onValueChange = {(itemValue) => setCategory(itemValue)}>
+                                        <Picker.Item label = '+' value = "+"></Picker.Item>
+                                        <Picker.Item label = '-' value = "-"></Picker.Item>
+                                        <Picker.Item label = '*' value = "*"></Picker.Item>
+                                        <Picker.Item label = '/' value = "/"></Picker.Item>
+                                    </Picker>
+                                </View>
 
                                 <TextInput
                                  style = {styles.textInput}
@@ -109,7 +135,7 @@ const Strate2_2 = (props) => {
                         {/* 조건 연산자 사용 Ex. {조건 ? view : null} 초기 값이 false이기 때문에 null값이 선택되었다가 true로 바뀌면 view출력 */}
                         {show ? (
                         <View>
-                            <View style = {styles.quizSpace}>
+                            <View style = {styles.quizSpace2}>
                                 <View style = {{alignItems:'center'}}>
                                     <Text style = {styles.header}>== PROMPT.2 ==</Text>
                                     <Text style = {styles.quizText}>Your equation is equivalent to{"\n"}16  1/8 + m = 22.{"\n"}{"\n"}
@@ -147,13 +173,22 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
+        padding:5,
+        margin:10,
+        borderRadius:5,
+        borderWidth:2,
+        borderColor:'black',
+        backgroundColor:'#EFEFEF'
+    },
+    quizSpace2: {
         padding:5,
         marginTop:10,
         marginBottom:10,
@@ -170,8 +205,8 @@ const styles = StyleSheet.create({
     textInput: {
         marginTop:15,
         marginBottom:15,
-        marginLeft:10,
-        marginRight:10,
+        marginLeft:8,
+        marginRight:8,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,
@@ -183,6 +218,15 @@ const styles = StyleSheet.create({
         marginRight:100,
         marginBottom:20,
         marginTop:10
+    },
+    selection: {
+        justifyContent:'center',
+        width:75,
+        height:30,
+        borderRadius:5,
+        borderWidth:1,
+        borderColor:'black',
+        backgroundColor:'white'
     }
 }); 
 

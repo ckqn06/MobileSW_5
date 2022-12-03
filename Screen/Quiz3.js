@@ -1,19 +1,55 @@
-import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard,
+import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { change3, up3 } from "../Redux/Actions";
 
 const Quiz3 = (props) => {
-    const dispatch = useDispatch()
-    const [show,setShow] = useState(false); //전략 선택 화면 상태 값 default는 false로 동작
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
+            return () => backHandler.remove() }
+    }, [])
     
+    const dispatch = useDispatch()
+
+    const ch3_1 = useSelector((state) => state.Change3_1)
+    const ch3_2 = useSelector((state) => state.Change3_2)
+    const ch3_3 = useSelector((state) => state.Change3_3)
+    
+    const [disable1, setdisable1] = useState(false);
+    const [disable2, setdisable2] = useState(false);
+    const [disable3, setdisable3] = useState(false);
+
+    function button1() {
+        if(ch3_1 == 0) { setdisable1(false) }
+        else if(ch3_1 == 1) { setdisable1(true) }
+    }
+    useEffect(()=>{ button1() },[ch3_1])
+
+    function button2() {
+        if(ch3_2 == 0) { setdisable2(false) }
+        else if(ch3_2 == 1) { setdisable2(true) }
+    }
+    useEffect(()=>{ button2() },[ch3_2])
+
+    function button3() {
+        if(ch3_3 == 0) { setdisable3(false) }
+        else if(ch3_3 == 1) { setdisable3(true) }
+    }
+    useEffect(()=>{ button3() },[ch3_3])
+
+    const [show,setShow] = useState(false);
     const showme = () => { setShow(true); }
 
     const check=()=>{
-        dispatch(up3()) //점수 값 -1에서 0으로 변경
-        dispatch(change3()) //submit버튼 누르면 해당 Quiz번호 버튼 비활성화 하기 위하여 reducers..change1.js state값 1 증가
-        props.navigation.navigate("QuizList")
+        if(ch3_1!=1 || ch3_2!=1 || ch3_3!=1) {
+            alert("There is a strategy that has not been solved yet! \n\nPlease solve all the strategy and submit.") }
+        else {
+            dispatch(up3())
+            dispatch(change3())
+            props.navigation.navigate("QuizList")
+            alert("Successfully submitted!")}
     }
 
     return (
@@ -60,18 +96,21 @@ const Quiz3 = (props) => {
                             
                             <View style = {styles.strateButton}>
                                 <Button
+                                 disabled = {disable1}
                                  title = {"subtract the extra yards and then" + "\n" + "figure out how much fabric she used for" + "\n" +  "each curtain"}
                                  onPress = {() => {props.navigation.navigate("Strate3_1")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
+                                 disabled = {disable2}
                                  title = "Write an equation to solve it"
                                  onPress = {() => {props.navigation.navigate("Strate3_2")}}/>
                             </View>
 
                             <View style = {styles.strateButton}>
                                 <Button
+                                 disabled = {disable3}
                                  title = {"Use a diagram to try and understand" + "\n" + "the problem"}
                                  onPress = {() => {props.navigation.navigate("Strate3_3")}}/>
                             </View>
@@ -95,17 +134,20 @@ const styles = StyleSheet.create({
     mainView: {
         flex:1,
         paddingBottom:10,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:3,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,
-        margin:10,
-        borderRadius:5,
-        borderWidth:2,
+        marginTop:10,
+        marginLeft:10,
+        marginRight:10,
+        borderRadius:0,
+        borderWidth:1.5,
         borderColor:'black',
         backgroundColor:'#EFEFEF'
     },
@@ -114,14 +156,17 @@ const styles = StyleSheet.create({
     },
     subSpace: {
         padding:5,
-        marginLeft:20,
-        marginRight:20,
+        marginLeft:10,
+        marginRight:10,
         borderRadius:15,
-        borderWidth:2,
+        borderWidth:1.5,
+        borderTopStartRadius:0,
+        borderTopEndRadius:0,
         borderColor:'black',
         backgroundColor:'#EFEFEF'
     },
     subText: {
+        padding:7,
         fontSize:20
     },
     textInput: {
@@ -138,13 +183,12 @@ const styles = StyleSheet.create({
     sendButton: {
         marginLeft:100,
         marginRight:100,
-        marginBottom:10,
         marginTop:10
     },
     strateButton: {
         alignItems:'center',
         marginTop:10,
-        marginBottom:10,
+        marginBottom:10
     }
 });
 

@@ -1,34 +1,40 @@
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux"
-import { up4 } from "../Redux/Actions";
+import { useDispatch } from "react-redux"
+import { up4, change4_2, cor, wrong, unquiz } from "../Redux/Actions";
+import { Picker } from '@react-native-picker/picker';
 
 const Strate4_2 = (props) => {
-    const dispatch = useDispatch() // 액션 불러오기 면어
-    //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
-
     useEffect(() => {
         if (Platform.OS === 'android') {
             const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
             return () => backHandler.remove() }
     }, [])
 
-    var count1 = 3;
-    var count2 = 3;
-    var count3 = 3;
-    var count4 = 3;
+    const dispatch = useDispatch()
 
-    const [show1, setShow1] = useState(false); //2번째 화면 상태 값 default는 false로 동작
-    const [show2, setShow2] = useState(false); //3번째 화면 상태 값 default는 false로 동작
-    const [show3, setShow3] = useState(false); //4번째 화면 상태 값 default는 false로 동작
-    const [myTextInput1_1, setMyTextInput1_1] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput1_2, setMyTextInput1_2] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput1_3, setMyTextInput1_3] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput2, setMyTextInput2] = useState("") //2번 답 저장 하는 공간
-    const [myTextInput3_1, setMyTextInput3_1] = useState("") //3번 답 저장 하는 공간
-    const [myTextInput3_2, setMyTextInput3_2] = useState("") //3번 답 저장 하는 공간
-    const [myTextInput4, setMyTextInput4] = useState("") //4번 답 저장 하는 공간
+    const [category1, setCategory1] = useState('+');
+    const [category2, setCategory2] = useState('Elena');
+
+    const [count1, setCount1] = useState(2) 
+    const [count2, setCount2] = useState(2) 
+    const [count3, setCount3] = useState(2) 
+    const [count4, setCount4] = useState(2) 
+    const decrease1 = () => { setCount1(count1-1); }                                
+    const decrease2 = () => { setCount2(count2-1); } 
+    const decrease3 = () => { setCount3(count3-1); } 
+    const decrease4 = () => { setCount4(count4-1); } 
+
+    const [show1, setShow1] = useState(false);
+    const [show2, setShow2] = useState(false);
+    const [show3, setShow3] = useState(false);
+    const [myTextInput1_1, setMyTextInput1_1] = useState("")
+    const [myTextInput1_2, setMyTextInput1_2] = useState("")
+    const [myTextInput1_3, setMyTextInput1_3] = useState("")
+    const [myTextInput2, setMyTextInput2] = useState("")
+    const [myTextInput3_1, setMyTextInput3_1] = useState("")
+    const [myTextInput3_2, setMyTextInput3_2] = useState("")
 
     const onChangeInput1_1 = (event) => { setMyTextInput1_1(event) }
     const onChangeInput1_2 = (event) => { setMyTextInput1_2(event) }
@@ -36,67 +42,84 @@ const Strate4_2 = (props) => {
     const onChangeInput2 = (event) => { setMyTextInput2(event) }
     const onChangeInput3_1 = (event) => { setMyTextInput3_1(event) }
     const onChangeInput3_2 = (event) => { setMyTextInput3_2(event) }
-    const onChangeInput4 = (event) => { setMyTextInput4(event) }
 
     const correct1 = () => {
-        if (myTextInput1_3==114 &&
-            (myTextInput1_1==30 && (myTextInput1_2=='4*e' || myTextInput1_2=='e*4' || myTextInput1_2=='4e' || myTextInput1_2=='e4')) ||
-            (myTextInput1_2==30 && (myTextInput1_1=='4*e' || myTextInput1_1=='e*4' || myTextInput1_1=='4e' || myTextInput1_1=='e4'))) {
-            alert("next");
+        if (myTextInput1_2==30 && category1=='+' && myTextInput1_3==114 &&
+            (myTextInput1_1=='4*e' || myTextInput1_1=='e*4' || myTextInput1_1=='4e' || myTextInput1_1=='e4')){
+            alert("Correct! Let's solve the next prompt.");
+            setShow1(true) }
+        else if (myTextInput1_1==30 && category1=='+' && myTextInput1_3==114 &&
+            (myTextInput1_2=='4*e' || myTextInput1_2=='e*4' || myTextInput1_2=='4e' || myTextInput1_2=='e4')){
+            alert("Correct! Let's solve the next prompt.");
             setShow1(true) }
         else {
             if(count1 > 0) {
-                count1 -= 1;
-                alert("miss you have "+(count1)+" chance");
+                decrease1();
+                alert("Wrong.. You have "+(count1)+" chance left.");
             }
             else if(count1 == 0) {
-                alert("miss you have no chance")
+                dispatch(change4_2())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz4")
             } }
     }
 
     const correct2 = () => {
         if (myTextInput2 == 21) {
-            alert("next");
+            alert("Correct! Let's solve the next prompt.");
             setShow2(true) }
         else {
             if(count2 > 0) {
-                count2 -= 1;
-                alert("miss you have "+(count2)+" chance");
+                decrease2();
+                alert("Wrong.. You have "+(count2)+" chance left.");
             }
             else if(count2 == 0) {
-                alert("miss you have no chance")
+                dispatch(change4_2())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz4")
             } }
     }
 
     const correct3 = () => {
         if (myTextInput3_1 == 42 && myTextInput3_2 == 51) {
-            alert("next");
+            alert("Correct! Let's solve the next prompt.");
             setShow3(true) }
         else {
             if(count3 > 0) {
-                count3 -= 1;
-                alert("miss you have "+(count3)+" chance");
+                decrease3();
+                alert("Wrong.. You have "+(count3)+" chance left.");
             }
             else if(count3 == 0) {
-                alert("miss you have no chance")
+                dispatch(change4_2())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz4")
             } }
     }
 
     const correct4 = () => {
-        if (myTextInput4 == 'Faye') {
-            dispatch(up4()) //점수 추가 액션 불러오기
-            alert("Ok! It looks like Faye scored the most.");
+        if (category2 == 'Faye') {
+            dispatch(up4())
+            dispatch(change4_2())
+            dispatch(cor())
+            dispatch(unquiz())
+            alert("Ok! \nIt looks like Faye scored the most.");
             props.navigation.navigate("Quiz4") }
         else {
             if(count4 > 0) {
-                count4 -= 1;
-                alert("miss you have "+(count4)+" chance");
+                decrease4();
+                alert("Wrong.. You have "+(count4)+" chance left.");
             }
             else if(count4 == 0) {
-                alert("miss you have no chance")
+                dispatch(change4_2())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz4")
             } }
     }
@@ -122,7 +145,17 @@ const Strate4_2 = (props) => {
                                  value = {myTextInput1_1}
                                  onChangeText = {onChangeInput1_1}
                                  maxLength = {6}/>
-                                <Text style = {{fontSize:18}}>+</Text>
+                                
+                                <View style = {styles.selection1}>
+                                    <Picker
+                                        selectedValue = {category1}
+                                        onValueChange = {(itemValue) => setCategory1(itemValue)}>
+                                        <Picker.Item label = '+' value = "+"></Picker.Item>
+                                        <Picker.Item label = '-' value = "-"></Picker.Item>
+                                        <Picker.Item label = '*' value = "*"></Picker.Item>
+                                        <Picker.Item label = '/' value = "/"></Picker.Item>
+                                    </Picker>
+                                </View>
 
                                 <TextInput
                                  style = {styles.textInput}
@@ -217,14 +250,18 @@ const Strate4_2 = (props) => {
                             <View style = {styles.quizSpace}>
                                 <View style = {{alignItems:'center'}}>
                                     <Text style = {styles.header}>== PROMPT.4 ==</Text>
-                                    <Text style = {styles.quizText}>So who scored the most?
-                                    </Text>
+                                    <Text style = {styles.quizText}>So who scored the most?</Text>
+
+                                    <View style = {styles.selection2}>
+                                        <Picker
+                                            selectedValue = {category2}
+                                            onValueChange = {(itemValue) => setCategory2(itemValue)}>
+                                            <Picker.Item label = 'Elena' value = "Elena"></Picker.Item>
+                                            <Picker.Item label = 'Karla' value = "Karla"></Picker.Item>
+                                            <Picker.Item label = 'Faye' value = "Faye"></Picker.Item>
+                                        </Picker>
+                                    </View>
                                 </View>
-                                <TextInput
-                                 style = {styles.textInput}
-                                 placeholder="Answer"
-                                 value = {myTextInput4}
-                                 onChangeText = {onChangeInput4}/>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -247,11 +284,12 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,
@@ -267,8 +305,8 @@ const styles = StyleSheet.create({
     textInput: {
         marginTop:15,
         marginBottom:15,
-        marginLeft:10,
-        marginRight:10,
+        marginLeft:8,
+        marginRight:8,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,
@@ -280,6 +318,26 @@ const styles = StyleSheet.create({
         marginRight:100,
         marginBottom:20,
         marginTop:10
+    },
+    selection1: {
+        justifyContent:'center',
+        width:75,
+        height:30,
+        borderRadius:5,
+        borderWidth:1,
+        borderColor:'black',
+        backgroundColor:'white'
+    },
+    selection2: {
+        justifyContent:'center',
+        marginTop:15,
+        marginBottom:15,
+        width:150,
+        height:30,
+        borderRadius:5,
+        borderWidth:1,
+        borderColor:'black',
+        backgroundColor:'white'
     }
 }); 
 

@@ -1,56 +1,66 @@
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux"
-import { up7 } from "../Redux/Actions";
+import { useDispatch } from "react-redux"
+import { up7, change7_3, cor, wrong, unquiz } from "../Redux/Actions";
 
 const Strate7_3 = (props) => {
-    const dispatch = useDispatch() // 액션 불러오기 면어
-    //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
-
     useEffect(() => {
         if (Platform.OS === 'android') {
             const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
             return () => backHandler.remove() }
     }, [])
 
-    var count1 = 3;
-    var count2 = 3;
+    const dispatch = useDispatch()
 
-    const [show, setShow] = useState(false); //2번째 화면 상태 값 default는 false로 동작
-    const [myTextInput1, setMyTextInput1] = useState("") //1번 답 저장 하는 공간
-    const [myTextInput2, setMyTextInput2] = useState("") //2번 답 저장 하는 공간
+    const [count1, setCount1] = useState(2) 
+    const [count2, setCount2] = useState(2) 
+    const decrease1 = () => { setCount1(count1-1); }
+    const decrease2 = () => { setCount2(count2-1); }
+
+    const [show, setShow] = useState(false);
+    const [myTextInput1, setMyTextInput1] = useState("")
+    const [myTextInput2, setMyTextInput2] = useState("")
 
     const onChangeInput1 = (event) => { setMyTextInput1(event) }
     const onChangeInput2 = (event) => { setMyTextInput2(event) }
     
     const correct1 = () => {
         if (myTextInput1 == 25) {
-            alert("next");
+            alert("Correct! Let's solve the next prompt.");
             setShow(true) }
         else {
             if(count1 > 0) {
-                count1 -= 1;
-                alert("miss you have "+(count1)+" chance");
+                decrease1();
+                alert("Wrong.. You have "+(count1)+" chance left.");
             }
             else if(count1 == 0) {
-                alert("miss you have no chance")
+                dispatch(change7_3())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz7")
             } }
     }
 
     const correct2 = () => {
         if (myTextInput2 == 4) {
-            dispatch(up7()) //점수 추가 액션 불러오기
-            alert("Fantastic! Jim can rent the car for 4 days!");
+            dispatch(up7())
+            dispatch(change7_3())
+            dispatch(cor())
+            dispatch(unquiz())
+            alert("Fantastic! \nJim can rent the car for 4 days!");
             props.navigation.navigate("Quiz7") }
         else {
             if(count2 > 0) {
-                count2 -=1;
-                alert("miss you have "+(count2)+" chance");
+                decrease2();
+                alert("Wrong.. You have "+(count2)+" chance left.");
             }
             else if(count2 == 0) {
-                alert("miss you have no chance")
+                dispatch(change7_3())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz7")
             } }
     }
@@ -70,11 +80,15 @@ const Strate7_3 = (props) => {
                                     How much will that cost?
                                 </Text>
                             </View>
-                            <TextInput
-                             style = {styles.textInput}
-                             placeholder="Answer"
-                             value = {myTextInput1}
-                             onChangeText = {onChangeInput1}/>
+                            <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                <Text style = {{fontSize:18}}>$</Text>
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1}
+                                 onChangeText = {onChangeInput1}
+                                 maxLength = {6}/>
+                            </View>
                         </View >
 
                         <View style = {styles.checkButton}>
@@ -95,15 +109,11 @@ const Strate7_3 = (props) => {
                                         How many times can you add $21 without going over $115?
                                     </Text>
                                 </View>
-                                <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
-                                    <Text style = {{fontSize:18}}>$</Text>
-                                    <TextInput
-                                     style = {styles.textInput}
-                                     placeholder="Answer"
-                                     value = {myTextInput3_1}
-                                     onChangeText = {onChangeInput2}
-                                     maxLength = {6}/>
-                                </View>
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput2}
+                                 onChangeText = {onChangeInput2}/>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -126,11 +136,12 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,

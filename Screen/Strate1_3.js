@@ -1,37 +1,42 @@
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux"
-import { up1 } from "../Redux/Actions";
+import { useDispatch } from "react-redux"
+import { up1, change1_3, cor, wrong, unquiz } from "../Redux/Actions";
 
 const Strate1_3 = (props) => {
-    const dispatch = useDispatch() // 액션 불러오기 면어
-    //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
-
     useEffect(() => {
         if (Platform.OS === 'android') {
             const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
             return () => backHandler.remove() }
     }, [])
 
-    var count = 3;
+    const dispatch = useDispatch()
+
+    const [count, setCount] = useState(2);
+    const decrease = () => { setCount(count-1); }  
 
     const [myTextInput, setMyTextInput] = useState("")
-
     const onChangeInput = (event) => { setMyTextInput(event) }
 
     const correct = () => {
         if (myTextInput == 11) {
-            dispatch(up1()) //점수 추가 액션 불러오기
+            dispatch(up1())
+            dispatch(change1_3())
+            dispatch(cor())
+            dispatch(unquiz())
             alert("Ok! If you’re right, then Todd bought 11 pictures.");
             props.navigation.navigate("Quiz1") }
         else {
             if(count > 0) {
-                count -= 1;
-                alert("miss you have "+(count)+" chance");
+                decrease();
+                alert("Wrong.. You have "+(count)+" chance left.");
             }
             else if(count == 0) {
-                alert("miss you have no chance")
+                dispatch(change1_3())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz1")
             } }
     }
@@ -76,11 +81,12 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,

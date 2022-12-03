@@ -1,75 +1,108 @@
 import { KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, BackHandler,
     ScrollView, View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux"
-import { up8 } from "../Redux/Actions";
+import { useDispatch } from "react-redux"
+import { up8, change8_2, cor, wrong, unquiz } from "../Redux/Actions";
+import { Picker } from '@react-native-picker/picker';
 
 const Strate8_2 = (props) => {
-    const dispatch = useDispatch() // 액션 불러오기 면어
-    //dispatch는 리듀서가 스토어의 상태를 업데이트하는 방법을 알려주는 작업을 전달하는 데 사용.
-
     useEffect(() => {
         if (Platform.OS === 'android') {
             const backHandler = BackHandler.addEventListener('hardwareBackPress', () => { return true })
             return () => backHandler.remove() }
     }, [])
 
-    var count1 = 3;
-    var count2 = 3;
-    var count3 = 3;
+    const dispatch = useDispatch()
 
-    const [show1, setShow1] = useState(false);              //2번째 화면 상태 값 default는 false로 동작
-    const [show2, setShow2] = useState(false);              //3번째 화면 상태 값 default는 false로 동작
-    const [myTextInput1, setMyTextInput1] = useState("")    //1번 답 저장 하는 공간
-    const [myTextInput2, setMyTextInput2] = useState("")    //2번 답 저장 하는 공간
-    const [myTextInput3, setMyTextInput3] = useState("")    //3번 답 저장 하는 공간
+    const [category1, setCategory1] = useState('+');
+    const [category2, setCategory2] = useState('<');
+    const [category3, setCategory3] = useState('<');
 
-    const onChangeInput1 = (event) => { setMyTextInput1(event) }
-    const onChangeInput2 = (event) => { setMyTextInput2(event) }
+    const [count1, setCount1] = useState(2) 
+    const [count2, setCount2] = useState(2) 
+    const [count3, setCount3] = useState(2) 
+    const decrease1 = () => { setCount1(count1-1); }
+    const decrease2 = () => { setCount2(count2-1); }
+    const decrease3 = () => { setCount3(count3-1); }
+
+    const [show1, setShow1] = useState(false);
+    const [show2, setShow2] = useState(false);
+    const [myTextInput1_1, setMyTextInput1_1] = useState("")
+    const [myTextInput1_2, setMyTextInput1_2] = useState("")
+    const [myTextInput1_3, setMyTextInput1_3] = useState("")
+    const [myTextInput2_1, setMyTextInput2_1] = useState("")
+    const [myTextInput2_2, setMyTextInput2_2] = useState("")
+    const [myTextInput3, setMyTextInput3] = useState("")
+
+    const onChangeInput1_1 = (event) => { setMyTextInput1_1(event) }
+    const onChangeInput1_2 = (event) => { setMyTextInput1_2(event) }
+    const onChangeInput1_3 = (event) => { setMyTextInput1_3(event) }
+    const onChangeInput2_1 = (event) => { setMyTextInput2_1(event) }
+    const onChangeInput2_2 = (event) => { setMyTextInput2_2(event) }
     const onChangeInput3 = (event) => { setMyTextInput3(event) }
     
     const correct1 = () => {
-        if (myTextInput1 == 11) {
-            alert("next");
+        if (category1=='+' && myTextInput1_2==50 && category2=='<=' && myTextInput1_3==80 &&
+            (myTextInput1_1=='2*w' || myTextInput1_1=='w*2' || myTextInput1_1=='2w' || myTextInput1_1=='w2')) {
+            alert("Correct! Let's solve the next prompt.");
+            setShow1(true) }
+        else if (category1=='+' && myTextInput1_1==50 && category2=='<=' && myTextInput1_3==80 &&
+            (myTextInput1_2=='2*w' || myTextInput1_2=='w*2' || myTextInput1_2=='2w' || myTextInput1_2=='w2')) {
+            alert("Correct! Let's solve the next prompt.");
             setShow1(true) }
         else {
             if(count1 > 0) {
-                count1 -= 1;
-                alert("miss you have "+(count1)+" chance");
+                decrease1();
+                alert("Wrong.. You have "+(count1)+" chance left.");
             }
             else if(count1 == 0) {
-                alert("miss you have no chance")
+                dispatch(change8_2())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz8")
             } }
     }
 
     const correct2 = () => {
-        if (myTextInput2 == 11) {
-            alert("next");
+        if (myTextInput2_1=='w' && category3=='<=' && myTextInput2_2==15) {
+            alert("Correct! Let's solve the next prompt.");
+            setShow2(true) }
+        else if (myTextInput2_1==15 && category3=='>=' && myTextInput2_2=='w') {
+            alert("Correct! Let's solve the next prompt.");
             setShow2(true) }
         else {
             if(count2 > 0) {
-                count2 -= 1;
-                alert("miss you have "+(count2)+" chance");
+                decrease2();
+                alert("Wrong.. You have "+(count2)+" chance left.");
             }
             else if(count2 == 0) {
-                alert("miss you have no chance")
+                dispatch(change8_2())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz8")
             } }
     }
 
     const correct3 = () => {
-        if (myTextInput3 == 11) {
-            dispatch(up8()) //점수 추가 액션 불러오기
+        if (myTextInput3 == 15) {
+            dispatch(up8())
+            dispatch(change8_2())
+            dispatch(cor())
+            dispatch(unquiz())
             alert("Nice work! That’s correct!");
             props.navigation.navigate("Quiz8") }
         else {
             if(count3 > 0) {
-                count3 -= 1;
-                alert("miss you have "+(count3)+" chance");
+                decrease3();
+                alert("Wrong.. You have "+(count3)+" chance left.");
             }
             else if(count3 == 0) {
-                alert("miss you have no chance")
+                dispatch(change8_2())
+                dispatch(wrong())
+                dispatch(unquiz())
+                alert("Wrong.. \nYou've used up all the chance.")
                 props.navigation.navigate("Quiz8")
             } }
     }
@@ -88,11 +121,52 @@ const Strate8_2 = (props) => {
                                     Use the letter w as your variable.
                                 </Text>
                             </View>
-                            <TextInput
-                             style = {styles.textInput}
-                             placeholder="Answer"
-                             value = {myTextInput1}
-                             onChangeText = {onChangeInput1}/>
+                            <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1_1}
+                                 onChangeText = {onChangeInput1_1}
+                                 maxLength = {6}/>
+                                
+                                <View style = {styles.selection}>
+                                    <Picker
+                                        selectedValue = {category1}
+                                        onValueChange = {(itemValue) => setCategory1(itemValue)}>
+                                        <Picker.Item label = '+' value = "+"></Picker.Item>
+                                        <Picker.Item label = '-' value = "-"></Picker.Item>
+                                        <Picker.Item label = '*' value = "*"></Picker.Item>
+                                        <Picker.Item label = '/' value = "/"></Picker.Item>
+                                    </Picker>
+                                </View>
+
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1_2}
+                                 onChangeText = {onChangeInput1_2}
+                                 maxLength = {6}/>
+                            </View>
+
+                            <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                <View style = {styles.selection}>
+                                    <Picker
+                                        selectedValue = {category2}
+                                        onValueChange = {(itemValue) => setCategory2(itemValue)}>
+                                        <Picker.Item label = '<' value = "<"></Picker.Item>
+                                        <Picker.Item label = '>' value = ">"></Picker.Item>
+                                        <Picker.Item label = '<=' value = "<="></Picker.Item>
+                                        <Picker.Item label = '>=' value = ">="></Picker.Item>
+                                    </Picker>
+                                </View>
+
+                                <TextInput
+                                 style = {styles.textInput}
+                                 placeholder="Answer"
+                                 value = {myTextInput1_3}
+                                 onChangeText = {onChangeInput1_3}
+                                 maxLength = {6}/>
+                            </View>
                         </View >
 
                         <View style = {styles.checkButton}>
@@ -112,11 +186,32 @@ const Strate8_2 = (props) => {
                                         Now, solve for w and enter your answer as an inequality
                                     </Text>
                                 </View>
-                                <TextInput
-                                 style = {styles.textInput}
-                                 placeholder="Answer"
-                                 value = {myTextInput2}
-                                 onChangeText = {onChangeInput2}/>
+                                <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput2_1}
+                                     onChangeText = {onChangeInput2_1}
+                                     maxLength = {6}/>
+                                    
+                                    <View style = {styles.selection}>
+                                        <Picker
+                                            selectedValue = {category3}
+                                            onValueChange = {(itemValue) => setCategory3(itemValue)}>
+                                            <Picker.Item label = '<' value = "<"></Picker.Item>
+                                            <Picker.Item label = '>' value = ">"></Picker.Item>
+                                            <Picker.Item label = '<=' value = "<="></Picker.Item>
+                                            <Picker.Item label = '>=' value = ">="></Picker.Item>
+                                        </Picker>
+                                    </View>
+
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput2_2}
+                                     onChangeText = {onChangeInput2_2}
+                                     maxLength = {6}/>
+                                </View>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -137,11 +232,15 @@ const Strate8_2 = (props) => {
                                         If that’s correct, then how wide could the fence be?
                                     </Text>
                                 </View>
-                                <TextInput
-                                 style = {styles.textInput}
-                                 placeholder="Answer"
-                                 value = {myTextInput3}
-                                 onChangeText = {onChangeInput3}/>
+                                <View style = {{flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+                                    <TextInput
+                                     style = {styles.textInput}
+                                     placeholder="Answer"
+                                     value = {myTextInput3}
+                                     onChangeText = {onChangeInput3}
+                                     maxLength = {10}/>
+                                    <Text style = {{fontSize:18}}>feet</Text>
+                                </View>
                             </View>
 
                             <View style = {styles.checkButton}>
@@ -164,11 +263,12 @@ const styles = StyleSheet.create({
         flex:1,
         paddingTop:15,
         paddingBottom:30,
-        backgroundColor: '#eefbff'
+        backgroundColor:'#eefbff'
     },
     header: {
         padding:5,
-        fontSize:17
+        fontSize:20,
+        textDecorationLine:'underline'
     },
     quizSpace: {
         padding:5,
@@ -185,7 +285,10 @@ const styles = StyleSheet.create({
         fontSize:18
     },
     textInput: {
-        margin:20,
+        marginTop:8,
+        marginBottom:8,
+        marginLeft:10,
+        marginRight:10,
         paddingHorizontal:10,
         borderRadius:5,
         borderWidth:1,
@@ -197,6 +300,15 @@ const styles = StyleSheet.create({
         marginRight:100,
         marginBottom:20,
         marginTop:10
+    },
+    selection: {
+        justifyContent:'center',
+        width:85,
+        height:30,
+        borderRadius:5,
+        borderWidth:1,
+        borderColor:'black',
+        backgroundColor:'white'
     }
 }); 
 
