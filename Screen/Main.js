@@ -60,48 +60,50 @@ const Main = (props) => {
     }
 
     return (
-        <View style = {styles.main}>
-            <View style = {styles.profileView}>
-                <Text style = {styles.profileText}>NAME: {studentData.Name}</Text>
-                <Text style = {styles.profileText}>EMAIL: {studentData.Email}</Text>
-            </View>
+        <ScrollView style ={{width:"100%"}}>
+            <View style = {styles.main}>
+                <View style = {styles.profileView}>
+                    <Text style = {styles.profileText}>NAME: {studentData.Name}</Text>
+                    <Text style = {styles.profileText}>EMAIL: {studentData.Email}</Text>
+                </View>
 
-            <View style = {styles.subView_1}>
-                <Text style = {{marginBottom:10, fontSize:25}}>== QUIZ PROGRESS ==</Text>
-                <Image
-                 style = {{marginTop:10, marginBottom:10, width:130, height:130}}
-                 source = {require('../assets/images/options.png')}
-                 resizeMode = "contain">
-                </Image>
+                <View style = {styles.subView_1}>
+                   <Text style = {{marginBottom:10, fontSize:25}}>== QUIZ PROGRESS ==</Text>
+                   <Image
+                     style = {{marginTop:10, marginBottom:10, width:130, height:130}}
+                     source = {require('../assets/images/options.png')}
+                     resizeMode = "contain">
+                    </Image>
                 
-                <View style = {{marginLeft:10, marginRight:30}}>
-                    <Text style = {{marginBottom:5, fontSize:25}}>Score: {studentData.score}/24</Text>
-                    <Text style = {{marginBottom:5, fontSize:25}}>Progress: {progress.toFixed(0)}%</Text>
+                    <View style = {{marginLeft:10, marginRight:30}}>
+                        <Text style = {{marginBottom:5, fontSize:25}}>Score: {studentData.score}/24</Text>
+                        <Text style = {{marginBottom:5, fontSize:25}}>Progress: {progress.toFixed(0)}%</Text>
+                    </View>
+                </View>
+
+                <View style = {{marginRight:80, marginLeft:80}}>
+                    <TouchableOpacity onPress = {() => { props.navigation.navigate("QuizList") }}>
+                        <View style = {styles.quizButton}>
+                            <Text style = {styles.quizButtonText}>Quiz Start!</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+
+                <View style = {styles.subView_2}>
+                    <TouchableOpacity onPress = {() => {Caution()}}>
+                        <View style = {styles.quizButton2}>
+                            <Text style = {styles.quizButtonText}>Caution for Quiz</Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress = {() => {Analysis()}}>
+                        <View style = {styles.quizButton2}>
+                            <Text style = {styles.quizButtonText}>Result analysis</Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </View>
-
-            <View style = {{marginRight:80, marginLeft:80}}>
-                <TouchableOpacity onPress = {() => { props.navigation.navigate("QuizList") }}>
-                    <View style = {styles.quizButton}>
-                        <Text style = {styles.quizButtonText}>Quiz Start!</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
-
-            <View style = {styles.subView_2}>
-                <TouchableOpacity onPress = {() => {Caution()}}>
-                    <View style = {styles.quizButton2}>
-                        <Text style = {styles.quizButtonText}>Caution for Quiz</Text>
-                    </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress = {() => {Analysis()}}>
-                    <View style = {styles.quizButton2}>
-                        <Text style = {styles.quizButtonText}>Result analysis</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
-        </View>
+        </ScrollView>
     );
 }
 
