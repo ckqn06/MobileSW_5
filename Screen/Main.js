@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity, Alert } from "react-native";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux"
 import { auth } from "../Auth/firebaseConfig";
